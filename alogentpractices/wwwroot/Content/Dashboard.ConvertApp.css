@@ -1,0 +1,49 @@
+﻿.aa-convert-app-widget {
+    width: 100%;
+}
+
+.aa-convert-app-widget > thead > tr,
+.aa-convert-app-widget > tbody > tr {
+    height: 25px;
+}
+
+.aa-no-results {
+    text-align: center;
+    font-weight: bold;
+}
+
+.aa-convert-app-widget > thead > tr > th {
+    background-color: #3B3B3B;
+    color: #FFF;
+    font-weight: bold;
+    padding: 0 6px;
+}
+
+.aa-convert-app-widget > tbody > tr > td {
+    padding: 0 6px;
+    background-color: #FFF;
+    border-bottom: 1px #F5F5F5 solid;
+}
+
+.aa-convert-app-widget.credit > tbody > tr:nth-last-child(2) > td,
+.aa-convert-app-widget.lender > tbody > tr:nth-last-child(2) > td {
+    border-bottom: 1px #3B3B3B solid;
+}
+
+.aa-convert-app-link {
+    text-align: center;
+}
+
+.aa-exception-type-indent,
+.aa-loan-indent > td:first-child {
+    padding-left: 20px !important;
+}
+
+.aa-exception-def-indent > td:first-child {
+    padding-left: 40px !important;
+}
+
+
+.aa-disabled {
+    color: #CBCFD5;
+}

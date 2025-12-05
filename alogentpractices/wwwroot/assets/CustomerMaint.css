@@ -1,0 +1,262 @@
+﻿section {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    display: table;
+}
+
+section#aa-form-header {
+    padding: 10px 10px 4px 10px;
+    display: none;
+}
+
+section#aa-form-footer {
+    padding: 0 10px 14px 10px;
+    display: none;
+}
+
+section#aa-form-header > div,
+section#aa-form-footer > div {
+    width: 50%;
+    float: left;
+}
+
+section#aa-form-header > div > ul.aa-button-wrapper,
+section#aa-form-footer > div > ul.aa-button-wrapper {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+
+section#aa-form-header > div > ul.aa-button-wrapper > li,
+section#aa-form-footer > div > ul.aa-button-wrapper > li {
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    padding-left: 12px;
+}
+
+section#aa-form-header > div > ul.aa-button-wrapper > li:first-child,
+section#aa-form-footer > div > ul.aa-button-wrapper > li:first-child {
+    padding-left: 0;
+}
+
+li.aa-command-button-wrapper {
+    margin-top: 3px;
+}
+
+section#aa-form-wrapper {
+    width: 100%;
+    display: none;
+    clear: left;
+    min-width: 1138px;
+}
+
+section#aa-form-wrapper > div {
+    width: 37%;
+    float: left;
+    box-sizing: border-box;
+    /*min-width: 510px;*/
+}
+
+section#aa-form-wrapper > div:last-child {
+    width: 63%;
+    padding-left: 20px;
+}
+
+#aa-form-table {
+    width: 100%;
+}
+
+#aa-form-table > tbody > tr {
+    height: 35px;
+}
+
+#aa-form-table > tbody > tr > td:first-child {
+    background-color: #F5F5F5;
+    border-bottom: 1px #ECECEC solid;
+    text-align: left;
+    padding: 0 12px;
+    min-width: 145px;
+}
+
+#aa-form-table > tbody > tr > td:nth-child(2) {
+    text-align: center;
+    width: 30px;
+    min-width: 30px;
+}
+
+#aa-form-table > tbody > tr.aa-no-background-color > td:first-child {
+    background-color: inherit;
+    border-bottom: 0;
+}
+
+#aa-form-table > tbody > tr.aa-flexfield-header > td {
+    background-color: #ECECEC;
+    border-bottom: 0;
+}
+
+.aa-flexfield-list {
+    display: table;
+    padding: 0;
+    margin: 0;
+}
+
+.aa-flexfield-list > li {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 6px;
+}
+
+.aa-full,
+.aa-partial {
+    padding: 3px 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -o-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.aa-partial {
+    opacity: 0.06;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+#aa-kendo-grid {
+    width: 100%;
+    border: 1px #E5E5E5 solid;
+}
+
+#aa-kendo-grid > thead > tr {
+    height: 39px;
+}
+
+#aa-kendo-grid > thead > tr > th {
+    background-color: #FAFAFA;
+    text-align: left;
+    font-size: 12px;
+    color: #999;
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px 0 12px;
+}
+
+#aa-kendo-grid > thead > tr > th:last-child {
+    border-right: 0;
+}
+
+#aa-kendo-grid > tbody > tr {
+    height: 30px;
+}
+
+#aa-kendo-grid > tbody > tr > td {
+    background-color: #FFF;
+    text-align: left;
+    font-size: 12px;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px 0 12px;
+}
+
+#aa-kendo-grid > tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+#aa-kendo-grid > tbody > tr > td > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: left;
+}
+
+#aa-kendo-grid > tbody > tr > td > ul > li {
+    float: left;
+    padding-left: 12px;
+    height: 35px;
+    line-height: 35px;
+}
+
+#aa-kendo-grid > tbody > tr > td > ul > li:first-child {
+    padding-left: 0;
+}
+
+.aa-warning,
+.aa-actions-section {
+    width: 100%;
+    display: table;
+    margin-top: 12px;
+}
+
+.aa-actions-section h2 {
+    margin-bottom: 6px;
+}
+
+.aa-actions-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: left;
+}
+
+.aa-actions-section ul > li {
+    float: left;
+    padding-left: 6px;
+}
+
+.aa-actions-section ul > li:first-child {
+    padding-left: 0;
+}
+
+.aa-account-description {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.k-textbox {
+    width: 250px;
+}
+
+.k-dropdown {
+    width: 250px;
+    text-align: left;
+}
+
+.fa-lock:hover, .fa-unlock:hover {
+    cursor: pointer;
+}
+
+.fa-lock.no-hover:hover {
+    cursor: inherit;
+}
+
+.k-loading-image {
+    background-image: url(../Packages/kendo-ui/styles/Default/loading-image.gif);
+}
+
+footer {
+    display: none;
+}
+
+.hide-contact{
+    display: none;
+}
+
+.show-contact {
+    display: block;
+}

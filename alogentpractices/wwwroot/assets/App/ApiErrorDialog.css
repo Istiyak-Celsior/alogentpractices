@@ -1,0 +1,49 @@
+.apierror-dialog.k-dialog .k-window-titlebar {
+    background-color: #ff4d4d;
+}
+
+.apierror-dialog-content {
+    padding: 12px 12px 24px 12px;
+}
+
+.apierror-dialog-content {
+    max-height: 450px;
+}
+
+.apierror-title {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.apierror-errorlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.apierror-errormessage {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 1.25em;
+    margin-top: 12px;
+}
+
+.apierror-errorlist-header {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.apierror-errorlist-item {
+    display: block;
+    padding: 12px;
+    background-color: #fff;
+    margin-bottom: 6px;
+    border-left: 3px solid #ff4d4d;
+}
+
+.apierror-errorlist-item span {
+    font-size: 1.05em;
+    font-weight: normal;
+}

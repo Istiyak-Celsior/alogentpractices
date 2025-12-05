@@ -1,0 +1,41 @@
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > tbody > tr > td:first-child,
+.aa-kendo-grid > thead > tr > th:nth-child(2),
+.aa-kendo-grid > tbody > tr > td:nth-child(2) {
+    width: 80px;
+    text-align: center;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-child(4),
+.aa-kendo-grid > tbody > tr > td:nth-child(4),
+.aa-kendo-grid > thead > tr > th:nth-child(5),
+.aa-kendo-grid > tbody > tr > td:nth-child(5),
+.aa-kendo-grid > thead > tr > th:nth-child(6),
+.aa-kendo-grid > tbody > tr > td:nth-child(6),
+.aa-kendo-grid > thead > tr > th:nth-child(7),
+.aa-kendo-grid > tbody > tr > td:nth-child(7) {
+    width: 100px;
+    text-align: center;
+}
+
+.fa-trash-alt.disabled {
+    color: #C3C3C3 !important;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+div.aa-scrollable-content {
+    height: 500px !important;
+    overflow-y: auto !important;
+}

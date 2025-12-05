@@ -1,0 +1,68 @@
+﻿main {
+    padding: 24px;
+}
+
+.aa-panel {
+    width: 100%;
+}
+
+.aa-panel > div {
+    width: 33%;
+    float: left;
+    padding-right: 24px;
+    box-sizing: border-box;
+}
+
+.aa-panel > div:last-child {
+    padding-right: 0;
+    width: 34%;
+}
+
+.aa-panel > div:after {
+    clear: left;
+}
+
+.top-pad {
+    margin-top: 24px;
+}
+
+.widget-wrapper {
+    border: 1px #BEBEBE solid;
+    background-color: #FFF;
+    width: 100%;
+}
+
+.widget-wrapper > div:first-child {
+    background-color: #8FB6CA;
+    color: #FFF;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 6px;
+    font-size: 1.1em;
+}
+
+.widget {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    font-size: 1.0em;
+}
+
+.widget > li {
+    height: 30px;
+    line-height: 30px;
+    padding-left: 6px;
+}
+
+.widget > li:hover {
+    background-color: #EAEAEA;
+}
+
+.aa-icon.fa {
+    font-size: 16px;
+}
+
+.fa-check-circle {
+    color: #27AE60;
+}

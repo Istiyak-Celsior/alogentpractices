@@ -1,0 +1,27 @@
+#aa-upload-nav-table {
+    width: 100%;
+}
+
+#aa-upload-nav-table > tr > td {
+    height: 100px;
+}
+
+.aa-quick-move-highlight {
+    color: blue;
+}
+
+.aa-info-highlight {
+    color: blue;
+}
+
+.aa-file-view-disabled {
+    opacity: .25;
+}
+
+.aa-customer-info-highlight {
+
+}
+
+.aa-account-info-highlight {
+    color: red;
+}

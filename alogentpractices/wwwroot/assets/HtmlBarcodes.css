@@ -1,0 +1,84 @@
+﻿body {
+    padding: 0 10px;
+    margin: 0px
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+td {
+    padding: 0;
+}
+
+
+@font-face {
+    font-family: 'Free3of9Extended';
+    src: local('Free 3 of 9 Extended'), url('../include/fonts/3Of9Barcode.eot');
+    src: local('Free 3 of 9 Extended'), 
+        url('../include/fonts/3Of9Barcode.eot?#iefix') format('embedded-opentype'),
+        url('../include/fonts/3Of9Barcode.ttf') format('truetype'),
+        url('../include/fonts/3Of9Barcode.woff2') format('woff2'),
+        url('../include/fonts/3Of9Barcode.woff') format('woff'), 
+        url('../include/fonts/3Of9Barcode.svg#Free3of9Extended') format('svg');
+}
+
+.free3of9 {
+    font-family: 'Free3of9Extended';
+    font-size: 50px;
+}
+
+.free3of9Col {
+    font-family: 'Free3of9Extended';
+    font-size: 42px;
+}
+
+.arial {
+    font-family: Arial;
+}
+
+.fb {
+    font-weight: bold;
+}
+
+.fs14 {
+    font-size: 14px;
+}
+
+.fs16 {
+    font-size: 16px;
+}
+
+.fs24 {
+    font-size: 24px;
+}
+
+.p5 {
+    padding: 5px;
+}
+
+table.sample {
+    border-width: 1px;
+    border-spacing: 0px;
+    border-style: solid;
+    border-color: gray;
+    border-collapse: collapse;
+}
+
+table.sample th {
+    border-width: 3px;
+    padding: 0px;
+    border-style: solid;
+    border-color: black;
+}
+
+table.sample td {
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+}
+
+.topLine {
+    background-color: RED;
+}

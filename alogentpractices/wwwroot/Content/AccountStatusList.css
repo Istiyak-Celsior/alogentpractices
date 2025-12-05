@@ -1,0 +1,47 @@
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > tbody > tr > td:first-child,
+.aa-kendo-grid > thead > tr > th:nth-child(2),
+.aa-kendo-grid > tbody > tr > td:nth-child(2) {
+    width: 5%;
+    text-align: center;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-child(3),
+.aa-kendo-grid > tbody > tr > td:nth-child(3) {
+    width: 40%;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-child(4),
+.aa-kendo-grid > tbody > tr > td:nth-child(4) {
+    width: 15%;
+}
+
+.fa-trash-alt.disabled {
+    color: #C3C3C3 !important;
+}
+
+div.padded {
+    margin: 12px 0;
+}
+
+#tabstrip {
+    min-height: 480px;
+}
+
+.k-content.k-state-active {
+    min-height: 413px;
+    max-height: 650px;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60;
+}
+
+.aa-status-no {
+    color: #E74C3C;
+}

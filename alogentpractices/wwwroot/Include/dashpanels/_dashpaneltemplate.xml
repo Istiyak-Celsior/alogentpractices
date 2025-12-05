@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<panel xmlns="" id="" title="panelName">
+  <!--This is a comment-->
+  <description></description>
+  <defaults>
+    <position panelnumber="" pagenumber=""></position>
+  </defaults>
+  <file>pagename.asp</file>
+</panel>

@@ -1,0 +1,192 @@
+﻿@page
+@using alogentpractices.Pages
+@model alogentpractices.Pages.AccountStatusListModel
+
+@{
+    ViewData["Title"] = "AccountStatusList";
+}
+
+<style>
+    .enable {
+        background: #9ea0da !important;
+    }
+
+    .add-btn {
+        margin-bottom: 16px;
+        color: white;
+        padding: 8px 16px;
+    }
+</style>
+
+
+<div id="tabstrip" style="padding: 1rem 10px; height: 100vh; background: #d7e2f6;">
+    <ul style="background: #9397cc;">
+        @foreach (var accountClass in Model.AccountClass)
+        {
+            @if (accountClass.accountClassId.ToString() == Model.AccountClassId)
+            {
+                <li class="k-active enable" style="border-bottom-color: rgba(244, 244, 244, 244) !important; border-bottom-width: 2px;">
+                    <a href="javascript:void(0)" onclick="loadCurrent(@accountClass.accountClassId)" style="color: white;">
+                        CREDIT TASK GROUPS
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="javascript:void(0)" onclick="loadCurrent(@accountClass.accountClassId)" style="color: white;">
+                        CREDIT TASK GROUPS
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+
+    @foreach (var accountClass in Model.AccountClass)
+    {
+        var gridId = $"LoanStatusGrid_{accountClass.accountClassId}";
+        var dataJson = Json.Serialize(accountClass.LoanStatuses);
+        var accountStatusList = Html.Raw(Model.LoanAccountStatusList);
+
+        <div>
+            <div id="addLoanSatus" onclick="openAddDialog(@accountClass.accountClassId, false);"
+                 class="add-btn enable k-button">
+                <svg width="48" height="48" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg">
+                    <!-- White Circle Outline -->
+                    <circle cx="24" cy="24" r="22" stroke="black" stroke-width="2" fill="white" />
+
+                    <!-- Vertical line of plus -->
+                    <line x1="24" y1="16" x2="24" y2="32" stroke="black" stroke-width="2" stroke-linecap="round" />
+
+                    <!-- Horizontal line of plus -->
+                    <line x1="16" y1="24" x2="32" y2="24" stroke="black" stroke-width="2" stroke-linecap="round" />
+                </svg>
+
+                ADD NEW @accountClass.accountClassName
+            </div>
+
+            <div id="@gridId" class="mb-2"></div>
+            <div id="accountStatusWindow"></div>
+
+            <script>
+
+                function loadCurrent(accountClassId) {
+                    window.location.href = `/accountstatuslist?accountClassId=` + accountClassId;
+                }
+
+                function onDeleteClick() {
+                    alert('delete')
+                }
+
+                function onEditClick() {
+                    window.location.href = "/ManageAccountStatus"
+                }
+
+                function openAddDialog(accountClassId, action) {
+                    window.location.href = "/ManageAccountStatus?accountClassId=" + accountClassId;
+                    // $("#accountStatusWindow").kendoWindow({
+                    //     width: "600px",
+                    //     title: (action === 'ADD' ? "Add" : "Edit") + " Loan Status",
+                    //     visible: false,
+                    //     modal: true,
+                    //     actions: ["Close"],
+                    //     content: {
+                    //         url: "/AccountStatusMain", // Razor Page without .cshtml
+                    //         data: { accountClassId: accountClassId, action: action },
+                    //         type: "GET"
+                    //     },
+                    //     open: function () {
+                    //         this.center();
+                    //     },
+                    //     refresh: function () {
+                    //         // You can bind Kendo UI widgets here if needed
+                    //     }
+                    // }).data("kendoWindow").center().open();
+                }
+
+                function openKendoDialog(title, url, width, height) {
+                    $("<div />").kendoWindow({
+                        title: title,
+                        content: url,
+                        modal: true,
+                        width: width,
+                        height: height,
+                        visible: false,
+                        close: function () {
+                            this.destroy();
+                        }
+                    }).data("kendoWindow").center().open();
+                }
+
+                $(document).ready(function () {
+                    $('#addLoanSatus').kendoButton();
+
+                    $(function () {
+                        $("#tabstrip").kendoTabStrip({
+                            animation: { open: { effects: "fadeIn" } }
+                        });
+                    });
+
+                    var data = @Html.Raw(Model.LoanAccountStatusList); //@Html.Raw(dataJson);
+
+                    $("#@gridId").kendoGrid({
+                        dataSource: {
+                            data: data,
+                            pageSize: 10
+                        },
+                        pageable: true,
+                        sortable: true,
+                        filterable: true,
+                        columns: [
+                            {
+                                command: [
+                                    {
+                                        text: "",
+                                        name: "customDelete",
+                                        template: `
+                                                                                                            <a href="javascript:void(0)" onclick="onDeleteClick()">
+                                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                         width="20" height="20" viewBox="0 0 24 24" fill="black">
+                                                                                                     <path d="M3 6H21M19 6L18.33 20C18.3 20.67 17.67 21 17 21H7C6.33 21 5.7 20.67 5.67 20L5 6M10 11V17M14 11V17M9 6V4C9 3.45 9.45 3 10 3H14C14.55 3 15 3.45 15 4V6"
+                                                                                                           stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                                 </svg>
+                                                                                            </a>
+                                                                                         `
+                                    },
+                                ],
+                                title: "Delete",
+                                width: "180px"
+                            },
+                            {
+                                command: [
+                                    {
+                                        name: "customEdit",
+                                        text: "",
+                                        template: `
+                                                                                                            <a href="javascript:void(0)" onclick="onEditClick()">
+                                                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                                                                                  <path d="M15.2322 5.23223L18.7678 8.76777C19.1239 9.12392 19.1239 9.71045 18.7678 10.0666L9.5 19.3344L5 20L5.66562 15.5L14.9334 6.23223C15.2896 5.87608 15.8761 5.87608 16.2322 6.23223Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                                  <path d="M13.5 7.5L16.5 10.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                                </svg>
+
+                                                                                            </a>
+                                                                                        `
+                                    }
+                                ],
+                                title: "Edit",
+                                width: "180px"
+                            },
+                            { field: "StatusDescription", title: "Task Group Name" },
+                            { field: "StatusCode", title: "Number of Tasks" },
+                            {
+                                field: "IsActive",
+                                title: "Processing Type",
+                                template: "Execute Tasks In Order"
+                            }
+                        ]
+                    });
+                });
+            </script>
+        </div>
+    }
+</div>

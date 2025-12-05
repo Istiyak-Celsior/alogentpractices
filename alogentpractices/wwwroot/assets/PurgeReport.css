@@ -1,0 +1,176 @@
+﻿/* PAGE STYLING */
+div#aa-grid-wrapper {
+    width: 100%;
+    display: none;
+    height: 750px;
+}
+
+footer {
+    display: none;
+}
+
+/* GRID STYLING */
+#data-grid td:nth-child(4),
+#data-grid td:nth-child(5) {
+    text-align: center;
+}
+
+.k-grid-header th.k-header:nth-child(4),
+.k-grid-header th.k-header:nth-child(5) {
+    padding-left: 2px;
+    padding-right: 0;
+    text-align: center;
+}
+
+.customer-row,
+.k-alt.customer-row {
+    background-color: #EFF9FF;
+}
+
+.k-grid-content tr td {
+    /* EXPOSE VERTICAL LINES IN GRID */
+    border-left-width: 1px;
+    border-color: #E6E6E6;
+}
+
+.k-grid-header th.k-header {
+    /* VERTICAL ALIGN HEADER TITLES */
+    vertical-align: middle;
+}
+
+.k-grid td {
+    padding: 6px;
+}
+
+.full-warning {
+    color: #FCAA06;
+}
+
+.row-description {
+    color: #A6A6A6;
+    padding-left: 18px;
+    display: inline-block;
+}
+
+#cross-info {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    width: 74px;
+    display: inline-block;
+}
+
+#cross-info > li {
+    float: left;
+    padding-left: 6px;
+    text-align: left;
+    font-weight: 400;
+}
+
+#cross-info > li:first-child {
+    padding-left: 0;
+    height: 32px;
+    line-height: 32px;
+}
+
+#desc-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    width: 100%;
+    display: inline-block;
+}
+
+#desc-list > li {
+    float: left;
+    padding-left: 6px;
+    text-align: left;
+    width: calc(100% - 18px);
+    box-sizing: border-box;
+}
+
+#desc-list > li:first-child {
+    padding-left: 0;
+    width: 18px;
+}
+
+.purge-icon {
+    width: 18px;
+    display: inline-block;
+}
+
+.aa-color-regular {
+    color: #D2D2D2;
+}
+
+/* PAGINATION STYLING */
+.aa-pagination-wrapper {
+    width: 90%;
+    text-align: center;
+    float: right;
+    padding-top: 4px;
+}
+
+.aa-pagination-wrapper.bottom {
+    margin-top: 12px;
+}
+
+.aa-pagination-wrapper > div.pager {
+    display: inline-block;
+}
+
+.aa-pagination-wrapper > div.pager a,
+.aa-pagination-wrapper > div.pager a:active,
+.aa-pagination-wrapper > div.pager a:visited {
+    float: left;
+    margin: 0 .08333em;
+    height: 2em;
+    line-height: 2em;
+    border-radius: 1.0833em;
+    cursor: pointer;
+    text-align: center;
+    border: 1px #CACACA solid;
+    width: 2.0em;
+}
+
+.aa-pagination-wrapper > div.pager a:hover {
+    background-color: #F5F5F5;
+}
+
+.aa-pagination-wrapper > div.pager a.selected,
+.aa-pagination-wrapper > div.pager a:active.selected,
+.aa-pagination-wrapper > div.pager a:visited.selected {
+    color: #7AA6BD;
+    border: 1px transparent solid;
+    background-color: #F5F5F5;
+}
+
+.aa-pagination-wrapper > div.pager a:hover.selected {
+    background-color: #F5F5F5;
+    cursor: default;
+}
+
+.aa-pagination-wrapper > div.page-bottom-wrapper > ul {
+    list-style: none;
+    clear: both;
+    padding: 0;
+    margin: 0;
+}
+
+.aa-pagination-wrapper > div.page-bottom-wrapper > ul > li {
+    float: left;
+    padding-left: 12px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.aa-pagination-wrapper > div.page-bottom-wrapper > ul > li:first-child {
+    padding-left: 0;
+}
+
+/* PRINT STYLING */
+@media print {
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}

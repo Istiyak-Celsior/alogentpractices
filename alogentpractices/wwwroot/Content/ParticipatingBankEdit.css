@@ -1,0 +1,91 @@
+.aa-panel {
+    width: 100%;
+}
+
+.aa-panel > div {
+    width: 35%;
+    float: left;
+}
+
+.aa-panel > div:last-child {
+    text-align: right;
+    width: 65%;
+}
+
+.aa-panel > div:after {
+    clear: left;
+}
+
+.k-textbox {
+    width: 300px;
+}
+
+.aa-panel-title {
+    width: 100%;
+}
+
+.aa-panel-title > div {
+    width: 50%;
+    float: left;
+    text-align: left;
+    height: 50px;
+    line-height: 35px;
+}
+
+.aa-panel-title > div:last-child {
+    text-align: right;
+}
+
+.aa-panel-title > div:after {
+    clear: left;
+}
+
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > tbody > tr > td:first-child,
+.aa-kendo-grid > thead > tr > th:nth-child(2),
+.aa-kendo-grid > tbody > tr > td:nth-child(2),
+.aa-kendo-grid > thead > tr > th:nth-child(6),
+.aa-kendo-grid > tbody > tr > td:nth-child(6) {
+    width: 80px;
+    text-align: center;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-child(5),
+.aa-kendo-grid > tbody > tr > td:nth-child(5) {
+    width: 100px;
+    text-align: center;
+}
+
+.fa-trash-alt.disabled,
+.fa-pencil-alt.disabled,
+.fa-minus-circle.disabled {
+    color: #C3C3C3 !important;
+}
+
+.aa-additional-pad {
+    padding: 6px 0;
+}
+
+.aa-no-left-pad {
+    padding-left: 0 !important;
+}
+
+.k-button.k-primary.aa-test {
+    padding: 4px 7px;
+}
+
+.checkbox-align {
+    position: relative;
+    top: 7px;
+}
+
+.url-horizontal-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.url-horizontal-list > span:not(:first-child) {
+    padding-left: 8px;
+}

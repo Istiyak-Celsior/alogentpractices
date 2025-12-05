@@ -1,0 +1,12 @@
+﻿footer {
+    border-top: 1px #cacaca solid;
+    color: #7B7B7B;
+    font-weight: bold;
+    text-align: right;
+    display: block;
+    height: 40px;
+    padding: 10px 0 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 24px;
+}

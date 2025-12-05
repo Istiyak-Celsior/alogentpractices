@@ -1,0 +1,10 @@
+main#aa-reassign-task {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+#aa-reassign-task .k-dropdown {
+    width: 380px;
+}

@@ -1,0 +1,6 @@
+.aa-widget-header button,
+.aa-widget-footer button {
+    height: 24px;
+    font-size: .9em;
+    padding: .8em;
+}

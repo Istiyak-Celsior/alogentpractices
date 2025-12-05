@@ -1,0 +1,68 @@
+﻿main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+main.inner {
+    padding: 0;
+    max-height: 430px;
+    overflow: hidden;
+    display: block;
+}
+
+#tabstrip {
+    min-height: 451px;
+}
+
+.aa-two-column-form-table > tbody > tr > td.label {
+    background-color: #F5F5F5;
+    border-bottom: 1px #FFF solid;
+    text-align: left;
+    padding: 0 12px;
+}
+
+.edit-default {
+    margin-top: 12px;
+    padding: 0 12px;
+    text-align: right;
+}
+
+.edit-default-disabled {
+    margin-top: 12px;
+    padding: 0 12px;
+    text-align: right;
+}
+
+/* HISTORY TAB */
+.aa-kendo-grid.history > thead > tr > th:first-child,
+.aa-kendo-grid.history > thead > tr > th:nth-child(2) {
+    width: 125px;
+}
+
+/* KENDO STYLING */
+.k-content.k-state-active {
+    min-height: 384px;
+    max-height: 384px;
+}
+
+.k-textbox.date {
+    width: 100px;
+}
+
+.k-textbox.grace {
+    width: 80px;
+}
+
+.k-textbox.text-area {
+    width: 500px;
+}
+
+.k-dropdown {
+    width: 250px;
+}
+
+span.k-tooltip {
+    margin-left: 0;
+}

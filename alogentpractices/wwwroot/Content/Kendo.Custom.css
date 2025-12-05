@@ -1,0 +1,107 @@
+.k-primary:focus,
+.k-primary:focus:hover,
+.k-primary.k-state-focused,
+.k-primary.k-state-focused.k-state-disabled,
+.k-state-disabled .k-primary.k-state-focused {
+    border-color: #47738A;
+    background-color: #47738A;
+}
+
+a.k-button.k-primary {
+    color: #FFF;
+}
+
+div.k-window-content {
+    padding: 0;
+}
+
+.k-dialog .k-content {
+    padding: 0.5em 1em 5.8em 1em;
+}
+
+.k-checkbox-label {
+    padding-left: 6px;
+}
+
+.k-menu .k-item > .k-link {
+    padding: 5px 12px;
+}
+
+.k-menu {
+    background-color: #EBEBEB;
+}
+
+.k-menu .k-animation-container .k-menu-group {
+    padding: 6px 0;
+    width: 214px;
+}
+
+.k-link:link, .k-link:visited, .k-nav-current.k-state-hover .k-link {
+    color: #45546C;
+}
+
+.k-window-titlebar {
+    display: flex;
+}
+
+.k-textbox {
+    background-color: #FAFAFA;
+    border-color: #DEDEDE;
+}
+
+.k-dropdown .k-state-default {
+    border-color: #DEDEDE;
+    background-image: none;
+    background-image: none, linear-gradient(to bottom, false);
+    background-position: 50% 50%;
+    background-color: #E6E6E6;
+}
+
+#tabstrip {
+    border: 1px #CECECE solid;
+}
+
+span.k-tooltip {
+    padding: 3px 10px;
+    margin-left: 40px;
+}
+
+.k-tabstrip-items .k-state-active, .k-panelbar .k-tabstrip-items .k-state-active {
+    background-color: #83AFC5;
+    background-image: none;
+    border-bottom-color: #D1F1FF;
+}
+
+.k-loading-image {
+    background-image: url(../Packages/kendo-ui/styles/Default/loading-image.gif);
+    position: fixed;
+}
+
+.k-notification-warning {
+    background-color: #f7e9b3;
+    color: #b18c00;
+    border-color: #f7e9b3;
+}
+
+.k-pager-numbers .k-state-selected {
+    border-color: #7AA6BD transparent transparent;
+    color: #7AA6BD;
+}
+
+/* KENDO DIALOG */
+.k-widget.k-window.k-dialog .k-content,
+.k-widget.k-window.k-dialog .k-prompt,
+.k-prompt-container {
+    background-color: #ECECEC;
+}
+
+.k-dialog .k-window-titlebar,
+.k-dialog.k-alert .k-window-titlebar,
+.k-dialog.k-prompt .k-dialog-titlebar {
+    background-color: #7AA6BD;
+    color: #FFF;
+}
+
+.k-dialog.k-prompt .k-window-titlebar .k-dialog-title {
+    color: #FFF;
+}

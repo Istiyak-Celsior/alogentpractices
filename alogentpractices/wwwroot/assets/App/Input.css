@@ -1,0 +1,15 @@
+input::placeholder {
+    color: #b8b8b8;
+    font-style: italic;
+}
+
+input:invalid::placeholder {
+    color: #ff4d4d;
+    font-style:italic;
+    opacity: 0.75;
+}
+
+input[readonly="readonly"],
+input[readonly="readonly"]:hover {
+    background-color: #ececec;;
+}

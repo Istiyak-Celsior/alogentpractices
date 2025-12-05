@@ -1,0 +1,66 @@
+﻿.aa-title {
+    padding-left: 20px;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+#aa-two-column-form-table {
+    width: 100%;
+}
+
+#aa-two-column-form-table > tbody > tr {
+    height: 35px;
+}
+
+#aa-two-column-form-table > tbody > tr > td:first-child {
+    background-color: #F5F5F5;
+    border-bottom: 1px #FFF solid;
+    text-align: left;
+    padding: 0 12px;
+}
+
+#aa-two-column-form-table > tbody > tr > td:nth-child(2) {
+    text-align: left;
+    padding-left: 12px;
+}
+
+#aa-two-column-form-table > tbody > tr.aa-no-background-color > td:first-child {
+    background-color: inherit;
+}
+
+#aa-two-column-form-table > tbody > tr.aa-flexfield-header > td {
+    background-color: #ECECEC;
+}
+
+.aa-button-wrapper {
+    width: 100%;
+    display: table;
+    margin-top: 12px;
+    clear: right;
+}
+
+.aa-button-wrapper > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+    clear: left;
+}
+
+.aa-button-wrapper > ul > li {
+    padding-left: 6px;
+    float: left;
+}
+
+.aa-button-wrapper > ul > li:first-child {
+    padding-left: 0;
+}
+
+.k-dropdown {
+    width: 380px;
+}

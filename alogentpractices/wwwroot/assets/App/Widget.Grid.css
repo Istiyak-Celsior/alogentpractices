@@ -1,0 +1,124 @@
+.aa-widget .k-grid,
+.aa-widget .k-grid-header-wrap {
+    border: 0;
+}
+
+.aa-widget .k-grid-header,
+.aa-widget .k-grid-header th,
+.aa-widget .k-grid-header th[role=columnheader] {
+    background-color: transparent;
+    border: 0;
+    font-weight: 500;
+    padding: 12px 6px;
+}
+
+.aa-widget .k-grid-header tr:hover {
+    background-color: transparent;
+}
+
+.aa-widget .k-grid tr:hover td {
+    background-color: #ececec;
+}
+
+.aa-widget .k-grid tr:not(.k-grouping-row):hover td:first-child {
+    border-radius: 3px 0 0 3px;
+}
+
+.aa-widget .k-grid tr:not(.k-grouping-row):hover td:last-child {
+    border-radius: 0 3px 3px 0;
+}
+
+.aa-widget .k-grid tr td {
+    border-right: 0;
+    border-left: 0;
+}
+
+.aa-widget .k-grid td {
+    padding: 6px;
+}
+
+.aa-widget .k-grid tr.k-grouping-row+tr td {
+    border-top-width: 0;
+}
+
+.aa-widget .k-grid tr:last-child td {
+    border-bottom: 0;
+}
+
+.aa-widget .k-grid .k-group-cell.k-header {
+    border-bottom: 0;
+}
+
+.aa-widget .k-grid .k-group-cell,
+.aa-widget .k-grid .k-grouping-row .k-group-cell {
+    background-color: transparent;
+}
+
+.aa-widget .k-grid .k-grouping-row .k-group-cell {
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+}
+
+.aa-widget .k-grid tr td.k-group-cell {
+    border-top-width: 1px;
+}
+
+.aa-widget .k-grid tr td {
+    border-top-width: 1px;
+    border-bottom-width: 0px;
+}
+
+.aa-widget .k-grid .k-grouping-row td:first-child:not(.k-group-cell) {    
+    background-color: #3a3a3a;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    margin-top: 4px;
+    border-color: #fff;
+    color: #fff;
+}
+
+.aa-widget .k-grid .k-grouping-row td {
+    border-width: 2px;
+    border-radius: 6px;
+    padding: 4px 2px;
+}
+
+.aa-widget .k-grid .k-grouping-row .k-icon {
+    color: #fff;
+}
+
+.aa-widget .k-grid .k-grid-norecords-template {
+    border: 0;
+}
+
+.aa-widget .k-grid tr.k-grouping-row:hover {
+    background-color: transparent;
+}
+
+.aa-widget .k-grid .aa-action-button:hover {
+    opacity: 0.25;
+}
+
+.aa-widget .k-grid tr:not(.k-state-selected):hover .aa-action-button:hover {
+    background-color: #fff;
+    opacity: 1;
+}
+
+.aa-widget .k-grid tr.k-state-selected:hover .aa-action-button:hover {
+    background-color: #fff;
+    opacity: 1;
+}
+
+.aa-widget .k-grid tr.k-state-selected {
+    background-color: var(--app-color-selection-highlight);
+}
+
+.aa-widget .k-grid tr.k-state-selected td {
+    background-color: transparent;
+    border-color: #fff;
+    color: var(--app-color-text);
+}
+
+.aa-widget .k-grid-filter.k-state-active {
+    color: var(--app-color-accent);
+}

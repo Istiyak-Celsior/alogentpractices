@@ -1,0 +1,7 @@
+﻿.k-textbox {
+    width: 250px;
+}
+
+.k-textbox.code {
+    width: 120px;
+}

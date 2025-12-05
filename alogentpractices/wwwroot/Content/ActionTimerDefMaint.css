@@ -1,0 +1,15 @@
+﻿.k-textbox {
+    width: 300px;
+}
+
+.k-textbox.name {
+    width: 320px;
+}
+
+.k-textbox.days {
+    width: 120px;
+}
+
+.k-dropdown {
+    width: 200px;
+}

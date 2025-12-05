@@ -1,0 +1,15 @@
+﻿.aa-two-column-form-table.aa-fixed-size {
+    width: 100%;
+}
+
+.aa-two-column-form-table > tbody > tr > td:nth-child(1) {
+    width:300px;
+}
+
+.aa-two-column-form-table > tbody > tr > td:nth-child(2) > input {
+    width: 400px;
+}
+
+.aa-two-column-form-table > tbody > tr > td:nth-child(2) > textarea {
+    width: 400px;
+}

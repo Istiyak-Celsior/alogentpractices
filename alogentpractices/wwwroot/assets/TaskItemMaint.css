@@ -1,0 +1,23 @@
+﻿.k-textbox.name {
+    width: 300px;
+}
+
+.k-textbox.notification {
+    width: 400px;
+}
+
+.k-textbox.grace {
+    width: 60px;
+}
+
+.k-dropdown {
+    width: 200px;
+}
+
+.aa-assigned-user .k-dropdown {
+    margin-top: 4px;
+}
+
+.aa-assigned-user {
+    padding: 4px 0;
+}

@@ -1,0 +1,139 @@
+﻿@page
+@model alogentpractices.Pages.TaskGroupDeleteConfirmModel
+@{
+    ViewData["Title"] = "Delete Task Group:Testing";
+    Layout = null;
+}
+<link href="/Packages/kendo-ui/styles/kendo.default-v2.min.css" rel="stylesheet" />
+<!-- #include file="include/ThemeStylesModal.asp" -->
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* fallback */
+    }
+
+    .modal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #f0f0f0; /* ✅ full background color here */
+        min-width: 600px;
+        height: 100vh;
+        box-sizing: border-box;
+    }
+
+    .modal-body {
+        padding: 20px;
+        font-size: 14px;
+        flex-grow: 1;
+    }
+
+    .warning {
+        color: red;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .confirmation {
+        margin-top: 10px;
+    }
+
+    .modal-footer {
+        padding: 20px;
+        text-align: right;
+        border-top: 1px solid #ccc;
+        /* No need to repeat background-color here */
+    }
+
+    .k-button {
+        min-width: 80px;
+        margin-left: 10px;
+    }
+
+    .aa-button-wrapper-absolute {
+        display: flex;
+        justify-content: flex-end; /* align buttons to the right */
+        padding: 20px;
+    }
+
+        .aa-button-wrapper-absolute ul {
+            display: flex;
+            gap: 10px; /* spacing between buttons */
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .aa-button-wrapper-absolute li {
+            margin: 0;
+        }
+
+</style>
+
+<div class="modal">
+    <form method="post" class="modal-body">
+        <input type="hidden" name="TaskGroupId" value="@Model.TaskGroupId" />
+        <input type="hidden" name="Action" value="DELETE" />
+       @*  <div class="top">
+            <span class="aa-color-danger">Warning!</span> You are about to delete this task group and all associated tasks.
+        </div>
+        <div class="top">
+            Are you sure you want to continue?
+        </div> *@
+        <div class="warning">
+            Warning!
+            <span style="font-weight: normal; color: black;">
+                You are about to delete this task group and all associated tasks.
+            </span>
+        </div>
+
+        <div class="confirmation">
+            Are you sure you want to continue?
+        </div>
+
+        <div class="aa-button-wrapper-absolute">
+            <ul>
+                <li><button type="submit" class="k-button k-primary">Delete</button></li>
+                <li><a href="javascript:void(0);" onclick="parent.closeKendoDialog();" class="k-button">Cancel</a></li>
+            </ul>
+        </div>
+    </form>
+       
+  
+</div>
+
+<!-- #include file="include/ThemeScriptsModal.asp" -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.all.min.js"></script>
+<script>
+    $(function () {
+        var pageTitle = '@ViewData["Title"]';
+        parent.$('#kendo-dialog_wnd_title').html(pageTitle);
+    });
+</script>
+@if (Model.IsDeleted)
+{
+    <script>
+        // Try to get the Kendo window from the parent
+        var kendoWindow = parent.$(".k-window-content").data("kendoWindow");
+
+        if (kendoWindow) {
+            // Close the Kendo window and redirect after a small delay
+            kendoWindow.bind("close", function () {
+                // Delay ensures the window is fully closed before navigating
+                setTimeout(function () {
+                    window.location.href = "/TaskGroupList?bankid=1";
+                }, 100);
+            });
+
+            kendoWindow.close();
+        } else {
+            // Fallback: redirect directly if no Kendo window found
+            parent.location.href = "/TaskGroupList?bankid=1";
+        }
+    </script>
+
+}
+<!-- #include file="include/dbclose.inc" -->

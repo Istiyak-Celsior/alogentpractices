@@ -1,0 +1,14 @@
+﻿.feature-title > td {
+    background-color: #8FB6CA !important;
+    color: #FFF;
+    font-size: 1.2em !important;
+}
+
+.sub-header > td {
+    background-color: #D7D7D7 !important;
+}
+
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > tbody > tr > td:first-child {
+    width: 100px;
+}

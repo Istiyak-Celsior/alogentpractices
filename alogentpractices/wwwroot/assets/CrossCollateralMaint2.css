@@ -1,0 +1,9 @@
+﻿.aa-button-wrapper-left.top {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.aa-scrollable-wrapper {
+    height: 430px;
+    overflow-y: auto;
+}

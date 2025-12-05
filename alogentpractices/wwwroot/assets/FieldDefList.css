@@ -1,0 +1,104 @@
+.aa-panel {
+    width: 100%;
+}
+
+.aa-panel > div {
+    height: 30px;
+    line-height: 35px;
+    font-weight: bold;
+    width: 50%;
+    float: left;
+    display: table;
+}
+
+.aa-panel > div:last-child {
+    text-align: right;
+}
+
+.aa-panel > div:after {
+    clear: left;
+}
+
+.aa-content-panel {
+    width: 100%;
+    display: inline-block;
+}
+
+.aa-content-panel > div {
+    width: 30%;
+    float: left;
+    display: table;
+    box-sizing: border-box;
+}
+
+.aa-content-panel > div:last-child {
+    width: 70%;
+    padding-left: 24px;
+}
+
+.aa-content-panel > div:after {
+    clear: left;
+}
+
+a.k-button.k-primary {
+    margin-bottom: 12px;
+}
+
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > thead > tr > th:nth-child(2),
+.aa-kendo-grid > tbody > tr > td:first-child,
+.aa-kendo-grid > tbody > tr > td:nth-child(2) {
+    width: 80px;
+    text-align: center;
+}
+
+.aa-kendo-grid.main > thead > tr > th:nth-child(4),
+.aa-kendo-grid.main > tbody > tr > td:nth-child(4),
+.aa-kendo-grid.main > thead > tr > th:nth-child(5),
+.aa-kendo-grid.main > tbody > tr > td:nth-child(5),
+.aa-kendo-grid.main > thead > tr > th:nth-child(6),
+.aa-kendo-grid.main > tbody > tr > td:nth-child(6),
+.aa-kendo-grid.main > thead > tr > th:nth-child(7),
+.aa-kendo-grid.main > tbody > tr > td:nth-child(7),
+.aa-kendo-grid.main > thead > tr > th:nth-child(8),
+.aa-kendo-grid.main > tbody > tr > td:nth-child(8) {
+    width: 80px;
+    text-align: center;
+}
+
+.fa-trash-alt.disabled {
+    color: #C3C3C3 !important;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.group-selected > td {
+    background-color: #CBE3F2 !important;
+}
+
+.tabstrip-content-wrapper {
+    padding: 12px;
+    border-left: 1px #E5E5E5 solid;
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+    background: #FFF;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 500px;
+}
+
+.spacer {
+    height: 12px;
+}

@@ -1,0 +1,17 @@
+﻿main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+.aa-two-column-form-table > tbody > tr > td.label {
+    background-color: #F5F5F5;
+    border-bottom: 1px #FFF solid;
+    text-align: left;
+    padding: 0 12px;
+}
+
+.aa-two-column-form-table > tbody > tr > td.left-pad-6 {
+    padding-left: 6px;
+}

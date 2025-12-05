@@ -1,0 +1,32 @@
+.aa-select-customer-content {
+    margin: auto;
+    width: 80%;
+    padding: 10px 25px;
+}
+
+.scrollable-wrapper {
+    border: 1px #CECECE solid;
+    height: 600px;
+    overflow-y: auto;
+}
+
+.listing-table {
+    width: 100%;
+    display: table;
+}
+
+.listing-table > tbody > tr {
+    height: 30px;
+}
+
+.listing-table > tbody > tr > td {
+    padding-left: 6px;
+}
+
+.listing-table > tbody > tr:hover > td {
+    background-color: #CECECE;
+}
+
+.listing-table > tbody > tr:nth-child(odd) > td {
+    background-color: #F5F5F5;
+}

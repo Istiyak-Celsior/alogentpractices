@@ -1,0 +1,23 @@
+﻿main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+.aa-two-column-form-table > tbody > tr.header-row > td {
+    background-color: #ECECEC;
+    border-bottom: 3px #EBEBEB solid;
+}
+
+.k-textbox.current-value {
+    width: 300px;
+}
+
+span.k-tooltip {
+    margin-left: 0px;
+}
+
+.aa-horizontal-list > li {
+    padding-left: 10px;
+}

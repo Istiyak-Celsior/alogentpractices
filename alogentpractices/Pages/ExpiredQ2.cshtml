@@ -1,0 +1,979 @@
+﻿@page
+@model alogentpractices.Pages.ExpiredQ2Model
+@{
+    ViewData["Title"] = "AccuAccount : Expired Loan Document Search (Part 2)";
+}
+<!-- #include file="include/adovbs.inc" -->
+<!-- #include file="include/dbopen.inc" -->
+<!-- #include file="include/getCustTypeArray.inc" -->
+<!-- #include file="include/getLoanTypeArray.inc" -->
+<!-- #include file="include/getFieldDefGroupArray.inc" -->
+<!-- #include file="include/getFieldDefinitions.inc" -->
+<!-- #include file="include/common.inc" -->
+<!-- #include file="include/security.inc" -->
+
+<!-- #include file="include/ThemeStyles.asp" -->
+<link rel="stylesheet" type="text/css" href="Packages/kendo-accuaccount/styles/kendo.custom.css" />
+<link rel="stylesheet" type="text/css" href="Packages/kendo-ui/styles/kendo.material.mobile.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/ExpiredQ2.css" />
+
+@{
+   
+
+    if (HttpContext.Session.GetString("errFlag") != null && bool.TryParse(HttpContext.Session.GetString("errFlag"), out bool errFlag) && errFlag)
+    {
+        // Get values from Session
+        Model.searchName = HttpContext.Session.GetString("searchName");
+        Model.searchCustomerNumber = HttpContext.Session.GetString("searchCustomerNumber");
+        Model.searchTaxId = HttpContext.Session.GetString("searchTaxId");
+        Model.searchCustomerStatus = HttpContext.Session.GetString("searchCustomerStatus");
+        Model.searchLoan = HttpContext.Session.GetString("searchLoan");
+        Model.searchLoanStatus = HttpContext.Session.GetString("searchLoanStatus");
+        Model.searchLoanTypeId = HttpContext.Session.GetString("searchLoanTypeId");
+        Model.searchLoanOfficer = HttpContext.Session.GetString("searchLoanOfficer");
+        Model.searchBank = HttpContext.Session.GetString("searchbankId");
+        Model.searchCustomerTypeId = HttpContext.Session.GetString("customerTypeId");
+        Model.searchFromLoanOrgDate = HttpContext.Session.GetString("searchFromLoanOrgDate");
+        Model.searchToLoanOrgDate = HttpContext.Session.GetString("searchToLoanOrgDate");
+        Model.searchPageSize = HttpContext.Session.GetString("searchPageSize");
+        Model.searchCustomerOfficer = HttpContext.Session.GetString("searchCustomerOfficer");
+        Model.searchLoanDescription = HttpContext.Session.GetString("searchLoanDescription");
+        Model.searchCustomerBranch = HttpContext.Session.GetString("searchCustomerBranch");
+        Model.searchLoanBranch = HttpContext.Session.GetString("searchLoanBranch");
+        Model.searchClassificationId = HttpContext.Session.GetString("searchClassificationId");
+        Model.searchAccountClassId = HttpContext.Session.GetString("searchAccountClassId");
+        Model.searchMaxResult = HttpContext.Session.GetString("searchMaxResult");
+        Model.searchDocumentFilter = HttpContext.Session.GetString("searchDocumentFilter");
+        Model.searchDisplayDocs = HttpContext.Session.GetString("searchDisplayDocs");
+        Model.searchAppDateFrom = HttpContext.Session.GetString("searchAppDateFrom");
+        Model.searchAppDateTo = HttpContext.Session.GetString("searchAppDateTo");
+        Model.searchAppLender = HttpContext.Session.GetString("searchAppLender");
+        Model.searchAppDelegate = HttpContext.Session.GetString("searchAppDelegate");
+        Model.searchAppAnalyst = HttpContext.Session.GetString("searchAppAnalyst");
+        Model.searchApprovalStatusId = HttpContext.Session.GetString("searchApprovalStatusId");
+        Model.searchLoanStatusId = HttpContext.Session.GetString("searchLoanStatusId");
+        Model.searchAppApprover = HttpContext.Session.GetString("searchAppApprover");
+    }
+    else
+    {
+        // Get values from the request
+        Model.searchName = HttpContext.Request.Query["name"];
+        Model.searchCustomerNumber = HttpContext.Request.Query["customerID"];
+        Model.searchTaxId = HttpContext.Request.Query["taxID"];
+        Model.searchLoan = HttpContext.Request.Query["loan"];
+        Model.searchLoanStatus = HttpContext.Request.Query["loanStatus"];
+        Model.searchLoanTypeId = HttpContext.Request.Query["loanType"];
+        Model.searchFromLoanOrgDate = HttpContext.Request.Query["fromOrgDate"];
+        Model.searchToLoanOrgDate = HttpContext.Request.Query["toOrgDate"];
+        Model.searchBank = HttpContext.Request.Query["bank"];
+        Model.searchLoanOfficer = HttpContext.Request.Query["loanOfficer"];
+        Model.searchCustomerStatus = HttpContext.Request.Query["searchcustomerStatus"];
+        Model.searchCustomerTypeId = HttpContext.Request.Query["customerType"];
+        Model.searchPageSize = HttpContext.Request.Query["searchPageSize"];
+        Model.searchCustomerOfficer = HttpContext.Request.Query["customerOfficer"];
+        Model.searchLoanDescription = HttpContext.Request.Query["loanDescription"];
+        Model.searchCustomerBranch = HttpContext.Request.Query["customerBranch"];
+        Model.searchLoanBranch = HttpContext.Request.Query["loanBranch"];
+        Model.searchClassificationId = HttpContext.Request.Query["classificationId"];
+        Model.searchAccountClassId = HttpContext.Request.Query["accountClassId"];
+        Model.searchMaxResult = HttpContext.Request.Query["maxResult"];
+        Model.searchDocumentFilter = HttpContext.Request.Query["documentFilter"];
+        Model.searchDisplayDocs = HttpContext.Request.Query["displayDocs"];
+        Model.searchAppDateFrom = HttpContext.Request.Query["appDateFrom"];
+        Model.searchAppDateTo = HttpContext.Request.Query["appDateTo"];
+        Model.searchAppLender = HttpContext.Request.Query["appLender"];
+        Model.searchAppDelegate = HttpContext.Request.Query["appDelegate"];
+        Model.searchAppAnalyst = HttpContext.Request.Query["appAnalyst"];
+        Model.searchApprovalStatusId = HttpContext.Request.Query["approvalStatusId"];
+        Model.searchLoanStatusId = HttpContext.Request.Query["loanStatusId"];
+        Model.searchAppApprover = HttpContext.Request.Query["appApprover"];
+
+        //Store values in Session
+        
+        if (Model.searchName != null)
+            HttpContext.Session.SetString("searchName", Model.searchName);
+
+        if (Model.searchCustomerNumber != null)
+            HttpContext.Session.SetString("searchCustomerNumber", Model.searchCustomerNumber);
+
+        if (Model.searchTaxId != null)
+            HttpContext.Session.SetString("searchTaxId", Model.searchTaxId);
+
+        if (Model.searchCustomerStatus != null)
+            HttpContext.Session.SetString("searchCustomerStatus", Model.searchCustomerStatus);
+       
+        if (Model.searchLoan != null)
+            HttpContext.Session.SetString("searchLoan", Model.searchLoan);
+
+        if (Model.searchLoanStatus != null)
+            HttpContext.Session.SetString("searchLoanStatus", Model.searchLoanStatus);
+
+        if (Model.searchLoanTypeId != null)
+            HttpContext.Session.SetString("searchLoanTypeId", Model.searchLoanTypeId);
+
+        if (Model.searchLoanOfficer != null)
+            HttpContext.Session.SetString("searchLoanOfficer", Model.searchLoanOfficer);
+
+        if (Model.searchBank != null)
+            HttpContext.Session.SetString("searchbankId", Model.searchBank);
+
+        if (Model.searchCustomerTypeId != null)
+            HttpContext.Session.SetString("customerTypeId", Model.searchCustomerTypeId);
+
+        if (Model.searchFromLoanOrgDate != null)
+            HttpContext.Session.SetString("searchFromLoanOrgDate", Model.searchFromLoanOrgDate);
+
+        if (Model.searchToLoanOrgDate != null)
+            HttpContext.Session.SetString("searchToLoanOrgDate", Model.searchToLoanOrgDate);
+
+        if (Model.searchPageSize != null)
+            HttpContext.Session.SetString("searchPageSize", Model.searchPageSize);
+
+        if (Model.searchCustomerOfficer != null)
+            HttpContext.Session.SetString("searchCustomerOfficer", Model.searchCustomerOfficer);
+
+        if (Model.searchLoanDescription != null)
+            HttpContext.Session.SetString("searchLoanDescription", Model.searchLoanDescription);
+
+        if (Model.searchCustomerBranch != null)
+            HttpContext.Session.SetString("searchCustomerBranch", Model.searchCustomerBranch);
+
+        if (Model.searchLoanBranch != null)
+            HttpContext.Session.SetString("searchLoanBranch", Model.searchLoanBranch);
+
+        if (Model.searchClassificationId != null)
+            HttpContext.Session.SetString("searchClassificationId", Model.searchClassificationId); 
+            
+        if (Model.searchCustomerStatus != null)
+            HttpContext.Session.SetString("searchCustomerStatus", Model.searchCustomerStatus);
+
+        if (Model.searchAccountClassId != null)
+            HttpContext.Session.SetString("searchAccountClassId", Model.searchAccountClassId);
+
+        if (Model.searchMaxResult != null)
+            HttpContext.Session.SetString("searchMaxResult", Model.searchMaxResult);
+
+        if (Model.searchDocumentFilter != null)
+            HttpContext.Session.SetString("searchDocumentFilter", Model.searchDocumentFilter);
+
+        if (Model.searchDisplayDocs != null)
+            HttpContext.Session.SetString("searchDisplayDocs", Model.searchDisplayDocs);
+
+        if (Model.searchAppDateFrom != null)
+            HttpContext.Session.SetString("searchAppDateFrom", Model.searchAppDateFrom);
+
+        if (Model.searchAppDateTo != null)
+            HttpContext.Session.SetString("searchAppDateTo", Model.searchAppDateTo);
+
+        if (Model.searchAppLender != null)
+            HttpContext.Session.SetString("searchAppLender", Model.searchAppLender);
+
+        if (Model.searchAppDelegate != null)
+            HttpContext.Session.SetString("searchAppDelegate", Model.searchAppDelegate);
+
+        if (Model.searchAppAnalyst != null)
+            HttpContext.Session.SetString("searchAppAnalyst", Model.searchAppAnalyst);
+
+        if (Model.searchApprovalStatusId != null)
+            HttpContext.Session.SetString("searchApprovalStatusId", Model.searchApprovalStatusId);
+
+        if (Model.searchLoanStatusId != null)
+            HttpContext.Session.SetString("searchLoanStatusId", Model.searchLoanStatusId);
+
+        if (Model.searchAppApprover != null)
+            HttpContext.Session.SetString("searchAppApprover", Model.searchAppApprover);
+    }
+}
+
+<!-- #include file="include/header.asp" -->
+<div class="aa-title">
+    <div>
+        <h1><i class="title-icon fas fa-exclamation-circle" aria-hidden="true"></i>&nbsp;Expired Document Search: Step 2</h1>
+    </div>
+    <div id="aa-bank-logo-container">
+        <img src="customer/logo/customerlogo.gif" alt="logo" id="customer-logo-image" />
+    </div>
+</div>
+
+<form name="calform" action="searchgen.asp" method="Post">
+    <input type="hidden" name="searchType" value="Expired" />
+    <input type="hidden" name="Name" value=Model.searchName />
+    <input type="hidden" name="CustomerId" value=Model.searchCustomerNumber />
+    <input type="hidden" name="TaxId" value="Model.searchtaxId" />
+    <input type="hidden" name="searchCustomerStatus" value=Model.searchcustomerStatus /> 
+    <input type="hidden" name="Loan" value=Model.searchloan />
+    <input type="hidden" name="LoanStatus" value=Model.searchLoanStatus />
+    <input type="hidden" name="LoanType" value=Model.searchLoanTypeId />
+    <input type="hidden" name="LoanOfficer" value=Model.searchloanOfficer /> 
+    <input type="hidden" name="customerType" value=Model.searchCustomerTypeId />
+    <input type="hidden" name="bank" value=Model.searchbank />
+    <input type="hidden" name="fromOrgDate" value=Model.searchFromLoanOrgDate />
+    <input type="hidden" name="toOrgDate" value=Model.searchToLoanOrgDate />
+    <input type="hidden" name="searchPageSize" value=Model.searchPageSize />
+    <input type="hidden" name="customerOfficer" value=Model.searchCustomerOfficer />
+    <input type="hidden" name="loanDescription" value=Model.searchLoanDescription />
+    <input type="hidden" name="customerBranch" value=Model.searchCustomerBranch />
+    <input type="hidden" name="loanBranch" value=Model.searchLoanBranch />
+    <input type="hidden" name="accountClassId" value=Model.searchAccountClassId />
+    <input type="hidden" name="maxResult" value=Model.searchMaxResult />
+    <input type="hidden" name="documentFilter" value="Model.searchDocumentFilter" />
+    <input type="hidden" name="displayDocs" value=Model.searchDisplayDocs />
+    <input type="hidden" name="appDateFrom" value=Model.searchAppDateFrom />
+    <input type="hidden" name="appDateTo" value=Model.searchAppDateTo />
+    <input type="hidden" name="appLender" value=Model.searchAppLender />
+    <input type="hidden" name="appDelegate" value=Model.searchAppDelegate />
+    <input type="hidden" name="appAnalyst" value=Model.searchAppAnalyst />
+    <input type="hidden" name="approvalStatusId" value=Model.searchApprovalStatusId />
+    <input type="hidden" name="loanStatusId" value=Model.searchLoanStatusId />
+    <input type="hidden" name="appApprover" value=Model.searchAppApprover />
+
+    <!-- #include file="include/msghandler.inc" -->
+   @*  <%
+    Dim expDateList : expDateList = ""
+    Dim tabDisplayed :  tabDisplayed = false
+    Dim accountClassRS : Set accountClassRS = Server.CreateObject("ADODB.RecordSet")
+
+    IF searchLoanTypeId <> "" AND searchAccountClassId = "" THEN
+    searchAccountClassId = GetAccountClassByLoanType(searchLoanTypeId)
+    END IF
+
+    Dim accountClassFilter : accountClassFilter = ""
+    IF searchAccountClassId <> "" THEN
+    accountClassFilter = " WHERE accountClassId = " & dbFormatId(searchAccountClassId)
+    END IF
+
+    Dim accountClassQuery : accountClassQuery = "SELECT * FROM accountClass " & accountClassFilter & " ORDER BY accountClassSortOrder"
+    %> *@
+
+
+
+
+    @{
+        // Variable declarations
+        string expDateList = "";
+        bool tabDisplayed = false;
+
+        string accountClassFilter = "";
+        string searchAccClsId = "";
+        // Conditional logic
+        if (!string.IsNullOrEmpty(Model.searchLoanTypeId) && string.IsNullOrEmpty(Model.searchAccountClassId))
+        {
+
+            searchAccClsId = Model.GetAccountClassByLoanType(Model.searchLoanTypeId);
+        }
+
+        // Conditional logic for the filter
+        if (!string.IsNullOrEmpty(searchAccClsId))
+        {
+            accountClassFilter = " WHERE accountClassId = " + searchAccClsId;
+        }
+
+        string accountClassQuery = "SELECT * FROM accountClass " + accountClassFilter + " ORDER BY accountClassSortOrder";
+    }
+
+    <div id="aa-expiredq2-loading">
+        <h1>Loading Document Tabs</h1>
+        <i class="fas fa-cog fa-spin fa-3x fa-fw"></i>
+    </div>
+    <div id="aa-expiredq2-content" class="aa-expiredq2-hide">
+        <section id="aa-form-header">
+            <div>
+                <ul class="aa-button-wrapper">
+                    <li><button type="button" class="k-button k-primary" onclick="validateForm(calform);">Search</button></li>
+                    <li><button type="button" class="k-button" onclick="history.back();">Cancel</button></li>
+                </ul>
+            </div>
+        </section>
+        <div id="exp-date-form">
+            <section>
+                <div id="tabstrip">
+                    <ul>
+                     @*    <%
+                        Dim selectedAccountClassName, selectedAccountClassId
+                        IF searchDocumentFilter = "C" THEN
+                        selectedAccountClassName = "Credit"
+                        %>
+                        <li class="k-state-active">Credit Tabs</li><%
+                        ELSE
+                        Dim tabSelected : tabSelected = "class=""k-state-active"""
+                        Dim doOnce : doOnce = true
+                        accountClassRS.Open accountClassQuery, db, adOpenStatic, adCmdText
+                        DO UNTIL accountClassRS.EOF
+                        Dim accountClassName : accountClassName = accountClassRS("accountClassName")
+                        Dim accountClassCode : accountClassCode = accountClassRS("accountClassCode")
+                        Dim accountClassId : accountClassId = accountClassRS("accountClassId")
+                        %>
+                        <li <%=tabSelected%>><%=accountClassName%></li><%
+                        IF doOnce THEN
+                        doOnce = false
+                        tabSelected = ""
+                        selectedAccountClassName = accountClassName
+                        selectedAccountClassId = accountClassId
+                        END IF
+                        accountClassRS.MoveNext
+                        LOOP
+                        accountClassRS.Close
+                        END IF
+                        %> *@
+
+                        @{
+                            
+                                string selectedAccountClassName = null;
+                                int? selectedAccountClassId = null;
+
+                                if (Model.searchDocumentFilter == "C")
+                                {
+                                    selectedAccountClassName = "Credit";
+                                    <li class="k-state-active">Credit Tabs</li>
+                                }
+                                else
+                                {
+                                    string tabSelected = "class=\"k-state-active\"";
+                                    bool doOnce = true;
+                                   
+                                    foreach (var accountClass in Model.getAllAccountClasses())
+                                    {
+                                        var accountClassName = accountClass.accountClassName;
+                                        var accountClassCode = accountClass.accountClassCode;
+                                        var accountClassId = accountClass.accountClassId;
+                                                                            
+                                  
+                                        <li @Html.Raw(tabSelected)>@accountClass.accountClassName</li>
+
+                                        if (doOnce)
+                                            {
+                                                doOnce = false;
+                                                tabSelected = ""; // remove on subsequent iterations
+                                                selectedAccountClassName = accountClass.accountClassName;
+                                                selectedAccountClassId = accountClass.accountClassId;
+                                            }
+                                    }
+                                }
+
+                            }
+                            }
+                        }
+                    </ul>
+                   
+                    @*  <%
+                    IF searchDocumentFilter = "C" THEN
+                    Response.Write "<div>
+                        " & vbCrLf
+                        Call BuildTabList("C", "Credit", "")
+                        Response.Write "
+                    </div>" & vbCrLf
+                    ELSE
+                    accountClassRS.Open accountClassQuery, db, adOpenStatic, adCmdText
+                    DO UNTIL accountClassRS.EOF
+                    Response.write "<div>
+                        " & vbCrLf
+                        Call BuildTabList("L", accountClassRS("accountClassName"), accountClassRS("accountClassId"))
+                        Response.Write "
+                    </div>" & vbCrLf
+                    accountClassRS.MoveNext
+                    LOOP
+                    accountClassRS.Close
+                    END IF
+                    %> *@
+                    @{
+                        if (Model.searchDocumentFilter == "C")
+                        {
+                            <div>
+                                Model.BuildTabList("C", "Credit", "")
+                            </div>
+                        }
+                        else
+                        {
+
+                            // foreach (var accountClass in accountClassData)
+                            // {
+                                <div>
+                                    Model.BuildTabList("L", accountClass.accountClassName, accountClass.accountClassId)
+                                </div>
+                            // }
+                        }
+                    }
+                </div>
+            </section>
+        </div>
+        <section id="aa-form-footer">
+            <div>
+                <ul class="aa-button-wrapper">
+                    <li><button type="button" class="k-button k-primary" onclick="validateForm(calform);">Search</button></li>
+                    <li><button type="button" class="k-button" onclick="history.back();">Cancel</button></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    @*  <%
+    FOR i = 0 TO g_creditFieldDefCount - 1
+    fieldName = g_creditFieldDefList(FIELD_DEF_NAME, i)
+    fieldDataType = g_creditFieldDefList(FIELD_DEF_DATA_TYPE, i)
+
+    ' ### Only generate fields that were checked ###
+    IF Request("chk_flex_" & fieldName) THEN
+    %><input type="hidden" name="chk_flex_<%=fieldName%>" value="1" /><%
+    ' ### Handle From/To field types ###
+    IF fieldDataType = "datetime" OR fieldDataType = "int" OR fieldDataType = "decimal" OR fieldDataType = "money" THEN
+    fieldValueFrom = Request("from_flex_" & fieldName)
+    fieldValueTo = Request("to_flex_" & fieldName)
+    %><input type="hidden" name="from_flex_<%=fieldName%>" value="<%=fieldValueFrom%>" />
+    <input type="hidden" name="to_flex_<%=fieldName%>" value="<%=fieldValueTo%>" /><%
+    ELSE
+    fieldValue = Request("flex_" & fieldName)
+    %><input type="hidden" name="flex_<%=fieldName%>" value="<%=fieldValue%>" /><%
+    END IF
+    END IF
+    NEXT
+    *@
+    @{
+        // Suppose these are initialized somewhere in your code/backing model:
+        var g_creditFieldDefCount = 2; // g_creditFieldDefList.Count;  /Mocking
+        for (int i = 0; i < g_creditFieldDefCount; i++)
+        {
+            var fieldName = "flex_ChoiceFlexField"; // g_creditFieldDefList[i].FieldName;
+            var fieldDataType = "";// g_creditFieldDefList[i].DataType;
+
+            // Only generate fields that were checked
+            // if (Request.Form[$"chk_flex_{fieldName}"] != null)
+            if (Request.Query[$"flex_ChoiceFlexField"].ToString()!=null)  
+            {
+                <input type="hidden" name="chk_flex_@fieldName" value="1" />
+
+                // Handle From/To field types
+                if (fieldDataType == "datetime" || fieldDataType == "int" ||
+                fieldDataType == "decimal" || fieldDataType == "money")
+                {
+                    var fieldValueFrom = Request.Form[$"from_flex_{fieldName}"];
+                    var fieldValueTo = Request.Form[$"to_flex_{fieldName}"];
+                    <input type="hidden" name="from_flex_@fieldName" value="@fieldValueFrom" />
+                    <input type="hidden" name="to_flex_@fieldName" value="@fieldValueTo" />
+                }
+                else
+                {
+                    var fieldValue = Request.Query[$"flex_{fieldName}"];
+                    <input type="hidden" name="flex_@fieldName" value="@fieldValue" />
+                }
+            }
+        }
+    }
+
+
+    @*
+    FOR i = 0 TO g_accountFieldDefCount - 1
+    fieldName = g_accountFieldDefList(FIELD_DEF_NAME, i)
+    fieldDataType = g_accountFieldDefList(FIELD_DEF_DATA_TYPE, i)
+
+    ' ### Only generate fields that were checked ###
+    IF Request("chk_flex_" & fieldName) THEN
+    %><input type="hidden" name="chk_flex_<%=fieldName%>" value="1" /><%
+    ' ### Handle From/To field types ###
+    IF fieldDataType = "datetime" OR fieldDataType = "int" OR fieldDataType = "decimal" OR fieldDataType = "money" THEN
+    fieldValueFrom = Request("from_flex_" & fieldName)
+    fieldValueTo = Request("to_flex_" & fieldName)
+    %><input type="hidden" name="from_flex_<%=fieldName%>" value="<%=fieldValueFrom%>" />
+    <input type="hidden" name="to_flex_<%=fieldName%>" value="<%=fieldValueTo%>" /><%
+    ELSE
+    fieldValue = Request("flex_" & fieldName)
+    %><input type="hidden" name="flex_<%=fieldName%>" value="<%=fieldValue%>" /><%
+    END IF
+    END IF
+    NEXT
+    *@
+
+    @{
+        // List<AccountFieldDef> g_accountFieldDefList; // where each has FieldName and DataType
+        int g_accountFieldDefCount = 1;// g_accountFieldDefList.Count;
+
+        for (int i = 0; i < g_accountFieldDefCount; i++)
+        {
+            string fieldName = "flex_LoanChoiceTest"; // g_accountFieldDefList[i].FieldName;
+            string fieldDataType = "";// g_accountFieldDefList[i].DataType;
+
+            // Only generate fields that were checked
+            if (Request.Query[$"chk_flex_{fieldName}"].ToString() != null)
+            {
+                <input type="hidden" name="chk_flex_@fieldName" value="1" />
+
+                // Handle From/To field types
+                if (fieldDataType == "datetime" ||
+                fieldDataType == "int" ||
+                fieldDataType == "decimal" ||
+                fieldDataType == "money")
+                {
+                    var fieldValueFrom = Request.Form[$"from_flex_{fieldName}"];
+                    var fieldValueTo = Request.Form[$"to_flex_{fieldName}"];
+                    <input type="hidden" name="from_flex_@fieldName" value="@fieldValueFrom" />
+                    <input type="hidden" name="to_flex_@fieldName" value="@fieldValueTo" />
+                }
+                else
+                {
+                    var fieldValue = Request.Query[$"flex_{fieldName}"];
+                    <input type="hidden" name="flex_@fieldName" value="@fieldValue" />
+                }
+            }
+        }
+    }
+
+
+    @*
+    FOR i = 0 TO g_collateralFieldDefCount - 1
+    fieldName = g_collateralFieldDefList(FIELD_DEF_NAME, i)
+    fieldDataType = g_collateralFieldDefList(FIELD_DEF_DATA_TYPE, i)
+
+    ' ### Only generate fields that were checked ###
+    IF Request("chk" & fieldName) THEN
+    %><input type="hidden" name="chk<%=fieldName%>" value="1" /><%
+    ' ### Handle From/To field types ###
+    IF fieldDataType = "datetime" OR fieldDataType = "int" OR fieldDataType = "decimal" OR fieldDataType = "money" THEN
+    fieldValueFrom = Request("from_" & fieldName)
+    fieldValueTo = Request("to_" & fieldName)
+    %><input type="hidden" name="from_<%=fieldName%>" value="<%=fieldValueFrom%>" />
+    <input type="hidden" name="to_<%=fieldName%>" value="<%=fieldValueTo%>" /><%
+    ELSE
+    fieldValue = Request(fieldName)
+    %><input type="hidden" name="<%=fieldName%>" value="<%=fieldValue%>" /><%
+    END IF
+    END IF
+    NEXT
+    %> *@
+    @{
+        // Assume g_collateralFieldDefList is a List with properties FieldName and DataType
+        int g_collateralFieldDefCount = 0;// g_collateralFieldDefList.Count;
+
+        for (int i = 0; i < g_collateralFieldDefCount; i++)
+        {
+            string fieldName = "flex_CollateralCovenantActive";// g_collateralFieldDefList[i].FieldName;
+            string fieldDataType = "";// g_collateralFieldDefList[i].DataType;
+
+            // Only generate fields that were checked (Request equivalent in Razor)
+            if (Request.Query[$"chk{fieldName}"].ToString() != null)
+            {
+                <input type="hidden" name="chk@fieldName" value="1" />
+
+                if (fieldDataType == "datetime" || fieldDataType == "int" ||
+                fieldDataType == "decimal" || fieldDataType == "money")
+                {
+                    var fieldValueFrom = Request.Form[$"from_{fieldName}"];
+                    var fieldValueTo = Request.Form[$"to_{fieldName}"];
+                    <input type="hidden" name="from_@fieldName" value="@fieldValueFrom" />
+                    <input type="hidden" name="to_@fieldName" value="@fieldValueTo" />
+                }
+                else
+                {
+                    var fieldValue = Request.Form[$"{fieldName}"];
+                    <input type="hidden" name="@fieldName" value="@fieldValue" />
+                }
+            }
+        }
+    }
+
+
+
+// @{
+//     for (int i = 0; i < fieldDefinitions.Count; i++)
+//     {
+//         string fieldName = fieldDefinitions[i].FieldName;
+//         string fieldDataType = fieldDefinitions[i].FieldDataType;
+
+//         // Check if the field was "checked"
+//         if (!string.IsNullOrEmpty(Request.Form["chk_flex_" + fieldName]))
+//         {
+//             <input type="hidden" name="chk_flex_@fieldName" value="1" />
+
+//             // Handle From/To field types
+//             if (fieldDataType == "datetime" || fieldDataType == "int" || fieldDataType == "decimal" || fieldDataType == "money")
+//             {
+//                 string fieldValueFrom = Request.Form["from_flex_" + fieldName];
+//                 string fieldValueTo = Request.Form["to_flex_" + fieldName];
+//                 <input type="hidden" name="from_flex_@fieldName" value="@fieldValueFrom" />
+//                 <input type="hidden" name="to_flex_@fieldName" value="@fieldValueTo" />
+//             }
+//             else
+//             {
+//                 string fieldValue = Request.Form["flex_" + fieldName];
+//                 <input type="hidden" name="flex_@fieldName" value="@fieldValue" />
+//             }
+//         }
+//     }
+// }
+
+// @{
+//     // The g_creditFieldDefList, g_accountFieldDefList, and g_collateralFieldDefList
+//     // would be C# collections (e.g., List<>) populated by your controller.
+//     // For demonstration, we'll assume they exist and have a "FieldName" and "FieldDataType" property.
+
+//     // Call the helper method for each data set
+//     @GenerateHiddenInputs(g_creditFieldDefList);
+//     @GenerateHiddenInputs(g_accountFieldDefList);
+//     @GenerateHiddenInputs(g_collateralFieldDefList);
+
+//     // Note: The third loop has a slightly different naming convention ("chk" instead of "chk_flex_").
+//     // A separate, specialized helper or a conditional check within the main helper could handle this.
+//     // Here is how you could convert the third loop directly for clarity.
+//     for (int i = 0; i < g_collateralFieldDefList.Count; i++)
+//     {
+//         string fieldName = g_collateralFieldDefList[i].FieldName;
+//         string fieldDataType = g_collateralFieldDefList[i].FieldDataType;
+
+//         if (!string.IsNullOrEmpty(Request.Form["chk" + fieldName]))
+//         {
+//             <input type="hidden" name="chk@fieldName" value="1" />
+            
+//             if (fieldDataType == "datetime" || fieldDataType == "int" || fieldDataType == "decimal" || fieldDataType == "money")
+//             {
+//                 string fieldValueFrom = Request.Form["from_" + fieldName];
+//                 string fieldValueTo = Request.Form["to_" + fieldName];
+//                 <input type="hidden" name="from_@fieldName" value="@fieldValueFrom" />
+//                 <input type="hidden" name="to_@fieldName" value="@fieldValueTo" />
+//             }
+//             else
+//             {
+//                 string fieldValue = Request.Form[fieldName];
+//                 <input type="hidden" name="@fieldName" value="@fieldValue" />
+//             }
+//         }
+//     }
+ } 
+</form>
+<!-- #include file="include/footer.asp" -->
+<!-- #include file="include/ThemeScripts.asp" -->
+<script src="Packages/kendo-ui/js/kendo.core.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.data.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.tabstrip.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.userevents.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.selectable.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.calendar.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.popup.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.datepicker.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.validator.min.js"></script>
+<script src="include/javascript/utility.js"></script>
+<script src="Packages/kendo-accuaccount/js/kendo.culture.en-US.js"></script>
+<script src="Packages/kendo-accuaccount/js/kendo.validatorrules.js"></script>
+<script src="Packages/kendo-accuaccount/js/kendo.datepicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tabstrip").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            }
+        });
+
+        $("#aa-expiredq2-loading").hide();
+        $("#aa-expiredq2-content").show();
+
+        // Initialize the expired date calendar objects
+        var expDateFields = '<%=Left(expDateList, Len(expDateList) - 1)%>';
+        expDateFields = expDateFields.split(',');
+
+        for (i = 0; i < expDateFields.length; i++) {
+            initializeDateField(expDateFields[i], '');
+        }
+    });
+
+    function initializeDateField(fieldId, fieldValue) {
+        $('#' + fieldId).kendoConfiguredDatePicker();
+        if (fieldValue !== '') {
+            $('#' + fieldId).data('kendoConfiguredDatePicker').value(fieldValue);
+        }
+    }
+
+    // leave ui/validation to the page/developer/caller
+    $('#exp-date-form').kendoValidator({
+        rules: {
+            date: KendoValidatorRules.date,
+            mindate: KendoValidatorRules.mindate,
+            maxdate: KendoValidatorRules.maxdate
+        }
+    });
+
+    function validateForm(frm) {
+        var result = false;
+
+        if ($('#exp-date-form').data('kendoValidator').validate()) {
+            frm.submit();
+            result = true;
+        }
+
+        return result;
+    }
+
+    function checkAllTabs(chkAllTabs, chkDocuments) {
+        var checkedState;
+
+        if (chkAllTabs.checked) {
+            checkedState = true;
+        } else {
+            checkedState = false;
+        }
+
+        for (var i = 0; i < chkDocuments.length; i++) {
+            chkDocuments[i].checked = checkedState;
+        }
+    }
+
+    function checkTab(chkAllTabs, chkDocuments) {
+        // Assume all documents are checked.
+        var checkAllState = true;
+
+        // Set the state to false if any document is not checked.
+        for (var i = 0; i < chkDocuments.length; i++) {
+            if (!chkDocuments[i].checked) {
+                checkAllState = false;
+            }
+        }
+
+        // Update the chkAllTabs checkbox to new state.
+        chkAllTabs.checked = checkAllState;
+    }
+</script>
+
+@* <%
+SUB BuildTabList(tabType, accountClassName, accountClassId)
+    %>
+<input type="hidden" name="accountClassCode" value="<%=lCase(accountClassName)%>" />
+<div>
+    <table class="aa-kendo-grid">
+        <%
+        Dim documentQuery
+        Dim documentRS : Set documentRS = Server.CreateObject("ADODB.RecordSet")
+
+        IF tabType = "C" THEN
+        Dim customerTypeFilter : customerTypeFilter = ""
+
+        IF searchCustomerTypeId <> "" THEN
+        customerTypeFilter = " AND dd.customerTypeId = " & dbFormatId(searchCustomerTypeId)
+        END IF
+
+        documentQuery = _
+        " SELECT DISTINCT" & _
+        "   dt.documentTypeId," & _
+        "   dt.documentTypeName," & _
+        "   dst.documentSubTypeId," & _
+        "   dst.documentSubTypeName" & _
+        " FROM" & _
+        "   documentType AS dt INNER JOIN documentSubType AS dst" & _
+        "       ON dt.documentTypeId=dst.documentTypeId" & _
+        "   LEFT OUTER JOIN documentDefinitions AS dd" & _
+        "       ON dd.documentTypeId=dt.documentTypeId" & _
+        "       AND dd.documentSubTypeId=dst.documentSubTypeId" & _
+        " WHERE" & _
+        "   (IsNull(dd.requireExpDate, 0) = 1 OR dst.subTypeRequireExpDateYN LIKE 'Y')" & _
+        "   AND dt.typeCode LIKE " & dbFormatText(tabType) & _
+        "   AND dst.documentSubTypeId IN (" & _
+        "       SELECT documentSubTypeId FROM documentDefinitions" & _
+        "   )" & _
+        customerTypeFilter & _
+        " ORDER BY" & _
+        "   dt.documentTypeName," & _
+        "   dst.documentSubTypeName"
+        ELSE
+        Dim loanTypeFilter : loanTypeFilter = ""
+
+        IF searchLoanTypeId <> "" THEN
+        loanTypeFilter = " AND dd.loanTypeId = " & dbFormatId(searchLoanTypeId)
+        END IF
+
+        documentQuery = _
+        " SELECT DISTINCT" & _
+        "   dt.documentTypeId," & _
+        "   dt.documentTypeName," & _
+        "   dst.documentSubTypeId," & _
+        "   dst.documentSubTypeName" & _
+        " FROM" & _
+        "   documentType AS dt INNER JOIN documentSubType AS dst" & _
+        "       ON dt.documentTypeId=dst.documentTypeId" & _
+        "   INNER JOIN documentTabAccountSecurity AS dtas" & _
+        "       ON dtas.documentSubTypeId=dst.documentSubtypeId" & _
+        "       AND dtas.accountClassId=" & dbFormatId(accountClassId) & _
+        "   LEFT OUTER JOIN documentDefinitions AS dd" & _
+        "       ON dd.documentTypeId=dt.documentTypeId" & _
+        "       AND dd.documentSubTypeId=dst.documentSubTypeId" & _
+        " WHERE" & _
+        "   (IsNull(dd.requireExpDate, 0) = 1 OR dst.subTypeRequireExpDateYN LIKE 'Y')" & _
+        "   AND dt.typeCode LIKE " & dbFormatText(tabType) & _
+        "   AND dst.documentSubTypeId IN (" & _
+        "       SELECT documentSubTypeId FROM documentDefinitions" & _
+        "   )" & _
+        loanTypeFilter & _
+        " ORDER BY" & _
+        "   dt.documentTypeName," & _
+        "   dst.documentSubTypeName"
+        END IF
+        documentRS.Open documentQuery, db, adOpenStatic, adCmdText
+
+        IF documentRS.EOF THEN
+        %>
+        <tr>
+            <td colspan="2">
+                There are no Expired Document Tabs associated with the type selected. Press the Cancel button to return to the search page to change your selection.
+                Click the Search button if you want to continue without any Expired Tab filters selected.
+            </td>
+        </tr><%
+        ELSE
+        %>
+        <thead>
+            <tr>
+                <th>Document Group</th>
+                <th>Document Tab</th>
+                <th>Expiring on</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead><%
+        END IF
+
+        Dim classStyle
+        Dim flipper : flipper = -1
+        Dim currentDocumentTypeId : currentDocumentTypeId = ""
+        Dim displayGroupName : displayGroupName = false
+        Dim tabsFound : tabsFound = false
+        Dim i : i = 1
+
+        DO UNTIL documentRS.EOF
+        tabsFound = true
+        tabDisplayed = true
+        classStyle = ""
+        IF cStr(currentDocumentTypeId) <> documentRS("documentTypeId") THEN
+        currentDocumentTypeId = documentRS("documentTypeId")
+        displayGroupName = true
+        classStyle = "aa-document-type-header"
+        END IF
+        %>
+        <tr class="<%=classStyle%>">
+            <td>
+                <%
+                IF displayGroupName THEN
+                displayGroupName = false
+                %><b><%=documentRS("documentTypeName")%></b><%
+                END IF %>&nbsp;
+            </td>
+            <td><%=Server.HTMLEncode(documentRS("documentSubTypeName"))%></td>
+            <td>
+                <input type="date"
+                       id="documentExpDate_<%=LCase(accountClassName)%>_<%=i%>"
+                       name="documentExpDate_<%=LCase(accountClassName)%>_<%=i%>"
+                       data-type="date"
+                       data-mindate-msg="Date must be equal or greater than 1/1/1753"
+                       data-maxdate-msg="Date must be equal or less than 12/31/9999"
+                       data-date-msg="Invalid Date" />
+                <input type="hidden" name="documentSubTypeId_<%=lCase(accountClassName)%>" value="<%=documentRS(" documentSubTypeId")%>"/>
+            </td>
+            <td>&nbsp;<span class="k-invalid-msg" data-for="documentExpDate_<%=lCase(accountClassName)%>_<%=i%>"></span></td>
+        </tr>
+        <%
+        expDateList = expDateList & "documentExpDate_" & lCase(accountClassName) & "_" & i & ","
+        i = i + 1
+        documentRS.MoveNext
+        LOOP
+        documentRS.Close
+        %>
+    </table>
+    <input type="hidden" name="documentCount_<%=lCase(accountClassName)%>" value="<%=i%>" />
+</div>
+    <%
+END SUB
+
+FUNCTION GetAccountClassByLoanType(loanTypeId)
+    Dim resultId
+    Dim sqlRS : Set sqlRS = Server.CreateObject("ADODB.RecordSet")
+    Dim sqlQuery : sqlQuery = "SELECT accountClassId FROM loanType WHERE loanTypeId = " & dbFormatId(loanTypeId)
+    sqlRS.Open sqlQuery, db, adOpenStatic, adCmdText
+    IF NOT sqlRS.EOF THEN
+        resultId = sqlRS("accountClassId")
+    END IF
+    sqlRS.Close
+    GetAccountClassByLoanType = resultId
+END FUNCTION
+%> *@
+@* @helper BuildTabList(string tabType, string accountClassName, int? accountClassId)
+{
+    // In a modern application, you would fetch data in a controller or service.
+    // This helper method would receive a populated list or model.
+    // The code below simulates this by assuming 'documentData' is already available.
+    // The actual data fetching logic is moved out of the view.
+
+    var documentData = GetDocumentData(tabType, accountClassId);
+ *@
+ 
+ @* 
+    <input type="hidden" name="accountClassCode" value="@accountClassName.ToLower()" /> *@
+  @*   
+    <input type="hidden" name="accountClassCode" value="@accountClassName.ToLower()" />
+    <div>
+        <table class="aa-kendo-grid">
+            @if (documentData == null || !documentData.Any())
+            {
+                <tr>
+                    <td colspan="2">
+                        There are no Expired Document Tabs associated with the type selected. Press the Cancel button to return to the search page to change your selection.
+                        Click the Search button if you want to continue without any Expired Tab filters selected.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <thead>
+                    <tr>
+                        <th>Document Group</th>
+                        <th>Document Tab</th>
+                        <th>Expiring on</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        string currentDocumentTypeId = "";
+                        bool displayGroupName = false;
+                        int i = 1;
+                        // Assuming 'expDateList' is a list or variable in a parent scope
+                        // List<string> expDateList = new List<string>();
+                    }
+
+                    @foreach (var document in documentData)
+                    {
+                        string classStyle = "";
+                        if (currentDocumentTypeId != document.documentTypeId)
+                        {
+                            currentDocumentTypeId = document.documentTypeId;
+                            displayGroupName = true;
+                            classStyle = "aa-document-type-header";
+                        }
+                        
+                        <tr class="@classStyle">
+                            <td>
+                                @if (displayGroupName)
+                                {
+                                    displayGroupName = false;
+                                    <b>@document.documentTypeName</b>
+                                }
+                                &nbsp;
+                            </td>
+                            <td>@document.documentSubTypeName</td>
+                            <td>
+                                <input
+                                    type="date"
+                                    id="documentExpDate_@(accountClassName.ToLower())_@(i)"
+                                    name="documentExpDate_@(accountClassName.ToLower())_@(i)"
+                                    data-type="date"
+                                    data-mindate-msg="Date must be equal or greater than 1/1/1753"
+                                    data-maxdate-msg="Date must be equal or less than 12/31/9999"
+                                    data-date-msg="Invalid Date" />
+                                <input type="hidden" name="documentSubTypeId_@(accountClassName.ToLower())" value="@document.documentSubTypeId"/>
+                            </td>
+                            <td>&nbsp;<span class="k-invalid-msg" data-for="documentExpDate_@(accountClassName.ToLower())_@(i)"></span></td>
+                        </tr>
+                        
+                        expDateList.Add($"documentExpDate_{accountClassName.ToLower()}_{i}");
+                        i++;
+                    }
+                </tbody>
+            }
+        </table>
+        <input type="hidden" name="documentCount_@(accountClassName.ToLower())" value="@(i - 1)"/>
+    </div>
+} *@
+
+
+

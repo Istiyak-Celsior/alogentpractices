@@ -1,0 +1,136 @@
+﻿@page
+@using alogentpractices.Pages
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<style>
+    .comp-label strong {
+        font-size: 4em;
+        line-height: 1;
+        font-weight: 200;
+        display: block;
+    }
+
+    .comp-label small {
+        font-size: .7em;
+        text-transform: uppercase;
+        display: block;
+    }
+</style>
+
+<div class="container-fluid">
+    <main role="main" class="px-4">
+        <div class="dashboard">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+
+                <div class="col-md order-md-first text-center text-md-left">
+                    <h2>
+                        <span class="small text-uppercase text-muted d-block">Statistics</span>
+                        <span id="spanFilteredDateRange"></span>
+                    </h2>
+                </div>
+
+                <div class="btn-toolbar mb-2 mb-md-0">
+
+                    <div class="btn-group mr-2">
+                        <input id="inputAssignee" placeholder="Select assignee..." style="width: 260px;" />
+                    </div>
+
+                    <div class="btn-group mr-2 pt-range-filter-group">
+                        <button type="button" class="pt-class-range-filter" data-range="3"
+                                data-icon="calendar">
+                            3
+                            Months
+                        </button>
+                        <button type="button" class="pt-class-range-filter" data-range="6"
+                                data-icon="calendar">
+                            6
+                            Months
+                        </button>
+                        <button type="button" class="pt-class-range-filter" data-range="12"
+                                data-icon="calendar">
+                            1
+                            Year
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <h3 class="card-header">Active Issues</h3>
+                <div class="card-block">
+
+                    <div class="row">
+
+                        <div class="col-12 col-lg-6 col-xl pb-4 active-issues">
+                            <span class="comp-label">
+                                <strong id="statusCountsActiveItemsCount"></strong>
+                                <small>Active issues</small>
+                            </span>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-xl pb-4 text-success closed-issues">
+                            <span class="comp-label">
+                                <strong id="statusCountsClosedItemsCount"></strong>
+                                <small>Closed issues</small>
+                            </span>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-xl pb-4 text-danger open-issues">
+                            <span class="comp-label">
+                                <strong id="statusCountsOpenItemsCount"></strong>
+                                <small>Open issues</small>
+                            </span>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-xl pb-4 close-rate">
+                            <span class="comp-label">
+                                <strong id="statusCountsCloseRate"></strong>
+                                <small>Close rate</small>
+                            </span>
+                            <p class="m-0 small text-uppercase text-muted">
+                                Highest:
+                                100%
+                                on Oct 11, 2018
+                            </p>
+                            <p class="m-0 small text-uppercase text-muted">
+                                Lowest:
+                                20%
+                                on Oct 9, 2018
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>All issues</h3>
+
+                            <div id="chart"></div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </main>
+</div>
+
+<script>
+    $("#ddl").kendoDropDownList({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            { text: "Item1", value: "1" },
+            { text: "Item2", value: "2" }
+        ]
+    });
+</script>	

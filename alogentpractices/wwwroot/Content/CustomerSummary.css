@@ -1,0 +1,160 @@
+div.outerdiv a:link,
+div.outerdiv a:active,
+div.outerdiv a:visited {
+    color: #FFF;
+}
+
+h2 {
+    margin-left: 6px;
+}
+
+div.outerdiv {
+    background: #FFF;
+    text-align: left;
+    border: 1px #000 solid;
+}
+
+table {
+    width: 100%;
+}
+
+.print-wrapper {
+    padding: 12px;
+}
+
+div.header {
+    background: #34495e;
+    color: White;
+}
+
+tr.label > td {
+    color: #000;
+    text-align: left;
+    background-color: #FFF;
+    padding-left: 10px;
+}
+
+tr.label > td.aa-tar {
+    color: #000;
+    text-align: left;
+    background-color: #FFF;
+    padding-right: 10px;
+}
+
+td.labelTotal {
+    color: #000;
+    font-weight: bold;
+    text-align: right;
+    font-size: 10pt;
+    background-color: #DDD;
+    padding-right: 10px;
+}
+
+tr.customer-header > td {
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFF;
+    text-align: left;
+    background-color: #5C5C5C;
+    padding-left: 10px;
+}
+
+td.loanHeader {
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFF;
+    background-color: #34495e;
+    padding-left: 10px;
+}
+
+td.applicationHeader {
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFF;
+    text-align: left;
+    background-color: #2980b9;
+    padding-left: 10px;
+}
+
+td.depositHeader {
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFF;
+    text-align: left;
+    background-color: #16A085;
+    padding-left: 10px;
+}
+
+td.trustHeader {
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFF;
+    text-align: left;
+    background-color: #C0392B;
+    padding-left: 10px;
+}
+
+td.customerHeaderRight {
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFF;
+    text-align: right;
+    background-color: #5C5C5C;
+    padding-right: 10px;
+}
+
+td.loanHeaderRight {
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFF;
+    text-align: right;
+    background-color: #34495e;
+    padding-right: 10px;
+}
+
+td.applicationHeaderRight {
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFF;
+    text-align: right;
+    background-color: #2980b9;
+    padding-right: 10px;
+}
+
+td.depositHeaderRight {
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFF;
+    text-align: right;
+    background-color: #16A085;
+    padding-right: 10px;
+}
+
+td.trustHeaderRight {
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFF;
+    text-align: right;
+    background-color: #C0392B;
+    padding-right: 10px;
+}
+
+td.header-no-border {
+    font-weight: bold;
+    font-size: 12px;
+    color: #000;
+    background-color: #DDD;
+    padding-left: 6px
+}
+
+div.outerdiv > table {
+    width: 100%;
+}
+
+div.outerdiv > table > tbody > tr {
+    height: 30px;
+}
+
+.fb {
+    font-weight: bold;
+}

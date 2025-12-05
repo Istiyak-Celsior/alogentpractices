@@ -1,0 +1,23 @@
+﻿#aa-tabstrip-content {
+    width: 100%;
+    height: 550px;
+    overflow: auto;
+}
+
+.aa-document-tab-list {
+    width: 100%;
+}
+
+.aa-document-tab-list > tbody > tr > td.aa-banner {
+    padding: 3px;
+    font-weight: bold;
+
+}
+
+.aa-document-tab-list > tbody > tr > td.aa-column-spacer {
+    width:25px;
+}
+
+.aa-document-tab-list > tbody > tr > td.aa-document-list-item {
+    text-align: left;
+}

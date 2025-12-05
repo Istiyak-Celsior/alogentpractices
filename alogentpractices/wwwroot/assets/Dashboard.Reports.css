@@ -1,0 +1,187 @@
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit .dashboard-report-edit-create-message {
+    width: 50%;
+    min-width: 260px;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit a,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit a:active,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit a:visited {
+    color: #79A6BE;
+    text-decoration: none;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit a:hover {
+    text-decoration: underline;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit ul.report-selection {
+    list-style-type: none;
+    padding: 0;
+    margin: 12px 0;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit ul.report-selection > li {
+    float: left;
+    padding-left: 6px;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit ul.report-selection > li:nth-child(1) {
+    padding-left: 0;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit ul.report-selection > li:nth-child(2) {
+    line-height: 28px;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit .report-selection a,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit .report-selection a:active,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit .report-selection a:visited,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-edit .report-selection a:hover {
+    color: #9E9E9E;
+    text-decoration: none;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .report-selection:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.dashboard-report-list-item {
+    display: flex;
+    flex-direction: row
+}
+
+.dashboard-report-list-item div:nth-child(1) {
+    text-align: left;
+}
+
+.dashboard-report-list-item div:nth-child(2) {
+    padding-left: 24px;
+    text-align: right;
+    flex-grow: 1;
+}
+
+.dashboard-report-list-item span {
+    color: #79A6BE;
+}
+
+/* DYNAMIC REPORTING JUNK*/
+
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] th,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] td {
+    padding: 4px;
+    background-color: #fff;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] th:empty {
+    height: 16px;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] td:empty {
+    height: 19px;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] {
+    border: none;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grid-header {
+    background-color: #fff;
+    border-bottom-width: 0px;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grid-header-wrap {
+    border-color: #fff;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grouping-header {
+    background-color: #fff;
+    line-height: 28px;
+    height: 28px;
+    color: #cecece;
+    padding: 0;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grouping-header > .k-group-indicator {
+    background-color: #ececec;
+    border-color: #ececec;
+    color: #696969;
+    padding: 2px;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grouping-header > .k-group-indicator,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grouping-header > .k-group-indicator a,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grouping-header > .k-group-indicator a:link,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grouping-header > .k-group-indicator a:visited,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grouping-header > .k-group-indicator a:active,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grouping-header > .k-group-indicator a:hover {
+    color: #808080;
+    font-size: 11px;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grouping-header > .k-group-indicator .k-icon {
+    font: 12px/1 WebComponentsIcons;
+    line-height: 12px;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal > div:first-child,
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal > div.k-licensed > div[data-role=grid] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal > div:not(.k-licensed) > div[data-role=grid] {
+    position: absolute;
+    left: 0;
+    top: 38px;
+    right: 0;
+    bottom: 0;
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal > div:not(.k-licensed) > div[data-role=grid] .k-pager-wrap {
+    display: none;
+}
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal > div:not(.k-licensed) > div[data-role=grid] .k-grid-content {
+    height: calc(100% - 53px);
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grid-content {
+    height: calc(100% - 97px);
+}
+
+.aa-reports-dashboard-widget.k-dashboard-widget .k-state-normal div[data-role=grid] .k-grouping-row td {
+    background-color: #f5f5f5;
+}
+
+/*preview banner*/
+.dashboard-report-preview {
+    background-color: #e7d6f5;
+    padding: 8px 16px;
+    color: #000;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.dashboard-report-preview .exclamation {
+    color: #7434ab;
+    cursor: help;
+}
+
+.dashboard-report-preview span:first-child {
+    display: inline-block;
+    margin-right: 12px;
+}

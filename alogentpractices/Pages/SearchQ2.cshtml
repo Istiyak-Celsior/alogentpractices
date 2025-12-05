@@ -1,0 +1,484 @@
+﻿@page
+@using System.Text.Json
+@using alogentpractices.Entities
+@using Microsoft.AspNetCore.Http
+
+@model alogentpractices.Pages.SearchQ2Model
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!-- #include file="include/adovbs.inc" -->
+<!-- #include file="include/dbopen.inc" -->
+<!-- #include file="include/getCustTypeArray.inc" -->
+<!-- #include file="include/getLoanTypeArray.inc" -->
+<!-- #include file="include/getFieldDefGroupArray.inc" -->
+<!-- #include file="include/getFieldDefinitions.inc" -->
+<!-- #include file="include/common.inc" -->
+<!-- #include file="include/security.inc" -->
+@{
+    string searchType = Request.Query["searchType"].ToString()?.Trim() ?? string.Empty;
+
+    // Check for 'errFlag' in the session.
+    // It's a good practice to serialize/deserialize complex objects in session.
+    if (HttpContext.Session.TryGetValue("errFlag", out _))
+    {
+        var searchDataJson = HttpContext.Session.GetString("SearchData");
+        if (!string.IsNullOrEmpty(searchDataJson))
+        {
+            Model.SearchData = JsonSerializer.Deserialize<SearchViewModel>(searchDataJson);
+        }
+    }
+    else
+    {
+        // Initialize a new ViewModel and populate it from the current request's query string.
+
+        Model.SearchName = HttpContext.Request.Query["name"].ToString().Trim();
+        Model.SearchCustomerNumber = HttpContext.Request.Query["customerID"].ToString().Trim();
+        Model.SearchTaxId = HttpContext.Request.Query["taxID"].ToString().Trim();
+        Model.SearchLoan = HttpContext.Request.Query["loan"].ToString().Trim();
+        Model.SearchLoanStatus = HttpContext.Request.Query["loanStatus"].ToString().Trim();
+        Model.SearchLoanTypeId = HttpContext.Request.Query["loanType"].ToString().Trim();
+        Model.SearchFromLoanOrgDate = HttpContext.Request.Query["fromOrgDate"].ToString().Trim();
+        Model.SearchToLoanOrgDate = HttpContext.Request.Query["toOrgDate"].ToString().Trim();
+        Model.SearchBank = HttpContext.Request.Query["bank"].ToString().Trim();
+        Model.SearchLoanOfficer = HttpContext.Request.Query["loanOfficer"].ToString().Trim();
+        Model.SearchCustomerStatus = HttpContext.Request.Query["searchcustomerStatus"].ToString().Trim();
+        Model.SearchCustomerTypeId = HttpContext.Request.Query["customerType"].ToString().Trim();
+        Model.SearchPageSize = HttpContext.Request.Query["searchPageSize"].ToString().Trim();
+        Model.SearchCustomerOfficer = HttpContext.Request.Query["customerOfficer"].ToString().Trim();
+        Model.SearchLoanDescription = HttpContext.Request.Query["loanDescription"].ToString().Trim();
+        Model.SearchCustomerBranch = HttpContext.Request.Query["customerBranch"].ToString().Trim();
+        Model.SearchLoanBranch = HttpContext.Request.Query["loanBranch"].ToString().Trim();
+        Model.SearchClassificationId = HttpContext.Request.Query["classificationId"].ToString().Trim();
+        Model.SearchAccountClassId = HttpContext.Request.Query["accountClassId"].ToString();
+        Model.SearchMaxResult = HttpContext.Request.Query["maxResult"].ToString();
+        Model.SearchDocumentFilter = HttpContext.Request.Query["documentFilter"].ToString();
+        Model.SearchDisplayDocs = HttpContext.Request.Query["displayDocs"].ToString();
+        Model.SearchAppDateFrom = HttpContext.Request.Query["appDateFrom"].ToString();
+        Model.SearchAppDateTo = HttpContext.Request.Query["appDateTo"].ToString();
+        Model.SearchAppLender = HttpContext.Request.Query["appLender"].ToString();
+        Model.SearchAppDelegate = HttpContext.Request.Query["appDelegate"].ToString();
+        Model.SearchAppAnalyst = HttpContext.Request.Query["appAnalyst"].ToString();
+        Model.SearchApprovalStatusId = HttpContext.Request.Query["approvalStatusId"].ToString();
+        Model.SearchLoanStatusId = HttpContext.Request.Query["loanStatusId"].ToString();
+        Model.SearchAppApprover = HttpContext.Request.Query["appApprover"].ToString();
+
+
+
+        // Save the initialized ViewModel to the session
+        var searchDataJson = JsonSerializer.Serialize(Model.SearchData);
+        HttpContext.Session.SetString("SearchData", searchDataJson);
+        HttpContext.Session.Remove("errFlag"); // Clear the error flag
+    }
+}
+
+<div class="aa-title">
+  <div>
+    <h1><i class="title-icon fas fa-exclamation-circle" aria-hidden="true"></i>&nbsp;&nbsp;@searchType Document Search: Step 2</h1>
+        <!-- #include file="include/ThemeStyles.asp" -->
+        <link rel="stylesheet" type="text/css" href="Content/SearchQ2.css" />
+</div>
+<div id="aa-bank-logo-container">
+    <img src="customer/logo/customerlogo.gif" alt="logo" id="customer-logo-image" />
+</div>
+</div>
+<form action="searchgen" name="searchq2" method="post" onsubmit="return Validate()">
+    <input type="hidden" name="searchType" value="@searchType" />
+    <input type="hidden" name="Name" value="Model.searchName" />
+    <input type="hidden" name="CustomerId" value="Model.searchCustomerNumber" />
+    <input type="hidden" name="TaxId" value="Model.searchtaxId" />
+    <input type="hidden" name="searchCustomerStatus" value="Model.searchcustomerStatus" />
+    <input type="hidden" name="Loan" value="Model.searchloan" />
+    <input type="hidden" name="LoanStatus" value="Model.searchLoanStatus" />
+    <input type="hidden" name="LoanType" value="Model.searchLoanTypeId" />
+    <input type="hidden" name="LoanOfficer" value="Model.searchloanOfficer" />
+    <input type="hidden" name="customerType" value="Model.searchCustomerTypeId" />
+    <input type="hidden" name="bank" value="Model.searchbank" />
+    <input type="hidden" name="searchPageSize" value="Model.searchPageSize" />
+    <input type="hidden" name="fromOrgDate" value="Model.searchFromLoanOrgDate" />
+    <input type="hidden" name="toOrgDate" value="Model.searchToLoanOrgDate" />
+    <input type="hidden" name="customerOfficer" value="Model.searchCustomerOfficer" />
+    <input type="hidden" name="loanDescription" value="Model.searchLoanDescription" />
+    <input type="hidden" name="customerBranch" value="Model.searchCustomerBranch" />
+    <input type="hidden" name="loanBranch" value="Model.searchLoanBranch" />
+    <input type="hidden" name="classificationId" value="Model.searchClassificationId" />
+    <input type="hidden" name="accountClassId" value="Model.searchAccountClassId" />
+    <input type="hidden" name="maxResult" value="Model.searchMaxResult" />
+    <input type="hidden" name="documentFilter" value="Model.searchDocumentFilter" />
+    <input type="hidden" name="displayDocs" value="Model.searchDisplayDocs" />
+    <input type="hidden" name="appDateFrom" value="Model.searchAppDateFrom" />
+    <input type="hidden" name="appDateTo" value="Model.searchAppDateTo" />
+    <input type="hidden" name="appLender" value="Model.searchAppLender" />
+    <input type="hidden" name="appDelegate" value="Model.searchAppDelegate" />
+    <input type="hidden" name="appAnalyst" value="Model.searchAppAnalyst" />
+    <input type="hidden" name="approvalStatusId" value="Model.searchApprovalStatusId" />
+    <input type="hidden" name="loanStatusId" value="Model.searchLoanStatusId" />
+    <input type="hidden" name="appApprover" value="Model.searchAppApprover" />
+
+    @{
+        bool tabDisplayed = false;
+
+        // Example: Get account classes based on searchLoanTypeId and searchAccountClassId
+        var accountClasses = new List<AccountClass>(); // Your model class
+        string selectedAccountClassName = "";
+        int? selectedAccountClassId = null;
+        int searchTestAccountClassId = 1010;
+        if (!string.IsNullOrEmpty(Model.searchLoanTypeId) && string.IsNullOrEmpty(Model.searchAccountClassId))
+        {
+
+            searchTestAccountClassId = 1010;// Model.GetAccountClassByLoanType(); // Mocking
+            //Model.searchAccountClassId = GetAccountClassByLoanType(Model.searchLoanTypeId);
+        }
+
+        //Mocking
+        //if (!string.IsNullOrEmpty(searchAccountClassId))
+        if (!string.IsNullOrEmpty("1010"))
+        {
+           // accountClasses = GetAccountClasses(Model.searchAccountClassId); // Implement this accordingly
+        }
+        else
+        {
+           // accountClasses = GetAllAccountClasses(); // Or adjust to your needs
+        }
+    }
+
+    <div id="aa-searchq2-loading">
+        <h1>Loading Document Tabs</h1>
+        <i class="fas fa-cog fa-spin fa-3x fa-fw"></i>
+    </div>
+
+    <div id="aa-searchq2-content" class="aa-searchq2-hide">
+        <section id="aa-form-header">
+            <div>
+                <ul class="aa-button-wrapper">
+                    <li><button type="submit" class="k-button k-primary">Search</button></li>
+                    <li><button type="button" class="k-button" onclick="history.back();">Cancel</button></li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            @* Replace all instances of 'SearchData' with 'Model.SearchData' to reference the property on the page model. *@
+            
+            <ul>
+                @if (Model.SearchDocumentFilter == "C")
+                {
+                    selectedAccountClassName = "Credit";
+                    <li class="k-state-active">Credit Tabs</li>
+                }
+                else
+                {
+                    bool doOnce = true;
+                    foreach (var accountClass in accountClasses)
+                    {
+                        if (doOnce)
+                        {
+                            selectedAccountClassName = accountClass.accountClassName;
+                            selectedAccountClassId = accountClass.accountClassId;
+                        }
+
+                        <li class="@(doOnce ? "k-state-active" : "")">
+                            @accountClass.accountClassName
+                        </li>
+
+                        doOnce = false;
+                    }
+                }
+            </ul>
+            <div id="tabstrip">
+                <ul>
+                    @if (Model.SearchDocumentFilter == "C")
+                    {
+                        selectedAccountClassName = "Credit";
+                        <li class="k-state-active">Credit Tabs</li>
+                    }
+                    else
+                    {
+                        bool doOnce = true;
+                        foreach (var accountClass in accountClasses)
+                        {
+                            if (doOnce)
+                            {
+                                selectedAccountClassName = accountClass.accountClassName;
+                                selectedAccountClassId = accountClass.accountClassId;
+                            }
+
+                            <li class="@(doOnce ? "k-state-active" : "")">
+                                @accountClass.accountClassName
+                            </li>
+
+                            doOnce = false;
+                        }
+                    }
+                </ul>
+
+                @if (Model.SearchDocumentFilter == "C")
+                {
+                    <div>
+                        Model.BuildTabList("C", "Credit", "") <!-- or call a partial/component -->
+                    </div>
+                }
+                else
+                {
+                    foreach (var accountClass in accountClasses)
+                    {
+                        <div>
+                            Model.BuildTabList("L", accountClass.AccountClassName, accountClass.AccountClassId.ToString())
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+
+        <section id="aa-form-footer">
+            <div>
+                <ul class="aa-button-wrapper">
+                    <li><button type="submit" class="k-button k-primary">Search</button></li>
+                    <li><button type="button" class="k-button" onclick="history.back();">Cancel</button></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+   
+    @* Assuming g_creditFieldDefList, g_accountFieldDefList, and g_collateralFieldDefList are accessible collections like arrays of objects *@
+
+    @* Converted Credit Loop *@
+   @*  @{
+        // for (int i = 0; i < g_creditFieldDefCount; i++)
+        for (int i = 0; i < 3; i++)
+        {
+            var fieldName = "CreditFlexField";// g_creditFieldDefList[i].FIELD_DEF_NAME;
+            var fieldDataType = ""; // g_creditFieldDefList[i].FIELD_DEF_DATA_TYPE;
+
+            // Only generate fields that were checked
+           // if (Request.Form["chk_flex_" + fieldName] == "1")
+            if (Request.Form["chk_flex_CreditFlexField"] == "1")
+            {
+                <input type="hidden" name="chk_flex_@fieldName" value="1" />
+                // Handle From/To field types
+                if (fieldDataType == "datetime" || fieldDataType == "int" || fieldDataType == "decimal" || fieldDataType == "money")
+                {
+                    var fieldValueFrom = Request.Form["from_flex_" + fieldName];
+                    var fieldValueTo = Request.Form["to_flex_" + fieldName];
+                    <input type="hidden" name="from_flex_@fieldName" value="@fieldValueFrom" />
+                    <input type="hidden" name="to_flex_@fieldName" value="@fieldValueTo" />
+                }
+                else
+                {
+                    var fieldValue = Request.Form["flex_" + fieldName];
+                    <input type="hidden" name="flex_@fieldName" value="@fieldValue" />
+                }
+            }
+        }
+    } *@
+
+    @* Converted Account Loop *@
+    @* @{
+        // for (int i = 0; i < g_accountFieldDefCount; i++)
+        for (int i = 0; i < 3; i++)
+        {
+            var fieldName = "flex_LoanChoiceTest"; // g_accountFieldDefList[i].FIELD_DEF_NAME;
+            var fieldDataType = "";// g_accountFieldDefList[i].FIELD_DEF_DATA_TYPE;
+
+            // Only generate fields that were checked
+            if (Request.Form["chk_flex_" + fieldName] == "1")
+            {
+                <input type="hidden" name="chk_flex_@fieldName" value="1" />
+                // Handle From/To field types
+                if (fieldDataType == "datetime" || fieldDataType == "int" || fieldDataType == "decimal" || fieldDataType == "money")
+                {
+                    var fieldValueFrom = Request.Form["from_flex_" + fieldName];
+                    var fieldValueTo = Request.Form["to_flex_" + fieldName];
+                    <input type="hidden" name="from_flex_@fieldName" value="@fieldValueFrom" />
+                    <input type="hidden" name="to_flex_@fieldName" value="@fieldValueTo" />
+                }
+                else
+                {
+                    var fieldValue = Request.Form["flex_" + fieldName];
+                    <input type="hidden" name="flex_@fieldName" value="@fieldValue" />
+                }
+            }
+        }
+    } *@
+
+    @* Converted Collateral Loop *@
+   @* @{
+
+        // for (int i = 0; i < g_collateralFieldDefCount; i++)
+        for (int i = 0; i < 3; i++)
+        {
+            var fieldName = "flex_CollateralFiltering1"; // g_collateralFieldDefList[i].FIELD_DEF_NAME;
+            var fieldDataType = ""; // g_collateralFieldDefList[i].FIELD_DEF_DATA_TYPE;
+
+            // Only generate fields that were checked
+            if (Request.Form["chk_flex_" + fieldName] == "1")
+            {
+                <input type="hidden" name="chk_flex_@fieldName" value="1" />
+                // Handle From/To field types
+                if (fieldDataType == "datetime" || fieldDataType == "int" || fieldDataType == "decimal" || fieldDataType == "money")
+                {
+                    var fieldValueFrom = Request.Form["from_" + fieldName];
+                    var fieldValueTo = Request.Form["to_" + fieldName];
+                    <input type="hidden" name="from_flex_@fieldName" value="@fieldValueFrom" />
+                    <input type="hidden" name="to_flex_@fieldName" value="@fieldValueTo" />
+                }
+                else
+                {
+                    var fieldValue = Request.Form["flex_" + fieldName];
+                    <input type="hidden" name="flex_@fieldName" value="@fieldValue" />
+                }
+            }
+        }
+    } *@
+
+</form>
+
+<!-- #include file="include/footer.asp" -->
+<!-- #include file="include/ThemeScripts.asp" -->
+<script src="Packages/kendo-ui/js/kendo.core.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.data.min.js"></script>
+<script src="Packages/kendo-ui/js/kendo.tabstrip.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tabstrip").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            }
+        });
+        $("#aa-searchq2-loading").hide();
+        $("#aa-searchq2-content").show();
+    });
+
+    function checkAllTabs(chkAllTabs, chkDocuments) {
+        var checkedState;
+
+        if (chkAllTabs.checked) {
+            checkedState = true;
+        } else {
+            checkedState = false;
+        }
+
+        for (var i = 0; i < chkDocuments.length; i++) {
+            chkDocuments[i].checked = checkedState;
+        }
+    }
+
+    function checkTab(chkAllTabs, chkDocuments) {
+        // Assume all documents are checked.
+        var checkAllState = true;
+
+        // Set the state to false if any document is not checked.
+        for (var i = 0; i < chkDocuments.length; i++) {
+            if (!chkDocuments[i].checked) {
+                checkAllState = false;
+            }
+        }
+
+        // Update the chkAllTabs checkbox to new state.
+        chkAllTabs.checked = checkAllState;
+    }
+</script>
+
+
+@*
+@{
+    // Assuming g_creditFieldDefList, g_accountFieldDefList, and g_collateralFieldDefList are collections of objects
+    // with properties like FIELD_DEF_NAME and FIELD_DEF_DATA_TYPE
+
+    // for (int i = 0; i < g_creditFieldDefCount; i++)
+    @*
+    for (int i = 0; i < 3; i++)
+    {
+        var fieldDef = "";// g_creditFieldDefList[i];
+        var fieldName = "flex_CreditFlexField";// fieldDef.FIELD_DEF_NAME;
+        var fieldDataType = "";// fieldDef.FIELD_DEF_DATA_TYPE;
+
+        // Only generate fields that were checked
+        //if (!string.IsNullOrEmpty(Request.Form["chk_flex_" + fieldName]))
+        if (!string.IsNullOrEmpty(Request.Query["flex_CreditFlexField"]))
+        {
+            <input type="hidden" name="chk_flex_@fieldName" value="1" />
+            // Handle From/To field types
+            if (fieldDataType == "datetime" || fieldDataType == "int" || fieldDataType == "decimal" || fieldDataType == "money")
+            {
+                var fieldValueFrom = Request.Form["from_flex_" + fieldName];
+                var fieldValueTo = Request.Form["to_flex_" + fieldName];
+                <input type="hidden" name="from_flex_@fieldName" value="@fieldValueFrom" />
+                <input type="hidden" name="to_flex_@fieldName" value="@fieldValueTo" />
+            }
+            else
+            {
+                //var fieldValue = Request.Form["flex_" + fieldName];
+                var fieldValue = Request.Form["flex_CreditFlexField"];
+                <input type="hidden" name="flex_@fieldName" value="@fieldValue" />
+            }
+        }
+    }
+} *@
+
+@*
+@{
+    // for (int i = 0; i < g_accountFieldDefCount; i++)
+    for (int i = 0; i < 3; i++)
+    {
+        var fieldDef = "";// g_accountFieldDefList[i];
+        var fieldName = "flex_ChoiceFlexField";// fieldDef.FIELD_DEF_NAME;
+        var fieldDataType = "";// fieldDef.FIELD_DEF_DATA_TYPE;
+
+        // Only generate fields that were checked
+        //if (!string.IsNullOrEmpty(Request.Form["chk_flex_" + fieldName]))
+        if (!string.IsNullOrEmpty(Request.Form["flex_ChoiceFlexField"]))
+        {
+            <input type="hidden" name="chk_flex_@fieldName" value="1" />
+            // Handle From/To field types
+            if (fieldDataType == "datetime" || fieldDataType == "int" || fieldDataType == "decimal" || fieldDataType == "money")
+            {
+                var fieldValueFrom = Request.Form["from_flex_" + fieldName];
+                var fieldValueTo = Request.Form["to_flex_" + fieldName];
+                <input type="hidden" name="from_flex_@fieldName" value="@fieldValueFrom" />
+                <input type="hidden" name="to_flex_@fieldName" value="@fieldValueTo" />
+            }
+            else
+            {
+                //var fieldValue = Request.Form["flex_" + fieldName];
+                var fieldValue = Request.Form["flex_ChoiceFlexField"];
+                <input type="hidden" name="flex_@fieldName" value="@fieldValue" />
+            }
+        }
+    }
+}
+*@
+@*
+@{
+    // for (int i = 0; i < g_collateralFieldDefCount; i++)
+    for (int i = 0; i < 3; i++)
+    {
+        var fieldDef = "";//  g_collateralFieldDefList[i];
+        var fieldName = "flex_CollateralCovenantActive";// fieldDef.FIELD_DEF_NAME;
+        var fieldDataType = "";// fieldDef.FIELD_DEF_DATA_TYPE;
+
+        // Only generate fields that were checked
+       //if (!string.IsNullOrEmpty(Request.Form["chk_flex_" + fieldName]))
+        if (!string.IsNullOrEmpty(Request.Form["flex_CollateralCovenantActive"]))
+        {
+            <input type="hidden" name="chk_flex_@fieldName" value="1" />
+            // Handle From/To field types
+            if (fieldDataType == "datetime" || fieldDataType == "int" || fieldDataType == "decimal" || fieldDataType == "money")
+            {
+                var fieldValueFrom = Request.Form["from_" + fieldName];
+                var fieldValueTo = Request.Form["to_" + fieldName];
+                <input type="hidden" name="from_flex_@fieldName" value="@fieldValueFrom" />
+                <input type="hidden" name="to_flex_@fieldName" value="@fieldValueTo" />
+            }
+            else
+            {
+                var fieldValue = Request.Form["flex_" + fieldName];
+                <input type="hidden" name="flex_@fieldName" value="@fieldValue" />
+            }
+        }
+    }
+}*@
+<br />
+<br />
+

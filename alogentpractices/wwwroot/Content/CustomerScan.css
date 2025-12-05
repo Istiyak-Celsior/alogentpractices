@@ -1,0 +1,783 @@
+.aa-tar {
+    text-align: right !important;
+}
+
+.aa-tal {
+    text-align: left !important;
+}
+
+.aa-tac {
+    text-align: center !important;
+}
+
+#aa-customer-details-wrapper {
+    margin: 12px 24px;
+}
+
+#aa-customer-details-wrapper table {
+    border-spacing: 1px;
+}
+
+#aa-customer-details-wrapper > table {
+    width: 100%;
+}
+
+#aa-customer-details-wrapper > table > tbody > tr {
+    height: 30px;
+}
+
+#aa-customer-details-wrapper .hyperlink-wrapper {
+    background-color: #FFF;
+}
+
+#aa-customer-details-wrapper > table > tbody > tr > td {
+    padding-left: 15px;
+}
+
+#aa-customer-name-list,
+#aa-upload-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#aa-customer-name-list > li,
+#aa-upload-list > li {
+    height: 28px;
+    line-height: 28px;
+    float: left;
+}
+
+#aa-upload-list > li i {
+    margin-top: 7px;
+}
+
+#aa-customer-name-list > li:not(:first-child),
+#aa-upload-list > li:not(:first-child) {
+    padding-left: 6px;
+}
+
+footer {
+    display: none;
+}
+
+section {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    display: table;
+}
+
+section#aa-form-header {
+    padding: 1px 10px 6px 24px;
+    display: none;
+}
+
+section#aa-form-footer {
+    padding: 0 10px 14px 24px;
+    display: none;
+}
+
+section#aa-form-header > div,
+section#aa-form-footer > div {
+    width: 50%;
+    float: left;
+}
+
+section#aa-form-header > div > ul.aa-button-wrapper,
+section#aa-form-footer > div > ul.aa-button-wrapper {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+
+section#aa-form-header > div > ul.aa-button-wrapper > li,
+section#aa-form-footer > div > ul.aa-button-wrapper > li {
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    padding-left: 12px;
+}
+
+section#aa-form-header > div > ul.aa-button-wrapper > li:first-child,
+section#aa-form-footer > div > ul.aa-button-wrapper > li:first-child {
+    padding-left: 0;
+}
+
+#aa-page-content {
+    padding: 10px 24px;
+}
+
+#tabstrip {
+    box-sizing: border-box;
+}
+
+#tabstrip > div {
+    min-height: 600px;
+}
+
+/* CODES TAB */
+#aa-loan-maint-codes {
+    width: 100%;
+    display: table;
+    border: 1px #FFF solid;
+}
+
+#aa-loan-maint-codes h2.top {
+    margin-bottom: 12px;
+}
+
+.aa-form-table {
+    width: 100%;
+    display: table;
+    box-sizing: border-box;
+}
+
+.aa-form-table > tbody > tr {
+    height: 35px;
+}
+
+.aa-form-table > tbody > tr > td:first-child {
+    background-color: #F5F5F5;
+    border-bottom: 1px #FFF solid;
+    text-align: left;
+    padding: 0 12px;
+    width: 250px;
+}
+
+.aa-form-table > tbody > tr > td:nth-child(2) {
+    text-align: center;
+    width: 30px;
+}
+
+.aa-form-table > tbody > tr.aa-no-background-color > td:first-child {
+    background-color: inherit;
+    padding: 0;
+}
+
+.aa-form-table > tbody > tr.aa-flexfield-header > td {
+    background-color: #ECECEC;
+}
+
+.aa-flexfield-list {
+    display: table;
+    padding: 0;
+    margin: 0;
+}
+
+.aa-flexfield-list > li {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 6px;
+}
+
+.aa-flexfield-list > li.checkbox {
+    margin-top: 8px;
+    height: 28px;
+}
+
+.aa-full,
+.aa-partial {
+    padding: 3px 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -o-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.aa-partial {
+    opacity: 0.15;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.aa-status-pending {
+    color: #F1C40F;
+}
+/* END CODES TAB */
+
+/* LOAN APPLICATION TAB */
+#aa-loan-app-maint {
+    width: 100%;
+    display: table;
+    border: 1px #FFF solid;
+}
+
+.aa-loan-app-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: left;
+}
+
+.aa-loan-app-list > li {
+    float: left;
+    padding-left: 6px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.aa-loan-app-list > li:first-child {
+    padding-left: 0;
+}
+
+#aa-app-history-scroller {
+    max-height: 200px;
+    overflow-y: auto;
+}
+/* END LOAN APPLICATION TAB */
+
+/* DOCUMENTS TAB */
+#aa-loan-maint-documents {
+    width: 100%;
+    display: table;
+    border: 1px #FFF solid;
+}
+
+#aa-loan-maint-documents h2.top {
+    margin-bottom: 12px;
+}
+
+#aa-loan-maint-documents .tab-name-wrapper {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    max-width: 100%;
+}
+
+#aa-loan-maint-documents .k-textbox,
+#aa-loan-maint-documents span.k-widget.k-dropdown {
+    width: 100%;
+}
+
+.aa-document-header-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: left;
+}
+
+.aa-document-header-list > li {
+    float: left;
+    padding-left: 12px;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 12px;
+}
+
+.aa-document-header-list > li:first-child {
+    padding-left: 0;
+}
+
+#aa-kendo-grid-document {
+    width: 100%;
+    border: 1px #E5E5E5 solid;
+}
+
+#aa-kendo-grid-app-history {
+    width: 100%;
+    border-left: 1px #E5E5E5 solid;
+    border-right: 1px #E5E5E5 solid;
+    border-top: 1px #E5E5E5 solid;
+}
+
+#aa-kendo-grid-app-history2 {
+    width: 100%;
+    border-left: 1px #E5E5E5 solid;
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+}
+
+#aa-kendo-grid-app-history {
+    margin-top: 6px;
+}
+
+#aa-kendo-grid-document > thead > tr,
+#aa-kendo-grid-app-history > thead > tr {
+    height: 39px;
+}
+
+#aa-kendo-grid-document > thead > tr > th,
+#aa-kendo-grid-document > thead > tr > th,
+#aa-kendo-grid-app-history > thead > tr > th {
+    background-color: #FAFAFA;
+    text-align: left;
+    font-size: 12px;
+    color: #999;
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px 0 12px;
+}
+
+#aa-kendo-grid-app-history > thead > tr > th:nth-child(1),
+#aa-kendo-grid-app-history > thead > tr > th:nth-child(2),
+#aa-kendo-grid-app-history2 > tbody > tr > td:nth-child(1),
+#aa-kendo-grid-app-history2 > tbody > tr > td:nth-child(2) {
+    width: 200px;
+}
+
+#aa-kendo-grid-document > thead > tr > th:last-child,
+#aa-kendo-grid-app-history > thead > tr > th:last-child{
+    border-right: 0;
+}
+
+#aa-kendo-grid-document > tbody > tr,
+#aa-kendo-grid-app-history2 > tbody > tr {
+    height: 40px;
+}
+
+#aa-kendo-grid-document > tbody > tr > td,
+#aa-kendo-grid-app-history2 > tbody > tr > td {
+    background-color: #FFF;
+    text-align: left;
+    font-size: 12px;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px 0 12px;
+}
+
+#aa-kendo-grid-document > tbody > tr:last-child > td,
+#aa-kendo-grid-app-history2 > tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+.document-type-header {
+    height: 30px !important;
+}
+
+.document-type-header > td {
+    background-color: #ECECEC !important;
+}
+/* END DOCUMENT TAB */
+
+.k-dropdown {
+    width: 250px;
+    text-align: left;
+}
+
+#aa-loan-maint-codes .k-dropdown {
+    width: 500px;
+}
+
+.k-textbox {
+    width: 250px;
+}
+
+.k-textbox.date {
+    width: 150px;
+}
+
+.k-textbox.conditions {
+    width: 500px;
+}
+
+.k-textbox.document-date {
+    width: 110px;
+}
+
+.k-dropdown.document-status {
+    width: 150px;
+}
+
+.fa-lock:hover, .fa-unlock:hover {
+    cursor: pointer;
+}
+
+.fa-lock.no-hover:hover {
+    cursor: inherit;
+}
+
+/* COLLATERALS TAB */
+#aa-collateral-header-section {
+    padding-bottom: 10px;
+}
+
+.aa-kendo-grid.collateral > thead > tr > th:first-child,
+.aa-kendo-grid.collateral > thead > tr > th:nth-child(2),
+.aa-kendo-grid.collateral > tbody > tr > td:first-child,
+.aa-kendo-grid.collateral > tbody > tr > td:nth-child(2) {
+    width: 7%;
+}
+
+#aa-collateral-header {
+    display: inline;
+}
+
+.aa-description-column {
+    width: 45%;
+}
+
+/* LOAN APP ADMIN */
+.aa-action-timer-check {
+    text-align: center;
+}
+
+.aa-two-column-form-table > tbody > tr.aa-no-background-color > td:first-child {
+    padding: 0;
+    border-bottom: 0;
+}
+
+.aa-two-column-form-table.app-admin > tbody > tr > td:nth-child(2) {
+    width: 30px;
+    text-align: center;
+    padding: 0;
+}
+
+.aa-kendo-grid.app-admin > thead > tr > th:first-child,
+.aa-kendo-grid.app-admin > tbody > tr > td:first-child {
+    width: 80px;
+    text-align: center;
+}
+
+.aa-icon-spacer {
+    padding-left: 5px;
+}
+
+#aa-application-status-wrapper .k-dropdown {
+    width: 400px;
+}
+/* END App Admin tab*/
+
+
+/* PARTICIPATIONS TAB */
+#aa-loan-maint-participations {
+    width: 100%;
+    display: table;
+    border: 1px #FFF solid;
+}
+
+#aa-loan-maint-participations h2.top {
+    margin-top: 0;
+}
+
+#aa-loan-maint-participations h2 {
+    margin: 12px 0;
+}
+
+.sales-text {
+    width: 100% !important;
+}
+
+.sales-text p {
+    color: #999;
+}
+
+.sales-text > p:first-child {
+    font-weight: bold;
+}
+
+img[id^=delPB],
+.pBank {
+    cursor: pointer;
+}
+
+#aa-loan-maint-participations > div {
+    width: 40%;
+    padding-right: 80px;
+    float: left;
+    display: table-cell;
+    box-sizing: border-box;
+}
+
+#aa-loan-maint-participations > div:last-child {
+    width: 60%;
+}
+
+#pbList {
+    width: 100%;
+    border: 1px #E5E5E5 solid;
+}
+
+#pbList > thead > tr {
+    height: 39px;
+}
+
+#pbList > thead > tr > th {
+    background-color: #FAFAFA;
+    text-align: left;
+    font-size: 12px;
+    color: #999;
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px 0 12px;
+}
+
+#pbList > thead > tr > th:last-child{
+    border-right: 0;
+}
+
+#pbList > tbody > tr {
+    height: 40px;
+}
+
+#pbList > tbody > tr > td {
+    background-color: #FFF;
+    text-align: left;
+    font-size: 12px;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px 0 12px;
+}
+
+#pbList > tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+.aa-loan-participation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: left;
+}
+
+.aa-loan-participation-list > li {
+    float: left;
+    padding-left: 6px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.aa-loan-participation-list > li:first-child {
+    padding-left: 0;
+}
+
+.aa-form-participation-table {
+    width: 100%;
+    display: table;
+    box-sizing: border-box;
+}
+
+.aa-form-participation-table > tbody > tr {
+    height: 35px;
+}
+
+.aa-form-participation-table > tbody > tr > td:first-child {
+    background-color: #F5F5F5;
+    border-bottom: 1px #FFF solid;
+    text-align: left;
+    padding: 0 12px;
+    width: 250px;
+}
+
+.aa-form-participation-table > tbody > tr > td:nth-child(2) {
+    padding-left: 6px;
+}
+
+.aa-form-participation-table > tbody > tr.aa-no-background-color > td:first-child {
+    background-color: inherit;
+    padding: 0;
+    border-bottom: 0;
+}
+
+#aa-participation-button-wrapper > td {
+    padding-top: 6px;
+}
+
+h2.no-margin {
+    margin: 0 !important;
+}
+
+#aa-loan-maint-guarantors {
+    border: 0;
+}
+
+#aa-loan-maint-guarantors .aa-two-column-form-table > tbody > tr > td:first-child {
+    width: 15%;
+}
+
+div.dhxcombo_dhx_skyblue div.dhxcombo_select_button div.dhxcombo_select_img {
+    background-image: none;
+    left: 7px;
+    top: 4px;
+}
+
+.fa-trash-alt.disabled {
+    color: #C3C3C3 !important;
+}
+
+#aa-loan-maint-guarantors .aa-kendo-grid > thead > tr > th:first-child,
+#aa-loan-maint-guarantors .aa-kendo-grid > tbody > tr > td:first-child {
+    width: 80px;
+    text-align: center;
+}
+
+#quick-action-width {
+    width: 274px;
+    min-width: 274px;
+    padding-left: 0 !important;
+}
+
+#aa-customer-details-wrapper .hyperlink-wrapper {
+    background-color: #FFF;
+    padding-left: 0;
+}
+
+#quick-actions-wrapper,
+#quick-actions-title-wrapper {
+    width: 100%;
+}
+
+#quick-actions-wrapper > div {
+    width: 39%;
+    float: left;
+    display: table;
+    padding: 17px 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#quick-actions-title-wrapper > div {
+    width: 39%;
+    float: left;
+    display: table;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#quick-actions-title-wrapper > div:last-child {
+    width: 61%;
+    padding-left: 17px;
+    text-align: left;
+}
+
+#quick-actions-wrapper > div:last-child {
+    text-align: left;
+    padding: 7px 0 7px 17px;
+    width: 61%;
+    border-left: 1px #D5D5D5 solid;
+}
+
+#quick-actions-wrapper > div:after {
+    clear: left;
+}
+
+#quick-actions-wrapper ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#quick-actions-wrapper ul > li {
+    margin: 0;
+    line-height: 18px;
+    height: 18px;
+}
+
+#quick-actions-wrapper .fa-th {
+    font-size: 50px;
+}
+
+.k-loading-image {
+    background-image: url(../Packages/kendo-ui/styles/Default/loading-image.gif);
+}
+
+span.k-tooltip {
+    margin-left: 0px;
+}
+
+.aa-horizontal-list > li {
+    padding-left: 10px;
+}
+
+/* NEW KENDO MENU FOR CUSTOMER OPTIONS */
+#customer-dropdown-wrapper > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+#customer-dropdown-wrapper > ul > li {
+    float: left;
+    padding-left: 6px;
+}
+
+#customer-dropdown-wrapper > ul > li:nth-child(1) {
+    padding-left: 0;
+}
+
+.customer-option-wrapper {
+    font-weight: bold;
+    color: #555;
+    margin: 0;
+    padding: 0 6px;
+    margin-top: 9px;
+    font-size: 16px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+    transition: background-color 0.5s linear;
+}
+
+.customer-option-wrapper:hover {
+    background-color: #DBDBDB;
+    padding: 0 6px;
+    transition: background-color 0.5s linear;
+}
+
+.customer-option-wrapper .k-menu {
+    background-color: transparent;
+    display: inline-block;
+}
+
+.customer-option-wrapper .customer-name {
+    font-weight: bold;
+    color: #555;
+    font-size: 16px;
+}
+
+.customer-option-wrapper .k-state-active {
+    background-color: transparent;
+}
+
+.customer-option-wrapper .k-state-hover {
+    background-color: transparent;
+}
+
+.customer-option-wrapper .k-animation-container .k-state-hover {
+    background-color: #EBEBEB;
+}
+
+.k-menu .k-state-hover > .k-state-active {
+    background-color: transparent;
+}
+
+.customer-option-wrapper.k-menu {
+    display: inline-block;
+}
+
+.k-menu {
+    background-color: transparent;
+}
+
+.customer-option-wrapper .k-animation-container {
+    top: 32px !important;
+    left: auto !important;
+    right: -6px !important;
+    width: 216px !important;
+}
+
+.aa-employee-badge {
+    float: right;
+    margin: 4px 6px;
+    background-color: #86B8E0;
+    color: #FFF;
+    padding: 1px 4px 3px 4px;
+    border-radius: 3px;
+}

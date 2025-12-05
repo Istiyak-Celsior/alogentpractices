@@ -1,0 +1,506 @@
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+.group-hint {
+    width: 550px !important;
+    border: 1px solid #999;
+    opacity: 0.4;
+}
+
+.tab-hint {
+    width: 1000px !important;
+    border: 1px solid #999;
+    opacity: 0.4;
+}
+
+.handler:hover,
+.handler-tab:hover {
+    cursor: move;
+}
+
+.placeholder {
+    background-color: #DCEFFD;
+    padding: 9px 0;
+    font-size: 14px;
+    color: #52AEF7;
+}
+
+.spacer {
+    background-color: #FFF;
+    height: 2px;
+}
+
+ul.inactive {
+    background-color: #F5F5F5;
+    border-bottom: 1px #EEE solid;
+}
+
+ul.active {
+    background-color: #DDD;
+}
+
+ul.active:hover, ul.inactive:hover {
+    background-color: #CCC;
+}
+
+div#sortable-handlers-tabs > div.tab {
+    border-bottom: 1px #F1F1F1 solid;
+}
+
+div#sortable-handlers-tabs > div.tab:nth-child(even) {
+    background-color: #F9F9F9;
+}
+
+div.group-header,
+div.tab-header {
+    background-color: #383838;
+    font-weight: bold;
+    color: #FFF;
+    width: 100%;
+}
+
+div.group-header > ul,
+div.tab-header > ul {
+    display: table;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+div.group-header > ul > li,
+div.tab-header > ul > li {
+    display: table-cell;
+    height: 35px;
+    line-height: 35px;
+    margin: 0;
+    padding: 0px 4px;
+}
+
+div.tab-header > ul > li {
+    vertical-align: middle;
+}
+
+/* DIV TAB AND GROUPS */
+div.group, 
+div.tab {
+    width: 100%;
+}
+
+div.group > ul, 
+div.tab > ul {
+    display: table;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+div.group > ul > li,
+div.tab > ul > li {
+    display: table-cell;
+    margin: 0;
+    padding: 4px 0;
+}
+
+/* GROUP-HEADER LI WIDTHS */
+div.group-header > ul > li:nth-child(1) {
+    width: 20%;
+    text-align: center;
+}
+
+div.group-header > ul > li:nth-child(2) {
+    width: 50%;
+    padding: 0 4px;
+    text-align: left;
+}
+
+div.group-header > ul > li:nth-child(3) {
+    width: 30%;
+    text-align: center;
+}
+
+/* GROUP LI settings*/
+div.group > ul > li:nth-child(-n+4) {
+    width: 5%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+div.group > ul > li:nth-child(5) {
+    width: 50%;
+    padding-left: 4px;
+}
+
+div.group > ul > li:nth-child(6),
+div.group > ul > li:nth-child(7),
+div.group > ul > li:nth-child(8) {
+    width: 10%;
+    text-align: center;
+}
+
+/* TAB-HEADER LI WIDTHS */
+
+/* Actions Header */
+div.tab-header > ul > li:nth-child(1) {
+    width: 12%;
+    text-align: center;
+    margin: 0;
+    padding-left: 2px;
+}
+
+/* Tab Name Header */
+div.tab-header > ul > li:nth-child(2) {
+    width: 14%;
+}
+
+/* Default Status Header */
+div.tab-header > ul > li:nth-child(3) {
+    width: 8%;
+    line-height: 18px;
+    text-align: center;
+}
+
+/* Visibility Header */
+div.tab-header > ul > li:nth-child(4) {
+    width: 6%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Require Exp Date Header */
+div.tab-header > ul > li:nth-child(5) {
+    width: 8%;
+    line-height: 18px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hide Emp File Header */
+div.tab-header > ul > li:nth-child(6) {
+    width: 8%;
+    line-height: 18px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Allow AccuCapture Header */
+div.tab-header > ul > li:nth-child(7) {
+    width: 8%;
+    line-height: 18px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Scan Rule Header */
+div.tab-header > ul > li:nth-child(8) {
+    width: 8%;
+    line-height: 18px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Purge Header */
+div.tab-header > ul > li:nth-child(9) {
+    width: 6%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Block Participation Header */
+div.tab-header > ul > li:nth-child(10) {
+    width: 8%;
+    line-height: 18px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Enable Bookmarking Header */
+div.tab-header > ul > li:nth-child(11) {
+    width: 8%;
+    line-height: 18px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* TAB LI settings */
+
+/* Action Columns */
+div.tab > ul > li:nth-child(-n+4) {
+    width: 3%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Dcoument Tab Name */
+div.tab > ul > li:nth-child(5) {
+    width: 14%;
+}
+
+/* Default Status */
+div.tab > ul > li:nth-child(6) {
+    width: 8%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Visibility Columns */
+div.tab > ul > li:nth-child(7),
+div.tab > ul > li:nth-child(8),
+div.tab > ul > li:nth-child(9) {
+    width: 2%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Require Exp Date*/
+div.tab > ul > li:nth-child(10) {
+    width: 8%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Hide Employee */
+div.tab > ul > li:nth-child(11) {
+    width: 8%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Allow AccuCapture */
+div.tab > ul > li:nth-child(12) {
+    width: 8%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Scan Rule */
+div.tab > ul > li:nth-child(13) {
+    width: 8%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Purge */
+div.tab > ul > li:nth-child(14) {
+    width: 6%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Block Participation */
+div.tab > ul > li:nth-child(15) {
+    width: 8%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Enable Bookmarking */
+div.tab > ul > li:nth-child(16) {
+    width: 8%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#save-sort-button-container {
+    position: relative;
+}
+
+#save-sort-button {
+    opacity: .20;
+    pointer-events: none;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+}
+
+table#tabs {
+    width: 100%;
+}
+
+table#tabs > tbody > tr {
+    height: 30px;
+}
+
+table#tabs > tbody > tr:first-child > td {
+    background-color: #000;
+    color: #FFF;
+    font-weight: bold;
+}
+
+table#tabs > tbody > tr > td {
+    padding: 0 3px;
+    background-color: #FFF;
+}
+
+table#tabs > tbody > tr:hover:not(:first-child) > td {
+    background-color: #F5F5F5;
+}
+
+/* PAGE TABS */
+.tab-wrapper td {
+    border-bottom: 1px #CECECE solid;
+}
+
+.pagetab, .pagetab-selected {
+    padding: 5px 10px;
+    border-top: 1px #CECECE solid;
+    border-left: 1px #CECECE solid;
+    border-right: 1px #CECECE solid;
+    background-color: #EEE;
+    width: 65px;
+    text-align: center;
+    color: #666;
+    cursor: pointer;
+}
+
+.pagetab-selected {
+    background-image: none;
+    background-color: #FFF;
+    font-weight: bold;
+    color: #000;
+    border-bottom: 1px #FFF solid !important;
+    cursor: default;
+}
+
+.pagetab-separator {
+    width: 10px;
+    border-bottom: 1px #000 solid;
+}
+
+.tab-group-content-wrapper {
+    padding: 12px;
+    border-left: 1px #CECECE solid;
+    border-right: 1px #CECECE solid;
+    border-bottom: 1px #CECECE solid;
+    background: #FFF;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.tab-group-content-wrapper > div {
+    float: left;
+    width: 27%;
+    box-sizing: border-box;
+}
+
+.tab-group-content-wrapper > div:last-child {
+    width: 73%;
+    padding-left: 12px;
+}
+
+#group-title,
+#tabs-title {
+    padding-bottom: 12px;
+    height: 26px;
+    line-height: 26px;
+}
+
+#group-title > h2,
+#tabs-title > h2 {
+    display: inline-block;
+}
+
+#group-title span,
+#tabs-title span {
+    float: right;
+}
+
+i.fas.white {
+    color: #FFF;
+    font-size: 14px;
+}
+
+i.fas.disabled {
+    opacity: 0.2;
+}
+
+i.fas.m6 {
+    margin-top: 6px;
+}
+
+i.fas.fs8 {
+    font-size: 8px;
+}
+
+.account-letter-group {
+    background-color: #5E6C81;
+    color: #FFF;
+    font-family: Consolas, "Courier New";
+    padding: 1px 4px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-right: 6px;
+}
+
+.account-letter {
+    background-color: #5E6C81;
+    color: #FFF;
+    font-family: Consolas, "Courier New";
+    padding: 1px 4px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.scan-container {
+    background-color: #297FB8;
+    color: #FFF;
+    font-family: Consolas, "Courier New";
+    padding: 1px 4px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.scan-container:hover {
+    cursor: default;
+}
+
+.action-button-sm > a {
+    background-color: #5E6C81;
+    padding: 5px 10px 4px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #FFF;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.action-button-sm > a > i.fa {
+    font-size: 12px;
+    color: #FFF;
+}
+
+
+.action-button-sm > a:hover {
+    background-color: #7F8A99;
+}
+
+#save-order-fail-dialog {
+    display: none;
+}
+
+
+.k-button.small {
+    line-height: 1.28571428em;
+    padding: 3px 14px;
+}

@@ -1,0 +1,14 @@
+﻿.aa-title {
+    padding-left: 20px;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+#aa-comment-wrapper {
+    margin: 12px 0;
+}

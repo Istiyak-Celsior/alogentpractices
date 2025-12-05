@@ -1,0 +1,24 @@
+﻿.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > thead > tr > th:nth-child(2),
+.aa-kendo-grid > tbody > tr > td:first-child,
+.aa-kendo-grid > tbody > tr > td:nth-child(2) {
+    width: 80px;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60;
+}
+
+.aa-status-no {
+    color: #E74C3C;
+}
+
+div#tabstrip > div.aa-scrollable-content {
+    height: 500px !important;
+    overflow-y: auto !important;
+}

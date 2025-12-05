@@ -1,0 +1,11 @@
+﻿ul {
+    list-style-type: none !important;
+}
+
+ul > li {
+    height: 24px;
+}
+
+.aa-button-wrapper-absolute {
+    bottom: 21px;
+}

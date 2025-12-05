@@ -1,0 +1,634 @@
+﻿@page
+@model alogentpractices.Pages.SearchgenModel
+@{
+    ViewData["Title"] = "AccuAccount - SearchGen gateway";
+    <!-- #include file="include/ThemeStyles.asp" -->
+}
+
+<!-- #include file="include/savecurrentpage.asp" -->
+<!-- #include file="include/adovbs.inc" -->
+<!-- #include file="include/dbopen.inc" -->
+<!-- #include file="include/common.inc" -->
+<!-- #include file="include/getFieldDefinitions.inc" -->
+<!-- #include file="include/security.inc" -->
+@{
+    HttpContext.Session.SetString("FillTempCustomerQuery1", "");
+    HttpContext.Session.SetString("FillTempCustomerQuery2", "");
+    HttpContext.Session.SetString("FillTempAccountQuery1", "");
+    HttpContext.Session.SetString("FillTempAccountQuery2", "");
+    HttpContext.Session.SetString("FillTempAccountQuery3", "");
+    HttpContext.Session.SetString("FillTempAccountQuery4", "");
+    HttpContext.Session.SetString("FillTempCollateralQuery1", "");
+    HttpContext.Session.SetString("searchName", "");
+    HttpContext.Session.SetString("searchCustomerNumber", "");
+    HttpContext.Session.SetString("searchTaxId", "");
+    HttpContext.Session.SetString("searchCustomerStatus", "");
+    HttpContext.Session.SetString("searchcustomerType", "");
+    HttpContext.Session.SetString("searchCustomerOfficer", "");
+    HttpContext.Session.SetString("searchCustomerBranch", "");
+    HttpContext.Session.SetString("searchLoan", "");
+    HttpContext.Session.SetString("searchLoanStatus", "");
+    HttpContext.Session.SetString("searchLoanType", "");
+    HttpContext.Session.SetString("searchbankId", "");
+    HttpContext.Session.SetString("searchLoanOfficer", "");
+    HttpContext.Session.SetString("searchFromLoanOrgDate", "");
+    HttpContext.Session.SetString("searchToLoanOrgDate", "");
+    HttpContext.Session.SetString("searchLoanDescription", "");
+    HttpContext.Session.SetString("searchLoanBranch", "");
+    HttpContext.Session.SetString("searchClassificationId", "");
+    HttpContext.Session.SetString("searchAccountClassId", "");
+    HttpContext.Session.SetString("searchAccountClassList", "");
+    HttpContext.Session.SetString("searchMaxResult", "");
+    HttpContext.Session.SetString("searchDocumentFilter", "");
+    HttpContext.Session.SetString("searchDisplayDocs", "");
+    HttpContext.Session.SetString("searchParticipation", "");
+    HttpContext.Session.SetString("searchAppDateFrom", "");
+    HttpContext.Session.SetString("searchAppDateTo", "");
+    HttpContext.Session.SetString("searchAppLender", "");
+    HttpContext.Session.SetString("searchAppDelegate", "");
+    HttpContext.Session.SetString("searchAppAnalyst", "");
+    HttpContext.Session.SetString("searchApprovalStatusId", "");
+    HttpContext.Session.SetString("searchLoanStatusId", "");
+    HttpContext.Session.SetString("searchAppApprover", "");
+    HttpContext.Session.SetString("searchResults.customCreditFields", "");
+    HttpContext.Session.SetString("searchResults.customCreditFieldLabels", "");
+    HttpContext.Session.SetString("searchResults.customCreditFieldTypes", "");
+    HttpContext.Session.SetString("searchResults.customAccountFields", "");
+    HttpContext.Session.SetString("searchResults.customAccountFieldLabels", "");
+    HttpContext.Session.SetString("searchResults.customAccountFieldTypes", "");
+    HttpContext.Session.SetString("searchResults.customCollateralFields", "");
+    HttpContext.Session.SetString("searchResults.customCollateralFieldLabels", "");
+    HttpContext.Session.SetString("searchResults.customCollateralFieldTypes", "");
+}
+@{
+    var searchType = Request.Query["searchType"].ToString();
+    if (string.IsNullOrEmpty(searchType))
+    {
+        searchType = "customer";
+    }
+    HttpContext.Session.SetString("searchType", searchType);
+}
+@*
+//     <%
+// FOR i = 0 TO g_creditFieldDefCount - 1
+//     fieldDefName = g_creditFieldDefList(FIELD_DEF_NAME, i)
+//     Session("from_flex_cred_" & fieldDefName) = ""
+//     Session("to_flex_cred_" & fieldDefName) = ""
+//     Session("flex_cred_" & fieldDefName) = ""
+//     Session("chk_flex_cred_" & fieldDefName) = ""
+// NEXT
+
+// FOR i = 0 TO g_accountFieldDefCount - 1
+//     fieldDefName = g_accountFieldDefList(FIELD_DEF_NAME, i)
+//     Session("from_flex_act_" & fieldDefName) = ""
+//     Session("to_flex_act_" & fieldDefName) = ""
+//     Session("flex_act_" & fieldDefName) = ""
+//     Session("chk_flex_act_" & fieldDefName) = ""
+// NEXT
+
+// FOR i = 0 TO g_collateralFieldDefCount - 1
+//     fieldDefName = g_collateralFieldDefList(FIELD_DEF_NAME, i)
+//     Session("from_flex_col_" & fieldDefName) = ""
+//     Session("to_flex_col_" & fieldDefName) = ""
+//     Session("flex_col_" & fieldDefName) = ""
+//     Session("chk_flex_col_" & fieldDefName) = ""
+// NEXT
+// %> *@
+
+@{
+    /* for (int i = 0; i < g_creditFieldDefCount; i++) */
+    for(int i = 0; i < 1; i++)
+    {
+        @*
+        var fieldDefName = g_creditFieldDefList[FIELD_DEF_NAME, i];
+        HttpContext.Session.SetString("from_flex_cred_" + fieldDefName, "");
+        HttpContext.Session.SetString("to_flex_cred_" + fieldDefName, "");
+        HttpContext.Session.SetString("flex_cred_" + fieldDefName, "");
+        HttpContext.Session.SetString("chk_flex_cred_" + fieldDefName, "");
+        *@
+        /*Mocking*/
+        HttpContext.Session.SetString("from_flex_cred_ChoiceFlexField", "");
+        HttpContext.Session.SetString("to_flex_cred_ChoiceFlexField" , "");
+        HttpContext.Session.SetString("flex_cred_ChoiceFlexField", "");
+        HttpContext.Session.SetString("chk_flex_cred_ChoiceFlexField", "");
+    }
+
+    /* for (int i = 0; i < g_accountFieldDefCount; i++)*/
+    for (int i = 0; i < 1; i++)
+    {
+        
+       @*var fieldDefName = g_accountFieldDefList[FIELD_DEF_NAME, i];
+        HttpContext.Session.SetString("from_flex_act_" + fieldDefName, "");
+        HttpContext.Session.SetString("to_flex_act_" + fieldDefName, "");
+        HttpContext.Session.SetString("flex_act_" + fieldDefName, "");
+        HttpContext.Session.SetString("chk_flex_act_" + fieldDefName, "");
+        *@
+        /*Mocking*/
+        HttpContext.Session.SetString("from_flex_act_cred_ChoiceFlexField"  , "");
+        HttpContext.Session.SetString("to_flex_act_cred_ChoiceFlexField" , "");
+        HttpContext.Session.SetString("flex_act_cred_ChoiceFlexField", "");
+        HttpContext.Session.SetString("chk_flex_act_cred_ChoiceFlexField", "");
+    }
+
+    // for (int i = 0; i < g_collateralFieldDefCount; i++)
+    for (int i = 0; i < 1; i++)
+    {
+        /*
+        var fieldDefName = g_collateralFieldDefList[FIELD_DEF_NAME, i];
+        HttpContext.Session.SetString("from_flex_col_" + fieldDefName, "");
+        HttpContext.Session.SetString("to_flex_col_" + fieldDefName, "");
+        HttpContext.Session.SetString("flex_col_" + fieldDefName, "");
+        HttpContext.Session.SetString("chk_flex_col_" + fieldDefName, "");
+        */
+      
+       /*Mocking*/
+        HttpContext.Session.SetString("from_flex_col_CollateralCovenantActive", "");
+        HttpContext.Session.SetString("to_flex_col_CollateralCovenantActive", "");
+        HttpContext.Session.SetString("flex_col_CollateralCovenantActive", "");
+        HttpContext.Session.SetString("chk_flex_col_CollateralCovenantActive", "");
+    }
+}
+<!-- #include file="include/header.asp" -->
+<form action="searchresults" id="search-form" name="frmSearch" method="POST">
+
+@*
+    <%
+    Dim i
+
+    '### Test if CORELink arguments are passed and if so, create hidden pass through value fields ###
+    IF Not IsEmpty(Request("coreLink")) THEN
+    Dim searchArgs : Set searchArgs = Request("search")
+    %>
+    <input type="hidden" name="coreLink" value="<%=Request(" coreLink")%>"/>
+    <%      FOR i = 1 to searchArgs.Count %>
+    <input type="hidden" name="search" value="<%= searchArgs(i) %>" />
+    <%
+    NEXT 'i
+    END IF
+    %>
+    *@
+  
+    @{
+        var coreLink = Request.Query["coreLink"];
+        var searchArgs = Request.Query["search"];
+        if (!string.IsNullOrEmpty(coreLink))
+        {
+            searchArgs = Request.Query["search"];
+        }
+    }
+    @if (!string.IsNullOrEmpty(coreLink))
+    {
+        <input type="hidden" name="coreLink" value="@coreLink" />
+        @if (searchArgs.Count > 0)
+        {
+            for (int i = 0; i < searchArgs.Count; i++)
+            {
+                <input type="hidden" name="search" value="@searchArgs[i]" />
+            }
+        }
+    }
+
+    @*
+    <input type="hidden" name="searchType" value="<%=Request(" searchType")%>"/>
+    <input type="hidden" name="name" value="<%=Request(" name")%>"/>
+    <input type="hidden" name="customerID" value="<%=Request(" customerID")%>"/>
+    <input type="hidden" name="taxID" value="<%=Request(" taxID")%>"/>
+    <input type="hidden" name="searchcustomerStatus" value="<%=Request(" searchcustomerStatus")%>"/>
+    <input type="hidden" name="customerType" value="<%=Request(" customerType")%>"/>
+    <input type="hidden" name="customerOfficer" value="<%=Request(" customerOfficer")%>"/>
+    <input type="hidden" name="customerBranch" value="<%=Request(" customerBranch")%>"/>
+    <input type="hidden" name="loan" value="<%=Request(" loan")%>"/>
+    <input type="hidden" name="loanStatus" value="<%=Request(" loanStatus")%>"/>
+    <input type="hidden" name="loanType" value="<%=Request(" loanType")%>"/>
+    <input type="hidden" name="bank" value="<%=Request(" bank")%>"/>
+    <input type="hidden" name="loanOfficer" value="<%=Request(" loanOfficer")%>"/>
+    <input type="hidden" name="fromOrgDate" value="<%=Request(" fromOrgDate")%>"/>
+    <input type="hidden" name="toOrgDate" value="<%=Request(" toOrgDate")%>"/>
+    <input type="hidden" name="loanDescription" value="<%=Request(" loanDescription")%>"/>
+    <input type="hidden" name="loanBranch" value="<%=Request(" loanBranch")%>"/>
+    <input type="hidden" name="classificationId" value="<%=Request(" classificationId")%>"/>
+    <input type="hidden" name="accountClassId" value="<%=Request(" accountClassId")%>"/>
+    <input type="hidden" name="accountClassList" value="<%=Request(" accountClassList")%>"/>
+    <input type="hidden" name="maxResult" value="<%=Request(" maxResult")%>"/>
+    <input type="hidden" name="documentFilter" value="<%=Request(" documentFilter")%>"/>
+    <input type="hidden" name="displayDocs" value="<%=Request(" displayDocs")%>"/>
+    <input type="hidden" name="searchParticipation" value="<%=Request(" searchParticipation")%>"/>
+    <input type="hidden" name="appDateFrom" value="<%=Request(" appDateFrom")%>"/>
+    <input type="hidden" name="appDateTo" value="<%=Request(" appDateTo")%>"/>
+    <input type="hidden" name="appLender" value="<%=Request(" appLender")%>"/>
+    <input type="hidden" name="appDelegate" value="<%=Request(" appDelegate")%>"/>
+    <input type="hidden" name="appAnalyst" value="<%=Request(" appAnalyst")%>"/>
+    <input type="hidden" name="approvalStatusId" value="<%=Request(" approvalStatusId")%>"/>
+    <input type="hidden" name="loanStatusId" value="<%=Request(" loanStatusId")%>"/>
+    <input type="hidden" name="appApprover" value="<%=Request(" appApprover")%>"/><%=vbCrLf%>
+    *@
+    @{
+        string searchType = Request.Query["searchType"];
+        string name = Request.Query["name"];
+        string customerID = Request.Query["customerID"];
+        string taxID = Request.Query["taxID"];
+        string searchcustomerStatus = Request.Query["searchcustomerStatus"];
+        string customerType = Request.Query["customerType"];
+        string customerOfficer = Request.Query["customerOfficer"];
+        string customerBranch = Request.Query["customerBranch"];
+        string loan = Request.Query["loan"];
+        string loanStatus = Request.Query["loanStatus"];
+        string loanType = Request.Query["loanType"];
+        string bank = Request.Query["bank"];
+        string loanOfficer = Request.Query["loanOfficer"];
+        string fromOrgDate = Request.Query["fromOrgDate"];
+        string toOrgDate = Request.Query["toOrgDate"];
+        string loanDescription = Request.Query["loanDescription"];
+        string loanBranch = Request.Query["loanBranch"];
+        string classificationId = Request.Query["classificationId"];
+        string accountClassId = Request.Query["accountClassId"];
+        string accountClassList = Request.Query["accountClassList"];
+        string maxResult = Request.Query["maxResult"];
+        string documentFilter = Request.Query["documentFilter"];
+        string displayDocs = Request.Query["displayDocs"];
+        string searchParticipation = Request.Query["searchParticipation"];
+        string appDateFrom = Request.Query["appDateFrom"];
+        string appDateTo = Request.Query["appDateTo"];
+        string appLender = Request.Query["appLender"];
+        string appDelegate = Request.Query["appDelegate"];
+        string appAnalyst = Request.Query["appAnalyst"];
+        string approvalStatusId = Request.Query["approvalStatusId"];
+        string loanStatusId = Request.Query["loanStatusId"];
+        string appApprover = Request.Query["appApprover"];
+    }
+    <input type="hidden" name="searchType" value="@searchType" />
+    <input type="hidden" name="name" value="@name" />
+    <input type="hidden" name="customerID" value="@customerID" />
+    <input type="hidden" name="taxID" value="@taxID" />
+    <input type="hidden" name="searchcustomerStatus" value="@searchcustomerStatus" />
+    <input type="hidden" name="customerType" value="@customerType" />
+    <input type="hidden" name="customerOfficer" value="@customerOfficer" />
+    <input type="hidden" name="customerBranch" value="@customerBranch" />
+    <input type="hidden" name="loan" value="@loan" />
+    <input type="hidden" name="loanStatus" value="@loanStatus" />
+    <input type="hidden" name="loanType" value="@loanType" />
+    <input type="hidden" name="bank" value="@bank" />
+    <input type="hidden" name="loanOfficer" value="@loanOfficer" />
+    <input type="hidden" name="fromOrgDate" value="@fromOrgDate" />
+    <input type="hidden" name="toOrgDate" value="@toOrgDate" />
+    <input type="hidden" name="loanDescription" value="@loanDescription" />
+    <input type="hidden" name="loanBranch" value="@loanBranch" />
+    <input type="hidden" name="classificationId" value="@classificationId" />
+    <input type="hidden" name="accountClassId" value="@accountClassId" />
+    <input type="hidden" name="accountClassList" value="@accountClassList" />
+    <input type="hidden" name="maxResult" value="@maxResult" />
+    <input type="hidden" name="documentFilter" value="@documentFilter" />
+    <input type="hidden" name="displayDocs" value="@displayDocs" />
+    <input type="hidden" name="searchParticipation" value="@searchParticipation" />
+    <input type="hidden" name="appDateFrom" value="@appDateFrom" />
+    <input type="hidden" name="appDateTo" value="@appDateTo" />
+    <input type="hidden" name="appLender" value="@appLender" />
+    <input type="hidden" name="appDelegate" value="@appDelegate" />
+    <input type="hidden" name="appAnalyst" value="@appAnalyst" />
+    <input type="hidden" name="approvalStatusId" value="@approvalStatusId" />
+    <input type="hidden" name="loanStatusId" value="@loanStatusId" />
+    <input type="hidden" name="appApprover" value="@appApprover" />
+    @*
+    <%
+    Dim fieldDefName, fieldDefDataType, fieldDefIsCollateral, checkValue
+
+    ' ### Write out credit flex fields checked ###
+    FOR i = 0 TO g_creditFieldDefCount - 1
+    fieldDefName = g_creditFieldDefList(FIELD_DEF_NAME, i)
+    fieldDefDataType = g_creditFieldDefList(FIELD_DEF_DATA_TYPE, i)
+    checkValue = Request("chk_flex_" & fieldDefName)
+
+    IF checkValue = "1" THEN
+    %>    <input type="hidden" name="chk_flex_<%=fieldDefName%>" value="<%=checkValue%>" /><%=vbCrLf%><%
+    IF fieldDefDataType = "datetime" OR fieldDefDataType = "int" OR fieldDefDataType = "decimal" OR fieldDefDataType = "money" THEN
+    %>    <input type="hidden" name="from_flex_<%=fieldDefName%>" value="<%=Request(" from_flex_" & fieldDefName)%>"/><%=vbCrLf%>
+    <input type="hidden" name="to_flex_<%=fieldDefName%>" value="<%=Request(" to_flex_" & fieldDefName)%>"/><%=vbCrLf%><%
+    ELSE
+    %>    <input type="hidden" name="flex_<%=fieldDefName%>" value="<%=Request(" flex_" & fieldDefName)%>"/><%=vbCrLf%><%
+    END IF
+    END IF
+    NEXT
+
+    ' ### write out account flex fields checked ###
+    FOR i = 0 TO g_accountFieldDefCount - 1
+    fieldDefName = g_accountFieldDefList(FIELD_DEF_NAME, i)
+    fieldDefDataType = g_accountFieldDefList(FIELD_DEF_DATA_TYPE, i)
+    checkValue = Request("chk_flex_" & fieldDefName)
+
+    IF checkValue = "1" THEN
+    %>    <input type="hidden" name="chk_flex_<%=fieldDefName%>" value="<%=checkValue%>" /><%=vbCrLf%><%
+    IF fieldDefDataType = "datetime" OR fieldDefDataType = "int" OR fieldDefDataType = "decimal" OR fieldDefDataType = "money" THEN
+    %>    <input type="hidden" name="from_flex_<%=fieldDefName%>" value="<%=Request(" from_flex_" & fieldDefName)%>"/><%=vbCrLf%>    <input type="hidden" name="to_flex_<%=fieldDefName%>" value="<%=Request(" to_flex_" & fieldDefName)%>"/><%=vbCrLf%><%
+    ELSE
+    %>    <input type="hidden" name="flex_<%=fieldDefName%>" value="<%=Request(" flex_" & fieldDefName)%>"/><%=vbCrLf%><%
+    END IF
+    END IF
+    NEXT
+
+    ' ### Write out collateral flex fields checked ###
+    FOR i = 0 TO g_collateralFieldDefCount - 1
+    fieldDefName = g_collateralFieldDefList(FIELD_DEF_NAME, i)
+    fieldDefDataType = g_collateralFieldDefList(FIELD_DEF_DATA_TYPE, i)
+    fieldDefIsCollateral = g_collateralFieldDefList(FIELD_DEF_COLLATERAL, i)
+    checkValue = Request("chk_flex_" & fieldDefName)
+
+    IF fieldDefIsCollateral THEN
+    IF checkValue = "1" THEN
+    %>    <input type="hidden" name="chk_flex_<%=fieldDefName%>" value="<%=checkValue%>" /><%=vbCrLf%><%
+    IF fieldDefDataType = "datetime" OR fieldDefDataType = "int" OR fieldDefDataType = "decimal" OR fieldDefDataType = "money" THEN
+    %>    <input type="hidden" name="from_flex_<%=fieldDefName%>" value="<%=Request(" from_flex_" & fieldDefName)%>"/><%=vbCrLf%>    <input type="hidden" name="to_flex_<%=fieldDefName%>" value="<%=Request(" to_flex_" & fieldDefName)%>"/><%=vbCrLf%><%
+    ELSE
+    %>    <input type="hidden" name="flex_<%=fieldDefName%>" value="<%=Request(" flex_" & fieldDefName)%>"/><%=vbCrLf%><%
+    END IF
+    END IF
+    END IF
+    NEXT
+
+    Dim accountClassCode : Set accountClassCode = Request("accountClassCode")
+    FOR i = 1 TO accountClassCode.Count
+    %>
+    <input type="hidden" name="accountClassCode" value="<%=accountClassCode(i)%>" />
+    <%
+    NEXT 'i
+
+    ' ### build out selected documentSubTypeIds checked for Missing/Existing/Waived documents ###
+    Dim accountClassCodeList : Set accountClassCodeList = Request("accountClassCode")
+    Dim chkTab
+    FOR i = 1 TO accountClassCodeList.Count
+    Set chkTab = Request("chkTab_" & accountClassCodeList(i))
+    FOR j = 1 TO chkTab.Count
+    IF NOT InStr(documentSubTypeIdList, chkTab(j)) THEN
+    %><input type="hidden" name="chkTab_<%=accountClassCodeList(i)%>" value="<%=chkTab(j)%>" /><%
+    END IF
+    NEXT
+    NEXT
+
+    ' ### Write expired document filters if any ###
+    Dim formName, documentExpDate, documentSubTypeId
+    Dim dateClause  : dateClause = ""
+
+    FOR i = 1 TO accountClassCodeList.Count
+    Set documentSubTypeId = Request("documentSubTypeId_" & accountClassCodeList(i))
+    FOR j = 1 TO documentSubTypeId.Count
+    %><input type="hidden" name="documentSubTypeId_<%=accountClassCodeList(i)%>" value="<%=documentSubTypeId(j)%>" />
+    <input type="hidden" name="documentExpDate_<%=accountClassCodeList(i) & " _" & j%>" value="<%=Request("documentExpDate_" & accountClassCodeList(i) & "_" & j)%>"/><%
+    NEXT
+    NEXT
+
+    ' ### Write selected exceptions to filter if any ###
+    Dim chkAssignedUserId : Set chkAssignedUserId = Request("chkAssignedUserId")
+    Dim chkCustomerExceptionDefId : Set chkCustomerExceptionDefId = Request("chkCustomerExceptionDefId")
+    Dim chkLoanExceptionDefId : Set chkLoanExceptionDefId = Request("chkLoanExceptionDefId")
+    Dim chkDepositExceptionDefId : Set chkDepositExceptionDefId = Request("chkDepositExceptionDefId")
+    Dim chkTrustExceptionDefId : Set chkTrustExceptionDefId = Request("chkTrustExceptionDefId")
+
+    ' ### Build assigned user clause ###
+    FOR i = 1 TO chkAssignedUserId.Count
+    %><input type="hidden" name="chkAssignedUserId" value="<%=chkAssignedUserId(i)%>" /><%
+    NEXT
+
+    ' ### Build list of exceptionDefIds ###
+    IF Trim(Request("documentFilter") & "") = "C" THEN
+    FOR i = 1 TO chkCustomerExceptionDefId.Count
+    %>    <input type="hidden" name="chkCustomerExceptionDefId" value="<%=chkCustomerExceptionDefId(i)%>" /><%=vbCrLf%><%
+    NEXT
+    ELSE
+    FOR i = 1 TO chkLoanExceptionDefId.count
+    %>    <input type="hidden" name="chkLoanExceptionDefId" value="<%=chkLoanExceptionDefId(i)%>" /><%=vbCrLf%><%
+    NEXT
+    FOR i = 1 TO chkDepositExceptionDefId.count
+    %>    <input type="hidden" name="chkDepositExceptionDefId" value="<%=chkDepositExceptionDefId(i)%>" /><%=vbCrLf%><%
+    NEXT
+    FOR i = 1 TO chkTrustExceptionDefId.count
+    %>    <input type="hidden" name="chkTrustExceptionDefId" value="<%=chkTrustExceptionDefId(i)%>" /><%=vbCrLf%><%
+    NEXT
+    END IF
+    %> *@
+    @{
+        // Define utility local function for common flex field hidden inputs
+        string fieldDefName = "";
+        string fieldDefDataType = "";
+        string fieldDefIsCollatera = "";
+        string checkValue = "";
+        /* for (int i = 0; i < g_creditFieldDefCount; i++)*/
+        for (int i = 0; i < 2; i++)
+        {
+             fieldDefName = "Common Test1";//fieldDefList[FIELD_DEF_NAME, i];
+             fieldDefDataType = "";// fieldDefList[FIELD_DEF_DATA_TYPE, i];
+             checkValue = "0";// Request.Form["chk_flex_" + fieldDefName];
+
+            if (checkValue == "1")
+            {
+                // <input type="hidden" name="chk_flex_@fieldDefName" value="@checkValue" />
+                <input type="hidden" name="chk_flex_flex_ChoiceFlexField" value="0" />
+                if (fieldDefDataType == "datetime" || fieldDefDataType == "int" || fieldDefDataType == "decimal" || fieldDefDataType == "money")
+                {
+                    // <input type="hidden" name="from_flex_@fieldDefName" value="@Request.Form["from_flex_" + fieldDefName]" />
+                    // <input type="hidden" name="to_flex_@fieldDefName" value="@Request.Form["to_flex_" + fieldDefName]" />
+
+                    <input type="hidden" name="from_flex_flex_ChoiceFlexField" value="from_flex_flex_ChoiceFlexField"" />
+                    <input type="hidden" name="to_flex_flex_ChoiceFlexField" value="to_flex_flex_ChoiceFlexField_flex_ChoiceFlexField" />
+                }
+                else
+                {
+                    // <input type="hidden" name="flex_@fieldDefName" value="@Request.Form["flex_" + fieldDefName]" />
+                    <input type="hidden" name="flex_Flex_ChoiceFlexField" value="1" />
+                }
+            }
+        }
+           
+        /* ### write out account flex fields checked ### */
+
+        // for (int i = 0; i < g_accountFieldDefCount; i++)
+        for (int i = 0; i < 1; i++)
+        {
+                @* 
+                string fieldDefName = fieldDefList[FIELD_DEF_NAME, i];
+                string fieldDefDataType = fieldDefList[FIELD_DEF_DATA_TYPE, i];
+                string checkValue = Request.Form["chk_flex_" + fieldDefName];
+                *@
+            fieldDefName = "CreditCovenantActive";
+            fieldDefDataType = "";// fieldDefList[FIELD_DEF_DATA_TYPE, i];
+            checkValue = "1";// Request.Form["chk_flex_" + fieldDefName];
+            if (checkValue == "1")
+                {
+                    // <input type="hidden" name="chk_flex_@fieldDefName" value="@checkValue" />
+                <input type="hidden" name="chk_flex_CreditCovenantActive" value="0" />
+                    if (fieldDefDataType == "datetime" || fieldDefDataType == "int" || fieldDefDataType == "decimal" || fieldDefDataType == "money")
+                    {
+                        // <input type="hidden" name="from_flex_@fieldDefName" value="@Request.Form["from_flex_" + fieldDefName]" />
+                        // <input type="hidden" name="to_flex_@fieldDefName" value="@Request.Form["to_flex_" + fieldDefName]" />
+                    <input type="hidden" name="from_flex_CreditCovenantActive" value="from_flex_CreditCovenantActive" />
+                    <input type="hidden" name="to_flex_CreditCovenantActive" value="to_flex_CreditCovenantActive" />
+                    }
+                    else
+                    {
+                    // <input type="hidden" name="flex_@fieldDefName" value="@Request.Form["flex_" + fieldDefName]" />
+                    <input type="hidden" name="flex_CreditCovenantActive" value="flex_CreditCovenantActive" />
+                }
+            }
+        }
+
+
+        // Render credit flex fields
+        // RenderFlexFields(g_creditFieldDefList, g_creditFieldDefCount);
+
+        // Render account flex fields
+        // RenderFlexFields(g_accountFieldDefList, g_accountFieldDefCount);
+
+
+        //for (int i = 0; i < g_collateralFieldDefCount; i++)
+            for (int i = 0; i < 1; i++)
+        {
+            /*
+            string fieldDefName = g_collateralFieldDefList[FIELD_DEF_NAME, i];
+            string fieldDefDataType = g_collateralFieldDefList[FIELD_DEF_DATA_TYPE, i];
+            bool fieldDefIsCollateral = g_collateralFieldDefList[FIELD_DEF_COLLATERAL, i];
+            string checkValue = Request.Form["chk_flex_" + fieldDefName];
+            */
+           
+            /* Mocking */
+
+            fieldDefName = "CollateralCovenantActive";
+            fieldDefDataType = ""; // g_collateralFieldDefList[FIELD_DEF_DATA_TYPE, i];
+            bool fieldDefIsCollateral = false;// g_collateralFieldDefList[FIELD_DEF_COLLATERAL, i];
+            checkValue = "0"; // Request.Form["chk_flex_" + fieldDefName]
+
+            if (fieldDefIsCollateral && checkValue == "1")
+            {
+                // <input type="hidden" name="chk_flex_@fieldDefName" value="@checkValue" />
+                <input type="hidden" name="chk_flex_CollateralCovenantActive" value="" />
+                if (fieldDefDataType == "datetime" || fieldDefDataType == "int" || fieldDefDataType == "decimal" || fieldDefDataType == "money")
+                {
+                    @* <input type="hidden" name="from_flex_@fieldDefName" value="@Request.Form["from_flex_" + fieldDefName]" />
+                       <input type="hidden" name="to_flex_@fieldDefName" value="@Request.Form["to_flex_" + fieldDefName]" />
+                    *@
+                    <input type="hidden" name="from_flex_CollateralCovenantActive" value="0" />
+                    <input type="hidden" name="to_flex_CollateralCovenantActive" value="0" + fieldDefName]" />
+                }
+                else
+                {
+                    // <input type="hidden" name="flex_@fieldDefName" value="@Request.Form["flex_" + fieldDefName]" />
+                    <input type="hidden" name="from_flex_CollateralCovenantActive" value="" />
+                }
+            }
+        }
+
+        // Render accountClassCode hidden fields
+       // var accountClassCode = Request.Form["accountClassCode"];
+        var accountClassCode = Request.Query["accountClassCode"];
+        foreach (var val in accountClassCode)
+        {
+            // <input type="hidden" name="accountClassCode" value="@val" />
+            <input type="hidden" name="accountClassCode" value="" />
+        }
+
+        // Render chkTab hidden fields excluding those in documentSubTypeIdList
+        //var accountClassCodeList = Request.Form["accountClassCode"];
+        //var accountClassCodeList = Request.Query["accountClassCode"];
+        var accountClassCodeList = new string[] { "one","two"};
+        foreach (var accCode in accountClassCodeList)
+        {
+            //var chkTab =  Request.Form.GetValues("chkTab_" + accCode);
+            var chkTab = new string[] { "1", "0" };
+            if (chkTab != null)
+            {
+                foreach (var chkVal in chkTab)
+                {
+                    /*
+                    if (!documentSubTypeIdList.Contains(chkVal))
+                    {
+                        <input type="hidden" name="chkTab_@accCode" value="@chkVal" />
+                    }
+                    */
+                    <input type="hidden" name="chkTab1" value="0" /> //Mocking
+                    <input type="hidden" name="chkTab2" value="0" />//Mocking
+                }
+            }
+        }
+
+        // Render documentSubTypeId and documentExpDate hidden fields
+       foreach (var accCode in accountClassCodeList)
+        {
+            //var documentSubTypeIds = Request.Form.GetValues("documentSubTypeId_" + accCode);
+            var documentSubTypeIds = new string[] { "1", "0" }; //Mocking
+        if (documentSubTypeIds != null)
+            {
+                int j = 1;
+                foreach (var docSubTypeId in documentSubTypeIds)
+                {
+                    /*
+                    <input type="hidden" name="documentSubTypeId_@accCode" value="@docSubTypeId" />
+                    <input type="hidden" name="documentExpDate_@accCode_@j" value="@Request.Form["documentExpDate_" + accCode + "_" + j]" />
+                    */
+                    <input type="hidden" name="documentSubTypeId_101" value="" />
+                    <input type="hidden" name="documentExpDate_101_@j" value="documentExpDate_101" + j]" />
+
+                    j++;
+                }
+            }
+        }
+
+        // Render assigned user exceptions and other exceptions conditionally
+        var chkAssignedUserId = Request.Query["chkAssignedUserId"];
+        foreach (var val in chkAssignedUserId)
+        {
+            <input type="hidden" name="chkAssignedUserId" value="@val" />
+        }
+
+        // var documentFilter = (Request.Form["documentFilter"] ?? "").Trim();
+        documentFilter = "C";
+        if (documentFilter == "C")
+        {
+            
+            //var chkCustomerExceptionDefId =  Request.Form["chkCustomerExceptionDefId"];
+            var chkCustomerExceptionDefId = new string[] {"One","Two" };
+        foreach (var val in chkCustomerExceptionDefId)
+            {
+                <input type="hidden" name="chkCustomerExceptionDefId" value="@val" />
+            }
+        }
+        else
+        {
+            // var chkLoanExceptionDefId = Request.Form["chkLoanExceptionDefId"];
+            var chkLoanExceptionDefId = new string[] { "LoanTest1", "LoanTest2" };
+            foreach (var val in chkLoanExceptionDefId)
+            {
+                <input type="hidden" name="chkLoanExceptionDefId" value="@val" />
+            }
+
+            //var chkDepositExceptionDefId = Request.Form["chkDepositExceptionDefId"];
+            var chkDepositExceptionDefId = new string[] { "DepTest1", "DepTest2" };
+            foreach (var val in chkDepositExceptionDefId)
+            {
+                <input type="hidden" name="chkDepositExceptionDefId" value="@val" />
+            }
+
+            // var chkTrustExceptionDefId = Request.Form["chkTrustExceptionDefId"];
+
+            var chkTrustExceptionDefId = new string[] { "DepTest1", "DepTest2" };
+            foreach (var val in chkTrustExceptionDefId)
+            {
+                <input type="hidden" name="chkTrustExceptionDefId" value="@val" />
+            }
+        }
+    }
+
+</form>
+<!-- #include file="include/footer.asp" -->
+<!-- #include file="include/dbclose.inc" -->
+<!-- #include file="include/ThemeScripts.asp" -->
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.core.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.popup.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.data.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.list.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.autocomplete.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        kendo.ui.progress($(document.body), true);
+
+        setTimeout(function () {
+           $('#search-form').submit();
+        }, 100);
+    });
+</script>

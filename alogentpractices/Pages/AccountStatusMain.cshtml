@@ -1,0 +1,125 @@
+﻿@page
+@using alogentpractices.Pages
+@model AccountStatusMainModel
+@{
+    Layout = null;
+    var isApplicationStatus = false;
+}
+
+<div>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/11.0.2/default/default-main.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2025.2.702/js/kendo.all.min.js"></script>
+    <script src="./js/telerik-license.js"></script>
+
+    <form method="post" asp-page-handler="Save" id="frmAccountStatusMaint">
+        <input type="hidden" name="Action" value="Add" />
+        <input type="hidden" name="AccountClassId" value="@Model.loanStatus.accountClassId" />
+        <input type="hidden" name="StatusId" value="@Model.loanStatus.statusId" />
+        <input type="hidden" name="IsApplicationStatus" value="@Model.loanStatus.isApplicationStatus" />
+        <table class="aa-two-column-form-table">
+            <tr>
+                <td>Status Name</td>
+                <td><input type="text" class="k-textbox" name="StatusDescription" value="@Model.loanStatus.statusDescription" size="40" /></td>
+            </tr>
+            <tr>
+                <td>Status Code</td>
+                <td><input type="text" class="k-textbox" name="StatusCode" value="@Model.loanStatus.statusCode" size="20" /></td>
+            </tr>
+            @if (isApplicationStatus)
+            {
+                <tr>
+                    <td>Active Status?</td>
+                    <td>
+                        <select id="cboIsActiveApplicationStatus" name="IsActiveApplicationStatus">
+                            <option value="0" selected="@(Model.loanStatus.IsActiveApplicationStatus ? "" : "selected")">No</option>
+                            <option value="1" selected="@(Model.loanStatus.IsActiveApplicationStatus ? "selected" : "")">Yes</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Default Status?</td>
+                    <td>
+                        <select id="cboIsDefaultApplicationStatus" name="IsDefaultApplicationStatus">
+                            <option value="0" selected="@(Model.loanStatus.IsDefaultApplicationStatus ? "" : "selected")">No</option>
+                            <option value="1" selected="@(Model.loanStatus.IsDefaultApplicationStatus ? "selected" : "")">Yes</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Approved Status?</td>
+                    <td>
+                        <select id="cboIsApprovedApplicationStatus" name="IsApprovedApplicationStatus">
+                            <option value="0" selected="@(Model.loanStatus.IsApprovedApplicationStatus ? "" : "selected")">No</option>
+                            <option value="1" selected="@(Model.loanStatus.IsApprovedApplicationStatus ? "selected" : "")">Yes</option>
+                        </select>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>Active Status?</td>
+                    <td>
+                        <select id="cboIsActive" name="IsActive">
+                            <option value="0" selected="@(Model.loanStatus.isActive ? "" : "selected")">No</option>
+                            <option value="1" selected="@(Model.loanStatus.isActive ? "selected" : "")">Yes</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Default Status?</td>
+                    <td>
+                        <select id="cboIsDefaultYN" name="IsDefaultYN">
+                            <option value="N" selected="@(!Model.loanStatus.isDefault ? "" : "selected")">No</option>
+                            <option value="Y" selected="@(Model.loanStatus.isDefault ? "selected" : "")">Yes</option>
+                        </select>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="aa-button-wrapper-absolute">
+            <div style="margin-top: 20px;">
+                <button id="btnUpdate" type="button" class="k-button k-button-solid-success" onclick="validate();" style="margin-right: 10px;">Update</button>
+                <button id="btnCancel" type="button" class="k-button" onclick="parent.closeKendoDialog();">Cancel</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        $(document).ready(function () {
+            // Initialize Kendo Buttons
+            $("#btnUpdate").kendoButton({
+                click: function () {
+                    validate();
+                }
+            });
+
+            $("#btnCancel").kendoButton({
+                click: function () {
+                    parent.closeKendoDialog();
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $("select").each(function () {
+                $(this).kendoDropDownList();
+            });
+        });
+
+        function validate() {
+            var form = document.getElementById('frmAccountStatusMaint');
+            if (!form.StatusDescription.value) {
+                alert('Please enter the status name');
+                form.StatusDescription.focus();
+                return;
+            }
+            if (!form.StatusCode.value) {
+                alert('Please enter the status code');
+                form.StatusCode.focus();
+                return;
+            }
+            form.submit();
+        }
+    </script>
+</div>

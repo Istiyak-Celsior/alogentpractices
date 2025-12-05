@@ -1,0 +1,83 @@
+.aa-panel {
+    width: 100%;
+}
+
+.aa-panel > div {
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    width: 50%;
+    float: left;
+    display: table;
+}
+
+.aa-panel > div:after {
+    clear: left;
+}
+
+.k-textbox.name {
+    width: 250px;
+}
+
+.task-processing .k-dropdown {
+    width: 200px;
+}
+
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > thead > tr > th:nth-child(2),
+.aa-kendo-grid > tbody > tr > td:first-child,
+.aa-kendo-grid > tbody > tr > td:nth-child(2) {
+    width: 7%;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-last-child(1),
+.aa-kendo-grid > tbody > tr > td:nth-last-child(1),
+.aa-kendo-grid > thead > tr > th:nth-last-child(2),
+.aa-kendo-grid > tbody > tr > td:nth-last-child(2) {
+    width: 12%;
+}
+
+.aa-kendo-grid > thead > tr > th#task-order-th,
+.aa-kendo-grid > thead > tr > td#task-order-td {
+    width: 12%;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.aa-task-list-head {
+    width: 100%;
+}
+
+.aa-task-list-head > div {
+    font-weight: bold;
+    width: 50%;
+    float: left;
+    display: table;
+}
+
+.aa-task-list-head > div:last-child {
+    text-align: right;
+}
+
+.aa-task-list-head > div:after {
+    clear: left;
+}
+
+#aa-add-task-button {
+    margin-bottom: 10px;
+}
+
+.fa-trash-alt.disabled {
+    color: #C3C3C3;
+}

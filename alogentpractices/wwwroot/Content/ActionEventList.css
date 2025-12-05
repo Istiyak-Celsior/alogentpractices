@@ -1,0 +1,252 @@
+﻿.aa-title > div:last-child {
+    padding-right: 12px;
+}
+
+#tabstrip {
+    min-height: 480px;
+}
+
+.k-content.k-state-active {
+    min-height: 413px;
+    max-height: 650px;
+}
+
+div.top > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+div.top > ul > li {
+    float: left;
+    padding-left: 12px;
+}
+
+div.top > ul > li:nth-child(1) {
+    padding-left: 0;
+}
+
+/* DIV GRID */
+.action-grid {
+    border-top: 1px #E5E5E5 solid;
+    border-right: 1px #E5E5E5 solid;
+    border-left: 1px #E5E5E5 solid;
+    display: grid;
+}
+
+.action > div,
+.action-grid-row > div {
+    height: 39px;
+    line-height: 39px;
+    float: left;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 4%;
+    border-bottom: 1px #E5E5E5 solid;
+    text-align: center;
+}
+
+.action:hover {
+    background-color: #EAEAEA !important;
+}
+
+.action:hover .more-less {
+    display: block;
+}
+
+.action:hover span.event {
+    width: 220px;
+    display: inline-block;
+}
+
+.event {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.more-less {
+    float: right;
+    display: none;
+}
+
+.action .event-name,
+.action-grid-row .event-name {
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action .event-name {
+    width: calc(94% - 6px);
+    padding-left: 6px;
+}
+
+.action-grid-row .event-name {
+    width: 17%;
+}
+
+.action-grid-row.pre-header,
+.action-grid-row.header{
+    display: flex;
+}
+
+.action-grid-row.pre-header > div,
+.action-grid-row.header > div {
+    border-right: 1px #E5E5E5 solid;
+}
+
+.action-grid-row.pre-header > div:last-child,
+.action-grid-row.header > div:last-child {
+    border-right: 0;
+}
+
+.action-grid-row.header > div {
+    background-color: #FAFAFA;
+}
+
+.action {
+    background-color: #FFF;
+    display: flex;
+    height: 39px;
+    border-bottom: 1px #E5E5E5 solid;
+}
+
+.action:nth-child(even) {
+    background-color: #F9F9F9;
+}
+
+.action .w2 {
+    width: 2%;
+}
+
+.action .w5,
+.action-grid-row .w5 {
+    width: 5%;
+}
+
+.action .w4 {
+    width: 4%;
+}
+
+.head-space {
+    background-color: #FFF !important;
+}
+
+.head-background {
+    background-color: #EEE !important;
+}
+
+.multi-line {
+    line-height: normal !important;
+    padding: 3px 6px 0 6px !important;
+}
+
+div.spacer {
+    margin: 12px 0;
+    clear: left;
+}
+
+#save-order-fail-dialog {
+    display: none;
+}
+
+#save-sort-button-container {
+    position: relative;
+}
+
+#save-sort-button {
+    opacity: .20;
+    pointer-events: none;
+    right: 0;
+}
+
+.hint {
+    width: 90% !important;
+    border: 1px solid #999;
+    background: #FFF;
+    opacity: 0.7;
+    overflow: hidden;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 6px;
+    font-weight: bold;
+    color: #888;
+}
+
+.placeholder {
+    background-color: #DCEFFD !important;
+    font-size: 14px;
+    color: #52AEF7;
+    height: 39px;
+    line-height: 39px;
+}
+
+.handler {
+    margin-top: 4px;
+}
+
+.handler:hover {
+    cursor: move;
+}
+
+.no-records {
+    height: 38px;
+    line-height: 38px;
+    border: 1px #E4E4E4 solid;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* TABLE ROW CONTENT */
+table.row-content {
+    width: 100%;
+}
+
+table.row-content > tbody > tr {
+    height: 39px;
+}
+
+table.row-content > tbody > tr > td {
+    text-align: center;
+    box-sizing: border-box;
+}
+
+td.description {
+    text-align: left !important;
+    padding: 12px 12px 12px 15%;
+    width: 100px; /* IE HACK */
+}
+
+/* HIDDEN ON PAGE LOAD */
+#tabstrip,
+div.top,
+footer {
+    display: none;
+}
+
+.aa-hidden {
+    margin-bottom: 17px;
+}
+
+/* STYLING FOR CLONE WORKFLOW DIALOG */
+#aa-clone-workflow-content > span {
+    width: 425px;
+}
+
+#targetLoanTypeId {
+    display: none;
+}
+
+#aa-empty-list-message {
+    display: none;
+}
+
+.no-actions {
+    background-color: #FFF;
+    padding: 12px 24px;
+    border: 1px #DEDEDE solid;
+}

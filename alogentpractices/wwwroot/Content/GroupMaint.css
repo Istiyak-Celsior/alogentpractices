@@ -1,0 +1,71 @@
+﻿.sub-header {
+    margin: 24px 0 12px 0;
+}
+
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > tbody > tr > td:first-child {
+    width: 80px;
+    text-align: center;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-child(4),
+.aa-kendo-grid > tbody > tr > td:nth-child(4),
+.aa-kendo-grid > thead > tr > th:nth-child(5),
+.aa-kendo-grid > tbody > tr > td:nth-child(5),
+.aa-kendo-grid > thead > tr > th:nth-child(3),
+.aa-kendo-grid > tbody > tr > td:nth-child(3) {
+    width: 100px;
+    text-align: center;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.aa-button-wrapper-left.bottom {
+    margin-bottom: 12px;
+}
+
+.aa-panel {
+    width: 100%;
+}
+
+.aa-panel > div {
+    width: 35%;
+    float: left;
+    display: table;
+}
+
+.aa-panel > div:last-child {
+    width: 65%;
+}
+
+.aa-panel > div:after {
+    clear: left;
+}
+
+.k-textbox {
+    width: 300px;
+}
+
+.k-textbox.code {
+    width: 140px;
+}
+
+.k-dropdown {
+    width: 250px;
+}
+
+.grid-wrapper {
+    height: 600px;
+    overflow-y: auto;
+}

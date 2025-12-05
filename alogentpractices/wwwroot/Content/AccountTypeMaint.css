@@ -1,0 +1,16 @@
+﻿#tabstrip {
+    min-height: 263px;
+}
+
+.k-content.k-state-active {
+    min-height: 263px;
+    max-height: 263px;
+}
+
+.aa-two-column-form-table > tbody > tr > td:first-child {
+    width: 150px;
+}
+
+.k-textbox {
+    width: 260px;
+}

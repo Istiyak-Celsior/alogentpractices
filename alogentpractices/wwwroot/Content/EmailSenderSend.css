@@ -1,0 +1,74 @@
+﻿.aa-title {
+    padding-left: 20px;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+main > table {
+    width: 100%;
+}
+
+main > table > tbody > tr {
+    height: 40px;
+}
+
+main > table > tbody > tr > td {
+    text-align: center;
+}
+
+main > table > tbody > tr:first-child > td {
+    padding-top: 30px;
+}
+
+main h1 {
+    font-size: 18px;
+}
+
+main h2 {
+    margin: 20px 0;
+}
+
+.fa-envelope {
+    font-size: 32px;
+}
+
+.aa-report-wrapper {
+    overflow: auto;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #F5F5F5;
+    width: 600px;
+    padding: 12px;
+    border: 1px #ECECEC solid;
+}
+
+.aa-report {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.aa-report-row > td:first-child {
+    vertical-align: top;
+    padding-top: 4px;
+}
+
+.aa-report-row > td:nth-child(2) {
+    vertical-align: top;
+    padding-left: 6px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.aa-report-separator {
+    border-bottom: 1px #CCC dashed;
+    margin: 6px 0;
+}
+
+.aa-color-grey {
+    color: #777;
+}

@@ -1,0 +1,121 @@
+.aa-tab-display{
+    padding: 6px 0px;
+}
+
+.aa-history-icon {
+    margin-right: 4px;
+    color: rgb(122,166,189);
+    font-size: 12pt;
+}
+
+.aa-tab-label{
+    vertical-align: top;
+}
+
+#aa-view-document > table {
+    width: 100%;
+    padding-top: 8px;
+}
+
+#aa-view-document > table > thead > tr > th {
+    text-align: left;
+    background: rgb(229,229,229);
+    color: rgb(33,33,33);
+}
+
+#aa-view-document >table > tbody > tr > td {
+    vertical-align: top;
+}
+
+.aa-pad-sm {
+    margin: 0px;
+    padding: 4px 0px;
+}
+
+#TextArea1 {
+    width: 100%;
+    height: 120px;
+    margin-top: 3px;
+    resize: none;
+}
+
+#TextArea2 {
+    width: 100%;
+    height: 80px;
+    margin-top: 3px;
+    resize: none;
+}
+
+.aa-display-notify {
+    padding-top: 8px;
+    height: 26px;
+}
+
+.aa-disabled {
+    color: #B9B9B9;
+}
+
+/* FONT AWESOME STATUS ICONS */
+.aa-status-yes,
+.aa-status-no,
+.aa-status-pending,
+.aa-status-refresh {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.aa-status-pending {
+    color: #F1C40F
+}
+
+.aa-status-refresh {
+    color: #40B2E1
+}
+
+#aa-view-document {
+    margin: 6px 0px;
+}
+
+h2.restrict, 
+h3.restrict{
+    width: 540px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#busy-btn {
+    display: none;
+}
+
+.fa-cog {
+    font-size: 14px;
+}
+
+.notify-help-icon {
+    cursor: help;
+    font-size: 16px;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.icon-hide {
+    display: none;
+}
+
+.icon-show {
+    display: inline;
+}
+
+.aa-qcmaint-button-wrapper{
+    float: right;
+    padding-top: 8px;
+}
+

@@ -1,0 +1,216 @@
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > tbody > tr > td:first-child,
+.aa-kendo-grid > thead > tr > th:nth-child(2),
+.aa-kendo-grid > tbody > tr > td:nth-child(2)
+{
+    width: 20px;
+    text-align: center;
+    padding: 0 12px;
+}
+
+/* Barcode Id */
+.aa-kendo-grid > thead > tr > th:nth-child(5),
+.aa-kendo-grid > tbody > tr > td:nth-child(5) {
+    width: 60px;
+    padding: 0 12px;
+}
+
+/* Existing Default Status */
+.aa-kendo-grid > thead > tr > th:nth-child(6),
+.aa-kendo-grid > tbody > tr > td:nth-child(6) {
+    width: 220px;
+    padding: 0 12px;
+}
+
+/* Require QC */
+.aa-kendo-grid > thead > tr > th:nth-child(9),
+.aa-kendo-grid > tbody > tr > td:nth-child(9) {
+    width: 80px;
+    padding: 0 12px;
+}
+
+/* Critical QC as of Date */
+.aa-kendo-grid > thead > tr > th:nth-child(11),
+.aa-kendo-grid > tbody > tr > td:nth-child(11) {
+    width: 80px;
+    padding: 0 12px;
+}
+.aa-group-header {
+    background-color: #8FB6CA;
+    width: 100%;
+    display: inline-block;
+    margin-top: 12px;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+.aa-group-header h2 {
+    color: #FFF;
+}
+
+.aa-group-header > div {
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+    width: 50%;
+    float: left;
+    display: table;
+}
+
+.aa-group-header > div:last-child {
+    text-align: right;
+}
+
+.aa-group-header > div:after {
+    clear: left;
+}
+
+.aa-group-header > div > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: table;
+    float: right;
+}
+
+.aa-group-header > div > ul > li {
+    padding-left: 6px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.aa-group-header > div > ul > li:first-child {
+    padding-left: 0;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.k-button.small {
+    line-height: 1.28571428em;
+    padding: 3px 14px;
+}
+
+select {
+    border: 1px #F5F5F5 solid;
+    padding: 5px;
+}
+
+select:hover {
+    border: 1px #DDD solid;
+}
+
+.reqDisabledButton {
+    opacity: .25;
+    pointer-events: none;
+    cursor: default;
+}
+
+.validation-error {
+    background-color: #f2dede !important;
+    border: 1px #ebcccc solid !important;
+    color: #a94442 !important;
+}
+
+.aa-schedule-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: table;
+}
+
+.aa-schedule-list > li {
+    padding-left: 6px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.aa-schedule-list > li:first-child {
+    padding-left: 0;
+}
+
+.extras-row {
+    padding-bottom: 12px !important;
+}
+
+.fa-plus-circle,
+.fa-minus-circle {
+    cursor: pointer;
+}
+
+.tab-row > td {
+    background-color: #E7F1F7 !important;
+}
+
+.tab-row-added > td {
+    background-color: #F0F7E7 !important;
+}
+
+.tab-row-extras > td {
+    background-color: #FFF !important;
+}
+
+.aa-name {
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+}
+
+.aa-two-column-form-table.scheduling {
+    width: auto !important;
+}
+
+.aa-two-column-form-table td.highlight {
+    background-color: #F5F5F5;
+    border-bottom: 1px #FFF solid;
+    text-align: left;
+    padding: 0 12px;
+    width: 200px;
+}
+
+.aa-two-column-form-table td.highlight-right {
+    text-align: left;
+    padding-left: 12px;
+}
+
+.k-textbox.doc-title {
+    width: 95%;
+}
+
+.k-textbox:disabled {
+    background-color: #FAFAFA !important;
+    color: #7C7C7C;
+}
+
+.k-textbox {
+    height: 30px !important;
+    
+}
+
+.aa-barcode-id {
+    width: 60px !important;
+}
+
+.aa-header-cell {
+    display: table-cell;
+}
+
+.aa-header-icon {
+    vertical-align: middle;
+    line-height: 30px;
+}
+
+.aa-datefield {
+    width: 80px;
+}
+
+#aa-require-qc-header{
+    padding-right: 10px;
+}
+
+.k-widget.k-tooltip.k-tooltip-validation.k-invalid-msg{
+    margin: 0;
+}

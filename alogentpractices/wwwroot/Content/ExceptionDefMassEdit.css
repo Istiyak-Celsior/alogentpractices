@@ -1,0 +1,106 @@
+﻿main p {
+    margin-top: 0;
+}
+
+main h2 {
+    margin: 12px 0;
+}
+
+.exception-def-table {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px #ECECEC solid;
+}
+
+.exception-def-table > tbody > tr {
+    height: 35px;
+}
+
+.exception-def-table > tbody > tr > td {
+    width: 33%;
+    padding: 6px;
+}
+
+.exception-def-table > tbody > tr:first-child > td {
+    background-color: #F5F5F5;
+}
+
+.exception-def-table > tbody > tr:nth-child(2) > td {
+    vertical-align: top;
+}
+
+.exception-def-table ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.exception-def-table ul > li {
+    height: 30px;
+    line-height: 30px;
+    padding-left: 20px;
+}
+
+.exception-def-table ul.list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.exception-def-table ul.list:after {
+    clear: both;
+}
+
+.exception-def-table ul.list > li {
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    padding-left: 12px;
+}
+
+.exception-def-table ul.list > li:first-child {
+    padding-left: 0;
+}
+
+.head-dropdown .k-dropdown {
+    margin-bottom: 4px;
+}
+
+span.k-tooltip {
+    margin-left: 0px;
+}
+
+.aa-horizontal-list > li {
+    padding-left: 10px;
+}
+
+.aa-tool-message-box {
+    background-color: #ffffff;
+    border: 1px #BBB solid;
+    padding: 10px 10px;
+}
+
+.aa-tool-message-box {
+    color: #555;
+}
+.aa-tool-header {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.aa-danger {
+    color: #D24350;
+    font-weight: bold;
+}
+
+.k-button.aa-danger {
+    color: #FFF;
+    border-color: #D24350;
+    background-color: #D24350;
+}
+
+.k-button:hover.aa-danger {
+    color: #FFF;
+    border-color: #d88585;
+    background-color: #d88585;
+}

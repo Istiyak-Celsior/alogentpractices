@@ -1,0 +1,4 @@
+.k-tabstrip > div[role=tabpanel].k-content {
+    background-color: #e1e3e5;
+    padding: 12px;
+}

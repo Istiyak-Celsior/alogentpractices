@@ -1,0 +1,68 @@
+﻿.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > tbody > tr > td:first-child {
+    width: 80px;
+    text-align: center;
+}
+
+.aa-pagination-wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+.aa-pagination-wrapper.bottom {
+    margin-top: 12px;
+}
+
+.aa-pagination-wrapper > div.pager {
+    display: inline-block;
+}
+
+.aa-pagination-wrapper > div.pager a,
+.aa-pagination-wrapper > div.pager a:active,
+.aa-pagination-wrapper > div.pager a:visited {
+    float: left;
+    margin: 0 .08333em;
+    height: 2em;
+    line-height: 2em;
+    border-radius: 1.0833em;
+    cursor: pointer;
+    text-align: center;
+    border: 1px #CACACA solid;
+    width: 2.0em;
+}
+
+.aa-pagination-wrapper > div.pager a:hover {
+    background-color: #F5F5F5;
+}
+
+.aa-pagination-wrapper > div.pager a.selected,
+.aa-pagination-wrapper > div.pager a:active.selected,
+.aa-pagination-wrapper > div.pager a:visited.selected {
+    color: #7AA6BD;
+    border: 1px transparent solid;
+    background-color: #F5F5F5;
+}
+
+.aa-pagination-wrapper > div.pager a:hover.selected {
+    background-color: #F5F5F5;
+    cursor: default;
+}
+
+.aa-pagination-wrapper > div.page-bottom-wrapper > ul {
+    list-style: none;
+    clear: both;
+    padding: 0;
+    margin: 0;
+}
+
+.aa-pagination-wrapper > div.page-bottom-wrapper > ul > li {
+    float: left;
+    padding-left: 12px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.aa-pagination-wrapper > div.page-bottom-wrapper > ul > li:first-child {
+    padding-left: 0;
+}
+

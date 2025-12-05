@@ -1,0 +1,39 @@
+button.k-danger {
+    background-color: #ff4d4d;
+    border-color: #ff4d4d;
+    color: #ffffff;
+}
+
+button.k-danger:hover {
+    background-color: #ef3535;
+    border-color: #ef3535;
+    color: #ffffff;
+}
+
+.aa-action-button {
+    background-color: transparent;
+    border-radius: 3px;
+    padding: 3px 6px;
+    text-transform: uppercase;
+}
+
+.aa-action-button:hover {
+    background-color: #ececec;
+}
+
+.aa-action-button.aa-danger {
+    color: #ff7676;
+}
+
+.aa-button-small {
+    height: 24px;
+    font-size: .9em;
+    padding: .8em;
+    min-width: 0 !important;
+}
+
+.aa-action-button[disabled="disabled"] {
+    opacity: 0.3;
+    user-select: none;
+    pointer-events: none;
+}

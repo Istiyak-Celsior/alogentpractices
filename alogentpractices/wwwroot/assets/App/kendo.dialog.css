@@ -1,0 +1,17 @@
+/* 
+ * kendo.confirm Styles
+ */
+div[data-role=confirm] {
+    font-size: 10pt;
+    max-width: 640px;
+}
+
+
+
+.k-window.k-alert {
+    max-width: 50%;
+}
+
+.k-custom-dialog {
+    max-width: 768px;
+}

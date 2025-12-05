@@ -1,0 +1,218 @@
+section {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    display: table;
+}
+
+#grid-header {
+    display: none;
+}
+
+section#grid-header > div {
+    width: 40%;
+    float: left;
+}
+
+section#grid-header > div:last-child {
+    width: 60%;
+    text-align: right;
+    height: 35px;
+}
+
+section#grid-header > div > ul#aa-button-wrapper {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+
+section#grid-header > div > ul#aa-button-wrapper > li {
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    padding-left: 12px;
+}
+
+section#grid-header > div > ul#aa-button-wrapper > li:first-child {
+    padding-left: 0;
+}
+
+table > tbody > tr > td:nth-child(10) {
+    width: 100%;
+    text-align: center;
+}
+
+table > tbody > tr > td:nth-child(10) > .aa-command-link {
+    padding: 0;
+}
+
+.aa-disabled {
+    color: #B7B7B7;
+}
+
+.aa-disabled.pl {
+    margin-left: 5px;
+}
+
+span.badge.disabled {
+    background-color: #E1E1E1;
+}
+
+span.badge.disabled:hover {
+    background-color: #E1E1E1;
+}
+
+/* FONT AWESOME STATUS ICONS */
+.aa-status-yes,
+.aa-status-no,
+.aa-status-pending,
+.aa-status-refresh {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.aa-status-pending {
+    color: #F1C40F
+}
+
+.aa-status-refresh {
+    color: #40B2E1
+}
+
+span.badge {
+    background-color: #7AA6BD;
+    padding: 2px 5px;
+    color: #FFF;
+    font-weight: bold;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+    font-size: 11px;
+}
+
+span.badge:hover {
+    background-color: #8FB6CA;
+}
+
+.aa-qc-badge-color {
+    color: #7AA6BD;
+}
+
+span.aa-icon-spacer {
+    display: inline-block;
+    width: 15px;
+    padding-right: 6px;
+}
+
+span.aa-icon-spacer.qc-status {
+    display: inline-block;
+    width: auto;
+    padding-right: 1px;
+}
+
+#grid-wrapper {
+    display: none;
+}
+
+#aa-result-summary > table > tbody > tr > td {
+    padding-right: 6px;
+}
+
+#aa-result-summary > table > tbody > tr > td:nth-child(1){
+    text-align: right;
+}
+
+td.aa-align-center {
+    text-align: center !important;
+}
+
+table > thead > tr > th:nth-child(7),
+table > tbody > tr > td:nth-child(7) {
+    width: 55px;
+    min-width: 55px;
+}
+
+table > tbody > tr > td:nth-child(6),
+table > tbody > tr > td:nth-child(7),
+table > tbody > tr > td:nth-child(8) {
+    text-align: center !important;
+}
+
+.k-grid td {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#aa-result-summary > table > tbody > tr > td:nth-child(odd) {
+    color: #7D7D7D;
+}
+
+#info-wrapper {
+    padding: 5px 10px;
+    display: none;
+}
+
+#aa-result-summary,
+footer {
+    display: none;
+}
+
+a.change,
+a.change:visited,
+a.change:active {
+    color: darkorange;
+}
+
+/* KENDO GRID CHANGES */
+.k-grid-header th.k-header {
+    padding-left: 6px;
+}
+
+.k-grid td {
+    padding: 6px;
+}
+
+.k-grid-content.k-auto-scrollable {
+    height: 540px;
+}
+
+/* REMOVE EDITED FIELD RED TRIANGLE FLAG */
+.k-dirty {
+    display: none;
+}
+
+/* BEGIN: ENABLE WRAPPING ON KENDO GRID HEADER */
+.k-grid .k-grid-header .k-header .k-link {
+    height: auto;
+}
+
+.k-grid .k-grid-header .k-header {
+    white-space: normal;
+}
+/* END: ENABLE WRAPPING ON KENDO GRID HEADER */
+
+/* BEGIN: KENDO GRID ROW SELECTION */
+.k-grid tr.k-state-selected, .k-grid td.k-state-selected, .k-grid td.k-state-selected.k-state-focused {
+    background-color: #E1E1E1;
+    color: #444;
+}
+
+.k-grid td.k-state-selected, .k-grid tr.k-state-selected > td {
+    border-color: #CCC;
+}
+
+.k-grid td.k-state-selected:hover, .k-grid tr.k-state-selected:hover td {
+    background-color: #D2D2D2;
+}
+/* END: KENDO GRID ROW SELECTION */

@@ -1,0 +1,26 @@
+﻿div#aa-scrollable-content {
+    padding: 6px 0px;
+    height: 600px;
+    overflow-y: auto;
+}
+
+table#aa-shared-file-table {
+    width: 100%;
+}
+
+table#aa-shared-file-table > tbody > tr > td:nth-child(7),
+table#aa-shared-file-table > tbody > tr > td:nth-child(8) {
+    width: 50px;
+    text-align: center;
+    padding: 0 12px;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-child(7),
+.aa-kendo-grid > thead > tr > th:nth-child(8) {
+    text-align: center;
+    padding: 0 12px;
+}
+
+.sub-text {
+    margin: 6px 0;
+}

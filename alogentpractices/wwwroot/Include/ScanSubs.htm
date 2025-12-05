@@ -1,0 +1,19 @@
+<script LANGUAGE="JavaScript">
+   function ScanRequest(url){
+      try {
+         var obj = new ActiveXObject("AccuScanObject.AccuScanObject");
+         location = url + "&launcher=acculaunch&machinename=" + obj.MachineName;
+      }
+      catch(err) {
+         location = url + "&launcher=launchinie&machinename=";
+      }
+   }
+</script>
+<script type="text/vbscript">
+        Sub ScanStart(url,appFolder,dbLabel,scanQueueId)
+            Set obj = CreateObject("AccuScanObject.AccuScanObject")
+            obj.StartAccuScan appFolder, dbLabel, scanQueueId
+            Location.href = url
+        End Sub
+</script>
+

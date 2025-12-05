@@ -1,0 +1,39 @@
+﻿main h2 {
+    margin: 12px 0;
+}
+
+.account-letter-group {
+    background-color: #5E6C81;
+    color: #FFF;
+    font-family: Consolas, "Courier New";
+    padding: 1px 4px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-right: 6px;
+}
+
+.aa-kendo-grid {
+    margin-top: 17px;
+}
+
+.k-textbox.name {
+    width: 250px;
+}
+
+td .k-dropdown {
+    width: 200px;
+}
+
+td.dropdown250 .k-dropdown,
+li.dropdown250 .k-dropdown {
+    width: 250px;
+}
+
+span.k-tooltip {
+    margin-left: 0px;
+}
+
+.aa-horizontal-list > li {
+    padding-left: 10px;
+}

@@ -1,0 +1,71 @@
+﻿#content {
+    display: none;
+}
+
+footer {
+    display:none;
+}
+
+#loadingMessage {
+    text-align: center;
+    margin: 20px;
+}
+
+#defaultRegexContainer {
+    width: 100%;
+    margin-top: 7px;
+}
+
+#defaultRegexLabel {
+    margin-top: 20px;
+}
+
+#defaultRegexInput {
+    margin-top: 10px;
+    width: 545px;
+    background-color: #D9D9D9;
+}
+
+#updateSettingsButton {
+    margin: 5px 0 15px 0;
+}
+
+.aa-widget {
+    padding: 12px;
+}
+
+h2 {
+    padding: 12px 0;
+}
+
+h2.first {
+    padding-top: 0;
+}
+
+.k-grid .k-grid-toolbar .k-grid-add,
+.k-grid tbody .k-grid-edit,
+.k-grid tbody .k-grid-update,
+.k-grid tbody .k-grid-cancel,
+.k-grid tbody .k-grid-delete {
+    min-width: 0;
+}
+
+.k-grid .k-grid-toolbar .k-grid-add .k-icon,
+.k-grid tbody .k-grid-edit .k-icon,
+.k-grid tbody .k-grid-update .k-icon,
+.k-grid tbody .k-grid-cancel .k-icon,
+.k-grid tbody .k-grid-delete .k-icon {
+    margin: 0;
+}
+
+.k-grid-edit-row {
+    height: 128px;
+}
+
+.aa-widget-description {
+    margin-bottom: 12px;
+}
+
+.aa-widget-description h2 {
+    padding: 0 12px 12px 0;
+}

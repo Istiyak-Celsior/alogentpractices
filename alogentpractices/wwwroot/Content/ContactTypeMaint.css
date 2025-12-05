@@ -1,0 +1,8 @@
+﻿div.top {
+    margin-bottom: 12px;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-child(1),
+.aa-kendo-grid > thead > tr > th:nth-child(2) {
+    width: 7%;
+}

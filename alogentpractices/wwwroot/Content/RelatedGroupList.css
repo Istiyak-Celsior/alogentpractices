@@ -1,0 +1,57 @@
+﻿.aa-content-panel {
+    width: 100%;
+}
+
+.aa-content-panel > div {
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    width: 50%;
+    float: left;
+    display: table;
+}
+
+.aa-content-panel > div:last-child {
+    text-align: right;
+}
+
+.aa-content-panel > div:after {
+    clear: left;
+}
+
+#aa-add-button-wrapper {
+    margin-bottom: 12px;
+}
+
+#aa-debugging-wrapper {
+    padding-left: 12px;
+}
+
+.k-textbox {
+    width: 250px;
+}
+
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > tbody > tr > td:first-child,
+.aa-kendo-grid > thead > tr > th:nth-child(2),
+.aa-kendo-grid > tbody > tr > td:nth-child(2) {
+    width: 7%;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-child(4),
+.aa-kendo-grid > tbody > tr > td:nth-child(4) {
+    width: 10%;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}

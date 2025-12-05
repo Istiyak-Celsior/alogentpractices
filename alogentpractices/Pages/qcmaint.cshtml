@@ -1,0 +1,176 @@
+@page
+@model AlogentConversionWithAI.Pages.QcMaintModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "QC Transaction";
+}
+
+@section Styles {
+    @await Html.PartialAsync("_ThemeStylesModal")
+    <link rel="stylesheet" type="text/css" href="Content/QcMaint.css"/>
+}
+
+<main class="modal">
+    <form name="frmQCMaint" id="form-qc-maint" action="/QcMaintUpdate" method="post">
+        <input name="historyId" type="hidden" value="@Model.QcMaint.historyId" />
+        <input name="documentId" type="hidden" value="@Model.QcMaint.docId" />
+        <input name="descr" type="hidden" value="@Model.QcMaint.documentType" />
+        <input name="cust" type="hidden" value="@Model.QcMaint.customerName"/>
+
+        <div class="aa-qcmaint-body">
+            <h1>@Model.QcMaint.customerName > @Model.QcMaint.customerNumber</h1>
+            <div id="aa-view-document">
+                @if (Model.QcMaint.documentStatus == 2)
+                {
+                    @Html.Raw("&nbsp;")
+                }
+                else if (Model.QcMaint.docId != "" && Model.QcMaint.file != "" && Model.QcMaint.documentStatus == 1)
+                {
+                    if (Model.QcMaint.viewDocumentAccess.HasAccess)
+                    {
+                        <div class="aa-tab-display"><font><a href="@Model.QcMaint.viewDocumentUrl"><i class="aa-history-icon @Model.QcMaint.documentTypeIcon nb" title="Click Here to View Document" alt="View"></i></a><span class="aa-tab-label">@(Model.QcMaint.documentType + Model.QcMaint.historicalLabel)</span></font></div>
+                    }
+                    else
+                    {
+                        <div class="aa-tab-display"><font><i class="aa-history-icon lock fad fa-lock fa-fw aa-disabled" title="@Model.QcMaint.viewDocumentAccess.Reason" aria-hidden="true"></i><span class="aa-tab-label">@(Model.QcMaint.documentType + Model.QcMaint.historicalLabel)</span></font></div>
+                    }
+                }
+                else
+                {
+                    <div class="aa-tab-display"><font><i class="aa-history-icon fa fa-history" title="Document does not exist." alt="Document does not exist."></i><span class="aa-tab-label">@(Model.QcMaint.documentType + Model.QcMaint.historicalLabel)</span></font></div>
+                }
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Select QC Status</th>
+                            <th>Add Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="aa-pad-sm">
+                                    <input type="radio" class="k-radio" id="aa-approved" name="qcstatus" value="1"@Html.Raw(Model.QcMaint.qcSuccess) onclick="enableNotify(false)"/><label class="k-radio-label" for="aa-approved">Approved</label>
+                                </div>
+                                <div class="aa-pad-sm">
+                                    <input type="radio" class="k-radio" id="aa-rejected" name="qcstatus" value="2" @Html.Raw(Model.QcMaint.qcErrors) onclick="enableNotify(@Model.QcMaint.qcNotifyEnabled)" /><label class="k-radio-label" for="aa-rejected">Rejected</label>
+                                </div>
+                                <div class="aa-pad-sm">
+                                    <input type="radio" class="k-radio" id="aa-not-verified" name="qcstatus" value="0"@Html.Raw(Model.QcMaint.noQc) onclick="enableNotify(false)"/><label class="k-radio-label" for="aa-not-verified">Not Verified</label>
+                                </div>
+                            </td>
+                            <td>
+                                <textarea id="TextArea2" class="k-textbox" name="qccomm"></textarea>
+                                <div class="aa-display-notify">
+@if (Model.QcMaint.documentMissing == 0)
+{
+                                    <input class="k-checkbox" id="cbNotify" name="cbNotify" type="checkbox" @Html.Raw(Model.QcMaint.loaddisable) @Html.Raw(Model.QcMaint.loadcheck)/><label class="k-checkbox-label" for="cbNotify">Notify Author</label><span class="notify-help-icon @Model.QcMaint.qcInfoDisplay fas fa-question-circle aa-icon aa-color-info" title="@Model.QcMaint.qcInfo"></span>
+}
+&nbsp;
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>QC History</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <textarea class="k-textbox" id="TextArea1" name="qchist" readonly="readonly">@Model.QcMaint.qcHistory</textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="clearfix aa-qcmaint-button-wrapper">
+            <button type="button" class="k-button" id="busy-btn"></button>
+            <button type="button" class="k-button k-primary" id="update-btn">Update</button>
+            <a class="k-button" href="javascript:void(0);" onclick="parent.closeKendoDialog();">Cancel</a>
+
+        </div>
+        <input type="hidden" name="orgQcStatus" value="@Model.QcMaint.qcStatus"/>
+    </form>
+</main>
+
+@section Scripts {
+    @await Html.PartialAsync("_ThemeScriptsModal")
+    <script type="text/javascript">
+        $(function () {
+            $('#update-btn').click(function () {
+                /* DECLARE BUTTON CONTENT HTML CODE */
+                var notifying = '<i class="fas fa-cog fa-spin fa-fw"></i>&nbsp;Notifying';
+                var updating = '<i class="fas fa-cog fa-spin fa-fw"></i>&nbsp;Updating';
+
+                /* HIDE UPDATE BUTTON */
+                $('#update-btn').hide();
+
+                /* DISPLAY APPROPRIATE BUTTON BASED ON NOTIFY CHECKBOX SELECTION */
+                if ($('#cbNotify').prop('checked')) {
+                    $('#busy-btn').html(notifying).show();
+                } else {
+                    $('#busy-btn').html(updating).show();
+                }
+
+                /* SUBMIT FORM */
+                $('#form-qc-maint').submit();
+            })
+        })
+
+        function Start(page) {
+            var rndValue = Math.round(Math.random() * 10000);
+            window.open(page, "CtrlWindow_" + rndValue, "toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes");
+        }
+
+        function QC(page) {
+            var rndValue = Math.round(Math.random() * 10000);
+            window.open(page, "CtrlWindow_" + rndValue, "toolbar=false, height=400px, width=500px, left=100px, top=60px, focus=true");
+        }
+
+        function enableNotify(val) {
+            var checkbox       = document.getElementById("cbNotify");
+
+            if (val)
+                checkbox.checked = true;
+
+            checkbox.disabled = !val;
+            checkbox.checked = val;
+        }
+
+        function downloadFile(fileURL, fileName) {
+            if (!window.ActiveXObject) {
+                var save = document.createElement('a');
+                save.href = fileURL;
+                save.target = '_blank';
+
+                var filename = fileURL.substring(fileURL.lastIndexOf('/') + 1);
+                save.download = fileName || filename;
+
+                if (navigator.userAgent.toLowerCase().match(/(ipad|iphone|safari)/) && navigator.userAgent.search("Chrome") < 0) {
+
+                    document.location = save.href;
+
+                } else {
+                    evt = document.createEvent("MouseEvent");
+                    evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
+                    save.dispatchEvent(evt);
+                    (window.URL || window.webkitURL).revokeObjectURL(save.href);
+                }
+            }
+            else if (!!window.ActiveXObject && document.execCommand) {
+                var _window = window.open(fileURL, '_blank');
+                _window.document.close();
+                _window.document.execCommand('SaveAs', true, fileName || fileURL);
+                _window.close();
+            }
+        }
+    </script>
+}

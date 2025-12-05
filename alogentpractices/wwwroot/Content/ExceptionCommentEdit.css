@@ -1,0 +1,16 @@
+﻿.aa-title {
+    padding-left: 20px;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+#aa-exception-comment-textarea {
+    margin: 0px;
+    width: 100%;
+    height: 320px;
+}

@@ -1,0 +1,90 @@
+﻿.aa-active-task-dashboard-widget .aa-panel-table {
+    width: 100%;
+}
+
+.aa-active-task-dashboard-widget .aa-panel-table > tbody > tr {
+    height: 25px;
+}
+
+.aa-active-task-dashboard-widget .aa-no-results {
+    text-align: center;
+    font-weight: bold;
+}
+
+.aa-active-task-dashboard-widget .aa-panel-table > tbody > tr > td {
+    padding: 0 6px;
+    background-color: #FFF;
+    border-bottom: 1px #F5F5F5 solid;
+}
+
+.aa-active-task-dashboard-widget .aa-panel-table.credit > tbody > tr:nth-last-child(2) > td,
+.aa-active-task-dashboard-widget .aa-panel-table.lender > tbody > tr:nth-last-child(2) > td {
+    border-bottom: 1px #3B3B3B solid;
+}
+
+.aa-active-task-dashboard-widget .aa-panel-table > tbody > tr.aa-header > td {
+    background-color: #3B3B3B;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.aa-active-task-dashboard-widget .aa-panel-table > tbody > tr > td:last-child {
+    width: 50px;
+}
+
+.aa-active-task-dashboard-widget .aa-panel-table > tbody > tr > td.aa-tac {
+    padding: 0 6px;
+}
+
+.aa-active-task-dashboard-widget .aa-panel-table > tbody > tr.aa-header > td:last-child {
+    padding-left: 0;
+    padding-right: 6px;
+}
+
+.aa-active-task-dashboard-widget .aa-panel-table.accudoc > tbody > tr.aa-header > td:last-child {
+    padding-left: 6px;
+    padding-right: 0;
+}
+
+.aa-active-task-dashboard-widget .aa-exception-type-indent,
+.aa-active-task-dashboard-widget .aa-loan-indent > td:first-child {
+    padding-left: 20px !important;
+}
+
+.aa-active-task-dashboard-widget .aa-exception-def-indent > td:first-child {
+    padding-left: 40px !important;
+}
+
+.aa-active-task-dashboard-widget .aa-timer-name > td {
+    background-color: #8FB6CA !important;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.aa-active-task-dashboard-widget .aa-total > td {
+    text-align: right;
+    background-color: #F5F5F5 !important;
+}
+
+.aa-active-task-dashboard-widget .icon-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.aa-active-task-dashboard-widget .icon-list:after {
+    clear: left;
+}
+
+.aa-active-task-dashboard-widget .icon-list > li {
+    float: left;
+    padding-left: 6px;
+}
+
+.aa-active-task-dashboard-widget .icon-list > li:first-child {
+    padding-left: 0;
+}
+
+.aa-active-task-dashboard-widget.k-window-content main {
+    margin-right: 32px;
+}

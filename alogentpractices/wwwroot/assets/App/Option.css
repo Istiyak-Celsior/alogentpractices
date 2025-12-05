@@ -1,0 +1,25 @@
+.aa-option {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.aa-option .aa-option-label {
+    width: 150px;
+    display: block;
+    padding: 6px;
+    align-content: center;
+}
+
+.aa-option.aa-vertical {
+    flex-direction: column;
+}
+
+.aa-option.aa-vertical .aa-option-input {
+    padding-left: 6px;
+}
+
+.aa-option .aa-option-input {
+    flex: 1;
+    display: block;
+    align-content: center;
+}

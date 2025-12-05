@@ -1,0 +1,55 @@
+﻿.k-loading-image {
+    background-image: url(../Packages/kendo-ui/styles/Default/loading-image.gif);
+}
+
+.newupdate-container{
+    border-bottom:1px solid #ececec;
+}
+
+.newupdate{
+    font-family:'Segoe UI';
+    margin:24px 24px 0 24px;
+    padding:8px;
+    background-color:#f5f5f5;
+    border:1px solid #ececec;
+    border-left:4px solid green;
+    border-top-left-radius:2px;
+    border-bottom-left-radius:2px;
+    border-top-right-radius:6px;
+    border-bottom-right-radius:6px;
+}
+
+.newupdate.none {
+    border-left-color:limegreen;
+}
+
+.newupdate.critical {
+    border-left-color:red;
+}
+
+.newupdate.elevated {
+    border-left-color: #dcc272;
+}
+
+.newupdate .title{
+    font-weight:600;
+    font-size:12pt;
+}
+
+.newupdate .description{
+    display:block;
+    margin-top:4px;
+}
+
+.newupdate a:active,
+.newupdate a:visited,
+.newupdate a:link
+{
+    color: #003399;
+    text-decoration: none;
+}
+
+.newupdate a:link:hover
+{
+    color: #0066cc;
+}

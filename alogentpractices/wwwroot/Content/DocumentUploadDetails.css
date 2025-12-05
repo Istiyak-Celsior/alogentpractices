@@ -1,0 +1,11 @@
+﻿.aa-title {
+    padding-left: 20px;
+    min-width: 0;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}

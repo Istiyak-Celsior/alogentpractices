@@ -1,0 +1,85 @@
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+.file-wrapper a,
+.file-wrapper a:active,
+.file-wrapper a:visited,
+.file-wrapper a:link {
+    color: #7389AE;
+}
+
+.aa-widget {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 24px 24px;
+    background-color: #F5F5F5;
+    border: 1px #E5E5E5 solid;
+    min-height: 383px;
+}
+
+.aa-upload-nav-table,
+.aa-upload-folder {
+    width: 100%;
+}
+
+.aa-upload-nav-table {
+    border: 1px #E5E5E5 solid;
+}
+
+.aa-upload-folder {
+    border: 1px #F5F5F5 solid;
+}
+
+.aa-upload-nav-table > tbody > tr,
+.aa-upload-folder > tbody > tr {
+    height: 39px;
+}
+
+.aa-upload-nav-table > tbody > tr > td:first-child,
+.aa-upload-nav-table > tbody > tr > td:nth-child(2),
+.aa-upload-nav-table > tbody > tr > td:nth-child(3) {
+    width: 18px;
+    text-align: center;
+}
+
+.aa-upload-folder > tbody > tr > td:first-child,
+.aa-upload-folder > tbody > tr > td:nth-child(2) {
+    width: 18px;
+    text-align: center;
+    border-right: 1px transparent solid;
+}
+
+.aa-upload-folder > tbody > tr > td {
+    text-align: left;
+    font-size: 12px;
+    padding: 0 6px;
+}
+
+.aa-upload-nav-table > tbody > tr > td {
+    text-align: left;
+    font-size: 12px;
+    padding: 0 6px;
+    background-color: #FFF;
+}
+
+.aa-upload-nav-table > tbody > tr.header > td {
+    background-color: #FAFAFA;
+    text-align: left;
+    font-size: 12px;
+    color: #999;
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px;
+}
+
+.aa-upload-nav-table > tbody > tr.header > td:last-child {
+    border-right: none;
+}
+
+.aa-file-view-disabled {
+    opacity: .25;
+}

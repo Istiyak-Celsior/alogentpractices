@@ -1,0 +1,11 @@
+﻿.k-textbox {
+    width: 300px;
+}
+
+.k-textbox.code {
+    width: 150px;
+}
+
+.k-dropdown {
+    width: 300px;
+}

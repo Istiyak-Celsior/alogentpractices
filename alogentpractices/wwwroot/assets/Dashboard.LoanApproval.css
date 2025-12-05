@@ -1,0 +1,76 @@
+.aa-approval-dashboard-widget.aa-panel-table {
+    width: 100%;
+}
+
+.aa-approval-dashboard-widget.aa-panel-table > tbody > tr {
+    height: 25px;
+}
+
+.aa-approval-dashboard-widget .aa-no-results {
+    text-align: center;
+    font-weight: bold;
+}
+
+.aa-approval-dashboard-widget.aa-panel-table > tbody > tr > td {
+    padding: 0 6px;
+    background-color: #FFF;
+    border-bottom: 1px #F5F5F5 solid;
+}
+
+.aa-approval-dashboard-widget.aa-panel-table > tbody > tr.aa-header > td {
+    background-color: #3B3B3B;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.aa-approval-dashboard-widget.aa-panel-table > tbody > tr > td:last-child {
+    width: 125px;
+}
+
+.aa-approval-dashboard-widget.aa-panel-table > tbody > tr > td.aa-tac {
+    padding: 0 6px;
+}
+
+.aa-approval-dashboard-widget.aa-panel-table > tbody > tr.aa-header > td:last-child {
+    padding-left: 0;
+    padding-right: 6px;
+}
+
+.aa-approval-dashboard-widget .aa-exception-type-indent,
+.aa-approval-dashboard-widget .aa-loan-indent > td:first-child {
+    padding-left: 20px !important;
+}
+
+.aa-approval-dashboard-widget .aa-exception-def-indent > td:first-child {
+    padding-left: 40px !important;
+}
+
+.aa-approval-dashboard-widget .aa-timer-name > td {
+    background-color: #8FB6CA !important;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.aa-approval-dashboard-widget .aa-total > td {
+    text-align: right;
+    background-color: #F5F5F5 !important;
+}
+
+.aa-approval-dashboard-widget .icon-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.aa-approval-dashboard-widget .icon-list:after {
+    clear: left;
+}
+
+.aa-approval-dashboard-widget .icon-list > li {
+    float: left;
+    padding-left: 6px;
+}
+
+.aa-approval-dashboard-widget .icon-list > li:first-child {
+    padding-left: 0;
+}

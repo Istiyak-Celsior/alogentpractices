@@ -1,0 +1,84 @@
+﻿.common {
+    padding-left: 12px;
+}
+
+h2 {
+    margin-bottom: 12px;
+}
+
+.aa-exception-def-group {
+    padding: 12px;
+    border-left: 1px #CECECE solid;
+    border-right: 1px #CECECE solid;
+    border-bottom: 1px #CECECE solid;
+    background: #FFF;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.aa-exception-def-group table.aa-exception-wrapper {
+    width: 100%;
+}
+
+.aa-exception-def-group table.aa-exception-wrapper > tbody > tr {
+    height: 30px;
+    line-height: 30px;
+}
+
+.aa-exception-def-group table.aa-exception-wrapper > tbody > tr > td:first-child {
+    width: 24px;
+    text-align: center;
+}
+
+.aa-group-header-wrapper > td {
+    background-color: #F5F5F5;
+    border-bottom: 1px #FFF solid;
+}
+
+.aa-exception-def-list {
+    width: 100%;
+}
+
+.aa-exception-def-list > tbody > tr.aa-links > td:first-child {
+    text-align: left;
+}
+
+.aa-exception-def-list > tbody > tr.aa-header > td {
+    background-color: #3B3B3B;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.aa-exception-def-list > tbody > tr > td:first-child {
+    width: 2%;
+    text-align: center;
+}
+
+.aa-exception-def-list > tbody > tr > td:nth-child(2) {
+    width: 48%;
+    text-align: left;
+}
+
+.aa-exception-def-list > tbody > tr > td:nth-child(3),
+.aa-exception-def-list > tbody > tr > td:nth-child(4),
+.aa-exception-def-list > tbody > tr > td:nth-child(5),
+.aa-exception-def-list > tbody > tr > td:nth-child(6),
+.aa-exception-def-list > tbody > tr > td:nth-child(7) {
+    width: 10%;
+    text-align: center;
+}
+
+.scrollable-wrapper {
+    height: 600px;
+    overflow-y: auto;
+}
+
+main,
+footer {
+    display: none;
+}
+
+.k-loading-image {
+    background-image: url(../Packages/kendo-ui/styles/Default/loading-image.gif);
+}

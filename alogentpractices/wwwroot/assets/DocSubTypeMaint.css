@@ -1,0 +1,53 @@
+﻿.k-dropdown,
+.k-textbox {
+    width: 350px;
+}
+
+.k-textbox.large {
+    width: 600px;
+}
+
+div#aa-scrollable-content {
+    padding: 6px 0px;
+    height: 600px;
+    overflow-y: auto;
+}
+
+.aa-static-content{
+    padding-left: 12px;
+}
+
+table#aa-barcode-map-table > thead > tr > th:nth-child(1),
+table#aa-barcode-map-table > tbody > tr > td:nth-child(1) {
+    width: 40px;
+}
+
+.aa-new-barcode-textbox {
+    padding: 3px 0px;
+}
+
+table#aa-visibility-table > tbody > tr > td:nth-child(1),
+table#aa-visibility-table > tbody > tr > td:nth-child(2) {
+    width: 5px;
+}
+
+table#aa-definition-table > tbody > tr > td:nth-child(4),
+table#aa-definition-table > tbody > tr > td:nth-child(6) {
+    width: 40px;
+    text-align: center;
+}
+
+a.k-button.k-add {
+    background-color: #fdbdc9;
+}
+
+a.k-button.k-edit {
+    background-color: #a2e080;
+}
+
+a.k-button.k-default {
+    background-color: #FFF;
+}
+.aa-static-button:hover {
+    cursor: default;
+}

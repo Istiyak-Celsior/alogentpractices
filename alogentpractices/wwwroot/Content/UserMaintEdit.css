@@ -1,0 +1,85 @@
+.aa-title h2 {
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.k-textbox {
+    width: 300px;
+}
+
+.k-textbox.path {
+    width: 500px;
+}
+
+.k-dropdown {
+    width: 250px;
+}
+
+h2.tab-title {
+    margin-bottom: 11px;
+}
+
+.head-background {
+    background-color: #EEE !important;
+}
+
+.head-space {
+    background-color: #FFF !important;
+}
+
+/* The following adjusts the switch styling from the defaults */
+.km-switch-background {
+    background-color: lightgrey;
+}
+
+.km-switch-handle {
+    color: #5FB662;
+}
+.km-switch-off .km-switch-container {
+    background-color: #808080;
+}
+
+.km-switch-on .km-switch-container {
+    background-color: #5FB662;
+}
+
+.km-switch-label-off,
+.km-switch-label-on {
+    color: #ffffff;
+}
+
+.km-switch-container {
+    border-color: #FFF !important;
+}
+
+.aa-panel {
+    width: 100%;
+}
+
+.aa-panel > div {
+    font-weight: bold;
+    width: 35%;
+    float: left;
+    display: table;
+}
+
+.aa-panel > div:last-child {
+    width: 65%;
+}
+
+.aa-panel > div:after {
+    clear: left;
+}
+
+.aa-kendo-grid.bank-security > thead > tr > th:nth-child(2),
+.aa-kendo-grid.bank-security > thead > tr > th:nth-child(3),
+.aa-kendo-grid.bank-security > thead > tr > th:nth-child(4),
+.aa-kendo-grid.bank-security > tbody > tr > td:nth-child(2),
+.aa-kendo-grid.bank-security > tbody > tr > td:nth-child(3),
+.aa-kendo-grid.bank-security > tbody > tr > td:nth-child(4) {
+    width: 20%;
+}
+
+.aa-two-column-form-table.scan-module > tbody > tr > td:first-child {
+    width: 250px;
+}

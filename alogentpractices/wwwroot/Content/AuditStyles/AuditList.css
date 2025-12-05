@@ -1,0 +1,56 @@
+﻿#audit-list {
+    padding: 12px 25px;
+}
+
+/* KENDO GRID STYLING */
+.aa-kendo-grid {
+    width: 100%;
+    border: 1px #E5E5E5 solid;
+    box-sizing: border-box;
+}
+
+.aa-kendo-grid > thead > tr {
+    height: 39px;
+}
+
+.aa-kendo-grid > thead > tr > th {
+    background-color: #FAFAFA;
+    text-align: left;
+    font-size: 12px;
+    color: #999;
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px 0 12px;
+}
+
+.aa-kendo-grid > thead > tr > th.aa-tac {
+    padding: 0 6px;
+}
+
+.aa-kendo-grid > thead > tr > th:last-child {
+    border-right: 0;
+}
+
+.aa-kendo-grid > tbody > tr {
+    height: 40px;
+}
+
+.aa-kendo-grid > tbody > tr > td {
+    background-color: #FFF;
+    text-align: left;
+    font-size: 12px;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px 0 12px;
+}
+
+.aa-kendo-grid > tbody > tr:hover > td {
+    background-color: #EAEAEA;
+}
+
+.aa-kendo-grid > tbody > tr > td.aa-tac {
+    padding: 0 6px;
+}
+
+.aa-kendo-grid > tbody > tr:last-child > td {
+    border-bottom: 0;
+}

@@ -1,0 +1,35 @@
+﻿div.aa-checklist-row {
+    height: 25px;
+    padding-left: 25px;
+}
+
+.k-button:disabled.k-button:hover {
+    color: #999999;
+    background-color: #fafafa;
+    border-color: #fafafa;
+}
+
+/* Original in page styling */
+.status-alert {
+    border: 1px solid #E5E5E5;
+    padding: 10px 5px;
+    background: #F5F5F5;
+}
+
+#warning-wrapper {
+width: 100%;
+display: table-row
+}
+
+#warning-wrapper div {
+    float: left;
+}
+
+#warning-wrapper div:last-child {
+    padding-left: 10px;
+    font-size: 24px;
+    color: #444;
+    font-weight: bold;
+    line-height: 33px;
+}
+

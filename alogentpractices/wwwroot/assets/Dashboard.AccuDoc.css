@@ -1,0 +1,33 @@
+.aa-accudoc-dashboard-widget.aa-panel-table {
+    width: 100%;
+}
+
+.aa-accudoc-dashboard-widget.aa-panel-table > tbody > tr {
+    height: 25px;
+}
+
+.aa-accudoc-dashboard-widget .aa-no-results {
+    text-align: center;
+    font-weight: bold;
+}
+
+.aa-accudoc-dashboard-widget.aa-panel-table > tbody > tr > td {
+    padding: 0 6px;
+    background-color: #FFF;
+    border-bottom: 1px #F5F5F5 solid;
+}
+
+.aa-accudoc-dashboard-widget.aa-panel-table > tbody > tr.aa-header > td {
+    background-color: #3B3B3B;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.aa-accudoc-dashboard-widget.aa-panel-table > tbody > tr > td:last-child {
+    width: 45%;
+}
+
+.aa-accudoc-dashboard-widget.aa-panel-table > tbody > tr.aa-header > td:last-child {
+    padding-left: 6px;
+    padding-right: 6px;
+}

@@ -1,0 +1,49 @@
+﻿.aa-title {
+    padding-left: 0;
+}
+
+.aa-title > div {
+    height: 45px;
+    line-height: 45px;
+    padding-left: 15px;
+}
+
+.aa-title > div:last-child {
+    width: auto;
+    float: inherit;
+    text-align: inherit;
+}
+
+.aa-pad-lg {
+    padding: 25px 60px;
+}
+
+.aa-radio-row {
+    padding-bottom: 20px;
+}
+
+.button-wrapper {
+    display: table;
+    width: 100%;
+    text-align: center;
+}
+
+.button-wrapper > ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+.button-wrapper > ul > li {
+    float: left;
+}
+
+.button-wrapper > ul > li:not(:first-child) {
+    padding-left: 18px;
+}
+
+#error-message-wrapper {
+    border: 1px #FF3958 solid;
+    border-radius: 4px;
+}

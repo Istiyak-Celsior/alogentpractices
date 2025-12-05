@@ -1,0 +1,49 @@
+div[data-role=tabstrip].aa-widget div[role=tabpanel] {
+    padding: 0;
+}
+
+.aa-widget .k-tabstrip > .k-content {
+    padding: 0;
+    margin: 0;
+    overflow: inherit;
+}
+
+.aa-widget .k-tabstrip-items {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.aa-widget .k-tabstrip.k-header,
+.aa-widget .k-tabstrip-items .k-item {
+    background-color: transparent;
+    margin-right: 1px;
+}
+
+.aa-widget .k-tabstrip-items .k-item .k-link {
+    color: black;
+    padding: 6px 12px;
+    color: #696969;
+}
+
+.aa-widget div[role="tabpanel"].k-content {
+    background: transparent;
+}
+.aa-widget .k-tabstrip .k-content {
+    background: transparent;
+}
+
+.aa-widget .k-tabstrip-items .k-item.k-state-active {
+    background: #e6e6e6;
+    border-bottom-color: #e6e6e6;
+    border-radius: 4px 4px 0 0;
+}
+
+.aa-widget .k-tabstrip-items .k-item.k-state-hover {
+    background: #ececec;
+    border-bottom-color: #e6e6e6;
+    border-top-color: transparent;
+    border-radius: 4px 4px 0 0;
+}
+
+.aa-widget .k-tabstrip:focus {
+    box-shadow: none;
+}

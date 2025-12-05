@@ -1,0 +1,27 @@
+﻿.aa-panel {
+    width: 100%;
+}
+
+.aa-panel > div {
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    width: 50%;
+    float: left;
+    display: table;
+    margin-bottom: 12px;
+}
+
+.aa-panel > div:after {
+    clear: left;
+}
+
+.aa-two-column-form-table > tbody > tr > td:first-child {
+    width: 120px;
+}
+
+.aa-scrollable-content {
+    width: 100%;
+    height: 425px;
+    overflow-y: auto;
+}

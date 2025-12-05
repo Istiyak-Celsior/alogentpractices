@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<panel xmlns="" id="" title="Quick Search">
+  <!--define quick search panel-->
+  <description>Quick Search Panel</description>
+  <defaults>
+    <position panelnumber="1" pagenumber="1"></position>
+  </defaults>
+  <file>dashpanelquicksearch.asp</file>
+</panel>

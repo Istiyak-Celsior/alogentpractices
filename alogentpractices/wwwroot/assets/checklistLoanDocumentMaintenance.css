@@ -1,0 +1,52 @@
+﻿.aa-title {
+    padding-left: 0;
+}
+
+.aa-title > div {
+    height: 45px;
+    line-height: 45px;
+    padding-left: 15px;
+}
+
+.aa-title > div:last-child {
+    width: auto;
+    float: inherit;
+    text-align: inherit;
+}
+
+
+#account-type-list > div {
+    padding: 6px 0 6px 6px;
+    background-color: #F5F5F5;
+    border-top: #CECECE 1px solid;
+    border-left: #CECECE 1px solid;
+    border-right: #CECECE 1px solid;
+}
+
+#account-type-list > div:last-child {
+    border-bottom: #CECECE 1px solid;
+}
+
+#account-type-list > div:nth-child(even) {
+    background-color: #E5E5E5;
+}
+
+.button-wrapper {
+    padding: 0 18px 12px 18px;
+    text-align: right;
+}
+
+.button-wrapper > ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+.button-wrapper > ul > li {
+    float: left;
+}
+
+.button-wrapper > ul > li:not(:first-child) {
+    padding-left: 6px;
+}

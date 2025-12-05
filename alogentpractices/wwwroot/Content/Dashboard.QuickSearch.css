@@ -1,0 +1,19 @@
+div.aa-search-dashboard-widget-item {
+    padding-bottom: 8px;
+}
+
+div.aa-search-dashboard-widget-item > label {
+    display: block;
+    font-weight: bold;
+}
+
+div.aa-search-dashboard-widget-item > .k-autocomplete.k-state-default,
+div.aa-search-dashboard-widget-item > .k-textbox > input, .k-autocomplete .k-input {
+    width: 100%;
+}
+
+.aa-button-wrapper {
+    text-align: right;
+    padding-bottom: 6px;
+    box-sizing: border-box;
+}

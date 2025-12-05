@@ -1,0 +1,8 @@
+﻿.aa-help-header {
+    margin-bottom: 12px;
+}
+
+.aa-scrollable-wrapper {
+    height: 400px;
+    overflow-y: auto;
+}

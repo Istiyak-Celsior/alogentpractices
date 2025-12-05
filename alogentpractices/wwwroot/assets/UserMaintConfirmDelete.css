@@ -1,0 +1,36 @@
+﻿.aa-panel {
+    width: 100%;
+}
+
+.aa-panel > div {
+    width: 35%;
+    float: left;
+    display: table;
+}
+
+.aa-panel > div:last-child {
+    width: 65%;
+}
+
+.aa-panel > div:after {
+    clear: left;
+}
+
+.k-dropdown {
+    width: 250px;
+}
+
+.aa-kendo-grid.exceptions {
+    width: 99%;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.scrollable-wrapper {
+    height:400px;
+    overflow:auto;
+    margin-bottom: 12px;
+}

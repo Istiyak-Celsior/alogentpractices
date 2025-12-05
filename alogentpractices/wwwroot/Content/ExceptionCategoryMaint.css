@@ -1,0 +1,16 @@
+﻿.k-textbox.name {
+    width: 300px;
+}
+
+.k-textbox.description {
+    width: 500px;
+}
+
+.aa-button-wrapper {
+    clear: none;
+}
+
+.aa-button-wrapper > ul {
+    float: none;
+    clear: none;
+}

@@ -1,0 +1,24 @@
+﻿.aa-audit-button-wrapper {
+    margin-bottom: 12px;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-child(1),
+.aa-kendo-grid > thead > tr > th:nth-child(2),
+.aa-kendo-grid > thead > tr > th:nth-child(3),
+.aa-kendo-grid > tbody > tr > td:nth-child(1),
+.aa-kendo-grid > tbody > tr > td:nth-child(2),
+.aa-kendo-grid > tbody > tr > td:nth-child(3) {
+    width: 5%;
+}
+
+.aa-kendo-grid > thead > tr > th:last-child,
+.aa-kendo-grid > tbody > tr > td:last-child {
+    width: 300px;
+}
+
+.aa-audit-description {
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

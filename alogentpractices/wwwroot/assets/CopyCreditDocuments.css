@@ -1,0 +1,68 @@
+﻿.aa-title {
+    padding-left: 20px;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+}
+
+.aa-two-column-form-table > tbody > tr > td:first-child {
+    width: 180px;
+}
+
+#processing-wrapper {
+    height: 70vh;
+    max-height: 70vh;
+    width: 100%;
+}
+
+#processing-wrapper > div {
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#processing-wrapper > div > i.fa {
+    font-size: 40px;
+}
+
+div.resultSummary{
+    padding: 5px 10px;
+}
+
+div.dhxcombo_dhx_skyblue div.dhxcombo_select_button div.dhxcombo_select_img {
+    background-image: none;
+    left: 7px;
+    top: 4px;
+}
+
+#resultWarningMessage {
+    padding-bottom: 12px;
+}
+
+#errorDetails {
+    box-sizing: border-box;
+    overflow-y: auto;
+    width: 100%;
+    margin: 6px 0 0 0;
+    display: inline-block;
+    border: 1px #FF3958 solid;
+    max-width: 576px;
+    height: 126px;
+}
+
+#errorDetails > div {
+    width: 100%;
+    display: inline-block;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+
+.description-text {
+    margin-bottom: 12px;
+}

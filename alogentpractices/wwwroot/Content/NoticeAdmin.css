@@ -1,0 +1,184 @@
+h2 {
+    padding: 6px 0;
+    text-transform: uppercase;
+    color: #808080ff;
+}
+
+#aa-noticeadmin {
+    padding: 0;
+}
+
+#aa-noticeadmin-tabstrip > div[role=tabpanel] {
+    background-color: #e1e3e5;
+    padding: 12px;
+}
+
+#aa-noticeadmin-tabstrip div[role=tabpanel] .aa-widget:last-child {
+    margin-bottom: 0;
+}
+
+.aa-noticeadmin-setlist {
+    width: 300px;
+    border: none;
+}
+
+.aa-noticeadmin-setitem {
+    display: flex;
+    padding: 6px 6px;
+    flex-direction: row;
+    border-radius: 3px;
+}
+
+.aa-noticeadmin-setitem-text {
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+}
+
+.aa-noticeadmin-setitem * {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.aa-noticeadmin-setitem:hover {
+    background-color: #ececec;
+    cursor: default;
+}
+
+.aa-noticeadmin-setitem.k-state-selected .fa {
+    color: #ffffff;
+}
+
+.aa-noticeadmin-setitem.k-state-selected:hover {
+    background-color: #99cde7;
+}
+
+#aa-noticeadmin-setadmin {
+    display: flex;
+    flex-direction: row;
+}
+
+#aa-noticeadmin-setadmin .aa-left {
+    flex: 0;
+    margin-right: 12px;
+}
+
+#aa-noticeadmin-setadmin .aa-right {
+    flex: 1;
+}
+
+#aa-noticeadmin-setadmin .aa-right .aa-widget {
+    margin-bottom: 12px;
+}
+
+.noticelettertemplate-stagelist tr.k-state-drag,
+.noticelettertemplate-stagelist tr.k-state-drag:hover,
+.noticelettertemplate-stagelist tr.k-state-drag:hover td {
+    opacity: 0.75;
+}
+
+.noticelettertemplate-stagelist .k-state-dragging tr:hover,
+.noticelettertemplate-stagelist .k-state-dragging tr:hover td {
+    background-color: transparent;
+}
+
+.noticelettertemplate-stage-draghandle {
+    color: #999;
+}
+
+.noticelettertemplate-stage-draghandle:hover {
+    color: #99cde7;
+}
+
+.k-dialog .confirm-stageorder-dialog {
+    padding: 32px;
+}
+
+.k-dialog .confirm-stageorder-dialog p {
+    font-size: 10pt;
+}
+
+.aa-noticeplaceholders-label {
+    font-size: 1.25em;
+    color: #696969;
+    border-bottom: 1px solid #ececec;
+    display: block;
+    width: auto !important;
+}
+
+.aa-noticeplaceholder-group:first-child .aa-noticeplaceholder-groupheader {
+    margin-top: 0;
+}
+
+.aa-option.aa-noticeplaceholder-group {
+    margin: 0;
+    border-bottom: 1px solid #ececec;
+    padding: 6px 0;
+}
+
+.aa-option-label.aa-noticeplaceholder-groupheader {
+    display: block;
+    padding: 4px 0;
+    font-weight: bold;
+}
+
+.templateeditor-footer {
+    background-color: #f2f2f2;
+    border-color: rgb(230, 230, 230);
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.templateeditor-footer > * {
+    margin-right: 12px;
+}
+
+
+template-placeholder {
+    background-color: transparent;
+    border-color: #999;
+    border-style: dashed;
+    border-width: 1px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+    margin: 1px;
+    padding: 0 4px;
+}
+template-placeholder[class="System"][label="Obsolete"] {
+    border-color: var(--app-color-danger);
+}
+
+template-placeholder[class="System"][label="Obsolete"] .aa-noticeplaceholder-group,
+template-placeholder[class="System"][label="Obsolete"] .aa-noticeplaceholder-label {
+    color: var(--app-color-danger);
+}
+
+.aa-noticeplaceholder-group {
+    border-radius: 2px 0 0 2px;
+    color: #6d6d6d;
+}
+
+.aa-noticeplaceholder-label {
+    border-radius: 0 2px 2px 0;
+    color: #6e6e6e;
+}
+
+.templateeditor-command .k-dropdown-wrap .k-input {
+    text-indent: 0;
+    display: flex;
+    align-items: center;
+    padding: 6px 0 6px 8px;
+    line-height: inherit;
+}
+
+.placeholderslist-option .fa,
+.placeholderslist-option .fad,
+.placeholderslist-option .far {
+    font-size: 1.75em;
+}

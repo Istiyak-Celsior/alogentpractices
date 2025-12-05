@@ -1,0 +1,275 @@
+#uxUploadFileWrapper {
+    display: inline-block;
+}
+
+#uxDeleteAllInFolder {
+    float: right;
+}
+
+#uxDeleteAllInFolder a,
+#uxDeleteAllInFolder a:visited,
+#uxDeleteAllInFolder a:active {
+    color: #777;
+    text-decoration: none;
+}
+
+#uxDeleteAllInFolder a:hover {
+    color: #999;
+    text-decoration: underline;
+}
+
+.uxButtonWrapperSelect,
+.uxButtonWrapperUpload {
+    float: right;
+    margin-top: 6px;
+    width: 100%;
+}
+
+.uxButtonWrapperSelect tr td,
+.uxButtonWrapperUpload tr td {
+    padding: 0px 3px;
+}
+
+.merge-button-wrapper {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    float: right;
+}
+
+.merge-button-wrapper > li {
+    /*height: 40px;*/
+    /*line-height: 40px;*/
+    float: left;
+    padding-left: 6px;
+}
+
+.merge-button-wrapper > li:first-child {
+    padding-left: 0;
+}
+
+.uxButtonWrapperUpload {
+    display: none;
+}
+
+#uxUploadFileDescription {
+    padding: 10px 0;
+}
+
+#uxFileListWrapper {
+    max-height: 280px; /* 329 */
+    min-height: 280px;
+    height: 280px;
+    overflow: auto;
+}
+
+#uxFileBreadcrumb {
+    border: 1px #DDD solid;
+    margin-bottom: 5px;
+    padding: 0 5px;
+    background-color: #F5F5F5;
+}
+
+#uxUploadControl {
+    border: 1px #DDD solid;
+    padding: 10px;
+    background-color: #F5F5F5;
+    display: inline-block;
+}
+
+#uxUploadControl input[type=file] {
+    width: 600px;
+}
+
+#uxFileBreadcrumbList {
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+    margin: 0;
+    width: 100%;
+}
+
+#uxFileBreadcrumbList li {
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    padding-left: 5px;
+}
+
+#uxFileBreadcrumbList li:last-child {
+    float: right;
+    padding-right: 5px;
+}
+
+#uxFileBreadcrumbList li img {
+    margin-top: 4px;
+}
+
+.breadcrumb-chevron {
+    margin: 8px 5px 0 7px;
+    color: #999;
+    font-size: 10px !important;
+}
+
+.breadcrumb-up {
+    margin-top: 4px;
+    color: #000;
+    font-size: 16px !important;
+}
+
+#uxMergeRadioButtonsWrapper,
+#uxClientMergeRadioButtonsWrapper {
+    display: none;
+}
+
+#uxMergeRadioButtons,
+#uxClientMergeRadioButtons {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#uxMergeRadioButtons li,
+#uxClientMergeRadioButtons li {
+    float: left;
+    padding-top: 8px;
+}
+
+#uxMergeRadioButtons li:not(:first-child):nth-child(odd),
+#uxClientMergeRadioButtons li:not(:first-child):nth-child(odd) {
+    padding-left: 10px;
+}
+
+#uxMergeRadioButtons li input[type=radio],
+#uxClientMergeRadioButtons li input[type=radio] {
+    margin: 0 5px 0 0;
+}
+
+#errLabel {
+    display: block;
+    text-align: left;
+    line-height: 16px;
+}
+
+#errDiv {
+    padding: 6px;
+    border: 1px #f3c1c1 solid;
+}
+
+.loan-link {
+    color: #569134 !important;
+}
+
+.client-save-wrapper,
+.server-save-wrapper {
+    display: none;
+}
+
+.saving-list,
+.saving-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.saving-list li,
+.saving-list li {
+    float: left;
+    padding-left: 10px;
+}
+
+
+/* FROM UploadNavFiles.css */
+.aa-upload-nav-table,
+.aa-upload-folder {
+    width: 100%;
+}
+
+.aa-upload-nav-table {
+    border: 1px #E5E5E5 solid;
+}
+
+.aa-upload-folder {
+    border: 1px #F5F5F5 solid;
+}
+
+.aa-upload-nav-table > tbody > tr,
+.aa-upload-folder > tbody > tr {
+    height: 39px;
+}
+
+.aa-upload-nav-table > tbody > tr > td:first-child,
+.aa-upload-nav-table > tbody > tr > td:nth-child(2),
+.aa-upload-nav-table > tbody > tr > td:nth-child(3),
+.aa-upload-nav-table > tbody > tr > td:nth-child(4) {
+    width: 18px;
+    text-align: center;
+}
+.aa-upload-nav-table > tbody > tr > td:nth-child(5),
+.aa-upload-nav-table > tbody > tr > td:nth-child(6)
+{
+    width: 250px;
+}
+
+.aa-upload-nav-table > tbody > tr > td:nth-child(7)
+{
+    width: 125px;
+}
+
+.aa-upload-nav-table > tbody > tr > td:last-child
+{
+    width: 75px;
+}
+
+.aa-upload-folder > tbody > tr > td:first-child,
+.aa-upload-folder > tbody > tr > td:nth-child(2) {
+    width: 18px;
+    text-align: center;
+    border-right: 1px transparent solid;
+}
+
+.aa-upload-folder > tbody > tr > td {
+    text-align: left;
+    font-size: 12px;
+    padding: 0 6px;
+}
+
+.aa-upload-nav-table > tbody > tr > td {
+    text-align: left;
+    font-size: 12px;
+    padding: 0 6px;
+    background-color: #FFF;
+}
+
+.aa-upload-nav-table > tbody > tr.header > td {
+    background-color: #FAFAFA;
+    text-align: left;
+    font-size: 12px;
+    color: #999;
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px;
+}
+
+.aa-upload-nav-table > tbody > tr.header > td:last-child {
+    border-right: none;
+}
+
+.aa-button-wrapper > table {
+    float: right;
+}
+
+#aa-upload-tabstrip {
+    border: 1px #E5E5E5 solid;
+    min-height: 398px;
+    max-height: 398px;
+}
+
+.k-tabstrip .k-content.k-state-active {
+    min-height: 331px;
+    max-height: 331px;
+}
+
+.aa-disabled {
+    opacity: .25;
+}

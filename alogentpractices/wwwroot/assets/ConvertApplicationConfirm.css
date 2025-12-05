@@ -1,0 +1,34 @@
+﻿.aa-title {
+    padding-left: 20px;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+.aa-button-wrapper {
+    width: 100%;
+    display: table;
+    margin-top: 12px;
+    clear: right;
+}
+
+.aa-button-wrapper > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+    clear: left;
+}
+
+.aa-button-wrapper > ul > li {
+    padding-left: 6px;
+    float: left;
+}
+
+.aa-button-wrapper > ul > li:first-child {
+    padding-left: 0;
+}

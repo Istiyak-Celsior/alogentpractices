@@ -1,0 +1,21 @@
+﻿.k-dropdown,
+.k-textbox {
+    width: 250px;
+}
+
+.k-checkbox-label.aa-italic-label {
+    font-style: italic;
+}
+
+.aa-checkbox-indent {
+    padding-left: 20px;
+}
+
+div.aa-error-message {
+    display: block;
+    width: 98%;
+    margin: 6px 0px;
+    background: #ebcccc;
+    border: 1px #bbb6b6 solid;
+    padding: 5px 10px;
+}

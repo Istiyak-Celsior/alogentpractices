@@ -1,0 +1,11 @@
+﻿.k-textbox {
+    width: 250px;
+}
+
+.k-textbox.code {
+    width: 120px;
+}
+
+div#aa-background {
+    width: 50px
+}

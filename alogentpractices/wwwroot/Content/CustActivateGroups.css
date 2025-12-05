@@ -1,0 +1,80 @@
+﻿.aa-title {
+    padding-left: 20px;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+.aa-tac {
+    text-align: center !important;
+}
+
+.aa-kendo-grid {
+    border: 0;
+}
+
+.aa-button-wrapper.top {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.aa-button-wrapper.top > ul {
+    float: inherit;
+}
+
+.aa-button-wrapper > ul > li {
+    line-height: 35px;
+    height: 35px;
+}
+
+.aa-grid-wrapper {
+    display: block;
+    overflow: auto;
+    height: 428px;
+    border: 1px #E5E5E5 solid;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.k-dropdown {
+    width: 90px;
+}
+
+.kendo-grid-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    clear: left;
+    display: table;
+}
+
+.kendo-grid-list > li {
+    float: left;
+    padding-left: 6px;
+    line-height: 32px;
+    height: 32px;
+}
+
+.kendo-grid-list > li:first-child {
+    padding-left: 0;
+}
+
+.fa-exclamation-triangle, .fa-question-circle,
+.fa-exclamation-triangle:hover, .fa-question-circle:hover {
+    cursor: default;
+}

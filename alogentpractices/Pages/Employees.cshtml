@@ -1,0 +1,62 @@
+﻿@page
+@model alogentpractices.Pages.EmployeesModel
+@using Newtonsoft.Json
+@using alogentpractices.Pages
+
+@{
+    ViewData["Title"] = "Employees";
+    var employeeJson = JsonConvert.SerializeObject(
+    Model.Employee.Select(e => new
+    {
+        employeeUid = e.EmployeeUid,
+        firstName = e.FirstName,
+        lastName = e.LastName,
+        email = e.Email,
+        mobile = e.Mobile
+    }));
+}
+
+<h1>Employees</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<button id="btn">My Button</button>
+<div id="employeeGrid"></div>
+
+<script>
+    var employees = @Html.Raw(employeeJson);
+    $("#btn").kendoButton({
+        icon: "pencil"
+    });
+
+    $(document).ready(function () {
+        $("#employeeGrid").kendoGrid({
+            dataSource: {
+                data: employees,
+                pageSize: 10
+            },
+            pageable: true,
+            sortable: true,
+            filterable: true,
+            columns: [
+                { field: "firstName", title: "First Name" },
+                { field: "lastName", title: "Last Name" },
+                { field: "email", title: "Email" },
+                { field: "mobile", title: "Mobile" },
+                {
+                    title: "Actions",
+                    template: function (dataItem) {
+                        const id = dataItem.employeeUid;
+                        return `
+                                            <a href='/Edit?id=${id}'>Edit</a> |
+                                            <a href='/Details?id=${id}'>Details</a> |
+                                            <a href='/Delete?id=${id}'>Delete</a>`;
+                    },
+                    width: 250
+                }
+            ]
+        });
+    });
+</script>

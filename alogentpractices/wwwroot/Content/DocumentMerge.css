@@ -1,0 +1,67 @@
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+/* FONT AWESOME STATUS ICONS */
+.aa-status-yes,
+.aa-status-no,
+.aa-status-pending,
+.aa-status-refresh {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.aa-status-pending {
+    color: #F1C40F
+}
+
+.aa-status-refresh {
+    color: #40B2E1
+}
+
+/* FONT AWESOME FILE TYPES */
+.fa-file-pdf {
+    color: #ED4F3F !important;
+}
+
+.fa-file-powerpoint {
+    color: #B7472A !important;
+}
+
+.fa-file-excel {
+    color: #217346 !important;
+}
+
+.fa-file-word {
+    color: #2B579A !important;
+}
+
+.fa-file-alt {
+    color: #E1E4E6 !important;
+}
+
+.fa-file-code {
+    color: #009586 !important;
+}
+
+.fa-file-image {
+    color: #F4B400 !important;
+}
+
+.fa-file {
+    color: #3B3B3B !important;
+}
+
+.aa-disabled {
+    color: #ECECEC;
+}

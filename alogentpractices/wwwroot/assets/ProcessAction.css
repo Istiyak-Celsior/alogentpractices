@@ -1,0 +1,34 @@
+﻿.aa-process-action-wrapper {
+    width: 100%;
+    height: 350px;
+    overflow: auto;
+}
+
+div.sectionHead {
+    padding: 3px;
+}
+
+div.aa-action-event-content {
+    padding: 3px 12px;
+}
+
+.aa-two-column-form-table.aa-user-assignment > tbody > tr > td:nth-child(1) {
+    width: 200px;
+}
+
+.k-dropdown {
+    width: 350px;
+}
+
+.k-textbox {
+    width: 600px;
+}
+
+.aa-icon-spacer {
+    padding-left: 6px;
+}
+
+#aa-action-processing {
+    display: none;
+    padding-right: 25px;
+}

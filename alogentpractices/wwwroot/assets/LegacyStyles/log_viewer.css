@@ -1,0 +1,223 @@
+﻿html {
+    font-family: 'Segoe UI';
+    font-size: 10pt;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.header {
+    background: #000496;
+}
+
+.progress {
+    margin-bottom: 9px !important;
+}
+
+.headerText {
+    background: #000496;
+    color: #ffffff;
+    padding: 4px 4px;
+}
+
+.log-options {
+    padding: 16px 12px 11px 12px;
+}
+
+.dashboard-health {
+    float: left;
+    padding-right: 32px;
+    margin-right: 32px;
+    border-right: 1px solid #ececec;
+    max-width: 500px;
+}
+
+#paging {
+    text-align: center;
+    border-top: 1px #efefef solid;
+    height: 57px;
+    background: #F5F5F5;
+}
+
+.pagination {
+    margin: 11px 0 0 0 !important;
+}
+
+.dashboard-filters {
+    color: lightgrey;
+    float: left;
+    padding-right: 2px;
+    margin-right: 2px;
+    border-right: 1px solid #ececec;
+    min-width:720px;
+    margin:5px !important;
+}
+
+#InfoEntries, #ErrorEntries, #WarningEntries {
+    font-size: 24px;
+    width: 100%;
+}
+
+#InfoEntries {
+    color: #52AA52;
+}
+
+#ErrorEntries {
+    color: red;
+}
+
+#WarningEntries {
+    color: #EFA231;
+}
+
+.dashboard-filter {
+    color: lightgrey;
+    float: left;
+    font-size: 16px;
+}
+
+.dashboard-show-hide {
+    float: right;
+}
+
+.left {
+    float:left;
+}
+
+.right {
+    float:right;
+}
+
+.pl {
+    padding-left: 5px;
+}
+
+.pr {
+    padding-right: 5px;
+}
+
+.pt {
+    padding-top: 5px;
+}
+
+.pb {
+    padding-bottom: 5px;
+}
+
+.pll {
+    padding-left: 10px;
+}
+
+.pl30 {
+    padding-left: 10px;
+}
+
+.prr {
+    padding-right: 10px;
+}
+
+.ptt {
+    padding-top: 10px;
+}
+
+.pbb {
+    padding-bottom: 10px;
+}
+
+table, td {
+    border: 1px solid #CCC;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+table.filter, td.filters {
+    border: 1px #FFF solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-top: 0;
+}
+
+th {
+    border-width: 0;
+    border-spacing: 0;
+}
+
+table.tablesorter {
+    font-family: arial;
+    background-color: #CDCDCD;
+    margin: 0 0 15px;
+    font-size: 8pt;
+    width: 100%;
+    text-align: left;
+}
+
+table.tablesorter thead tr th,
+table.tablesorter tfoot tr th {
+    background-color: #2167b3;
+    border: 1px solid #FFF;
+    color: #FFF;
+    font-size: 8pt;
+    padding:0 20px 0 5px;
+    text-align: left;
+}
+
+table.tablesorter thead tr .header {
+    background-image: url(bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+table.tablesorter tbody td {
+    color: #3D3D3D;
+    padding: 4px;
+    background-color: #FFF;
+    vertical-align: top;
+    font-size: 8pt;
+}
+
+table.tablesorter tbody tr.odd td {
+    background-color: #F0F0F6;
+}
+
+table.tablesorter thead tr .headerSortUp {
+    background-image: url(asc.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+ 
+table.tablesorter thead tr .noSort {
+background-color: #2165B5;
+background-image: none;
+}
+
+table.tablesorter thead tr .headerSortDown {
+    background-image: url(desc.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+    background-color: #2780e0;
+}
+
+a:link, a:active, a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#accusystems-logo {
+    background-color: #22419E;
+}
+
+#accusystems-logo:before {
+    content: url(../Content/Images/Nav/Logo.png);
+}

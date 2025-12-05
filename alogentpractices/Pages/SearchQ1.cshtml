@@ -1,0 +1,1518 @@
+﻿@page
+@using alogentpractices.Entities
+@using Newtonsoft.Json;
+@model alogentpractices.Pages.SearchQ1Model
+@{
+
+    ViewData["Title"] = "AccuAccount : Search";
+}
+<!-- #include file="include/adovbs.inc" -->
+<!-- #include file="include/dbopen.inc" -->
+<!-- #include file="include/security.inc" -->
+
+ <!-- #include file="include/common.inc" -->
+<!-- #include file="include/search_setup.inc" -->
+<!-- #include file="include/getBranchArray.inc" -->
+<!-- #include file="include/getFieldDefGroupArray.inc" -->
+<!-- #include file="include/getFieldDefinitions.inc" --> 
+
+<link rel="stylesheet" type="text/css" href="Content/Home.css" />
+
+@{
+    
+    string searchType = Request.Query["searchType"];
+    string nextSearchPage;
+    string searchTypeLabel;
+
+    if (searchType == "Expired")
+    {
+        nextSearchPage = "expiredq2";
+    }
+    else if (searchType == "Exception")
+    {
+        nextSearchPage = "exceptionq2";
+    }
+    else if (searchType == "Missing" || searchType == "Waived" || searchType == "Existing")
+    {
+        nextSearchPage = "searchq2";
+    }
+    else
+    {
+        searchType = "Standard";
+        nextSearchPage = "searchgen";
+    }
+
+    searchTypeLabel = searchType == "Exception" ? "Exception" : "Document";
+
+    string searchHeader = $"{searchType} Document Search";
+}
+
+<div class="aa-title">
+    <div>
+        <h1><i class="title-icon fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;@Model.searchHeader</h1>
+    </div>
+    <div id="aa-bank-logo-container">
+        <img src="customer/logo/customerlogo.gif" alt="logo" id="customer-logo-image" />
+    </div>
+</div>
+<main>
+    <!-- #include file="include/msghandler.inc" -->
+    @*  <!-- #include file="include/search_new.inc" --> *@
+
+    <form id="aa-search-form" action="@nextSearchPage" name="frmSearch" method="post">
+      
+        <input type="hidden" name="action" value="SEARCH" />
+   @*  <input type="hidden" name="searchType" value="<%=searchType%>"/> *@
+    <div class="aa-search-wrapper">
+        <table id="aa-search-table">
+            @* <% IF searchType <> "Standard" THEN %> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">@searchTypeLabel Type Filter:</td>
+                    
+                    <td>&nbsp;</td>
+                    <td>
+                       @*  <ul class="vert-list">
+                            <li><input type="radio" id="aa-search-credit-document" class="k-radio" name="documentFilter" value="C" checked="checked" /><label id="aa-search-credit-document-label" class="k-radio-label" for="aa-search-credit-document">Credit <%=searchTypeLabel%>s</label></li>
+                            <li><input type="radio" id="aa-search-account-document" class="k-radio" name="documentFilter" value="L" /><label id="aa-search-account-document-label" class="k-radio-label" for="aa-search-account-document">Account/Collateral <%=searchTypeLabel%>s</label></li>
+                        </ul> *@
+                        <ul class="vert-list">
+                            <li><input type="radio" id="aa-search-credit-document" class="k-radio" name="documentFilter" value="C" checked="checked"><input type="radio" id="aa-search-credit-document" class="k-radio" name="documentFilter" value="C" checked="checked"><label id="aa-search-credit-document-label" class="k-radio-label" for="aa-search-credit-document">Credit Documents</label></li>
+                            <li><input type="radio" id="aa-search-account-document" class="k-radio" name="documentFilter" value="L"><label id="aa-search-account-document-label" class="k-radio-label" for="aa-search-account-document">Account/Collateral Documents</label></li>
+                        </ul>
+                    </td>
+                </tr>
+           @*  <% END IF %> *@
+            <tr>
+                <td colspan="5" class="sub-header top"><h1>Customer Search Fields</h1></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="2">Customer Name:</td>
+                <td>&nbsp;</td>
+                <td><input id="combo_zone_cname" name="name" autocomplete="off" style="width:300px" /></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="2">Customer Tax ID:</td>
+                <td>&nbsp;</td>
+                <td><input id="combo_zone_taxid" name="taxID" autocomplete="off" style="width:300px" /></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="2">Customer Number:</td>
+                <td>&nbsp;</td>
+                <td><input id="combo_zone_cnumber" name="customerID" autocomplete="off" style="width:300px" /></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="2">Customer Status:</td>
+                <td>&nbsp;</td>
+                <td>
+                   @*  <%
+                Dim customerStatusRS : Set customerStatusRS = Server.CreateObject("ADODB.Recordset")
+                Dim customerStatusQuery : customerStatusQuery = _
+                    " SELECT *" & _
+                    " FROM customerStatus" & _
+                    " ORDER BY customerStatusDescription"
+                customerStatusRS.Open customerStatusQuery, db, adOpenDynamic
+                %> *@
+                <select id="aa-search-customer-status" name="searchcustomerStatus">
+                <option value="">All</option><%
+                @* WHILE NOT customerStatusRS.EOF
+                    selected = ""
+                    IF cStr(customerStatusRS("customerStatusId")) = Session("searchcustomerStatus") OR customerStatusRS("isDefault") THEN
+                        selected = " selected=""selected"""
+                    END IF
+                    %><option value="<%=customerStatusRS("customerStatusId")%>"<%=selected%>><%=customerStatusRS("customerStatusDescription") %></option><%
+                    customerStatusRS.MoveNext()
+                WEND
+                %> *@
+            </select></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="2">Customer Type:</td>
+                <td>&nbsp;</td>
+                <td><select id="aa-select-customer-type" name="customerType">
+                <option value="" >All</option>
+                @* <%
+                savedct = Session("searchCustomerType")
+                DO UNTIL customerType.EOF
+                    IF savedct = customerType("customerTypeId") THEN
+                        htmloption = " selected=""selected"""
+                    ELSE
+                        htmloption = ""
+                    END IF
+                    %><option value="<%=customerType("customerTypeid")%>"<%=htmloption%>><%=customerType("customerTypeDescription")%></option><%
+                    customerType.MoveNext
+                LOOP
+                %> *@
+            </select></td>
+            </tr>
+          @*   <% savedco = Session("searchCustomerOfficer") %> *@
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="2">Customer Officer:</td>
+                <td>&nbsp;</td>
+                <td><select id="aa-select-customer-officer" name="customerOfficer">
+                <option value="">All</option>
+                @* <option value="NULL"<% IF Trim(savedco) = "NULL" THEN %> selected="selected"<% END IF %>>Unassigned</option><%
+                DO UNTIL lo.EOF
+                    FOR i = 1 TO bankmax
+                        IF banksecurity(i,1) = lo("bankid") THEN
+                            IF savedco = lo("officerid") THEN
+                                htmloption = " selected=""selected"""
+                            ELSE
+                                htmloption = ""
+                            END IF
+                            %><option value="<%=lo("officerid")%>"<%=htmloption%>><%=lo("officerName")%></option><%
+                        END IF
+                    NEXT
+                    lo.MoveNext
+                LOOP
+                %> *@
+            </select></td>
+            </tr>
+            <tr>
+                @* <% IF branchRows <= 1 THEN %>
+                <td colspan="5">&nbsp; <input type="hidden" name="customerBranch" value=""/></td>
+                <% ELSE %> *@
+                <td>&nbsp;</td>
+                <td colspan="2">Customer ( Region ) Branch:</td>
+                <td>&nbsp;</td>
+                <td><select id="aa-select-customer-branch" name="customerBranch">
+                <option value="">All Branches</option>@* <%
+                FOR i = 0 TO branchRows-1
+                   %><option value="<%=branchArray(2,i)%>">( <%=branchArray(4,i)%> ) <%=branchArray(3,i)%></option><%
+                NEXT
+                %> *@
+            </select></td>
+                @* <% END IF ' ### IF branchRows = <1 %> *@
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="2">Credit Classification:</td>
+                <td>&nbsp;</td>
+                <td><input id="aa-search-select-classification" name="classificationId" value="" style=""/></td>
+            </tr>
+            <!-- BEGIN Credit Flex Field Block -->
+           @*  <%
+            fieldDisplayState = Request.Cookies("creditsearchDisplayState")
+            IF fieldDisplayState = "collapsed" THEN
+                fieldDisplayClass = "aa-search-show"
+            ELSE
+                fieldDisplayClass = "aa-search-hide"
+            END IF
+	    
+            hasSearchableFields = false
+            FOR i = 0 TO g_creditFieldDefCount - 1
+                IF g_creditFieldDefList(FIELD_DEF_SEARCHABLE, i) THEN
+                    hasSearchableFields = true
+                    EXIT FOR
+                END IF
+            NEXT
+	    
+            IF hasSearchableFields THEN
+                %> *@
+              @*   <tr class="aa-credit-flex-collapsed <%=fieldDisplayClass%>"> *@
+                <tr class="aa-credit-flex-collapsed aa-search-hide">
+                    <td><i id="aa-expand-flex-credit" class="aa-icon fas fa-plus-square" aria-hidden="true" title="Expand Additional Customer Fields"></i></td>
+                    <td colspan="4" id="aa-credit-flex-field-banner"><i>View Additional Customer Fields</i></td>
+                </tr>
+                @* <%
+		idx = 0
+		groupIdx = 0 ' Keep count of displayed groups
+		for i = 0 to g_creditFieldGroupCount - 1
+			fieldDefGroupId = g_creditFieldGroupList(FDG_ID,i)
+			fieldDefGroupLabel = g_creditFieldGroupList(FDG_LABEL,i)
+			filedDefGroupName = g_creditFieldGroupList(FDG_NAME,i)
+			fieldIdx = 0 ' Keep count of displayed fields
+
+			for j = 0 to g_creditFieldDefCount - 1
+				fieldLabel = g_creditFieldDefList(FIELD_DEF_LABEL, j)
+				fieldName = g_creditFieldDefList(FIELD_DEF_NAME, j)
+				fieldDataType = g_creditFieldDefList(FIELD_DEF_DATA_TYPE, j)
+				fieldSearchable = g_creditFieldDefList(FIELD_DEF_SEARCHABLE, j)
+				fieldChoiceList = g_creditFieldDefList(FIELD_DEF_CHOICE_LIST, j)
+				fieldGroupId = g_creditFieldDefList(FIELD_DEF_GROUP_ID,j)
+
+    IF fieldSearchable AND fieldGroupId = fieldDefGroupId THEN
+        if fieldDisplayState = "collapsed" then
+		    fieldDisplayClass = "aa-search-hide"
+        else
+            fieldDisplayClass = "aa-search-show"
+	    end if
+%> *@
+   @*  <tr class="aa-credit-flex-expanded <%= fieldDisplayClass %>">
+            
+<%      IF groupIdx = 0 THEN %>
+<td>
+    
+    <i id="aa-collapse-flex-credit" class="aa-icon fas fa-minus-square" aria-hidden="true" title="Collapse Additional Customer Fields"></i></td>
+        <% ELSE %><td>&nbsp;</td><% END IF %>
+        <td><% IF fieldIdx = 0 THEN %><%=fieldDefGroupLabel%><% END IF %>&nbsp;</td>
+        <td class="aa-search-flex-field-label"><label for="aa-chk-flex-<%=fieldName%>"><%=fieldLabel%>: &nbsp; &nbsp;</label><input type="checkbox" class="k-checkbox" id="aa-chk-flex-<%=fieldName%>" name="chk_flex_<%=fieldName%>" value="1" /><label class="k-checkbox-label" for="aa-chk-flex-<%=fieldName%>"></label></td>
+        <td>&nbsp;</td>
+        <td><%
+        IF fieldDataType = "datetime" THEN
+            datePickerIds = datePickerIds & "from-flex-" & fieldName & ","
+            datePickerIds = datePickerIds & "to-flex-" & fieldName & ","
+            %><ul class="aa-horizontal-list">
+                <li><input
+                    type="text"
+                    name="from_flex_<%=fieldName%>"
+                    id="from-flex-<%=fieldName%>"
+                    data-type="date"
+                    data-date-msg="Invalid 'from' date"
+                    data-mindate-msg="Minimum date must be later or equal to 1/1/1753"
+                    data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999"
+                    /></li>
+                <li><b>to</b></li>
+                <li><input
+                    type="text"
+                    name="to_flex_<%=fieldName%>"
+                    id="to-flex-<%=fieldName%>"
+                    data-type="date"
+                    data-date-msg="Invalid 'to' date"
+                    data-mindate-msg="Minimum date must be later or equal to 1/1/1753"
+                    data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999"
+                    /></li>
+                <li>
+                    <div class="validator-msg">
+                        <span class="k-invalid-msg" data-for="from_flex_<%=fieldName%>"></span>
+                        <span class="k-invalid-msg" data-for="to_flex_<%=fieldName%>"></span>
+                    </div>
+                </li>
+            </ul>
+            <% ELSEIF fieldDataType = "int" OR fieldDataType = "decimal" OR fieldDataType = "money" THEN %>
+            <input type="text" class="k-textbox range" name="from_flex_<%=fieldName%>" size="16" value="" />
+            &nbsp; <b>to</b> &nbsp;
+            <input type="text" class="k-textbox range" name="to_flex_<%=fieldName%>" size="16" value="" />
+            <% ELSEIF fieldDataType = "bit" THEN %>
+            <select id="aa-select-flex-<%=fieldName%>" name="flex_<%=fieldName%>">
+                <option value="">Any</option>
+                <option value="1">True</option>
+                <option value="0">False</option>
+            </select>
+            <% ELSEIF fieldDataType = "choice" THEN %>
+            <select id="aa-select-flex-<%=fieldName%>" name="flex_<%=fieldName%>">
+            <% IF Trim(fieldChoiceList & "") <> "" THEN
+                    Response.Write "<option value=""" & fieldChoiceList & """>All</option>" & vbCr
+                    choiceList = Split(fieldChoiceList, "||")
+                    FOR k = lBound(choiceList) TO uBound(choiceList)
+                        Response.Write "<option value=""" & choiceList(k) & """>" & choiceList(k) & "</option>" & vbCr
+                    NEXT
+                ELSE
+                    Response.Write "<option value="""">All</option>" & vbCr
+                END IF
+            %></select>
+<%          ELSE %>
+            <input type="text" class="k-textbox" name="flex_<%=fieldName%>" size="41" value="" />
+            <% END IF %>
+        </td>
+    </tr> *@
+                <tr class="aa-credit-flex-expanded aa-search-show">
+                    <td><i id="aa-collapse-flex-credit" class="aa-icon fas fa-minus-square" aria-hidden="true" title="Collapse Additional Customer Fields"></i></td>
+                    <td>Credit Choice Flex Field&nbsp;</td>
+                    <td class="aa-search-flex-field-label"><label for="aa-chk-flex-flex_ChoiceFlexField">Choice Flex Field: &nbsp; &nbsp;</label><input type="checkbox" class="k-checkbox" id="aa-chk-flex-flex_ChoiceFlexField" name="chk_flex_flex_ChoiceFlexField" value="1"><label class="k-checkbox-label" for="aa-chk-flex-flex_ChoiceFlexField"></label></td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="aa-select-flex-flex_ChoiceFlexField_listbox" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="9702b97b-2a06-47ac-8fc4-08d166d939e9" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">All</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="aa-select-flex-flex_ChoiceFlexField" name="flex_flex_ChoiceFlexField" data-role="dropdownlist" style="display: none;"><option value="TEST 1||TEST 2||TEST 3" selected="selected">All</option><option value="TEST 1">TEST 1</option><option value="TEST 2">TEST 2</option><option value="TEST 3">TEST 3</option></select></span>
+
+                    </td>
+                </tr>
+                @* <%
+                        IF fieldDataType = "choice" OR fieldDataType = "bit" THEN
+                            IF creditFlexFieldIdList = "" THEN
+                                creditFlexFieldIdList = "#aa-select-flex-" & fieldName
+                            ELSE
+                                creditFlexFieldIdList = creditFlexFieldIdList + ", #aa-select-flex-" & fieldName
+                            END IF
+                        END IF
+                        idx = idx + 1
+                        fieldIdx = fieldIdx + 1
+                    END IF 'fieldSearchable
+                    groupIdx = groupIdx + 1
+                    next 'j
+                    next 'i
+
+                end if 'hasSearchableFields
+                 %> *@
+
+<!-- END Credit Flex Field Block -->
+                <tr>
+                    <td colspan="5" class="sub-header"><h1>Account/Collateral Search Fields</h1></td>
+                </tr>
+             @*    <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account<% IF Session("enableLoanApprovalsYN") = "Y" THEN %> / Application<% END IF %> Number:</td>
+                    <td>&nbsp;</td>
+                    <td><input id="combo_zone_lnumber" name="loan" autocomplete="off" style="width:300px" /></td>
+                </tr> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account / Application Number:</td>
+                    <td>&nbsp;</td>
+                    <td><span tabindex="-1" role="presentation" class="k-widget k-autocomplete k-autocomplete-clearable k-state-default" style="width: 300px;"><input id="combo_zone_lnumber" name="loan" autocomplete="off" style="" data-role="autocomplete" placeholder="Enter Account Number..." type="text" class="k-input" role="textbox" aria-haspopup="true" aria-disabled="false" aria-readonly="false" aria-owns="combo_zone_lnumber_listbox" aria-autocomplete="list"><span unselectable="on" class="k-icon k-clear-value k-i-close k-hidden" title="clear" role="button" tabindex="-1"></span><span class="k-icon k-i-loading" style="display:none"></span></span></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account / Collateral Description:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        @* <input type="text" class="k-textbox" name="loanDescription" size="40" value="<%=session(" searchLoanDescription") %>"> *@
+                        <input type="text" class="k-textbox" name="loanDescription" size="40" value="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account Class:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <input id="aa-select-account-class" name="accountClassId" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account Type:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select id="aa-select-account-type" name="loanType"></select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account Status:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select id="aa-select-account-status" name="loanStatus"></select>
+                    </td>
+                </tr>
+
+               @*  <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account Origination Date:</td>
+                    <td>&nbsp;</td>
+                    <%
+                    datePickerIds = datePickerIds & "from-org-date,"
+                    datePickerIds = datePickerIds & "to-org-date,"
+                    %>
+                    <td>
+                        <ul class="aa-horizontal-list">
+                            <li>
+                                <input type="text"
+                                       name="fromOrgDate"
+                                       id="from-org-date"
+                                       data-type="date"
+                                       data-date-msg="Invalid 'from' date"
+                                       data-mindate-msg="Minimum date must be later or equal to 1/1/1753"
+                                       data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" />
+                            </li>
+                            <li><b>to</b></li>
+                            <li>
+                                <input type="text"
+                                       name="toOrgDate"
+                                       id="to-org-date"
+                                       data-type="date"
+                                       data-date-msg="Invalid 'to' date"
+                                       data-mindate-msg="Minimum date must be later or equal to 1/1/1753"
+                                       data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" />
+                            </li>
+                            <li>
+                                <div class="validator-msg">
+                                    <span class="k-invalid-msg" data-for="fromOrgDate"></span>
+                                    <span class="k-invalid-msg" data-for="toOrgDate"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account Origination Date:</td>
+                    <td>&nbsp;</td>
+
+                    <td>
+                        <ul class="aa-horizontal-list">
+                            <li><span class="k-widget k-datepicker" style=""><span class="k-picker-wrap k-state-default"><input type="text" name="fromOrgDate" id="from-org-date" data-type="date" data-date-msg="Invalid 'from' date" data-mindate-msg="Minimum date must be later or equal to 1/1/1753" data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" data-role="configureddatepicker" class="k-input" role="combobox" aria-expanded="false" aria-owns="from-org-date_dateview" autocomplete="off" aria-disabled="false" style="width: 100%;"><span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="from-org-date_dateview"><span class="k-icon k-i-calendar"></span></span></span></span></li>
+                            <li><b>to</b></li>
+                            <li><span class="k-widget k-datepicker" style=""><span class="k-picker-wrap k-state-default"><input type="text" name="toOrgDate" id="to-org-date" data-type="date" data-date-msg="Invalid 'to' date" data-mindate-msg="Minimum date must be later or equal to 1/1/1753" data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" data-role="configureddatepicker" class="k-input" role="combobox" aria-expanded="false" aria-owns="to-org-date_dateview" autocomplete="off" aria-disabled="false" style="width: 100%;"><span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="to-org-date_dateview"><span class="k-icon k-i-calendar"></span></span></span></span></li>
+                            <li>
+                                <div class="validator-msg">
+                                    <span class="k-invalid-msg" data-for="fromOrgDate"></span>
+                                    <span class="k-invalid-msg" data-for="toOrgDate"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+              @*   <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account Officer:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select id="aa-select-account-officer" name="loanofficer">
+                            <option value="">All</option>
+                            <%
+                            savedlo = Session("searchLoanOfficer")
+                            lo.requery
+                            do until lo.eof
+                            for i = 1 to bankmax
+                            if banksecurity(i,1) = lo("bankid") then
+
+                            if savedlo = lo("officerid") then
+                            htmloption = " selected"
+                            else
+                            htmloption = ""
+                            end if
+                            %>
+                            <option value="<%= lo(" officerid") %>" <%=htmloption%>><%= lo("officerName") %></option>
+                            <%
+                            end if
+                            next
+                            lo.MoveNext
+                            loop
+                            %>
+                        </select>
+                    </td>
+                </tr> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account Officer:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="aa-select-account-officer_listbox" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="b4642521-33a7-44a4-b37e-951bc4135787" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">All</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="aa-select-account-officer" name="loanofficer" data-role="dropdownlist" style="display: none;"><option value="" selected="selected">All</option><option value="{7FDD1A1C-D813-4836-AF92-0295856FBA7C}">John Smith</option><option value="{D5C70210-AD24-4A97-AF42-BED28A2DA5B9}">Ryan M. Tomkins</option><option value="{4560EB8C-3FE2-465F-8117-8D1273AA78DD}">Tu Morrow</option><option value="{32921CB0-117E-46FA-A4C3-5FF71D6BDB7B}">Waba Waba</option><option value="{5DDECA71-D855-42B0-82E9-AA38456F65E4}">ZZ Sleeper</option></select></span>
+                    </td>
+                </tr>
+              @*   <tr>
+                    <%  if branchRows <= 1 then %>
+                    <td colspan="5">&nbsp; <input type="hidden" name="loanBranch" value="" /></td>
+                    <%  else %>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account ( Region ) Branch:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select id="aa-select-account-branch" name="loanBranch">
+                            <option value="">All Branches</option>
+                            <%
+                            for i = 0 to branchRows-1
+                            %>
+                            <option value="<%=branchArray(2,i)%>">( <%=branchArray(4,i)%> ) <%=branchArray(3,i)%></option>
+                            <%
+                            next
+                            %>
+                        </select>
+                    </td>
+                    <%  end if 'branchRows = 1 %>
+                </tr> *@
+                <tr>
+
+                    <td>&nbsp;</td>
+                    <td colspan="2">Account ( Region ) Branch:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="aa-select-account-branch_listbox" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="e8babb55-d1fb-412e-8631-d14503dcd37c" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">All Branches</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="aa-select-account-branch" name="loanBranch" data-role="dropdownlist" style="display: none;"><option value="" selected="selected">All Branches</option><option value="{1518DDBD-74B9-4B2E-98AE-3A13EAFC28E7}">( Colorado ) Pueblo</option><option value="{F7B6DCAF-D84C-4E4C-915E-E4A0C63FB5EE}">( Florida ) Ellenton</option><option value="{2CFF6157-9C9F-4F69-B5BC-CDBA7E4B1EFE}">( Florida ) Tampa</option><option value="{94AF0002-695F-49A1-B70C-21B47CA340DE}">( Illinois ) Moline</option><option value="{B990E271-70EE-4273-AAE4-EE0DAFC16569}">( Minnesota ) Minneapolis</option><option value="{F7F97247-1A62-427B-BDC2-477E3D6795BF}">( Unassigned ) Seattle</option></select></span>
+                    </td>
+
+                </tr>
+@* 
+                <% IF Session("acculoan.showParticipationLoan") = "1" THEN %>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Search Participation Loans Only?</td>
+                    <td>&nbsp;</td>
+                    <td><input type="checkbox" class="k-checkbox" name="searchParticipation" id="searchParticipation" value="1" /><label class="k-checkbox-label" for="searchParticipation"></label></td>
+                </tr>
+                <% END IF %> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Search Participation Loans Only?</td>
+                    <td>&nbsp;</td>
+                    <td><input type="checkbox" class="k-checkbox" name="searchParticipation" id="searchParticipation" value="1"><label class="k-checkbox-label" for="searchParticipation"></label></td>
+                </tr>
+                <!-- BEGIN Account Flex Field Block -->
+              @*   <%
+                fieldDisplayState = Request.Cookies("accountsearchDisplayState")
+                if fieldDisplayState = "collapsed" then
+                fieldDisplayClass = "aa-search-show"
+                else
+                fieldDisplayClass = "aa-search-hide"
+                end if
+
+                hasSearchableFields = false
+                for i = 0 to g_accountFieldDefCount - 1
+                if g_accountFieldDefList(FIELD_DEF_SEARCHABLE, i) then
+                hasSearchableFields = true
+                exit for
+                end if
+                next 'i 
+
+                if hasSearchableFields then
+                %>
+                <tr class="aa-account-flex-collapsed <%= fieldDisplayClass %>">
+                    <td><i id="aa-expand-flex-account" class="fas fa-plus-square" aria-hidden="true" title="Expand Additional Account Fields"></i></td>
+                    <td colspan="4" id="aa-account-flex-field-banner"><i>View Additional Account Fields</i></td>
+                </tr>
+                <%
+                idx = 0
+                groupIdx = 0 ' Keep count of displayed groups
+                if g_accountFieldDefCount > 0 And hasSearchableFields then
+                for i = 0 to g_accountFieldGroupCount - 1
+                fieldDefGroupId = g_accountFieldGroupList(FDG_ID,i)
+                fieldDefGroupLabel = g_accountFieldGroupList(FDG_LABEL,i)
+                filedDefGroupName = g_accountFieldGroupList(FDG_NAME,i)
+                fieldIdx = 0 ' Keep count of displayed fields
+
+                for j = 0 to g_accountFieldDefCount - 1
+                fieldLabel = g_accountFieldDefList(FIELD_DEF_LABEL, j)
+                fieldName = g_accountFieldDefList(FIELD_DEF_NAME, j)
+                fieldDataType = g_accountFieldDefList(FIELD_DEF_DATA_TYPE, j)
+                fieldSearchable = g_accountFieldDefList(FIELD_DEF_SEARCHABLE, j)
+                fieldChoiceList = g_accountFieldDefList(FIELD_DEF_CHOICE_LIST, j)
+                fieldGroupId = g_accountFieldDefList(FIELD_DEF_GROUP_ID,j)
+
+                if fieldSearchable And fieldGroupId = fieldDefGroupId  then
+                if fieldDisplayState = "collapsed" then
+                fieldDisplayClass = "aa-search-hide"
+                else
+                fieldDisplayClass = "aa-search-show"
+                end if
+                %>*@
+                <tr class="aa-account-flex-collapsed aa-search-hide">
+                    <td><i id="aa-expand-flex-account" class="fas fa-plus-square" aria-hidden="true" title="Expand Additional Account Fields"></i></td>
+                    <td colspan="4" id="aa-account-flex-field-banner"><i>View Additional Account Fields</i></td>
+                </tr>
+                @* <tr class="aa-account-flex-expanded <%= fieldDisplayClass %>">
+                    <%      IF groupIdx = 0 then %>
+                    <td><i id="aa-collapse-flex-account" class="fas fa-minus-square" aria-hidden="true" title="Collapse Additional Account Fields"></i></td><% ELSE %>
+                    <td>&nbsp;</td><% END IF %>
+                    <td><% IF fieldIdx = 0 then %><%=fieldDefGroupLabel%><% END IF %>&nbsp;</td>
+                    <td class="aa-search-flex-field-label"><label for="aa-chk-flex-<%=fieldName%>"><%=fieldLabel%>: &nbsp; &nbsp;</label><input type="checkbox" class="k-checkbox" id="aa-chk-flex-<%=fieldName%>" name="chk_flex_<%=fieldName%>" value="1" /><label class="k-checkbox-label" for="aa-chk-flex-<%=fieldName%>"></label></td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <% IF fieldDataType = "datetime" THEN
+                        datePickerIds = datePickerIds & "from-flex-" & fieldName & ","
+                        datePickerIds = datePickerIds & "to-flex-" & fieldName & ","
+                        %><ul class="aa-horizontal-list">
+                            <li>
+                                <input type="text"
+                                       name="from_flex_<%=fieldName%>"
+                                       id="from-flex-<%=fieldName%>"
+                                       data-type="date"
+                                       data-date-msg="Invalid 'from' date"
+                                       data-mindate-msg="Minimum date must be later or equal to 1/1/1753"
+                                       data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" />
+                            </li>
+                            <li><b>to</b></li>
+                            <li>
+                                <input type="text"
+                                       name="to_flex_<%=fieldName%>"
+                                       id="to-flex-<%=fieldName%>"
+                                       data-type="date"
+                                       data-date-msg="Invalid 'to' date"
+                                       data-mindate-msg="Minimum date must be later or equal to 1/1/1753"
+                                       data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" />
+                            </li>
+                            <li>
+                                <div class="validator-msg">
+                                    <span class="k-invalid-msg" data-for="from_flex_<%=fieldName%>"></span>
+                                    <span class="k-invalid-msg" data-for="to_flex_<%=fieldName%>"></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <% ELSEIF fieldDataType = "int" Or fieldDataType = "decimal" Or fieldDataType = "money" then %>
+                        <input type="text" class="k-textbox range" name="from_flex_<%=fieldName%>" size="16" value="" />
+                        &nbsp; <b>to</b> &nbsp;
+                        <input type="text" class="k-textbox range" name="to_flex_<%=fieldName%>" size="16" value="" />
+                        <%						elseif fieldDataType = "bit" then %>
+                        <select id="aa-select-flex-<%=fieldName%>" name="flex_<%=fieldName%>">
+                            <option value="">Any</option>
+                            <option value="1">True</option>
+                            <option value="0">False</option>
+                        </select>
+                        <%						elseif fieldDataType = "choice" then %>
+                        <select id="aa-select-flex-<%=fieldName%>" name="flex_<%=fieldName%>">
+                            <%
+                            IF Trim(fieldChoiceList & "") <> "" THEN
+                            Response.Write "
+                            <option value="" " & fieldChoiceList & " "">All</option>" & vbCr
+                            choiceList = Split(fieldChoiceList, "||")
+                            FOR k = lBound(choiceList) TO uBound(choiceList)
+                            Response.Write "
+                            <option value="" " & choiceList(k) & " "">" & choiceList(k) & "</option>" & vbCr
+                            NEXT
+                            ELSE
+                            Response.Write "
+                            <option value="" "">All</option>" & vbCr
+                            END IF
+                            %>
+                        </select>
+                        <% else %>
+                        <input type="text" class="k-textbox" name="flex_<%=fieldName%>" size="41" value="" />
+                        <%  end if %>
+                    </td>
+                </tr> *@
+                <tr class="aa-account-flex-collapsed aa-search-hide">
+                    <td><i id="aa-expand-flex-account" class="fas fa-plus-square" aria-hidden="true" title="Expand Additional Account Fields"></i></td>
+                    <td colspan="4" id="aa-account-flex-field-banner"><i>View Additional Account Fields</i></td>
+                </tr>
+                @* <%
+                IF fieldDataType = "choice" OR fieldDataType = "bit" THEN
+                IF accountFlexFieldIdList = "" THEN
+                accountFlexFieldIdList = "#aa-select-flex-" & fieldName
+                ELSE
+                accountFlexFieldIdList = accountFlexFieldIdList + ", #aa-select-flex-" & fieldName
+                END IF
+                END IF
+
+                idx = idx + 1
+                fieldIdx = fieldIdx + 1
+                end if ' fieldSearchable
+                %>
+
+                <%
+                groupIdx = groupIdx + 1
+                next 'j
+                next 'i
+                end if
+                %>
+                <%
+                end if 'hasSearchableFields
+                %> *@
+
+                <!-- END Account Flex Field Block -->
+                <!-- BEGIN Collateral Flex Field Block -->
+               @*  <%
+                fieldDisplayState = Request.Cookies("collateralsearchDisplayState")
+                if fieldDisplayState = "collapsed" then
+                fieldDisplayClass = "aa-search-show"
+                else
+                fieldDisplayClass = "aa-search-hide"
+                end if
+
+                hasSearchableFields = false
+
+                if g_hasCollateralFieldDefList then
+                for i = 0 to g_collateralFieldDefCount - 1
+                if g_collateralFieldDefList(FIELD_DEF_SEARCHABLE, i) then
+                hasSearchableFields = true
+                exit for
+                end if
+                next 'i
+                end if
+
+                if hasSearchableFields then
+                %>
+                <tr class="aa-collateral-flex-collapsed <%= fieldDisplayClass %>">
+                    <td><i id="aa-expand-flex-collateral" class="fas fa-plus-square" aria-hidden="true" title="Expand Additional Collateral Fields"></i></td>
+                    <td colspan="4" id="aa-collateral-flex-field-banner"><i>View Additional Collateral Fields</i></td>
+                </tr> *@
+                <tr class="aa-collateral-flex-collapsed aa-search-hide">
+                    <td><i id="aa-expand-flex-collateral" class="fas fa-plus-square" aria-hidden="true" title="Expand Additional Collateral Fields"></i></td>
+                    <td colspan="4" id="aa-collateral-flex-field-banner"><i>View Additional Collateral Fields</i></td>
+                </tr>
+              @*   <%
+                idx = 0
+                groupIdx = 0 ' Keep count of displayed groups
+                if g_collateralFieldDefCount > 0 And hasSearchableFields then
+                for i = 0 to g_collateralFieldGroupCount - 1
+                fieldDefGroupId = g_collateralFieldGroupList(FDG_ID,i)
+                fieldDefGroupLabel = g_collateralFieldGroupList(FDG_LABEL,i)
+                filedDefGroupName = g_collateralFieldGroupList(FDG_NAME,i)
+                fieldIdx = 0 ' Keep count of displayed fields
+
+                for j = 0 to g_collateralFieldDefCount - 1
+                fieldLabel = g_collateralFieldDefList(FIELD_DEF_LABEL, j)
+                fieldName = g_collateralFieldDefList(FIELD_DEF_NAME, j)
+                fieldDataType = g_collateralFieldDefList(FIELD_DEF_DATA_TYPE, j)
+                fieldSearchable = g_collateralFieldDefList(FIELD_DEF_SEARCHABLE, j)
+                fieldChoiceList = g_collateralFieldDefList(FIELD_DEF_CHOICE_LIST, j)
+                fieldGroupId = g_collateralFieldDefList(FIELD_DEF_GROUP_ID,j)
+
+                if fieldSearchable And fieldGroupId = fieldDefGroupId then
+                if fieldDisplayState = "collapsed" then
+                fieldDisplayClass = "aa-search-hide"
+                else
+                fieldDisplayClass = "aa-search-show"
+                end if
+                %> *@
+              @*   <tr class="aa-collateral-flex-expanded <%= fieldDisplayClass %>">
+                    <%      IF groupIdx = 0 THEN %>
+                    <td><i id="aa-collapse-flex-collateral" class="fas fa-minus-square" aria-hidden="true" title="Collapse Additional Customer Fields"></i></td><% else %>
+                    <td>&nbsp;</td><% END IF%>
+                    <td><% IF fieldIdx = 0 THEN %><%=fieldDefGroupLabel%><% END IF %>&nbsp;</td>
+                    <td class="aa-search-flex-field-label"><label for="aa-chk-flex-<%=fieldName%>"><%=fieldLabel%>: &nbsp; &nbsp;</label><input type="checkbox" class="k-checkbox" id="aa-chk-flex-<%=fieldName%>" name="chk_flex_<%=fieldName%>" value="1" /><label class="k-checkbox-label" for="aa-chk-flex-<%=fieldName%>"></label></td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <% IF fieldDataType = "datetime" THEN
+                        datePickerIds = datePickerIds & "from-flex-" & fieldName & ","
+                        datePickerIds = datePickerIds & "to-flex-" & fieldName & ","
+                        %><ul class="aa-horizontal-list">
+                            <li>
+                                <input type="text"
+                                       name="from_flex_<%=fieldName%>"
+                                       id="from-flex-<%=fieldName%>"
+                                       data-type="date"
+                                       data-date-msg="Invalid 'from' date"
+                                       data-mindate-msg="Minimum date must be later or equal to 1/1/1753"
+                                       data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" />
+                            </li>
+                            <li><b>to</b></li>
+                            <li>
+                                <input type="text"
+                                       name="to_flex_<%=fieldName%>"
+                                       id="to-flex-<%=fieldName%>"
+                                       data-type="date"
+                                       data-date-msg="Invalid 'to' date"
+                                       data-mindate-msg="Minimum date must be later or equal to 1/1/1753"
+                                       data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" />
+                            </li>
+                            <li>
+                                <div class="validator-msg">
+                                    <span class="k-invalid-msg" data-for="from_flex_<%=fieldName%>"></span>
+                                    <span class="k-invalid-msg" data-for="to_flex_<%=fieldName%>"></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <% ELSEIF fieldDataType = "int" Or fieldDataType = "decimal" Or fieldDataType = "money" then %>
+                        <input type="text" class="k-textbox range" name="from_flex_<%=fieldName%>" size="16" value="" />
+                        &nbsp; <b>to</b> &nbsp;
+                        <input type="text" class="k-textbox range" name="to_flex_<%=fieldName%>" size="16" value="" />
+                        <% ELSEIF fieldDataType = "bit" then %>
+                        <select id="aa-select-flex-<%=fieldName%>" name="flex_<%=fieldName%>">
+                            <option value="">Any</option>
+                            <option value="1">True</option>
+                            <option value="0">False</option>
+                        </select>
+                        <% ELSEIF fieldDataType = "choice" THEN %>
+                        <select id="aa-select-flex-<%=fieldName%>" name="flex_<%=fieldName%>">
+                            <%
+                            IF Trim(fieldChoiceList & "") <> "" THEN
+                            Response.Write "
+                            <option value="" " & fieldChoiceList & " "">All</option>" & vbCr
+                            choiceList = Split(fieldChoiceList, "||")
+                            FOR k = lBound(choiceList) TO uBound(choiceList)
+                            Response.Write "
+                            <option value="" " & choiceList(k) & " "">" & choiceList(k) & "</option>" & vbCr
+                            NEXT
+                            ELSE
+                            Response.Write "
+                            <option value="" "">All</option>" & vbCr
+                            END IF
+                            %>
+                        </select>
+                        <%      ELSE %>
+                        <input type="text" class="k-textbox" name="flex_<%=fieldName%>" size="41" value="" />
+                        <%      END IF %>
+                    </td>
+                </tr> *@
+                <tr class="aa-collateral-flex-expanded aa-search-show">
+                    <td><i id="aa-collapse-flex-collateral" class="fas fa-minus-square" aria-hidden="true" title="Collapse Additional Customer Fields"></i></td>
+                    <td>Collateral Covenant&nbsp;</td>
+                    <td class="aa-search-flex-field-label"><label for="aa-chk-flex-flex_AFRExport">AFRExport: &nbsp; &nbsp;</label><input type="checkbox" class="k-checkbox" id="aa-chk-flex-flex_AFRExport" name="chk_flex_flex_AFRExport" value="1"><label class="k-checkbox-label" for="aa-chk-flex-flex_AFRExport"></label></td>
+                    <td>&nbsp;</td>
+                    <td>
+
+                        <span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="aa-select-flex-flex_AFRExport_listbox" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="651d19b5-b5fa-4731-99f9-69bdeb7a1804" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">All</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="aa-select-flex-flex_AFRExport" name="flex_flex_AFRExport" data-role="dropdownlist" style="display: none;"><option value="Not Applicable||Ordered||Pending||Sent||Validation Error" selected="selected">All</option><option value="Not Applicable">Not Applicable</option><option value="Ordered">Ordered</option><option value="Pending">Pending</option><option value="Sent">Sent</option><option value="Validation Error">Validation Error</option></select></span>
+
+                    </td>
+                </tr>
+
+              @*   <%
+                IF fieldDataType = "choice" OR fieldDataType = "bit" THEN
+                IF collateralFlexFieldIdList = "" THEN
+                collateralFlexFieldIdList = "#aa-select-flex-" & fieldName
+                ELSE
+                collateralFlexFieldIdList = collateralFlexFieldIdList + ", #aa-select-flex-" & fieldName
+                END IF
+                END IF
+
+                idx = idx + 1
+                fieldIdx = fieldIdx + 1
+                end if ' fieldSearchable
+                %>
+
+                <%
+                groupIdx = groupIdx + 1
+                next 'j
+                next 'i
+                end if
+                %>
+                <%	end if 'hasSearchableFields %>
+
+                <!-- END Collateral Flex Field Block -->
+                <!-- Approval search fields (2780) -->
+                <% IF Session("enableLoanApprovalsYN") = "Y" THEN %> *@
+                <tr>
+                    <td colspan="5" class="sub-header"><h1>Approval Search Fields</h1></td>
+                </tr>
+               @*  <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Application Date:</td>
+                    <td>&nbsp;</td>
+                    <%
+                    datePickerIds = datePickerIds & "app-date-from,"
+                    datePickerIds = datePickerIds & "app-date-to,"
+                    %>
+                    <td>
+                        <ul class="aa-horizontal-list">
+                            <li>
+                                <input type="text"
+                                       name="appDateFrom"
+                                       id="app-date-from"
+                                       data-type="date"
+                                       data-date-msg="Invalid 'from' date"
+                                       data-mindate-msg="Minimum date must be later or equal to 1/1/1753"
+                                       data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" />
+                            </li>
+                            <li>to</li>
+                            <li>
+                                <input type="text"
+                                       name="appDateTo"
+                                       id="app-date-to"
+                                       data-type="date"
+                                       data-date-msg="Invalid 'to' date"
+                                       data-mindate-msg="Minimum date must be later or equal to 1/1/1753"
+                                       data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" />
+                            </li>
+                            <li>
+                                <div class="validator-msg">
+                                    <span class="k-invalid-msg" data-for="appDateFrom"></span>
+                                    <span class="k-invalid-msg" data-for="appDateTo"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Application Date:</td>
+                    <td>&nbsp;</td>
+
+                    <td>
+                        <ul class="aa-horizontal-list">
+                            <li><span class="k-widget k-datepicker" style=""><span class="k-picker-wrap k-state-default"><input type="text" name="appDateFrom" id="app-date-from" data-type="date" data-date-msg="Invalid 'from' date" data-mindate-msg="Minimum date must be later or equal to 1/1/1753" data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" data-role="configureddatepicker" class="k-input" role="combobox" aria-expanded="false" aria-owns="app-date-from_dateview" autocomplete="off" aria-disabled="false" style="width: 100%;"><span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="app-date-from_dateview"><span class="k-icon k-i-calendar"></span></span></span></span></li>
+                            <li>to</li>
+                            <li><span class="k-widget k-datepicker" style=""><span class="k-picker-wrap k-state-default"><input type="text" name="appDateTo" id="app-date-to" data-type="date" data-date-msg="Invalid 'to' date" data-mindate-msg="Minimum date must be later or equal to 1/1/1753" data-maxdate-msg="Maximum date must be prior or equal to 12/31/9999" data-role="configureddatepicker" class="k-input" role="combobox" aria-expanded="false" aria-owns="app-date-to_dateview" autocomplete="off" aria-disabled="false" style="width: 100%;"><span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="app-date-to_dateview"><span class="k-icon k-i-calendar"></span></span></span></span></li>
+                            <li>
+                                <div class="validator-msg">
+                                    <span class="k-invalid-msg" data-for="appDateFrom"></span>
+                                    <span class="k-invalid-msg" data-for="appDateTo"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+               @*  <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Assigned Lender:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <%
+                        Dim userGroupQuery, userGroupRS
+                        Set userGroupRS = Server.CreateObject("ADODB.RecordSet")
+                        userGroupQuery = BuildUserGroupQuery("lender")
+                        userGroupRS.Open userGroupQuery, db, adOpenStatic, adCmdText
+                        %><select id="aa-select-assigned-lender" name="appLender">
+                            <option value=""></option><%
+                            userGroupRS.Requery
+                            do until userGroupRS.eof
+                            targetName	= userGroupRS("targetName")
+                            targetType	= userGroupRS("targetType")
+                            targetId1	= Left(targetType,1) & ":" & userGroupRS("targetId")
+                            lenderType = UCase(Left(targetType,1))
+                            %>
+                            <option value="<%=targetId1%>"><%=targetName%></option><%
+                            userGroupRS.MoveNext()
+                            loop
+                            userGroupRS.Close()
+                            %>
+                        </select>
+                    </td>
+                </tr> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Assigned Lender:</td>
+                    <td>&nbsp;</td>
+                    <td><span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="aa-select-assigned-lender_listbox" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="f54e2f0b-729e-4c79-815d-924e14358d43" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input"></span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="aa-select-assigned-lender" name="appLender" data-role="dropdownlist" style="display: none;"><option value="" selected="selected"></option><option value="U:{ACA8AF20-A333-459F-AFB9-75952BBDBE62}">Daryan Lewis</option><option value="U:{FA41F1C1-15F6-4F09-BE40-54D7958E0D22}">Developer Account</option><option value="G:{4745C3C4-D04B-4152-A081-C4A4E2E210B6}">Document Prep Supervisor</option><option value="U:{CE92F448-8413-4E09-AB56-9641B85085F6}">Kristy Knutson</option><option value="G:{20EDA227-4B05-4309-81B2-9712215BE2F8}">Loan Processor</option><option value="G:{A01533D5-7E6D-460E-AD69-7D54C0EFB224}">Personal Bankers/Lenders</option></select></span></td>
+                </tr>
+              @*   <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Loan Delegate:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <%
+                        Set userGroupRS = Server.CreateObject("ADODB.RecordSet")
+                        userGroupQuery = BuildUserGroupQuery("loanprocessor")
+                        userGroupRS.Open userGroupQuery, db, adOpenStatic, adCmdText
+                        %><select id="aa-select-app-delegate" name="appDelegate">
+                            <option value=""></option><%
+                            userGroupRS.Requery
+                            do until userGroupRS.eof
+                            targetName	= userGroupRS("targetName")
+                            targetType	= userGroupRS("targetType")
+                            targetId1	= Left(targetType,1) & ":" & userGroupRS("targetId")
+                            lenderType = UCase(Left(targetType,1))
+                            %>
+                            <option value="<%=targetId1%>"><%=targetName%></option><%
+                            userGroupRS.MoveNext()
+                            loop
+                            userGroupRS.Close()
+                            %>
+                        </select>
+                    </td>
+                </tr> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Loan Delegate:</td>
+                    <td>&nbsp;</td>
+                    <td><span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="aa-select-app-delegate_listbox" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="55d42ebf-aecb-4918-9c98-ee70f1912ccc" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input"></span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="aa-select-app-delegate" name="appDelegate" data-role="dropdownlist" style="display: none;"><option value="" selected="selected"></option><option value="U:{ACA8AF20-A333-459F-AFB9-75952BBDBE62}">Daryan Lewis</option><option value="U:{FA41F1C1-15F6-4F09-BE40-54D7958E0D22}">Developer Account</option></select></span></td>
+                </tr>
+              @*   <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Assigned Analyst:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <%
+                        Set userGroupRS = Server.CreateObject("ADODB.RecordSet")
+                        userGroupQuery = BuildUserGroupQuery("analyst")
+                        userGroupRS.Open userGroupQuery, db, adOpenStatic, adCmdText
+                        %><select id="aa-select-app-analyst" name="appAnalyst">
+                            <option value=""></option><%
+                            userGroupRS.Requery
+                            do until userGroupRS.eof
+                            targetName	= userGroupRS("targetName")
+                            targetType	= userGroupRS("targetType")
+                            targetId1	= Left(targetType,1) & ":" & userGroupRS("targetId")
+                            lenderType = UCase(Left(targetType,1))
+                            %>
+                            <option value="<%=targetId1%>"><%=targetName%></option><%
+                            userGroupRS.MoveNext()
+                            loop
+                            userGroupRS.Close()
+                            %>
+                        </select>
+                    </td>
+                </tr> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Assigned Analyst:</td>
+                    <td>&nbsp;</td>
+                    <td><span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="aa-select-app-analyst_listbox" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="8d3f1c45-2c39-4ad4-b8b0-cd0e10844c62" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input"></span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="aa-select-app-analyst" name="appAnalyst" data-role="dropdownlist" style="display: none;"><option value="" selected="selected"></option><option value="U:{ACA8AF20-A333-459F-AFB9-75952BBDBE62}">Daryan Lewis</option><option value="U:{FA41F1C1-15F6-4F09-BE40-54D7958E0D22}">Developer Account</option></select></span></td>
+                </tr>
+               @*  <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Assigned Approver:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <%
+                        Set userGroupRS = Server.CreateObject("ADODB.RecordSet")
+                        userGroupQuery = BuildUserGroupQuery("approver")
+                        userGroupRS.Open userGroupQuery, db, adOpenStatic, adCmdText
+                        %><select id="aa-select-app-approver" name="appApprover">
+                            <option value=""></option><%
+                            userGroupRS.Requery
+                            do until userGroupRS.eof
+                            targetName	= userGroupRS("targetName")
+                            targetType	= userGroupRS("targetType")
+                            targetId1	= Left(targetType,1) & ":" & userGroupRS("targetId")
+                            lenderType = UCase(Left(targetType,1))
+                            %>
+                            <option value="<%=targetId1%>">
+                                <%=targetName%>
+                            </option><%
+                            userGroupRS.MoveNext()
+                            loop
+                            userGroupRS.Close()
+                            %>
+                        </select>
+                    </td>
+                </tr> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Assigned Approver:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="aa-select-app-approver_listbox" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="ea294f64-16e5-41a6-97eb-34ecfca70d87" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input"></span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="aa-select-app-approver" name="appApprover" data-role="dropdownlist" style="display: none;"><option value="" selected="selected"></option><option value="U:{ACA8AF20-A333-459F-AFB9-75952BBDBE62}">Daryan Lewis</option><option value="U:{FA41F1C1-15F6-4F09-BE40-54D7958E0D22}">Developer Account</option><option value="G:{F2D543BB-139E-4D92-8D11-BF7B4FB5D675}">Primary Approver</option><option value="G:{885C236E-6716-4B5C-8550-A2C773EE24BA}">Secondary Approver</option></select></span>
+                    </td>
+                </tr>
+               @*  <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Approval Status:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <%
+                        Dim applicationStatusQuery, applicationStatusRS, defaultapprovalstatus
+                        Set applicationStatusRS = Server.CreateObject("ADODB.RecordSet")
+                        applicationStatusQuery = _
+                        " SELECT " & _
+                        "   approvalStatusId, " & _
+                        "   approvalStatusDescription, " & _
+                        "   approvalStatusCode, " & _
+                        "   isDefault " & _
+                        " FROM " & _
+                        "   approvalStatus " & _
+                        " ORDER BY approvalStatusDescription"
+                        %><select id="aa-select-app-approval-status" name="approvalStatusId">
+                            <option value=""></option><%
+                            applicationStatusRS.Open applicationStatusQuery, db, adOpenStatic, adCmdText
+                            do until applicationStatusRS.eof
+                            %>
+                            <option value="<%=applicationStatusRS(" approvalStatusId")%>"><%=applicationStatusRS("approvalStatusDescription")%></option><%
+                            applicationStatusRS.MoveNext
+                            loop
+                            applicationStatusRS.Close
+                            %>
+                        </select>
+                    </td>
+                </tr> *@
+
+               @*  <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Application Status:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select id="aa-select-app-status" name="loanStatusId">
+                            <option value=""></option>
+                            <%
+                            Dim appAdminStatusQuery, appAdminStatusRS
+                            Set appAdminStatusRS = Server.CreateObject("ADODB.RecordSet")
+                            appAdminStatusQuery = _
+                            " SELECT *" & _
+                            " FROM loanStatus" & _
+                            " WHERE isApplicationStatus=1" & _
+                            " ORDER BY statusDescription"
+                            appAdminStatusRS.Open appAdminStatusQuery, db, adOpenStatic, adCmdText
+                            do until appAdminStatusRS.eof
+                            optionSelected = ""
+                            if CStr(appAdminStatusRS("statusId")) = CStr(loanStatusId) then
+                            optionSelected = "selected=""true"""
+                            end if
+                            %>
+                            <option value="<%=appAdminStatusRS(" statusId")%>"><%=appAdminStatusRS("statusDescription")%></option><%
+                            appAdminStatusRS.MoveNext
+                            loop
+                            appAdminStatusRS.Close
+                            %>
+                        </select>
+                    </td>
+                </tr> *@
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Approval Status:</td>
+                    <td>&nbsp;</td>
+                    <td><span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="aa-select-app-approval-status_listbox" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="9e86916b-e752-47b5-9903-3da478ddff8b" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input"></span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="aa-select-app-approval-status" name="approvalStatusId" data-role="dropdownlist" style="display: none;"><option value="" selected="selected"></option><option value="{C59BCBAD-B2B1-4A70-8C91-7F82D5E2B2B3}">Application in Process</option><option value="{2ECA0217-25EB-4413-AB45-62158FE7B023}">Application Withdrawn</option><option value="{1655E4FF-EF4C-4D8F-83EA-016C55BEBF96}">Approval Pending</option><option value="{FDF9C3F2-2149-4A97-A943-3494813EDEF0}">Approved</option><option value="{AD6D28FC-71CD-4D8C-91EF-DF36EE86A178}">Approved but not accepted</option><option value="{A2927B40-3938-419D-80AF-F6D98E69919C}">Denied - Adverse Action Processing Needed</option></select></span></td>
+                </tr>
+             @*    <% END IF ' ### IF Session("enableLoanApprovalsYN") = "Y" %> *@
+                <!-- End Approval search fields (2780) //-->
+               @*  <%
+                if bankmax = 1 then
+                %>
+                <tr>
+                    <td colspan="5"><input type="hidden" name="bank" value="<%=banksecurity(1,1)%>" /></td>
+                </tr> *@
+                <tr>
+                    <td colspan="5"><input type="hidden" name="bank" value="{DA470FE3-AD11-44F7-B237-433A2EB678BF}"></td>
+                </tr>
+               @*  <%
+                else
+                %>
+                <tr><td colspan="5">&nbsp;</td></tr>
+                <tr>
+                    <%      if bankmax = 1 then %>
+                    <td colspan="5">&nbsp; <input type="hidden" name="bank" value="<%=bank(" bankId")%>"/></td>
+                    <%      else %>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Bank:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select name="bank" onchange="changeBank(this);">
+                            <option value="0">All Banks</option>
+                            <%
+                            savedBankId = Session("searchBankId")
+                            do until bank.eof
+                            for i = 1 to bankmax
+                            if bank("bankid") = banksecurity(i,1) then
+                            if savedBankId = bank("bankid") then
+                            htmloption = " selected"
+                            else
+                            htmloption = ""
+                            end if
+
+                            %>
+                            <option value="<%=bank(" bankid")%>" <%=htmloption%>> <%= bank("bankName") %></option>
+                            <%
+                            end if
+                            next
+                            bank.MoveNext
+                            loop
+                            %>
+                        </select>
+                    </td>
+                    <%      end if 'bankmax = 1 %>
+                </tr>
+                <% end if %> *@
+
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="2">Maximum Results Displayed:</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select id="aa-display-max-result" name="maxResult">
+                            <option value="250">10 Pages</option>
+                            <option value="500">20 Pages</option>
+                            <option value="10000000">All Pages</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="h30">
+                    <td>&nbsp;</td>
+                    <td colspan="2">Display Document Status?</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <input id="aa-search-display-documents" type="checkbox" class="k-checkbox" name="displayDocs" value="1" />
+                        <label class="k-checkbox-label" for="aa-search-display-documents">Checking this may slow down the Search Results.</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="aa-button-wrapper-left">
+            <ul>
+                <li><button type="submit" class="k-button k-primary">Search</button></li>
+                <li><button id="aa-search-button-clear" type="button" class="k-button">Clear</button></li>
+            </ul>
+        </div>
+        <input type="hidden" name="searchPageSize" value="25" />
+
+    </form>
+
+</main>
+<!-- #include file="include/footer.asp" -->
+<!-- #include file="include/ThemeScripts.asp" -->
+<script type="text/javascript" src="include/javascript/utility.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.core.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.data.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.popup.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.list.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.dropdownlist.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.autocomplete.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.userevents.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.selectable.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.calendar.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.popup.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.datepicker.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.validator.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-accuaccount/js/kendo.culture.en-US.js"></script>
+<script type="text/javascript" src="Packages/kendo-accuaccount/js/kendo.validatorrules.js"></script>
+<script type="text/javascript" src="Packages/kendo-accuaccount/js/kendo.datepicker.js"></script>
+<script type="text/javascript" src="Scripts/Legacy/Search/search_autocomplete_initialize.js"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            kendo.ui.progress($(document.body), true);
+
+            setTimeout(function () {
+                initializeForm();
+            }, 3000);
+        });
+
+
+        var accountList = new Array();
+        var accountTypeList = new Array();
+        var accountStatusList = new Array();
+       
+        const accTypeList=[];
+         accountList[0] = new Array('','All');
+                   
+            accountTypeList[0] = new Array('', '', '', 'All');
+            accountList[1] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan');
+            accountTypeList[1] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{24B4A2F9-6FED-4B63-9AC3-1E24DE697C65}','AC Assignment');
+            accountTypeList[2] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{787CFEA9-4A21-4B84-8C01-0817B21820C1}','AC Real Estate');
+            accountTypeList[3] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{4A88B542-BE2B-429A-B83A-0BAA0E68865F}','AC Titled Vehicle');
+            accountTypeList[4] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{94B0D737-5F71-4B44-AE6C-746E6B048E7F}','AC UCC');
+            accountTypeList[5] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{5E08184E-E91C-4442-B350-4086DFAB3501}','Commercial Non Real Estate');
+            accountTypeList[6] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{05FFC52E-C588-4D47-998D-9179BAE7ADCA}','Commercial Real Estate');
+            accountTypeList[7] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{44EA63DC-5755-4483-8DE8-6AE0ACE349AD}','Consumer Non Real Estate');
+            accountTypeList[8] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{29AD8714-9615-4402-B1A3-D4EAD014D706}','Consumer Real Estate');
+            accountList[2] = new Array('{DA113DBE-F79B-408C-907C-6F7A81E4E5B0}','Deposit');
+            accountTypeList[9] = new Array('{DA113DBE-F79B-408C-907C-6F7A81E4E5B0}','Deposit','{E8E126F0-F34D-4F6F-A650-78E4AD38DB20}','Business Certificate of Deposit');
+            accountTypeList[10] = new Array('{DA113DBE-F79B-408C-907C-6F7A81E4E5B0}','Deposit','{58E0ABD5-1505-47F3-BA8A-AAD0CEC00337}','Business Checking');
+            accountTypeList[11] = new Array('{DA113DBE-F79B-408C-907C-6F7A81E4E5B0}','Deposit','{93078A44-E9CA-4B51-A3EA-CB6ADF11C319}','Business Savings');
+            accountTypeList[12] = new Array('{DA113DBE-F79B-408C-907C-6F7A81E4E5B0}','Deposit','{AA120632-B784-4B90-9952-4E6B26A6DB3D}','Personal Checking');
+            accountList[3] = new Array('{0D64E977-6865-471B-9E86-6FAE000AD1CC}','Trust');
+            accountTypeList[13] = new Array('{0D64E977-6865-471B-9E86-6FAE000AD1CC}','Trust','{34DC5F00-1B9E-4EE9-8912-07F9780EC1CB}','Corporate Trusts and Agencies');
+            accountTypeList[14] = new Array('{0D64E977-6865-471B-9E86-6FAE000AD1CC}','Trust','{F81CE5F3-383B-4A0E-A30A-6263202ACC90}','Emp Benefit Trusts and Agency Accts');
+            accountTypeList[15] = new Array('{0D64E977-6865-471B-9E86-6FAE000AD1CC}','Trust','{122E25DC-F222-4F02-B745-6EC1764323A5}','Funeral and Cemetery Trusts');
+            accountTypeList[16] = new Array('{0D64E977-6865-471B-9E86-6FAE000AD1CC}','Trust','{8CA2F207-4362-458D-B44B-551E2035D53B}','Personal Trusts and Personal Agencies');
+            accountStatusList[0] = new Array('', '', '', 'All');
+            accountStatusList[1] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{1711CC11-F441-4D52-9035-14B0745F3E22}','Active');
+            accountStatusList[2] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{50CE9657-34A9-45C2-A9B5-FAB063EFCABD}','Charged Off');
+            accountStatusList[3] = new Array('{62A68692-C594-4ECD-B957-78554DDA5ED0}','Loan','{7A8571A2-06E1-42D5-B55C-090E2FAF3DCA}','Paid Off');
+            accountStatusList[4] = new Array('{DA113DBE-F79B-408C-907C-6F7A81E4E5B0}','Deposit','{29287466-F524-4102-8621-32D350F6412B}','Closed');
+            accountStatusList[5] = new Array('{DA113DBE-F79B-408C-907C-6F7A81E4E5B0}','Deposit','{A1CEBDAF-30F7-4D0C-9388-22CA7AF1885D}','Open');
+            accountStatusList[6] = new Array('{0D64E977-6865-471B-9E86-6FAE000AD1CC}','Trust','{25201932-3244-48CA-AF1C-2BC29C575FB6}','Closed');
+            accountStatusList[7] = new Array('{0D64E977-6865-471B-9E86-6FAE000AD1CC}','Trust','{CA30F720-BBB9-4C24-9C24-B6522CD92FDF}','Open - Restricted');
+            accountStatusList[8] = new Array('{0D64E977-6865-471B-9E86-6FAE000AD1CC}','Trust','{FC725A88-11E6-47F1-8989-5B67903430E7}','Open - Unrestricted');
+   
+   
+            $("#aa-search-button-clear").click(function () {
+            // The following clears the form but not the session elements that remember the last search.
+            // For now the redirect will continue to be used as that will clear out the necessary variables.
+            //
+            //$("#aa-search-form")[0].reset();
+        window.location.replace('/searchq1?action=CLEAR&searchType=@searchType');
+        });
+
+        $("[id^='aa-expand-flex-']").click(function () {
+            var flexType = $(this).prop("id").replace("aa-expand-flex-", "");
+            var flexCollapsedDisplay = ".aa-" + flexType + "-flex-collapsed";
+            var flexExpandedDisplay = ".aa-" + flexType + "-flex-expanded";
+
+            updateFlexFieldExpandorCookie(flexType, "");
+
+            $(flexCollapsedDisplay).removeClass("aa-search-show").addClass("aa-search-hide");
+            $(flexExpandedDisplay).each(function () {
+                $(this).removeClass("aa-search-hide").addClass("aa-search-show");
+            });
+        });
+
+        $("[id^='aa-collapse-flex-']").click(function () {
+            var flexType = $(this).prop("id").replace("aa-collapse-flex-", "");
+            var flexCollapsedDisplay = ".aa-" + flexType + "-flex-collapsed";
+            var flexExpandedDisplay = ".aa-" + flexType + "-flex-expanded";
+
+            updateFlexFieldExpandorCookie(flexType, "collapsed");
+
+            $(flexCollapsedDisplay).removeClass("aa-search-hide").addClass("aa-search-show");
+            $(flexExpandedDisplay).each(function () {
+                $(this).removeClass("aa-search-show").addClass("aa-search-hide");
+            });
+        });
+
+        function updateFlexFieldExpandorCookie(idName, newState) {
+            // Set display preference as a cookie
+            //
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + 365);
+            var c_value = escape(newState) + "; expires=" + exdate.toUTCString();
+            document.cookie = idName + "searchDisplayState=" + c_value;
+        }
+
+        function populateAccountClass() {
+            var accountClassData = [];
+            
+            @foreach(var accountClass in Model.getAccClassData())
+            {
+                <text>
+                    accountClassData.push({
+                        "Name": "@accountClass.Name",
+                        "Id": "@accountClass.Id"
+                    });
+                </text>
+            }
+           
+          
+            //accountClassData.push(myArray);
+            //      for (var i = 0; i < accountList.length; i++){
+            //     var item = accountList[i];
+
+            //     accountClassData.push({
+            //         "Name": item[1],
+            //         "Id" : item[0]
+            //     });
+            // }
+
+            $("#aa-select-account-class").kendoDropDownList({
+                dataSource: accountClassData,
+                dataTextField: "Name",
+                dataValueField: "Id"
+            });
+
+            var accountClassDropDown = $("#aa-select-account-class").data("kendoDropDownList");
+            // accountClassDropDown.bind("change", changeAccountClass);
+        }
+
+        function populateAccountType(selectedAccountClassId) {
+            var accountTypeData = [];
+            for (var i = 0; i < accountTypeList.length; i++) {
+                var item = accountTypeList[i];
+
+                var itemName = item[3];
+
+                // decorate item name with account class if specific account class not selected.
+                if (selectedAccountClassId == "" && i != 0) {
+                    itemName += " (" + item[1] + ")";
+                }
+
+                if (i == 0 || selectedAccountClassId == "" || selectedAccountClassId == item[0]) {
+                    accountTypeData.push({
+                        "Name": itemName,
+                        "Id": item[2]
+                    });
+                }
+            }
+
+            $("#aa-select-account-type").kendoDropDownList({
+                dataSource: accountTypeData,
+                dataTextField: "Name",
+                dataValueField: "Id"
+            });
+
+            var accountTypeDropDown = $("#aa-select-account-type").data("kendoDropDownList");
+        }
+
+        function populateAccountStatus(selectedAccountClassId) {
+            var accountStatusData = [];
+            for (var i = 0; i < accountStatusList.length; i++) {
+                var item = accountStatusList[i];
+
+                var itemName = item[3];
+
+                // decorate item name with account class if specific account class not selected.
+                if (selectedAccountClassId == "" && i != 0) {
+                    itemName += " (" + item[1] + ")";
+                }
+
+                if (i == 0 || selectedAccountClassId == "" || selectedAccountClassId == item[0]) {
+                    accountStatusData.push({
+                        "Name": itemName,
+                        "Id": item[2]
+                    });
+                }
+            }
+
+            $("#aa-select-account-status").kendoDropDownList({
+                dataSource: accountStatusData,
+                dataTextField: "Name",
+                dataValueField: "Id"
+            });
+
+            var accountStatusDropDown = $("#aa-select-account-status").data("kendoDropDownList");
+        }
+
+        function changeAccountClass(e) {
+            var accountClassId = this.value();
+
+            populateAccountType(accountClassId);
+            $("#aa-select-account-type").data("kendoDropDownList").select(0);
+
+            populateAccountStatus(accountClassId);
+            $("#aa-select-account-status").data("kendoDropDownList").select(0);
+        }
+
+        function initializeForm() {
+            populateAccountClass();
+            populateAccountType("");
+            populateAccountStatus("");
+
+            // call kendo formatting on choice lists
+            $('#aa-search-customer-status').kendoDropDownList();
+            $('#aa-select-customer-type').kendoDropDownList();
+            $('#aa-select-customer-officer').kendoDropDownList();
+            $('#aa-select-customer-branch').kendoDropDownList();
+
+            $('#aa-select-account-officer').kendoDropDownList();
+            $('#aa-select-account-branch').kendoDropDownList();
+
+            $('#aa-select-assigned-lender').kendoDropDownList();
+            $('#aa-select-app-delegate').kendoDropDownList();
+            $('#aa-select-app-analyst').kendoDropDownList();
+            $('#aa-select-app-approver').kendoDropDownList();
+            $('#aa-select-app-approval-status').kendoDropDownList();
+            $('#aa-select-app-status').kendoDropDownList();
+
+            $('#aa-display-max-result').kendoDropDownList();
+
+            /* INITIATE KENDO DATEPICKERS */
+           
+             // var datepickerIds = '<%=Left(datePickerIds, Len(datePickerIds) - 1)%>';
+           var datepickerIds = 'from-org-date,to-org-date,from-flex-flex_DepositFiltering1,to-flex-flex_DepositFiltering1,from-flex-flex_DepositFiltering2,to-flex-flex_DepositFiltering2,from-flex-flex_LoanFiltering1,to-flex-flex_LoanFiltering1,from-flex-flex_LoanFiltering2,to-flex-flex_LoanFiltering2,from-flex-flex_TrustFiltering1,to-flex-flex_TrustFiltering1,from-flex-flex_TrustFiltering2,to-flex-flex_TrustFiltering2,from-flex-flex_CollateralFiltering1,to-flex-flex_CollateralFiltering1,from-flex-flex_CollateralFiltering2,to-flex-flex_CollateralFiltering2,app-date-from,app-date-to';
+        var datepickerId = datepickerIds.split(',');
+            var datepickerId = datepickerIds.split(',');
+
+            for (var i = 0; i < datepickerId.length; i++) {
+                $('#' + datepickerId[i]).kendoConfiguredDatePicker();
+            }
+
+            $('#aa-search-form').kendoValidator({
+                rules: {
+                    date:    KendoValidatorRules.date,
+                    mindate: KendoValidatorRules.mindate,
+                    maxdate: KendoValidatorRules.maxdate
+                }
+            });
+
+            // var creditFlexFieldIdList = "<%=creditFlexFieldIdList%>";
+                var creditFlexFieldIdList = "#aa-select-flex-flex_ChoiceFlexField";
+   
+            var idList = creditFlexFieldIdList.split(",");
+            for(var i = 0; i < idList.length; i++){
+                $(idList[i]).kendoDropDownList();
+            }
+
+
+            // var accountFlexFieldIdList = "<%=accountFlexFieldIdList%>";
+            var accountFlexFieldIdList = "#aa-select-flex-flex_LoanChoiceTest";
+            idList = accountFlexFieldIdList.split(",");
+            for(var i = 0; i < idList.length; i++){
+                $(idList[i]).kendoDropDownList();
+            }
+
+            // var collateralFlexFieldIdList = "<%=collateralFlexFieldIdList%>";
+
+        var collateralFlexFieldIdList = "#aa-select-flex-flex_AFRExport, #aa-select-flex-flex_ICGExport";
+            idList = collateralFlexFieldIdList.split(",");
+            for(var i = 0; i < idList.length; i++){
+                $(idList[i]).kendoDropDownList();
+            }
+
+            // Setup classification data and styles
+
+            @{
+            var classificationData = new List<ClassificationData>()
+            {
+                new ClassificationData() { Name = "All", Value = "", Style = "" }
+            };
+
+            foreach (var clf in Model.getClassification())
+            {
+                if (clf.displayEmphasis)
+                {
+                    classificationData.Add(new ClassificationData() { Name = clf.classificationName, Value = clf.classificationId, Style = "font-weight: bold; color: " + clf.displayColor });
+                }
+                else
+                {
+                    classificationData.Add(new ClassificationData() { Name = clf.classificationName, Value = clf.classificationId, Style = "font-weight: normal; color: " + clf.displayColor });
+                }
+            }
+            var classificationDataJson = System.Text.Json.JsonSerializer.Serialize(classificationData);
+        }
+
+        
+        // // alert( @Html.Raw(classificationDataJson).ToString());
+         
+             var jsonclassificationData = @Html.Raw(classificationDataJson);
+
+            $("#aa-search-select-classification").kendoDropDownList({
+                dataTextField:  "Name",
+                dataValueField: "Value",
+                valueTemplate:  "<span style='#: data.Style #'>#: Name #</span>",
+                template:       "<span class='k-state-default' style='#: data.Style #'>#: Name #</span>",
+                dataSource:     jsonclassificationData,
+                index:          0
+            });
+
+            var classificationDropDown = $("#aa-search-select-classification").data("kendoDropDownList");
+             
+
+    $('#aa-search-form-wrapper').show();
+    $('footer').show();
+    kendo.ui.progress($(document.body), false);
+     }
+        </script>
+
+<!-- #include file="include/dbclose.inc" -->

@@ -1,0 +1,39 @@
+﻿.aa-kendo-grid > tbody > tr {
+    height: 39px;
+}
+
+.aa-kendo-grid > tbody > tr > th {
+    background-color: #FAFAFA;
+    text-align: left;
+    font-size: 12px;
+    color: #999;
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px 0 12px;
+}
+
+.aa-kendo-grid > tbody > tr > td {
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+}
+
+
+.aa-kendo-grid > tbody > tr > th:first-child,
+.aa-kendo-grid > tbody > tr > td:first-child {
+    text-align: center;
+    padding: 0 6px;
+}
+
+.aa-kendo-grid > tbody > tr > th.aa-tac {
+    padding: 0 6px;
+}
+
+.aa-kendo-grid > tbody > tr > th:last-child {
+    border-right: 0;
+}     
+
+#aa-grid-wrapper {
+    height: 400px;
+    width: 100%;
+    overflow-y: auto;
+}

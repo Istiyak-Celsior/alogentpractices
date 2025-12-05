@@ -1,0 +1,107 @@
+﻿th {
+    text-align: left;
+}
+
+.aa-title {
+    padding-left: 0;
+    min-width: 0;
+}
+
+.aa-title > div {
+    height: 45px;
+    line-height: 45px;
+    padding-left: 15px;
+}
+
+.aa-title > div:last-child {
+    width: auto;
+    float: inherit;
+    text-align: inherit;
+}
+
+.title {
+    font-weight: bold;
+    color: #555;
+    font-size: 16px;
+}
+
+#control-wrapper {
+    background-color: #D7D7D7;
+    padding: 6px 15px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+    border-bottom: 1px #AFAFAF solid;
+}
+
+#control-wrapper > div {
+    font-weight: bold;
+    width: 15%;
+    float: left;
+    display: block;
+    overflow: auto;
+}
+
+#control-wrapper > div:last-child {
+    text-align: left;
+    width: 85%;
+}
+
+#control-wrapper > div:after {
+    clear: left;
+}
+
+#search-box-wrapper {
+    background-color: #545454;
+    padding: 10px 15px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+    border-bottom: 1px #CECECE solid;
+    color: #FFF;
+    font-weight: bold;
+}
+
+ul.search-boxes {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+ul.search-boxes > li {
+    height: 28px;
+    line-height: 28px;
+    float: left;
+    padding-left: 12px;
+}
+
+ul.search-boxes > li:first-child {
+    padding-left: 0;
+}
+
+#list-wrapper {
+    background-color: #ECECEC;
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+    border-bottom: 1px #CECECE solid;
+}
+
+.tbl-head {
+    font-weight: bold;
+    color: #999;
+    background-color: #FAFAFA;
+}
+
+.tbl-head a:link,
+.tbl-head a:visited,
+.tbl-head a:hover,
+.tbl-head a:active {
+    color: #999;
+    text-decoration: none;
+}
+
+#gridviewMTE > tbody > tr:not([class]) > td:first-child {
+    padding-left: 12px;
+}

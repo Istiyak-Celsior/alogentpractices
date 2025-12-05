@@ -1,0 +1,30 @@
+﻿.notification-error-handler .k-notification {
+    margin-bottom: 4px;
+}
+
+.notification-error-handler .k-notification-wrap {
+    display: flex;
+    align-items: center;
+    white-space: normal;
+    word-wrap: break-word;
+    padding: 4px 24px 4px 0px;
+}
+
+.notification-error-handler .k-notification-wrap .k-i-error,
+.notification-error-handler .k-notification-wrap .k-i-success,
+.notification-error-handler .k-notification-wrap .k-i-info,
+.notification-error-handler .k-notification-wrap .k-i-warning {
+    width: 32px;
+}
+
+.notification-error-handler .k-notification-wrap .k-i-close {
+    position: absolute;
+    top: calc(50% - 8px);
+    right: 4px;
+    bottom: auto;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.notification-error-handler .k-i-close {
+}

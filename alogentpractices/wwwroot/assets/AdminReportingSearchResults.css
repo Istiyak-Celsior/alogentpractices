@@ -1,0 +1,91 @@
+﻿div#aa-scrollable-container {
+    width: 100%;
+    height: 600px;
+    overflow-y: auto;
+}
+
+div#aa-paging-bar {
+    width: 100%;
+    padding-bottom: 12px;
+    text-align: right;
+}
+
+/* COPIED FROM SearchResultsGrid.css */
+section {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    display: table;
+    border: solid 1px green;
+}
+
+section#grid-header > div {
+    width: 50%;
+    float: left;
+}
+
+section#grid-header > div > ul#aa-button-wrapper {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+
+section#grid-header > div > ul#aa-button-wrapper > li {
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    padding-left: 12px;
+}
+
+section#grid-header > div > ul#aa-button-wrapper > li:first-child {
+    padding-left: 0;
+}
+
+#aa-pagination-wrapper {
+    width: 100%;
+    display: table;
+}
+
+#aa-pagination-wrapper > div.pager {
+    float: right;
+    padding-top: 5px;
+}
+
+#aa-pagination-wrapper > div.pager a,
+#aa-pagination-wrapper > div.pager a:active,
+#aa-pagination-wrapper > div.pager a:visited {
+    float: left;
+    margin: 0 .08333em;
+    height: 2em;
+    line-height: 2em;
+    border-radius: 1.0833em;
+    cursor: pointer;
+    text-align: center;
+    border: 1px #CACACA solid;
+    width: 2.0em;
+}
+
+#aa-pagination-wrapper > div.pager a:hover {
+    background-color: #F5F5F5;
+}
+
+#aa-pagination-wrapper > div.pager a.selected,
+#aa-pagination-wrapper > div.pager a:active.selected,
+#aa-pagination-wrapper > div.pager a:visited.selected {
+    color: #7AA6BD;
+    border: 1px transparent solid;
+    background-color: #F5F5F5;
+}
+
+#aa-pagination-wrapper > div.pager a:hover.selected {
+    background-color: #F5F5F5;
+    cursor: default;
+}
+
+.aa-account-description {
+    width: 185px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

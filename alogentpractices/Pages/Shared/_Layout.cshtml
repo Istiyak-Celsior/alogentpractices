@@ -1,0 +1,83 @@
+﻿@using ServiceLayer.Implementation
+@using alogentpractices.Services
+
+@inject IHttpContextAccessor _context
+@inject SecurityService security
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - alogentpractices</title>
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+
+    <script src="~/Packages/jquery/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="Packages/fontawesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="Packages/jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="Packages/kendo-ui/styles/kendo.common.min.css" />
+    <link rel="stylesheet" type="text/css" href="Packages/kendo-ui/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" type="text/css" href="Packages/kendo-accuaccount/styles/kendo.custom.css" />
+    <link rel="stylesheet" type="text/css" href="Packages/kendo-ui/styles/kendo.material.mobile.min.css" />
+    <link rel="stylesheet" type="text/css" href="Packages/malihu-scrollbar/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" type="text/css" href="Content/App.css" />
+    <link rel="stylesheet" type="text/css" href="Content/Core.css" />
+    <link rel="stylesheet" type="text/css" href="Content/Header.css" />
+    <link rel="stylesheet" type="text/css" href="Content/Footer.css" />
+    <link rel="stylesheet" type="text/css" href="Content/Kendo.Custom.css" />
+    <link rel="stylesheet" type="text/css" href="Content/Dhtmlx.Custom.css" />
+</head>
+<body>
+    <div id="aa-header-logo-container">
+        <a href="dashboard.asp" title="Go to the dashboard" id="pageTop"><img src="Content/Images/Nav/Logo.png" alt="AccuSystems Logo" /></a>
+    </div>
+    <nav>
+        <div>
+            @if (security.IsAdministrator())
+            {
+                @await Html.PartialAsync("_menu_items_su.cshtml")
+            }
+            else if (security.IsReader())
+            {
+                <!-- #include file="menu_items_user.asp" -->
+            }
+        </div>
+        <div id="head-search-wrapper">
+            <div class="aa-icon-block" id="cog"><i class="fas fa-cog fa-fw" title="Change User Password" id="header-config" aria-hidden="true"></i></div>
+            <div id="notification-no-count"><i class="fas fa-bell fa-fw" aria-hidden="true"></i></div>
+            <div id="notification-count">0</div>
+            <div id="notification-user-wrapper">@_context.HttpContext.Session.GetString("userName")</div>
+        </div>
+    </nav>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            AccuAccount 25.0.2
+        </div>
+    </footer>
+
+    <script src="Packages/jquery-ui/jquery-ui.js"></script>
+    <script src="Packages/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="Scripts/Legacy/Notifications/NotificationsDTO.js"></script>
+    <script src="Scripts/Legacy/Notifications/NotificationsService.js"></script>
+    <script src="Scripts/Legacy/Notifications/NotificationsController.js"></script>
+    <script src="Scripts/Legacy/header.js"></script>
+
+    <script type="text/javascript" src="include/javascript/utility.js"></script>
+    <script src="Packages/kendo-ui/js/kendo.all.min.js"></script>
+@*     <script type="text/javascript" src="Packages/kendo-ui/js/kendo.core.min.js"></script>
+    <script type="text/javascript" src="Packages/kendo-ui/js/kendo.data.min.js"></script>
+    <script type="text/javascript" src="Packages/kendo-ui/js/kendo.userevents.min.js"></script>
+    <script type="text/javascript" src="Packages/kendo-ui/js/kendo.draganddrop.min.js"></script>
+    <script type="text/javascript" src="Packages/kendo-ui/js/kendo.popup.min.js"></script>
+    <script type="text/javascript" src="Packages/kendo-ui/js/kendo.window.min.js"></script>
+    <script type="text/javascript" src="Packages/kendo-ui/js/kendo.tabstrip.min.js"></script>
+    <script type="text/javascript" src="Scripts/Legacy/Kendo.Window.js"></script> *@
+</body>
+</html>

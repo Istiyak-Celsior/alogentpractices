@@ -1,0 +1,395 @@
+﻿@page
+@using Microsoft.EntityFrameworkCore
+@using alogentpractices.DAL
+@using alogentpractices.Entities
+@inject ApplicationDbContext _context;
+@model alogentpractices.Pages.exceptiondeflistModel
+@{
+    ViewData["Title"] = "Exception List";
+}
+
+
+@{
+    // Response.BufferOutput = true;
+    /*
+    * If, just migrating old code and had Response.Buffer = true for safety,
+    * remove it entirely — it’s the default behavior in Core.
+         *
+    */
+
+    string loanStyle = string.Empty;
+    string activeTabStyle = string.Empty;
+    string displayLabel = string.Empty;
+    string targetIdFieldName = string.Empty;
+    string targetType = string.Empty;
+    string targetDescriptionFieldName = string.Empty;
+    string exceptionActiveBankName = string.Empty;
+    List<dynamic> targetTypeQuery = null;
+
+    if (string.IsNullOrEmpty(Model.expandAll))
+    {
+        Model.expandAll = "N";  
+    }
+
+    if (string.IsNullOrEmpty(Request.Query["bankId"]))
+    {
+        Model.bankId = Model.exceptionActiveBankId;
+    }
+    else
+    {
+        Model.bankId = Request.Query["bankId"];
+        HttpContext.Session.SetString("exceptionActiveBankId", Model.bankId ?? string.Empty);
+        var sqlGetBankName = (from n in _context.banks
+                              where n.bankId == Model.dbFormatId(Model.bankId)
+                              select n).FirstOrDefault<Bank>();
+
+        if (sqlGetBankName != null)
+        {
+            exceptionActiveBankName = sqlGetBankName.bankName;
+        }
+    }
+
+    if ((Model.bankId ?? "").Trim() == "")
+    {
+        HttpContext.Session.SetString("errFlag", "true");
+        HttpContext.Session.SetString("errMsg", "You must choose a bank to enter Exception Maintenance.");
+        Response.Clear();
+        Response.Redirect("/exceptionbankselection");
+    }
+
+    string customerStyle = "tabStyle1";
+    if (string.IsNullOrEmpty(Model.exceptionDefType))
+    {
+        Model.exceptionDefType = "customer";
+        Model.activeTab = "credit";
+    }
+
+    if (Model.exceptionDefType == "customer")
+    {
+        targetTypeQuery = (from n in _context.customerTypes
+                           join m in _context.customerTypeDescriptions on n.customerTypeId equals m.customerTypeId
+                           where m.bankId == Model.dbFormatId(Model.bankId)
+                           group m by new { n.customerTypeId, n.customerTypeDescription } into g
+                           orderby g.Key.customerTypeDescription
+                           select (dynamic)new
+                           {
+                               customerTypeId = g.Key.customerTypeId,
+                               customerTypeDescription = g.Key.customerTypeDescription,
+                           }).ToList();
+
+        targetDescriptionFieldName = "customerTypeDescription";
+        targetIdFieldName = "customerTypeId";
+        targetType = "C";
+        activeTabStyle = customerStyle;
+        displayLabel = "Credit";
+    }
+    else
+    {
+        targetTypeQuery = (from lt in _context.loanTypes
+                           join dd in _context.documentDefinations
+                                on lt.loanTypeId equals dd.loanTypeId
+                           join ac in _context.AccountClasses
+                                on lt.accountClassId equals ac.accountClassId
+                           where dd.bankId == Model.dbFormatId(Model.bankId)
+                           && ac.accountClassCode.Contains(Model.dbFormatId(Model.activeTab))
+                           group ac by new { lt.loanTypeId, lt.loanTypeDescription } into g
+                           orderby g.Key.loanTypeDescription
+                           select (dynamic)new
+                           {
+                               loanTypeId = g.Key.loanTypeId,
+                               loanTypeDescription = g.Key.loanTypeDescription,
+                           }).ToList();
+
+        targetDescriptionFieldName = "loanTypeDescription";
+
+        if (Model.activeTab == "loan")
+        {
+            loanStyle = "tabStyle3";
+            activeTabStyle = loanStyle;
+            displayLabel = "Loan";
+        }
+        else if (Model.activeTab == "deposit")
+        {
+            loanStyle = "tabStyle2";
+            activeTabStyle = loanStyle;
+            displayLabel = "Deposit";
+        }
+        else if (Model.activeTab == "trust")
+        {
+            loanStyle = "tabStyle4";
+            activeTabStyle = loanStyle;
+            displayLabel = "Trust";
+        }
+
+        targetIdFieldName = "loanTypeId";
+        targetType = "L";
+    }
+}
+
+<!-- #include file="include/adovbs.inc" -->
+<!-- #include file="include/dbopen.inc" -->
+<!-- #include file="include/security.inc" -->
+<!-- #include file="include/common.inc" -->
+
+<link rel="stylesheet" type="text/css" href="Content/ExceptionDefList.css" />
+
+<div>
+    <div class="aa-title">
+        <div>
+            <h1 class="restrict"><i class="title-icon fas fa-file-alt" aria-hidden="true"></i>&nbsp;&nbsp;Exception Maintenance:&nbsp;@exceptionActiveBankName</h1>
+        </div>
+        <div id="aa-bank-logo-container">
+            <img src="customer/logo/customerlogo.gif" alt="logo" id="customer-logo-image" />
+        </div>
+    </div>
+    <main>
+        <!-- #include file="include/msghandler.inc" -->
+        <div class="top">
+            @{
+                string sep = "&nbsp;&nbsp;&bull;&nbsp;&nbsp;";
+                var bankCount = HttpContext.Session.GetString("exceptionActiveBankCount");
+
+                if (!int.TryParse(bankCount, out _))
+                {
+                    {
+                        HttpContext.Session.SetInt32("exceptionActiveBankCount", 1);
+                    }
+                    if (Convert.ToInt32(HttpContext.Session.GetInt32("exceptionActiveBankCount")) > 1)
+                    {
+                        <a href="/exceptionbankselection"> Change Bank </a>
+                        @:&nbsp;&nbsp;&bull;&nbsp;&nbsp;
+                    }
+
+                    <a href="/exceptioncategorylist">Edit Exception Categories</a>
+                    @Html.Raw(sep)
+
+                    <a href="/exceptiondefmassedit">Edit Exception Ignore Flags</a>
+
+                    if (@Model.expandAll.ToUpper() == "Y")
+                    {
+                        @Html.Raw(sep)
+                        <a href="/exceptiondeflist?exceptionDefType=@Model.exceptionDefType&expandTypeId=@Model.expandTypeId&expandAll=N&activeTab=@Model.activeTab">
+                            Collapse All Exceptions
+                        </a>
+                    }
+                    else
+                    {
+                        @Html.Raw(sep)
+                        <a href="/exceptiondeflist?exceptionDefType=@Model.exceptionDefType&expandTypeId=@Model.expandTypeId&expandAll=Y&activeTab=@Model.activeTab">
+                            Expand All Exceptions
+                        </a>
+                    }
+                }
+            }
+        </div>
+        <div class="scrollable-wrapper">
+            <div id="tabstrip">
+                <ul>
+                    @if (@Model.activeTab == "credit")
+                    {
+                        <li class="k-state-active">Credit</li>
+                    }
+                    else
+                    {
+                        <li data-link="/exceptiondeflist?exceptionDefType=customer&expandTypeId=@Model.expandTypeId&expandAll=@Model.expandAll&activeTab=credit">Credit</li>
+                    }
+
+                    @{
+                        var accountClassRS = (from n in _context.AccountClasses
+                                              orderby n.accountClassSortOrder
+                                              select n).ToList<AccountClass>();
+
+                        foreach (AccountClass accountClass in accountClassRS)
+                        {
+                            if (accountClass.accountClassCode == "loan")
+                            {
+                                loanStyle = "tabstyle3";
+                            }
+                            else if (accountClass.accountClassCode == "deposit")
+                            {
+                                loanStyle = "tabstyle2";
+                            }
+                            else if (accountClass.accountClassCode == "trust")
+                            {
+                                loanStyle = "tabstyle4";
+                            }
+
+                            if (@Model.activeTab == accountClass.accountClassCode)
+                            {
+                                <li class="k-state-active">@accountClass.accountClassName</li>
+                            }
+                            else
+                            {
+                                <li data-link="/exceptiondeflist?exceptionDefType=loan&expandTypeId=@Model.expandTypeId&expandAll=@Model.expandAll&activeTab=@accountClass.accountClassCode">@accountClass.accountClassName</li>
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="aa-exception-def-group">
+                <h2>@displayLabel Exceptions</h2>
+                <table class="aa-exception-wrapper">
+                    @{
+                        // ### Build query for displaying exception types. ###
+                        // Dim targetTypeRS : Set targetTypeRS = Server.CreateObject("ADODB.RecordSet")
+                        // Dim exceptionDefRS : Set exceptionDefRS = Server.CreateObject("ADODB.RecordSet")
+                    }
+
+                    @foreach (var targetTypeRS in targetTypeQuery)
+                    {
+                        var currentTypeId = targetTypeRS.GetType().GetProperty(targetIdFieldName)?.GetValue(targetTypeRS);
+                        var exceptionDefQuery = (from ed in _context.exceptionDefinitions
+                                                 join nlse in _context.noticeLetterSetExceptions
+                                                 on ed.exceptionDefId equals nlse.exceptionDefinitionId into g
+                                                 where ed.bankId == Model.dbFormatId(Model.bankId)
+                                                 && !ed.exceptionDefType.Contains("custom")
+                                                 // && EF.Property<string>(ed, targetIdFieldName) == Model.dbFormatId(currentTypeId)
+                                                 orderby ed.sortOrder, ed.exceptionDefName
+                                                 from o in g.DefaultIfEmpty()
+                                                 select new
+                                                 {
+                                                     ed,
+                                                     noticeLetterSetExceptionId = o != null
+                                                     ? o.noticeLetterSetExceptionId
+                                                     : null
+                                                 }).ToList();
+
+                        // ### NOTE: we need to manually count the definitions since any cursor type other than dbOpenForwardOnly
+                        // generates database cursors. ###
+                        var exceptionDefCount = 0;
+                        @if (exceptionDefQuery != null && exceptionDefQuery.Count > 0)
+                        {
+                            exceptionDefCount = exceptionDefQuery.Count;
+                        }
+
+
+                        @if (Model.expandTypeId == currentTypeId.ToString() || Model.expandAll.ToUpper() == "Y")
+                        {
+                            <tr class="aa-group-header-wrapper">
+                                <td><a href="/exceptiondeflist?exceptionDefType=@Model.exceptionDefType&targetTypeId=@currentTypeId&collapseTypeId=@currentTypeId&activeTab=@Model.activeTab"><i class="aa-icon fas fa-minus-square fa-fw" title="Collapse" aria-hidden="true"></i></a></td>
+                                <td><b>@targetTypeRS.GetType().GetProperty(targetDescriptionFieldName)?.GetValue(targetTypeRS) Exceptions</b>&nbsp;&nbsp;(<i>@exceptionDefCount Definitions</i>)</td>
+                            </tr>
+
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <table class="aa-exception-def-list">
+                                        <tr class="aa-links">
+                                            <td colspan="7">
+                                                <a href="javascript:void(0);" onclick="openKendoDialog('Create New Exception', '/exceptiondefselecttype?action=ADD&exceptionDefType=@Model.exceptionDefType&targetType=@targetType&targetTypeId=@currentTypeId&expandTypeId=@Model.expandTypeId&expandAll=@Model.expandAll&bankId=@Model.bankId&activeTab=@Model.activeTab', 550, 800);">Add New @targetTypeRS.GetType().GetProperty(targetDescriptionFieldName)?.GetValue(targetTypeRS) Exception</a>
+                                                @if (HttpContext.Session.GetInt32("accuaccount.enableExpress") != 1 || HttpContext.Session.GetInt32("accuaccount.enableNotices") == 1)
+                                                {
+                                                    @:&nbsp;&nbsp;&bull;&nbsp;&nbsp;<a href="javascript:void(0);" onclick="openKendoDialog('Create New Policy Exception', '/exceptiondefselectpolicy?action=ADD&exceptionDefType=@Model.exceptionDefType&targetType=@targetType&targetTypeId=@currentTypeId&expandTypeId=@Model.expandTypeId&expandAll=@Model.expandAll&bankId=@Model.bankId&activeTab=@Model.activeTab', 550, 800);">Add New @targetTypeRS.GetType().GetProperty(targetDescriptionFieldName)?.GetValue(targetTypeRS) Policy Exception</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                        @if (exceptionDefQuery.Count > 0)
+                                        {
+                                            <tr class="aa-header">
+                                                <td>Edit</td>
+                                                <td>Exception Name</td>
+                                                <td>Weight</td>
+                                                <td>Exception Type</td>
+                                                @if (HttpContext.Session.GetInt32("accuaccount.enableExpress") != 1 && HttpContext.Session.GetInt32("accuaccount.enableNotices") == 1)
+                                                {
+                                                    <td>Notices</td>
+                                                }
+                                                <td>Sort Order</td>
+                                                <td>Policy Exceptions</td>
+                                            </tr>
+                                            @foreach (var exceptionDefRS in exceptionDefQuery)
+                                            {
+                                                string compLabel = string.Empty;
+                                                var compType = exceptionDefRS.ed.computationType; // EF.Property<string>(exceptionDefRS, "computationType");
+                                                if (compType == "computed")
+                                                {
+                                                    compLabel = "Document";
+                                                }
+                                                else
+                                                {
+                                                    compLabel = "Task";
+                                                }
+
+                                                var noticeLetterSetExceptionId = exceptionDefRS.noticeLetterSetExceptionId; // EF.Property<string>(exceptionDefRS, "noticeLetterSetExceptionId");
+                                                <tr>
+                                                    <td><a href="javascript:void(0);" onclick="openKendoDialog('Edit Exception', '/exceptiondefmaint1?action=EDIT&exceptionDefId=@exceptionDefRS.ed.exceptionDefId&expandTypeId=@Model.expandTypeId&expandAll=@Model.expandAll&activeTab=@Model.activeTab', 550, 850);" class="aa-command-link"><i class="aa-icon fas fa-pencil-alt fa-fw" title="Edit" aria-hidden="true"></i></a></td>
+                                                    <td>@exceptionDefRS.ed.exceptionDefName</td>
+                                                    <td>@exceptionDefRS.ed.weight</td>
+                                                    <td>@compLabel</td>
+                                                    @if (HttpContext.Session.GetInt32("accuaccount.enableExpress") != 1 && HttpContext.Session.GetInt32("accuaccount.enableNotices") == 1)
+                                                    {
+                                                        <td>
+                                                            @if (!string.IsNullOrEmpty(noticeLetterSetExceptionId))
+                                                            {
+                                                                <i class="aa-icon far fa-envelope aa-notice-icon-disabled" title="Notice Defined" aria-hidden="true"></i>
+                                                            }
+                                                        </td>
+                                                    }
+                                                    <td>@exceptionDefRS.ed.sortOrder</td>
+                                                    <td>
+                                                        @if (!string.IsNullOrEmpty(exceptionDefRS.ed.PolicyId))
+                                                        {
+                                                            <i class="aa-icon fab fa-product-hunt" aria-hidden="true"></i>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="aa-group-header-wrapper">
+                                <td><a href="/exceptiondeflist?exceptionDefType=@Model.exceptionDefType&targetTypeId=@currentTypeId&expandTypeId=@currentTypeId&activeTab=@Model.activeTab"><i class="aa-icon fas fa-plus-square fa-fw" title="Expand" aria-hidden="true"></i></a></td>
+                            <td>@targetTypeRS.GetType().GetProperty(targetDescriptionFieldName)?.GetValue(targetTypeRS) Exceptions&nbsp;&nbsp;(<i>@exceptionDefCount Definitions</i>)</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+    </main>
+    <!-- #include file="include/footer.asp" -->
+</div>
+<!-- #include file="include/ThemeScripts.asp" -->
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.core.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.userevents.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.draganddrop.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.sortable.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.popup.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.dialog.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.data.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.window.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.tabstrip.min.js"></script>
+<script type="text/javascript" src="Scripts/Legacy/Kendo.Window.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        kendo.ui.progress($(document.body), true);
+
+        setTimeout(function () {
+            initializePage();
+        }, 1500);
+    });
+
+    function initializePage() {
+        $('#tabstrip').kendoTabStrip({
+            select: onSelect,
+            animation: {
+                open: {
+                    effects: 'fadeIn'
+                }
+            }
+        });
+
+        $('main').css('display', 'table');
+        $('footer').show();
+        kendo.ui.progress($(document.body), false);
+    }
+
+    function onSelect(e) {
+        var link = $(e.item).data('link');
+        document.location.href = link;
+    }
+</script>

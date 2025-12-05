@@ -1,0 +1,14 @@
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > thead > tr > th:nth-child(2),
+.aa-kendo-grid > tbody > tr > td:first-child,
+.aa-kendo-grid > tbody > tr > td:nth-child(2) {
+    width: 80px;
+}
+
+.fa-trash-alt.disabled {
+    color: #C3C3C3 !important;
+}
+
+.fa-check-circle {
+    color: #27AE60;
+}

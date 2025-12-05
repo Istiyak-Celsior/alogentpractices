@@ -1,0 +1,69 @@
+﻿h3 {
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+.k-textbox {
+    width: 370px;
+}
+
+.k-dropdown {
+    width: 350px;
+}
+
+.sub-header {
+    margin: 12px 0;
+}
+
+.aa-vertical-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.aa-vertical-list > li {
+    height: 22px;
+    line-height: 22px;
+}
+
+.aa-vertical-list.indent > li {
+    margin-left: 20px;
+}
+
+.aa-panel {
+    width: 100%;
+}
+
+.aa-panel > div {
+    width: 33%;
+    float: left;
+    display: table;
+}
+
+.aa-panel > div:last-child {
+    width: 34%;
+}
+
+.aa-panel > div:after {
+    clear: left;
+}
+
+.aa-emails-wrapper span {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+}
+
+.aa-kendo-grid.timers {
+    width: 50%;
+}
+
+.aa-kendo-grid.timers > thead > tr > th:first-child,
+.aa-kendo-grid.timers > tbody > tr > td:first-child {
+    width: 80px;
+    text-align: center;
+}
+
+.aa-kendo-grid.new-timers {
+    width: 50%;
+}

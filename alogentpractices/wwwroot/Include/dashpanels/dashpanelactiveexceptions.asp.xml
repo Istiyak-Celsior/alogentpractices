@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<panel xmlns="" id="" title="Active Exceptions Summary" displayInAccuExpress="false">
+  <!--Define Active Exceptions panel-->
+  <description></description>
+  <defaults>
+    <position panelnumber="" pagenumber=""></position>
+  </defaults>
+  <file>dashpanelactiveexceptions.asp</file>
+</panel>

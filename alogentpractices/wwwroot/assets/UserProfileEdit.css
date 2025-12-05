@@ -1,0 +1,34 @@
+﻿fieldset {
+    padding: 8px;
+    border: 1px #CECECE solid;
+    background-color: #F5F5F5;
+}
+
+.aa-legend-preference > tbody > tr > td:nth-child(2) > label {
+    font-weight: bold;
+}
+
+.aa-view-preference-checklist > tbody > tr > td:nth-child(2) {
+    padding-left: 10px;
+}
+
+#aa-edit-preferences-panel {
+    width: 100%;
+    padding: 12px;
+    display: table;
+    box-sizing: border-box;
+}
+
+#aa-view-preference-tabstrip > .k-content {
+    height: 300px;
+    overflow: auto;
+}
+
+#aa-view-preference-tabstrip {
+    border: 1px #E5E5E5 solid;
+    box-sizing: border-box;
+}
+
+#aa-view-preference-tabstrip > div {
+    min-height: 362px;
+}

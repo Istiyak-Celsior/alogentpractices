@@ -1,0 +1,14 @@
+﻿main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+.k-dropdown {
+    width:120px;
+}
+
+#docdefid .k-dropdown {
+    width: 500px;
+}

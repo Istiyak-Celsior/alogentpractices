@@ -1,0 +1,14 @@
+﻿<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel = "stylesheet" type="text/css" href="Packages/fontawesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="Packages/jquery-ui/jquery-ui.css"/>
+<link rel="stylesheet" type="text/css" href="Packages/kendo-ui/styles/kendo.common.min.css"/>
+<link rel="stylesheet" type="text/css" href="Packages/kendo-ui/styles/kendo.common-material.min.css"/>
+<link rel="stylesheet" type="text/css" href="Packages/kendo-accuaccount/styles/kendo.custom.css"/>
+<link rel="stylesheet" type="text/css" href="Packages/kendo-ui/styles/kendo.material.mobile.min.css" />
+<link rel="stylesheet" type="text/css" href="Packages/malihu-scrollbar/jquery.mCustomScrollbar.css"/>
+<link rel="stylesheet" type="text/css" href="Content/App.css"/>
+<link rel="stylesheet" type="text/css" href="Content/Core.css"/>
+<link rel="stylesheet" type="text/css" href="Content/Header.css"/>
+<link rel="stylesheet" type="text/css" href="Content/Footer.css"/>
+<link rel="stylesheet" type="text/css" href="Content/Kendo.Custom.css"/>
+<link rel="stylesheet" type="text/css" href="Content/Dhtmlx.Custom.css"/>

@@ -1,0 +1,160 @@
+﻿.k-dropdown,
+.k-textbox {
+    width: 350px;
+}
+
+.k-dropdown.small,
+.k-textbox.small{
+    width: 100px;
+}
+
+.validation-error {
+    background-color: #F2DEDE !important;
+    border: 1px #EBCCCC solid !important;
+    color: #A94442 !important;
+}
+
+.normal {
+    background: transparent;
+}
+
+.highlight {
+    background: #E5E5E5;
+}
+
+h2 {
+    margin: 7px 0;
+    padding: 5px 0 5px 6px;
+    background-color: #E6E6E6;
+}
+
+/* Styling for the Purge Section */
+table#aa-purge-control-table > tbody > tr > td.aa-no-background-color {
+    background-color: #FFF;
+}
+
+table#aa-purge-control-table > tbody > tr.aa-date-purge-row,
+table#aa-purge-control-table > tbody > tr.aa-flex-purge-row {
+    display: none;
+}
+
+table#aa-loan-status-table,
+table#aa-application-status-table {
+    width: 100%;
+    display: none;
+}
+
+table.aa-status-table-content {
+    width: 100%;
+}
+table.aa-status-table-content > tbody > tr > td {
+    vertical-align: top;
+}
+
+table.aa-status-column {
+    width: 325px;
+}
+
+div#aa-alert-message {
+    width: 98% !important;
+    margin: 6px 0px;
+    display: none;
+    background: #ebcccc !important;
+    border: 1px #bbb6b6 solid !important;
+    padding: 5px 10px !important;
+}
+
+div#aa-status-warning {
+    width: 98%;
+    display: none;
+    background: #EBCCCC;
+    border: 1px #BBB6B6 solid;
+    padding: 5px 10px;
+    margin-top: 12px;
+}
+
+tr#no-control-alert {
+    display: none;
+}
+
+/* Styling for the Manage Document Schedule Section */
+table#aa-manage-schedule-table {
+    width: 100%;
+}
+
+table#aa-manage-schedule-table > tbody > tr {
+    height: 35px;
+}
+
+table#aa-manage-schedule-table > tbody > tr > td:nth-child(odd) {
+    background-color: #D7D7D7;
+    /*border-bottom: 1px #FFF solid;*/
+    text-align: left;
+    padding: 0 12px;
+    width: 200px;
+}
+
+table#aa-manage-schedule-table > tbody > tr > td:nth-child(even) {
+    text-align: left;
+    padding-left: 12px;
+}
+
+table#aa-manage-schedule-table > tbody > tr.aa-no-background-color.narrow {
+    height: 12px;
+}
+
+table#aa-manage-schedule-table > tbody > tr.aa-no-background-color > td:first-child {
+    background-color: inherit;
+}
+
+table#aa-manage-schedule-table > tbody > tr > td.aa-no-background-color {
+    background-color: #EBEBEB;
+}
+
+input#fldSchedule_7 {
+    width: 700px;
+}
+
+#fldSchedule_8,
+#fldSchedule_9,
+#fldSchedule_10 {
+    cursor: pointer;
+}
+
+#instructionWarning {
+    display: none;
+}
+
+.aa-calendar-container {
+    width: 50px;
+    display:inline-block;
+    vertical-align: middle;
+}
+
+.aa-collapsable-schedule-row {
+    display: none;
+}
+
+span.k-tooltip {
+    margin-left: 35px;
+}
+
+.aa-horizontal-list > li {
+    padding-left: 10px;
+}
+
+.aa-info-text {
+    width: 40%;
+    display: inline-block;
+    padding: 3px 5px;
+    color: white;
+    background-color: #4a4a4a;
+}
+
+.aa-v-align-middle {
+    vertical-align: middle;
+}
+
+.aa-qc-critical {
+    padding-left: 335px;
+}

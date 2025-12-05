@@ -1,0 +1,37 @@
+﻿#uxNoFtpUrlAlert {
+    padding: 5px;
+    margin: 5px 0;
+    text-align: center;
+}
+
+#uxNoFtpUrlAlert div {
+    display: inline-block;
+    float: left;
+    height: 16px;
+    line-height: 16px;
+}
+
+.aa-horizontal-list.warning {
+    display: inline-block;
+}
+
+.aa-horizontal-list.warning > li {
+    height: unset;
+    line-height: unset;
+}
+
+.aa-two-column-form-table > tbody > tr > td:first-child {
+    width: 250px;
+}
+
+.aa-no-background-color.warning > td:first-child {
+    padding: 0;
+}
+
+.k-textbox.name {
+    width: 350px;
+}
+
+.k-textbox.email {
+    width: 250px;
+}

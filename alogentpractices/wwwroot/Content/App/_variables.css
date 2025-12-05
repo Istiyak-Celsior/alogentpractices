@@ -1,0 +1,13 @@
+:root {
+    --app-color-primary: #7aa6bd;
+    --app-color-secondary: #4d7c9e;
+    --app-color-accent: #45ca93;
+    --app-color-info: #238fc9;
+    --app-color-warning: #e2b00f;
+    --app-color-danger: #ec6c6c;
+    --app-color-success: rgb(104, 207, 104);
+    --app-color-border-light: #e6e6e6;
+    --app-color-text: #696969;
+    --app-color-text-light: #a1a1a1;
+    --app-color-selection-highlight: #d7f1ff85;
+}

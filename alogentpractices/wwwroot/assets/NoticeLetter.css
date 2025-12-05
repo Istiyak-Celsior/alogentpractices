@@ -1,0 +1,13 @@
+.noticeletter-preview {
+    aspect-ratio: 8.5 / 11;
+    background-color: #fff;
+    margin: 36px;
+    padding: 24px;
+    height: 400px;
+    
+    box-shadow: 1px 1px 9px 9px rgba(0,0,0,0.10);
+    -webkit-box-shadow: 1px 1px 9px 9px rgba(0,0,0,0.10);
+    -moz-box-shadow: 1px 1px 9px 9px rgba(0,0,0,0.10);
+
+    overflow-y: scroll;
+}

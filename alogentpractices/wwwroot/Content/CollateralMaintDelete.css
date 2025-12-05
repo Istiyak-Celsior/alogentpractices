@@ -1,0 +1,12 @@
+﻿.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.aa-align-right {
+    text-align: right;
+}
+
+.aa-clear-column-styling {
+    background-color: white !important;
+}

@@ -1,0 +1,10 @@
+﻿table#aa-tab-list-table > tbody > tr > td:nth-child(2){
+    width: 20px;
+    text-align: center;
+}
+
+div#aa-scrollable-content {
+    padding: 6px 0px;
+    height: 425px;
+    overflow-y: auto;
+}

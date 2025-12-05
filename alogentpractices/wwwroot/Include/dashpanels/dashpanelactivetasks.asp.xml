@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<panel xmlns="" id="" title="Active Tasks" displayInAccuExpress="false">
+  <!--Define Active Exceptions Detailed panel-->
+  <description></description>
+  <defaults>
+    <position panelnumber="" pagenumber=""></position>
+  </defaults>
+  <file>dashpanelactivetasks.asp</file>
+</panel>

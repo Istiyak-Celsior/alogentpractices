@@ -1,0 +1,92 @@
+﻿#aa-tellerview-table {
+    width: 100%;
+    height: 500px;
+}
+
+.k-dropdown {
+    width: 250px;
+}
+
+#aa-document-navigation {
+    width: 9%;
+    vertical-align: top;
+}
+
+div.aa-dropdown-field > h2 {
+    padding: 6px;
+    width: 95%;
+    background-color: #E5E5E5;
+}
+
+div.aa-dropdown-field > div {
+    padding: 6px 3px;
+}
+
+td.aa-document-view-container {
+    width: 45%;
+    height: 70%;
+    vertical-align: top;
+    border: solid 1px #CACACA;
+}
+
+td.aa-document-controls  {
+    vertical-align: top;
+}
+
+#creditDocumentLabel,
+#accountDocumentLabel {
+    text-align: center;
+}
+
+table.aa-document-view {
+    width: 100%;
+}
+
+h2.aa-document-header {
+    padding: 3px 0px;
+    color: #FFFFFF;
+    background-color: #000000;
+}
+
+.aa-frame-viewer {
+    width: 100%;
+    height: 800px;
+    border: none;
+}
+
+.aa-two-column-form-table.aa-top-pad {
+    padding-top: 12px;
+}
+
+.aa-header {
+    font-size: larger;
+    font-weight: bold;
+    color: #444444;
+}
+
+.aa-qc-approval {
+    padding-top: 6px;
+}
+
+.aa-approval-icon-box{
+    display: table-cell;
+    padding: 0px 3px;
+}
+
+#aa-credit-approval-label,
+#aa-account-approval-label {
+    display: table-cell;
+    padding: 0px 3px;
+}
+
+.aa-icon {
+    font-size: 16px !important;
+}
+
+.aa-document-unapproved {
+    color: #ca3f3f;
+}
+
+.aa-document-approved {
+    color: #3fca5b;
+}

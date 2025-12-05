@@ -1,0 +1,43 @@
+.document-type-row > td {
+    background-color: #F5F5F5 !important;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.aa-disabled {
+    color: #B9B9B9;
+}
+
+.aa-check-all-wrapper {
+    margin-bottom: 12px;
+    text-align: right;
+    padding-right: 14px;
+}
+
+.grid-wrapper {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.aa-kendo-grid > thead > tr > th:nth-child(4) {
+    text-align: center;
+    padding: 0px 6px;
+    width: 80px;
+    min-width: 80px;
+}
+
+.aa-document-approved,
+.aa-document-unapproved {
+    font-size: 16px !important;
+}

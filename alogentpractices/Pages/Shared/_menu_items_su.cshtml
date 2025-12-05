@@ -1,0 +1,127 @@
+﻿@inject IHttpContextAccessor _context
+
+@{
+    var Session = _context.HttpContext.Session;
+}
+
+@{
+    var session = _context.HttpContext.Session;
+
+    session.SetInt32("accuaccount.enableExpress", 1);
+    session.SetString("isSuperUser", "True");
+    session.SetString("credit.isAdmin", "True");
+    session.SetString("credit.allowAdd", "True");
+    session.SetString("UseBranchSecurity", "Y");
+    session.SetInt32("BranchAccessCount", 0);
+    session.SetString("accuaccount.disableImaging", "0");
+    session.SetString("acculoan.showParticipationLoan", "1");
+    session.SetInt32("accuaccount.enableNotices", 1);
+    session.SetString("AccuAccount.Notice::Manage", "0");
+    session.SetString("AccuAccount.Notice::Distribute", "0");
+    session.SetString("AccuAccount.Audit::Manage", "0");
+    session.SetString("userName", "Developer");
+}
+
+<ul id="nav">
+    <li><a href="/dashboard" class="menu" id="mmenu0">Dashboard</a></li>
+    <li>
+        <a href="/home" target="_self" class="menu" id="mmenu1" onmouseover="mopen(1);" onmouseout="mclosetime();">Search</a>
+        <div class="submenu" id="menu1" onmouseover="mcancelclosetime()" onmouseout="mclosetime();">
+            @if (Session.GetString("accuaccount.enableExpress") != "1")
+            {
+                <a href="/searchq1?searchType=Exception">Exceptions</a>
+
+            }
+            <a href="/searchq1?searchType=Existing">Existing Documents</a>
+            <a href="/searchq1?searchType=Expired">Expired Documents</a>
+            <a href="/searchq1?searchType=Missing">Missing Documents</a>
+            <a href="/searchq1?searchType=Waived">Waived Documents</a>
+        </div>
+    </li>
+    <li>
+        <a href="#" class="menu" id="mmenu2" onmouseover="mopen(2);" onmouseout="mclosetime();">User</a>
+        <div class="submenu" id="menu2" onmouseover="mcancelclosetime()" onmouseout="mclosetime();">
+            <a href="/user_barcode_cover_sheet" target="_blank">Print User Barcode Covers</a>
+        </div>
+    </li>
+    <li>
+        <a href="#" class="menu" id="mmenu3" onmouseover="mopen(3);" onmouseout="mclosetime();">Reporting</a>
+        <div class="submenu" id="menu3" onmouseover="mcancelclosetime()" onmouseout="mclosetime();">
+            <a href="/dynamicreporting">My Reports</a>
+            <a href="/exceptionreports?mode=checklist">Checklists</a>
+            <a href="/exceptionreports?mode=classifiedaccounts">Classified Accounts</a>
+            @if (Session.GetString("accuaccount.enableExpress") != "1")
+            {
+                <a href="/exceptionreports?mode=crosscollaterals">Cross Collaterals</a>
+                <a href="/exceptionreports">Exception Reports</a>
+            }
+            <a href="/exceptionreports?mode=expiringdocuments">Expiring Documents</a>
+            @if (Session.GetString("accuaccount.enableExpress") != "1")
+            {
+                <a href="/exceptionreports?mode=accountapplications">Account Applications</a>
+                <a href="/exceptionreports?mode=policyexceptions">Policy Exceptions</a>
+                <a href="/exceptionreports?mode=relatedentities">Related Entities</a>
+            }
+            @if (Session.GetString("acculoan.showParticipationLoan") == "1")
+            {
+                <a href="/exceptionreports?mode=participations">Participation Loans</a>
+            }
+            <a href="/sh_search?action=SCAN">Document History</a>
+            @if (Session.GetString("accuaccount.disableImaging") == "0")
+            {
+                <a href="/sh_search?action=VIEW">Documents Viewed</a>
+            }
+        </div>
+    </li>
+    @if (Session.GetString("credit.allowAdd") == "true" || Session.GetString("credit.isAdmin") == "true"
+        || Session.GetString("isSuperUser") == "true")
+    {
+        int branchAccessCount = 0;
+        @if (Session.GetString("isSuperUser") == "true" || Session.GetString("UseBranchSecurity") == "N"
+            || (Session.GetString("UseBranchSecurity") == "Y" && @branchAccessCount > 0))
+        {
+            <li><a href="/customermaintadd?state=INITIAL&action=ADD" class="menu" id="mmenu4">Add Customer</a></li>
+        }
+        else
+        {
+            <li><a href="javascript:void(0);" class="menu" id="mmenu4" style="cursor:default;"><span title="Cannot add Customers because you do not have access to any Branches">Add Customer</span></a></li>
+        }
+    }
+
+    @if (Session.GetString("accuaccount.disableImaging") == "0" && (Session.GetString("isSuperUser") == "true" || (Session.GetString("AccuAccount.Audit::Manage") ?? "") == "0"))
+    {
+        <li><a href="/auditlist" class="menu" id="mmenu5">Audit</a></li>
+    }
+
+    @if (Session.GetString("accuaccount.enableExpress") != "1")
+    {
+        <li>
+            <a href="#" class="menu" id="mmenu6" onmouseover="mopen(6);" onmouseout="mclosetime();">Exceptions</a>
+            <div class="submenu" id="menu6" onmouseover="mcancelclosetime()" onmouseout="mclosetime();">
+                <a href="exceptionbankselection">Exception Maintenance</a>
+                <a href="PolicyMaintenance">Policy Exception Maintenance</a>
+                <a href="taskgrouplist">Task List Maintenance</a>
+                <a href="contactMaint">Contacts Maintenance</a>
+                <a href="contactTypeMaint">Contact Types Maintenance</a>
+            </div>
+        </li>
+    }
+    @if (Session.GetString("accuaccount.enableExpress") != "1" && Session.GetString("accuaccount.enableNotices") == "1" && (Session.GetString("isSuperUser") == "true" || (Session.GetString("AccuAccount.Notice::Manage") ?? "") == "0" || (Session.GetString("AccuAccount.Notice::Distribute") ?? "") == "0"))
+    {
+        <li>
+            <a href="#" class="menu" id="mmenu7" onmouseover="mopen(7);" onmouseout="mclosetime();">Notices</a>
+            <div class="submenu" id="menu7" onmouseover="mcancelclosetime()" onmouseout="mclosetime();">
+                @if (Session.GetString("isSuperUser") == "true" || (Session.GetString("AccuAccount.Notice::Manage") ?? "") == "0")
+                {
+                    <a href="noticeadmin.asp">Notice Administration</a>
+                }
+                @if (Session.GetString("isSuperUser") == "true" || (Session.GetString("AccuAccount.Notice::Distribute") ?? "") == "0")
+                {
+                    <a href="noticedistribution.asp">Notice Distribution</a>
+                }
+            </div>
+        </li>
+    }
+    <li><a href="/adminlist" class="menu" id="mmenu8">Admin</a></li>
+    <li><a href="/logoff" class="menu" id="mmenu19">Sign Out</a></li>
+</ul>

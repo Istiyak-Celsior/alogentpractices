@@ -1,0 +1,131 @@
+﻿#aa-search-wrapper {
+    margin: 0 auto;
+    display: table;
+}
+
+#aa-search-table > tbody > tr {
+    height: 35px;
+}
+
+#aa-search-table > tbody > tr > td:first-child {
+    padding-right: 12px;
+}
+
+#aa-credit-flex-field-banner, #aa-account-flex-field-banner, #aa-collateral-flex-field-banner {
+    text-align: left !important;
+    padding-left: 5px;
+    background-color: #FFFFFF !important;
+}
+
+#aa-search-table > tbody > tr > td:nth-child(2) {
+    text-align: right;
+    padding: 0 6px;
+    background-color: #D7D7D7;
+    border-bottom: 1px #FFF solid;
+}
+
+#aa-search-table > tbody > tr > td:nth-child(3) {
+    text-align: right;
+}
+
+#aa-search-table > tbody > tr > td:nth-child(4), td:nth-child(5) {
+    text-align: left;
+}
+
+.aa-search-flex-field-label {
+    background-color: #ECECEC;
+    padding-left: 6px;
+}
+
+.aa-search-show {
+    display: table-row;
+}
+
+.aa-search-hide {
+    display: none;
+}
+
+#aa-search-loading {
+    margin: 25px;
+    text-align: center;
+}
+
+i[id^="aa-expand-flex"], i[id^="aa-collapse-flex"]{
+    cursor: pointer
+}
+
+.k-dropdown {
+    width: 300px;
+    text-align: left;
+}
+
+.aa-date-input {
+    padding-right: 10px;
+}
+
+.aa-button-section {
+    text-align: right;
+}
+
+.aa-search-wrapper {
+    background-color: #FFF;
+    padding: 12px;
+    border: 1px #d6d6d6 solid;
+    display: inline-block;
+}
+
+.sub-header {
+    padding: 6px 24px;
+}
+
+.sub-header.top {
+    padding: 0 24px 6px 24px;
+}
+
+.k-textbox {
+    width: 300px;
+}
+
+.k-textbox.date {
+    width: 102px;
+}
+
+.k-textbox.range {
+    width: 134px;
+}
+
+div.dhxcombo_dhx_skyblue div.dhxcombo_select_button div.dhxcombo_select_img {
+    background-image: none;
+    left: 7px;
+    top: 4px;
+}
+
+.vert-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.vert-list > li:not(:first-child) {
+    padding-top: 3px;
+}
+
+.k-loading-image {
+    background-image: url(../Packages/kendo-ui/styles/Default/loading-image.gif);
+}
+
+footer {
+    display: none;
+}
+
+.k-datepicker {
+    width: 134px;
+}
+
+span.k-tooltip {
+    margin-left: 0;
+}
+
+.aa-horizontal-list > li {
+    padding-left: 10px;
+}

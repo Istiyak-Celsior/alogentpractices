@@ -1,0 +1,8 @@
+﻿#changePrimaryBorrowerContentWrapper > span {
+    width: 300px;
+}
+
+#aa-change-borrower-button-bar {
+    padding: 15px;
+    text-align: right;
+}

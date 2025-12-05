@@ -1,0 +1,105 @@
+﻿@* @page
+@using Microsoft.EntityFrameworkCore
+@using alogentpractices.DAL
+@using alogentpractices.Entities
+@using alogentpractices.Services
+
+@inject ApplicationDbContext _dbContext
+@inject Security _security
+@inject IHttpContextAccessor _context
+
+@model alogentpractices.Pages.exceptiondefselectpolicyModel
+@{
+    Layout = null;
+    ViewData["Title"] = "AccuAccount : Select Policy";
+}
+
+<partial name="_ThemeStylesModal" />
+
+<!-- #include file="include/adovbs.inc" -->
+<!-- #include file="include/dbopen.inc" -->
+<!-- #include file="include/common.inc" -->
+<!-- #include file="include/security.inc" -->
+@{
+    _security.CheckExceptionSecurity(2);
+
+    string action = Request.Query["action"];
+    string exceptionDefType = Request.Query["exceptionDefType"];
+    string targetType = Request.Query["targetType"];
+    string targetTypeId = Request.Query["targetTypeId"];
+    string targetId = Request.Query["targetId"];
+    string bankId = Request.Query["bankId"];
+    string activeTab = Request.Query["activeTab"];
+
+    // ### The following are only passed by general ExceptionDefinition maintenance ###
+    string expandTypeId = Request.Query["expandTypeId"];
+    string expandAll = Request.Query["expandAll"];
+}
+
+
+
+<!-- #include file="include/ThemeStylesModal.asp" -->
+<link rel="stylesheet" type="text/css" href="Content/ExceptionDefSelectPolicy.css" />
+<main class="modal">
+    <form name="frmSelectExceptionType" action="exceptiondefmaint1.asp" method="post">
+        <input type="hidden" name="action" value="@action" />
+        <input type="hidden" name="exceptionDefType" value="@exceptionDefType" />
+        <input type="hidden" name="targetType" value="@targetType" />
+        <input type="hidden" name="targetTypeId" value="@targetTypeId" />
+        <input type="hidden" name="targetId" value="@targetId" />
+        <input type="hidden" name="bankId" value="@bankId" />
+        <input type="hidden" name="expandTypeId" value="@expandTypeId" />
+        <input type="hidden" name="expandAll" value="@expandAll" />
+        <input type="hidden" name="computationType" value="manual" />
+        <input type="hidden" name="isPolicyException" value="1" />
+        <input type="hidden" name="activeTab" value="@activeTab" />
+        <table class="listing-table">
+            @{
+                // Dim policyRS : Set policyRS = Server.CreateObject("ADODB.RecordSet")
+                // Dim policyQuery : policyQuery = "SELECT * FROM policyDefinitions ORDER BY policyTitle"
+                // policyRS.Open policyQuery, db, adOpenStatic, adCmdText
+                policyDefinitions pds = (from n in _dbContext.policyDefinitions
+                order by n.policyTitle
+                select n).ToList();
+
+                bool firstTime = true;
+                foreach (var policyRS in pds)
+                {
+                    string policyDescription = Trim(CheckForNull(policyRS.policyDescription));
+                    string checked = "";
+                    if (firstTime)
+                    {
+                        checked = ' checked=""checked""';
+                        firstTime = false;
+                        }
+                    }
+                }
+                <tr>
+                    <td><input type="radio" class="k-radio" name="policyId" id="policy-id-<%=policyRS(" policyId")%>" value="<%=policyRS("policyId")%>"<%=checked%>/><label class="k-radio-label" for="policy-id-<%=policyRS(" policyId")%>"><%=policyRS("policyTitle")%></label></td>
+                    <% IF Trim(policyDescription & "") <> "" THEN %>
+                    <td><div class="aa-policy-description" title="<%=policyDescription%>"><%=policyDescription%></div></td>
+                    <% ELSE %>
+                    <td>&nbsp;</td>
+                    <% END IF %>
+                </tr>
+                <%
+                policyRS.MoveNext
+                LOOP
+                policyRS.Close
+                %>
+            </table>
+            <div class="aa-button-wrapper-absolute">
+                <ul>
+                    <li><a href="javascript:void(0);" onclick="document.frmSelectExceptionType.submit();" class="k-button k-primary">Update</a></li>
+                    <li><a href="javascript:void(0);" onclick="parent.closeKendoDialog();" class="k-button">Cancel</a></li>
+                </ul>
+            </div>
+        </form>
+    </main>
+    <!-- #include file="include/ThemeScriptsModal.asp" -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            parent.$('#kendo-dialog_wnd_title').html('Create New Policy Exception: Select Policy');
+        });
+    </script>
+    <!-- #include file="include/dbclose.inc" --> *@

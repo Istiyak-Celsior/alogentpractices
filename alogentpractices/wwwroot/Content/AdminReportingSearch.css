@@ -1,0 +1,23 @@
+﻿.aa-search-wrapper {
+    background-color: #FFF;
+    padding: 12px;
+    border: 1px #d6d6d6 solid;
+    display: inline-block;
+}
+
+.k-dropdown,
+.k-textbox {
+    width: 350px;
+}
+
+.k-textbox.short {
+    width: 135px;
+}
+
+span.k-tooltip {
+    margin-left: 0;
+}
+
+footer, main {
+    display: none;
+}

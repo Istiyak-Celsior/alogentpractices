@@ -1,0 +1,85 @@
+﻿@page
+@using Microsoft.EntityFrameworkCore
+@using alogentpractices.DAL
+@using alogentpractices.Entities
+@using alogentpractices.Services
+
+@inject Security _security
+@inject IHttpContextAccessor _context
+
+@model alogentpractices.Pages.exceptiondefselecttypeModel
+@{
+    Layout = null;
+    ViewData["Title"] = "AccuAccount : Select Exception Type";
+}
+
+<partial name="_ThemeStylesModal" />
+
+<!-- #include file="include/adovbs.inc" -->
+<!-- #include file="include/dbopen.inc" -->
+<!-- #include file="include/common.inc" -->
+<!-- #include file="include/security.inc" -->
+@{
+    _security.CheckExceptionSecurity(3);
+    _context.HttpContext.Session.SetString("redirectUrl", "");
+
+    string action = Request.Query["action"];
+
+    string exceptionDefType = Request.Query["exceptionDefType"];
+    string targetType = Request.Query["targetType"];
+    string targetTypeId = Request.Query["targetTypeId"];
+    string targetId = Request.Query["targetId"];
+    string bankId = Request.Query["bankId"];
+    string activeTab = Request.Query["activeTab"];
+
+    // The following are only passed by general ExceptionDefinition maintenance ###
+    string expandTypeId = Request.Query["expandTypeId"];
+    string expandAll = Request.Query["expandAll"];
+
+    if (targetType == "L")
+    {
+        targetType = "Loan";
+    }
+    else if (targetType == "D")
+    {
+        targetType = "L";
+    }
+    else if (targetType == "T")
+    {
+        targetType = "Trust";
+    }
+}
+
+<!-- #include file="include/ThemeStylesModal.asp" -->
+<link rel="stylesheet" type="text/css" href="Content/ExceptionDefSelectType.css" />
+
+<main class="modal">
+    <form name="frmSelectExceptionType" action="/exceptiondefmaint1" method="post">
+        <input type="hidden" name="action" value="@action" />
+        <input type="hidden" name="exceptionDefType" value="@exceptionDefType" />
+        <input type="hidden" name="targetType" value="@targetType" />
+        <input type="hidden" name="targetTypeId" value="@targetTypeId" />
+        <input type="hidden" name="targetId" value="@targetId" />
+        <input type="hidden" name="bankId" value="@bankId" />
+        <input type="hidden" name="expandTypeId" value="@expandTypeId" />
+        <input type="hidden" name="expandAll" value="@expandAll" />
+        <input type="hidden" name="activeTab" value="@activeTab" />
+        <ul>
+            <li><input type="radio" class="k-radio" id="aa-document-exception" name="computationType" value="computed" checked /><label class="k-radio-label" for="aa-document-exception">Document Exception</label></li>
+            <li><input type="radio" class="k-radio" id="aa-task-exception" name="computationType" value="manual" /><label class="k-radio-label" for="aa-task-exception">Task Exception</label></li>
+        </ul>
+        <div class="aa-button-wrapper-absolute">
+            <ul>
+                <li><button type="submit" class="k-button k-primary">Next</button></li>
+                <li><button type="button" onclick="parent.closeKendoDialog();" class="k-button">Cancel</button></li>
+            </ul>
+        </div>
+    </form>
+</main>
+<!-- #include file="include/ThemeScriptsModal.asp" -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        parent.$('#kendo-dialog_wnd_title').html('Create New Exception: Select Exception Type');
+    });
+</script>
+<!-- #include file="include/dbclose.inc" -->

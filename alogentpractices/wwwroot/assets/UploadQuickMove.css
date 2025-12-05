@@ -1,0 +1,19 @@
+﻿.aa-title.modal {
+    padding-left: 20px;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+.k-dropdown {
+    width: 380px;
+}
+
+.document-title {
+    word-break: break-word;
+    word-break: break-all;
+}

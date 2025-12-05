@@ -1,0 +1,29 @@
+﻿.k-textbox {
+    width: 300px;
+}
+
+.k-textbox.number {
+    width: 100px;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.k-dropdown {
+    width: 200px;
+}
+
+.k-textbox:disabled {
+    background-color: #FAFAFA !important;
+    color: #7C7C7C;
+}

@@ -1,0 +1,138 @@
+﻿.aa-title {
+    padding-left: 20px;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+main.inner {
+    padding: 0;
+    overflow: hidden;
+    display: block;
+}
+
+#tabstrip {
+    min-height: 480px;
+}
+
+.k-textbox.exception-name {
+    width: 400px;
+}
+
+.k-dropdown {
+    width: 300px;
+}
+
+.default-assigned-user-id .k-dropdown {
+    width: 200px;
+}
+
+.k-content.k-state-active {
+    min-height: 413px;
+    max-height: 413px;
+}
+
+#default-status-type-wrapper .k-dropdown {
+    width: 100px;
+}
+
+.inner.filters > div:nth-child(1) {
+    float: left;
+    width: 52%;
+    padding-left: 2px;
+    box-sizing: border-box;
+}
+
+.inner.filters > div:nth-child(2) {
+    float: left;
+    width: 48%;
+    box-sizing: border-box;
+}
+
+.inner.filters > div:first-child > div {
+    height: 35px;
+    line-height: 35px;
+}
+
+/* FILTERS */
+.aa-kendo-grid-wrapper {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px #E5E5E5 solid;
+}
+
+.aa-kendo-grid.no-border {
+    border: 0;
+}
+
+.aa-kendo-grid > thead > tr > th:first-child,
+.aa-kendo-grid > thead > tr > th:nth-child(3),
+.aa-kendo-grid > tbody > tr > td:first-child,
+.aa-kendo-grid > tbody > tr > td:nth-child(3) {
+    padding: 0 6px;
+}
+
+.aa-kendo-grid > tbody > tr.header > td {
+    background-color: #FAFAFA;
+    text-align: left;
+    font-size: 12px;
+    color: #999;
+    border-right: 1px #E5E5E5 solid;
+    border-bottom: 1px #E5E5E5 solid;
+    padding: 0 6px 0 12px;
+}
+
+.threshold-amount {
+    margin-top: 12px;
+}
+
+/* FONT AWESOME STATUS ICONS */
+.aa-status-yes,
+.aa-status-no,
+.aa-status-pending,
+.aa-status-refresh {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.aa-status-pending {
+    color: #F1C40F
+}
+
+.aa-status-refresh {
+    color: #40B2E1
+}
+
+.aa-two-column-form-table > tbody > tr > td:first-child {
+    border-bottom: none;
+}
+
+span.k-tooltip {
+    margin-left: 0;
+}
+
+.filters label {
+    display: inline;
+}
+
+.flex-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.flex-list > div:not(:nth-child(1)) {
+    padding-left: 6px;
+}

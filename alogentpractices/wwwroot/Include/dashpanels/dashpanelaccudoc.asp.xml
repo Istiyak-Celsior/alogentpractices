@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<panel xmlns="" id="" title="AccuDoc">
+  <!--Define AccuDoc panel-->
+  <description></description>
+  <defaults>
+    <position panelnumber="" pagenumber=""></position>
+  </defaults>
+  <file>dashpanelaccudoc.asp</file>
+</panel>

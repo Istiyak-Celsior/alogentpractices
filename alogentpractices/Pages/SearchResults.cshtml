@@ -1,0 +1,643 @@
+﻿@page
+@model alogentpractices.Pages.SearchResultsModel
+@{
+    ViewData["Title"] = "AccuAccount : Search Results";
+    <link rel="stylesheet" type="text/css" href="Content/LegacyStyles/Print.css" media="print" />
+   @* <!-- #include file="include/ThemeStyles.asp" --> *@
+    <link rel="stylesheet" type="text/css" href="Content/SearchResults.css" />
+}
+@{
+    // Disable caching (ASP.NET Core compatible)
+    Response.Headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0";
+    Response.Headers["Pragma"] = "no-cache";
+    Response.Headers["Expires"] = "-1";
+    //Response.Body.Flush();
+    await Response.Body.FlushAsync();
+
+    // Start timer
+    var timeStart = DateTime.Now;
+}
+
+
+@*<!-- #include file="include/searchresults_querybuilder.asp" -->*@
+<!-- #include file="include/getBranchArray.inc" -->
+
+@{
+    string page = (Request.Query["page"].ToString() ?? "").Trim();
+}
+ @* if (string.IsNullOrEmpty(pageStr) || !int.TryParse(pageStr, out int page))
+     {
+         page = 1;
+     }
+     *@
+@{
+    const int BUILD_QUERY_TIMEOUT = 120;
+    //Context.Server.ScriptTimeout = 5 * 60;
+
+    // Example: ensure you have a db command or connection object accessible here for setting timeout
+    //db.CommandTimeout = BUILD_QUERY_TIMEOUT;
+
+    //// Retrieve session variables safely as strings
+    string searchType = Request.Query["searchType"];
+    string searchName = HttpContext.Session.GetString("searchName");
+    string searchCustomerNumber = HttpContext.Session.GetString("searchCustomerNumber");
+    string searchtaxId = HttpContext.Session.GetString("searchTaxId");
+    string searchcustomerStatus = HttpContext.Session.GetString("searchCustomerStatus");
+    string searchloan = HttpContext.Session.GetString("searchLoan");
+    string searchloanType = HttpContext.Session.GetString("searchLoanType");
+    string searchloanOfficer = HttpContext.Session.GetString("searchLoanOfficer");
+    string searchbank = HttpContext.Session.GetString("searchbankId") ?? "0";
+    string searchCustomerType = HttpContext.Session.GetString("searchcustomerType");
+    string searchCustomerOfficer = HttpContext.Session.GetString("searchCustomerOfficer");
+    string searchDisplayDocs = HttpContext.Session.GetString("searchDisplayDocs");
+    if (string.IsNullOrEmpty(searchDisplayDocs)) searchDisplayDocs = "0";
+    string searchParticipation = HttpContext.Session.GetString("searchParticipation");
+
+
+    // Retrieve and trim request query params
+    string expandLoanId = (Request.Query["expandLoanId"].ToString() ?? "").Trim();
+    string collapseLoanId = (Request.Query["collapseLoanId"].ToString() ?? "").Trim();
+
+
+    int pageSize = 25;
+    int maxResult = 250;
+    @if (int.TryParse(HttpContext.Session.GetString("searchMaxResult")?.ToString(), out int sessionMaxResult))
+    {
+        maxResult = sessionMaxResult;
+    }
+
+    bool maxResultExceeded = false;
+    int docCount = 0;
+    int docCountDelta = 0;
+
+    // Initialize other variables (with defaults)
+    // int pageCount = 0, startIndex = 0, lastIndex = 0, i = 0, advanceNextRecord = 0;
+    // int creditExceptCountStart = 0, creditExceptCountEnd = 0, creditExceptCountDelta = 0, creditExceptCount = 0;
+    // int customerExceptionCount = 0, borrowerCountStart = 0, borrowerCount = 0, borrowerCountEnd = 0, borrowerCountDelta = 0;
+    // int borrowerCounter = 0, accountExceptCountStart = 0, accountExceptCountEnd = 0, accountExceptCountDelta = 0;
+    // int loanExceptionCount = 0, loanCount = 0, collateralCount = 0;
+
+    int pageCount = 0;
+    int startIndex = 0;
+    int lastIndex = 0;
+    int i = 0;
+    int advanceNextRecord = 0;
+
+    int creditExceptCountStart = 0;
+    int creditExceptCountEnd = 0;
+    int creditExceptCountDelta = 0;
+    int creditExceptCount = 0;
+
+    int customerExceptionCount = 0;
+    int borrowerCountStart = 0;
+    int borrowerCount = 0;
+    int borrowerCountEnd = 0;
+    int borrowerCountDelta = 0;
+
+    int borrowerCounter = 0;
+    int accountExceptCountStart = 0;
+    int accountExceptCountEnd = 0;
+    int accountExceptCountDelta = 0;
+
+    int loanExceptionCount = 0;
+    int loanCount = 0;
+    int collateralCount = 0;
+
+
+    string loanUrlArg = "";
+    string displayLoanId = "";
+    string displayUrl = "";
+    string prevCustomerNumber = "";
+    string prevAccountNumber = "";
+    string prevLoanNumber = ""; 
+    string prevCollateralNumber = "";
+    string AddAnd = ""; 
+    string firstCollateralId = "";
+
+
+    // Determine current page, default to 1 if missing or invalid
+
+    //page = int.TryParse((HttpContext.Session["page"] ?? "").Trim(), out int reqPage) ? reqPage : 1;
+
+
+    // Prepare expandLoanId clause for query string usage
+    string expandLoanIdClause = string.IsNullOrEmpty(expandLoanId) ? "" : "&expandLoanId=" + expandLoanId;
+
+    // Bank security data retrieval
+    int bankmax = 0;
+    if (int.TryParse(HttpContext.Session.GetString("userbanklen")?.ToString(), out int tempBankmax))
+    {
+        bankmax = tempBankmax;
+    }
+
+    string banksecurity = "";
+    if (bankmax > 0)
+    {
+        banksecurity = HttpContext.Session.GetString("userbanks") as string;
+    }
+    else
+    {
+        // Replace with actual method call to populate banksecurity
+        // banksecurity = PopulateBankSecurity(20, 2);
+    }
+
+    // Start timer
+    DateTime queryStart = DateTime.Now;
+
+    bool pageError = false;
+    string pageErrNumber = "";
+    string pageErrMessage = ""; 
+    string pageErrSource = "";
+    int pageErrLineNumber = 0;
+
+    //  ### Used for finding active customer exceptions ###
+    //     Dim customerExceptionQuery
+    //     Dim customerExceptionRS : Set customerExceptionRS = CreateObject("ADODB.RecordSet")
+
+    //     ' ### Used for finding active loan exceptions ###
+    //     Dim loanExceptionQuery
+    //     Dim loanExceptionRS : Set loanExceptionRS = CreateObject("ADODB.RecordSet")
+
+    //     Query = searchQuery
+    //     Dim queryStart : queryStart = Timer()
+
+    //     Set Customer = Server.CreateObject("ADODB.Recordset")
+    //     Customer.cursorLocation = adUseClient
+    //     IF showDebug THEN Response.Write "Query = " & Query & "<br/>"
+    //    Customer.Open Query, db, adOpenForwardOnly
+
+    // ' ### Used for finding active loan exceptions ###
+    //     Dim loanExceptionQuery
+    //     Dim loanExceptionRS : Set loanExceptionRS = CreateObject("ADODB.RecordSet")
+
+    //     Query = searchQuery
+    //     Dim queryStart : queryStart = Timer()
+
+    //     Set Customer = Server.CreateObject("ADODB.Recordset")
+    //     Customer.cursorLocation = adUseClient
+    //     IF showDebug THEN Response.Write "Query = " & Query & "<br/>"
+    //     Customer.Open Query, db, adOpenForwardOnly
+
+        // Dim pageError : pageError = false
+        // Dim pageErrNumber : pageErrNumber = ""
+        // Dim pageErrMessage : pageErrMessage = ""
+        // Dim pageErrSource : pageErrSource = ""
+        // Dim pageErrLineNumber : pageErrLineNumber = ""
+
+        // bool pageError = false;
+        // string pageErrNumber = "";
+        // string pageErrMessage = "";
+        // string pageErrSource = "";
+        // string pageErrLineNumber = "";
+    
+    }
+    @* catch (Exception ex)
+    {
+        pageError = true;
+        pageErrNumber = ex.HResult.ToString();
+        pageErrMessage = ex.Message;
+        pageErrSource = ex.Source;
+    } *@
+}
+
+
+
+@{
+    string banner = "";
+    string matchType = "";
+
+    if (string.Equals(searchType, "standard", StringComparison.OrdinalIgnoreCase))
+    {
+        banner = "Search Results";
+        matchType = "Document";
+    }
+    else if (string.Equals(searchType, "existing", StringComparison.OrdinalIgnoreCase))
+    {
+        banner = "Existing Document Search Results";
+        matchType = "Document";
+    }
+    else if (string.Equals(searchType, "missing", StringComparison.OrdinalIgnoreCase))
+    {
+        banner = "Missing Document Search Results";
+        matchType = "Document";
+    }
+    else if (string.Equals(searchType, "expired", StringComparison.OrdinalIgnoreCase))
+    {
+        banner = "Expired Document Search Results";
+        matchType = "Document";
+    }
+    else if (string.Equals(searchType, "waived", StringComparison.OrdinalIgnoreCase))
+    {
+        banner = "Waived Document Search Results";
+        matchType = "Document";
+    }
+    else if (string.Equals(searchType, "exception", StringComparison.OrdinalIgnoreCase))
+    {
+        banner = "Exception Search Results";
+        matchType = "Exception";
+    }
+}
+@* catch(exception ex){
+    pageError = true;
+    pageErrNumber = ex.HResult.ToString();
+    pageErrMessage = ex.Message;
+    pageErrSource = ex.Source;
+} *@
+
+@* <!-- #include file="include/header.asp" -->*@
+<div class="aa-title">
+    <div>
+        <h1>
+            <i class="title-icon fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;@banner
+        </h1>
+        @if (@maxResultExceeded)
+        {
+            <span id="aa-max-warning" class="aa-color-danger">&nbsp;&nbsp;(Warning! Max search results exceeded. Please refine your search.)</span>
+        }
+    </div>
+    <div id="aa-bank-logo-container">
+        <img src="customer/logo/customerlogo.gif" alt="logo" id="customer-logo-image" />
+    </div>
+</div>
+
+@{
+    if (!pageError)
+    {
+        //bool maxResultExceeded = false;
+        var Customer = new string[] { "Customer1", "Customer2" }; // Mocking Customer recordset for demonstration
+        if (maxResult > 0)
+        {
+            if (Customer.Count() >= maxResult)
+            {
+                maxResultExceeded = true;
+            }
+        }
+
+        int nRecordCount = 0;
+        int nLastRecordOnPage = pageSize;
+        if (Customer.Count() < nLastRecordOnPage)
+        {
+            nLastRecordOnPage = Customer.Count();
+        }
+
+        var queryEnd = DateTime.Now;
+        var queryDelta = queryEnd - queryStart;
+
+        string firstCustomerId = null;
+        string firstLoanId = null;
+        int customerCount = 0;
+
+        string fieldList = HttpContext.Session.GetString("searchResults.customCreditFields") ?? "";
+        string[] customCreditFields = fieldList.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+        fieldList = HttpContext.Session.GetString("searchResults.customCreditFieldLabels") ?? "";
+        string[] customCreditFieldLabels = fieldList.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+        fieldList = HttpContext.Session.GetString("searchResults.customCreditFieldTypes") ?? "";
+        string[] customCreditFieldTypes = fieldList.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+        fieldList = HttpContext.Session.GetString("searchResults.customAccountFields") ?? "";
+        string[] customAccountFields = fieldList.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+        fieldList = HttpContext.Session.GetString("searchResults.customAccountFieldLabels") ?? "";
+        string[] customAccountFieldLabels = fieldList.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+        fieldList = HttpContext.Session.GetString("searchResults.customCollateralFields") ?? "";
+        string[] customCollateralFields = fieldList.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+        fieldList = HttpContext.Session.GetString("searchResults.customCollateralFieldLabels") ?? "";
+        string[] customCollateralFieldLabels = fieldList.Split(',', StringSplitOptions.RemoveEmptyEntries);
+        @*
+        <table id="aa-search-results-wrapper">
+            <tr>
+                <td>
+                    <% IF Customer.Recordcount = 0 THEN %>
+                    No customers or accounts match search criteria.
+                    <%
+                    ELSE
+                    Dim displayJumpToBottom : displayJumpToBottom = true
+                    %>
+                    <!-- #include file="include/searchresults_paging.asp" -->
+                    <br />
+                    <!-- #include file="include/searchresults_body.asp" -->
+                    <br />
+                    <!-- #include file="include/searchresults_paging.asp" -->
+                    <!-- #include file="include/searchresults_summary.asp" -->
+                    <%
+                    END IF
+                    %>
+                </td>
+            </tr>
+        </table>
+        <!-- #include file="include/search_across.asp" -->
+        *@
+
+        <table id="aa-search-results-wrapper">
+            <tr>
+                <td>
+                    @if (Customer == null || !Customer.Any())
+                    {
+                        <text>No customers or accounts match search criteria.</text>
+                    }
+                    else
+                    {
+                        bool displayJumpToBottom = true;
+
+                        // await Html.RenderPartialAsync("searchresults_paging");
+
+                        // <br />
+
+                        // await Html.RenderPartialAsync("searchresults_body");
+
+                        // <br />
+
+                        // await Html.RenderPartialAsync("searchresults_paging");
+
+                        // await Html.RenderPartialAsync("searchresults_summary");
+                    }
+                </td>
+            </tr>
+        </table>
+        <!-- #include file="include/search_across.asp" -->
+    }
+    else
+    {
+        //const QUERY_TIMEOUT_ERROR_NO = -2147217871;
+        <div class="aa-alert aa-color-danger aa-background-danger">
+            <h1>Search Results Error</h1>
+            <div>
+                @if (pageErrNumber == "1")  // QUERY_TIMEOUT_ERROR_NO)
+                {
+                    <text>The search query timed out. Please refine your search criteria to minimize the impact on the database.</text>
+                }
+                else
+                {
+                    <text>An unhandled error occurred while searching. If this persists then please contact AccuSystems with the details below:</text>
+                }
+            </div>
+        </div>
+        <main class="error-table-wrapper">
+            <table class="aa-two-column-form-table">
+                <tbody>
+                    <tr>
+                        <td>Error Number:</td>
+                        <td>@pageErrNumber</td>
+                    </tr>
+                    <tr>
+                        <td>Error Message:</td>
+                        <td>@pageErrMessage</td>
+                    </tr>
+                    <tr>
+                        <td>Source:</td>
+                        <td>@pageErrSource | @pageErrLineNumber</td>
+                    </tr>
+                    @if (!(pageErrLineNumber==0))
+                    {
+                        <tr>
+                            <td>Line Number:</td>
+                            <td>@pageErrLineNumber</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </main>
+        <!-- #include file="include/footer.asp" -->
+        <!-- #include file="include/dbclose.inc" -->
+        <!-- #include file="include/ThemeScripts.asp" -->
+        <script type="text/javascript" src="include/javascript/utility.js"></script>
+        <script type="text/javascript" src="include/javascript/date-picker.js"></script>
+        <script type="text/javascript" src="Packages/kendo-ui/js/kendo.core.min.js"></script>
+        <script type="text/javascript" src="Packages/kendo-ui/js/kendo.popup.min.js"></script>
+        <script type="text/javascript" src="Packages/kendo-ui/js/kendo.data.min.js"></script>
+        <script type="text/javascript" src="Packages/kendo-ui/js/kendo.list.min.js"></script>
+        <script type="text/javascript" src="Packages/kendo-ui/js/kendo.autocomplete.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                kendo.ui.progress($(document.body), true);
+
+                setTimeout(function () {
+                    initializeForm();
+                }, 300);
+            });
+
+            function initializeForm() {
+                // #### CUSTOMER NAME AUTOCOMPLETE #### //
+                $('#combo_zone_cname').kendoAutoComplete({
+                    dataTextField: 'mask',
+                    filter: 'contains',
+                    placeholder: "Enter Customer Name...",
+                    template: '<span class="customer-name-autocomplete">#:data.Value1#</span>',
+                    filtering: function (e) {
+                        if (e.filter.value.length < 3) {
+                            e.preventDefault();
+                            e.sender.dataSource.data([]);
+                        }
+                    },
+                    dataSource: {
+                        serverFiltering: true,
+                        transport: {
+                            read: {
+                                url: 'kendoQuickSearch.asp?table=customer&key=customerName&val=customerName',
+                                type: 'get',
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                cache: false
+                            }
+                        },
+                        schema: {
+                            data: 'results',
+                            model: {
+                                fields: {
+                                    Value1: { type: 'string' }
+                                }
+                            }
+                        }
+                    },
+                    select: function(e) {
+                        var dataItem = this.dataItem(e.item.index());
+                        $('#combo_zone_cname').val(dataItem.Value1);
+                    }
+                });
+
+                // #### CUSTOMER NUMBER AUTOCOMPLETE #### //
+                $('#combo_zone_cnumber').kendoAutoComplete({
+                    dataTextField: 'mask',
+                    filter: 'contains',
+                    placeholder: "Enter Customer Number...",
+                    template: '<span class="customer-number-autocomplete">#:data.Value1#</span>',
+                    filtering: function (e) {
+                        if (e.filter.value.length < 3) {
+                            e.preventDefault();
+                            e.sender.dataSource.data([]);
+                        }
+                    },
+                    dataSource: {
+                        serverFiltering: true,
+                        transport: {
+                            read: {
+                                url: 'kendoQuickSearch.asp?table=customer&key=customerNumber&val=customerNumber',
+                                type: 'get',
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                cache: false
+                            }
+                        },
+                        schema: {
+                            data: 'results',
+                            model: {
+                                fields: {
+                                    Value1: { type: 'string' }
+                                }
+                            }
+                        }
+                    },
+                    select: function(e) {
+                        var dataItem = this.dataItem(e.item.index());
+                        $('#combo_zone_cnumber').val(dataItem.Value1);
+                    }
+                });
+
+                // #### CUSTOMER TAX ID AUTOCOMPLETE #### //
+                $('#combo_zone_taxid').kendoAutoComplete({
+                    dataTextField: 'mask',
+                    filter: 'contains',
+                    placeholder: "Enter Customer Tax Id...",
+                    template: '<span class="customer-taxid-autocomplete">#:data.Value1#</span>',
+                    filtering: function (e) {
+                        if (e.filter.value.length < 3) {
+                            e.preventDefault();
+                            e.sender.dataSource.data([]);
+                        }
+                    },
+                    dataSource: {
+                        serverFiltering: true,
+                        transport: {
+                            read: {
+                                url: 'kendoQuickSearch.asp?table=customer&key=taxid&val=taxid',
+                                type: 'get',
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                cache: false
+                            }
+                        },
+                        schema: {
+                            data: 'results',
+                            model: {
+                                fields: {
+                                    Value1: { type: 'string' }
+                                }
+                            }
+                        }
+                    },
+                    select: function(e) {
+                        var dataItem = this.dataItem(e.item.index());
+                        $('#combo_zone_taxid').val(dataItem.Value1);
+                    }
+                });
+
+                // #### ACCOUNT NUMBER AUTOCOMPLETE #### //
+                $('#combo_zone_lnumber').kendoAutoComplete({
+                    dataTextField: 'mask',
+                    filter: 'contains',
+                    placeholder: "Enter Account Number...",
+                    template: '<span class="account-number-autocomplete">#:data.Value1#</span>',
+                    filtering: function (e) {
+                        if (e.filter.value.length < 3) {
+                            e.preventDefault();
+                            e.sender.dataSource.data([]);
+                        }
+                    },
+                    dataSource: {
+                        serverFiltering: true,
+                        transport: {
+                            read: {
+                                url: 'kendoQuickSearch.asp?table=loan&key=loanNumber&val=loanNumber',
+                                type: 'get',
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                cache: false
+                            }
+                        },
+                        schema: {
+                            data: 'results',
+                            model: {
+                                fields: {
+                                    Value1: { type: 'string' }
+                                }
+                            }
+                        }
+                    },
+                    select: function(e) {
+                        var dataItem = this.dataItem(e.item.index());
+                        $('#combo_zone_lnumber').val(dataItem.Value1);
+                    }
+                });
+
+                $('#aa-search-results-wrapper').show();
+                $('#aa-quick-search-title, #aa-search-debug-title').css('display', 'table');
+                $('#aa-search-panel, #aa-search-debug-panel').css('display', 'inline-table');
+                $('footer').show();
+                kendo.ui.progress($(document.body), false);
+            }
+        </script>
+
+@functions {
+    // Formats data cell value based on data type
+    public string FormatDataCell(string dataType, object dataValue)
+    {
+        if (dataValue == null) return "";
+
+        string str = dataValue.ToString();
+
+        if (dataType == "money")
+        {
+            if (decimal.TryParse(str, out decimal moneyValue))
+            {
+                return moneyValue.ToString("C2"); // Currency with 2 decimals
+            }
+        }
+        else if (dataType == "bit")
+        {
+            if (bool.TryParse(str, out bool bitValue))
+            {
+                return bitValue
+                    ? "<img src=\"Content/Images/Nav/icon_green.gif\" alt=\"True\" />"
+                    : "<img src=\"Content/Images/Nav/icon_red.gif\" alt=\"False\" />";
+            }
+        }
+        else if (dataType == "datetime")
+        {
+            if (DateTime.TryParse(str, out DateTime dtValue))
+            {
+                return dtValue.ToString("d"); // Short date pattern
+            }
+        }
+
+        return str;
+    }
+
+    // Returns CSS style string based on data type
+    public string GetCellStyle(string dataType)
+    {
+        if (dataType == "money" || dataType == "int" || dataType == "decimal")
+        {
+            return "text-align:right;";
+        }
+        else if (dataType == "bit" || dataType == "datetime")
+        {
+            return "text-align:center;";
+        }
+
+        return "text-align:left;";
+    }
+}
+
+    }
+}
+
+<!-- #include file="include/savecurrentpage.asp" -->
+<!-- #include file="include/adovbs.inc" -->
+<!-- #include file="include/dbopen.inc" -->
+<!-- #include file="include/common.inc" -->
+<!-- #include file="include/getFieldDefinitions.inc" -->
+<!-- #include file="include/security.inc" -->

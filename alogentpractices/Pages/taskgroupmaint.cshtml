@@ -1,0 +1,197 @@
+﻿@page
+@model alogentpractices.Pages.taskgroupmaintModel
+@{
+    ViewData["Title"] = "AccuAccount : Task Group Mainteannce";
+}
+
+<!-- #include file="include/adovbs.inc" -->
+<!-- #include file="include/dbopen.inc" -->
+<!-- #include file="include/common.inc" -->
+<!-- #include file="include/security.inc" -->
+
+<link rel="stylesheet" type="text/css" href="Content/TaskGroupMaint.css" />
+
+<div class="aa-title">
+    <div>
+        <h1><i class="title-icon fas fa-exclamation-circle" aria-hidden="true"></i>&nbsp;&nbsp;Task Group Maintenance: @Model.subHeaderText&nbsp;&nbsp;<a href="/adminlist" class="aa-command-button"><i class="aa-icon fas fa-arrow-circle-left fa-fw" title="Return to Admin Menus" aria-hidden="true"></i></a></h1>
+    </div>
+    <div id="aa-bank-logo-container">
+        <img src="customer/logo/customerlogo.gif" alt="logo" id="customer-logo-image" />
+    </div>
+</div>
+<main>
+    <form name="frmName" asp-page-handler="Save" method="post">
+        <input type="hidden" name="action" value="@Model.action" />
+        <input type="hidden" name="taskGroupId" value="@Model.taskGroupId" />
+        <input type="hidden" name="taskGroupType" value="@Model.taskGroupType" />
+        <input type="hidden" name="bankId" value="@Model.bankId" />
+        <div class="aa-panel">
+            <div>
+                <table class="aa-two-column-form-table">
+                    <tr>
+                        <td>Task Group Name:</td>
+                        <td><input type="text" class="k-textbox name" name="taskGroupLabel" value="@Model.taskGroup.taskGroupLabel" size="60" maxlength="1028" /></td>
+                    </tr>
+                    <tr>
+                        <td>Task Processing:</td>
+                        <td class="task-processing">
+                            <select name="taskProcessing" id="task-processing"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Task Group Type:</td>
+                        <td>@Model.taskGroup.taskGroupLabel</td>
+                    </tr>
+                </table>
+                <div class="aa-button-wrapper-left">
+                    <ul>
+                        <li><a href="javascript:void(0);" onclick="validate();" class="k-button k-primary"> @(Model.taskGroupId == 0 ? "Add" : "Update")</a></li>
+                        <li><a href="/taskgrouplist?tab=@Model.taskGroupType&bankId=@Model.bankId" class="k-button">Cancel</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                @if (Model.action == "EDIT")
+                {
+                    <div class="aa-task-list-head">
+                        <div><h2>Tasks in Group</h2></div>
+                        <div><a href="javascript:void(0);" id="aa-add-task-button" onclick="openKendoDialog('Add Task', '/taskitemmaint?action=ADD&taskGroupId=@Model.taskGroupId', 500, 700);" class="k-button k-primary"><i class="aa-icon fas fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add New Task</a></div>
+                    </div>
+                    <table class="aa-kendo-grid">
+                        @{
+                            bool hasTasks = false;
+                            bool displayHeader = true;
+                            
+                            if (displayHeader)
+                            {
+                                displayHeader = false;
+                                <thead>
+                                    <tr>
+                                        <th class="aa-tac">Delete</th>
+                                        <th class="aa-tac">Edit</th>
+                                        <th>Task Name</th>
+                                        @if (Model.taskProcessing == "S")
+                                        {
+                                            <th class="aa-tac" id="task-order-th">Task Order</th>
+                                        }
+                                        <th class="aa-tac">Notification</th>
+                                        <th class="aa-tac">Transferrable</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var taskRS in Model.LoadTable())
+                                    {
+                                        hasTasks = true;
+                                        <tr>
+                                            @if (Model.TaskHasException(@taskRS.taskId))
+                                            {
+                                                <td class="aa-tac"><i class="aa-icon fas fa-trash-alt fa-fw disabled" title="Task is assigned to an exception and cannot be deleted" aria-hidden="true"></i></td>
+                                            }
+                                            else
+                                            {
+                                                <td class="aa-tac"><a href="javascript:void(0);" onclick="openKendoDialog('Delete Task', '/taskitemdeleteconfirm?taskId=@taskRS.taskId', 500, 700);" class="aa-command-link"><i class="aa-icon fas fa-trash-alt fa-fw" title="Delete Task" aria-hidden="true"></i></a></td>
+                                            }
+                                            <td class="aa-tac">
+                                                <a href="javascript:void(0);" onclick="openKendoDialog('Edit Task', 'taskitemmaint.asp?action=EDIT&taskId=@taskRS.taskId&taskGroupId=@taskRS.taskGroupId', 500, 700);" class="aa-command-link"><i class="aa-icon fas fa-pencil-alt fa-fw" title="Edit Task" aria-hidden="true"></i></a>
+                                            </td>
+                                            <td>@taskRS.TaskLabel</td>
+                                            @if (Model.taskProcessing == "S")
+                                            {
+                                                <td id="task-order-td" class="aa-tac">taskRS.ProcessOrder</td>
+                                            }
+
+                                            @{
+                                                var imgIcon = "fas fa-circle aa-status-no fa-fw";
+                                                var altText = "Notification Off";
+
+                                                if (@taskRS.enableNotification)
+                                                {
+                                                    imgIcon = "fas fa-circle aa-status-yes fa-fw";
+                                                    altText = "Notification On";
+                                                }
+
+                                                <td class="aa-tac"><i class="@imgIcon" title="@altText" aria-hidden="true"></i></td>
+
+
+                                                imgIcon = "fas fa-circle aa-status-no fa-fw";
+                                                altText = "Notification Off";
+                                                @if (taskRS.transferableByUser)
+                                                {
+                                                    imgIcon = "fas fa-circle aa-status-yes fa-fw";
+                                                    altText = "Notification On";
+                                                }
+                                                <td class="aa-tac"><i class="@imgIcon" title="@altText" aria-hidden="true"></i></td>
+                                            }
+                                        </tr>
+                                    }
+                                    @if (!hasTasks)
+                                    {
+                                        <tr>
+                                            <td class="aa-tac">No Tasks defined yet.</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            }
+                        }
+                    </table>
+                }
+            </div>
+        </div>
+    </form>
+</main>
+
+<!-- #include file="include/footer.asp" -->
+<!-- #include file="include/ThemeScripts.asp" -->
+<script src="Packages/kendo-ui/js/kendo.all.min.js"></script>
+@* <script type="text/javascript" src="Packages/kendo-ui/js/kendo.core.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.userevents.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.draganddrop.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.popup.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.window.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.data.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.popup.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.list.min.js"></script>
+<script type="text/javascript" src="Packages/kendo-ui/js/kendo.dropdownlist.min.js"></script>
+<script type="text/javascript" src="Scripts/Legacy/Kendo.Window.js"></script> *@
+
+
+<script type="text/javascript">
+          $(document).ready(function () {
+        $("#task-processing").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "Execute all Tasks", value: "P" },
+                { text: "Execute Tasks in Order", value: "S" }
+            ],
+            optionLabel: "-- Select Task Processing --",
+            value: "@Model.taskProcessing" // Razor will inject "P" or "S" here
+        });
+    });
+
+    function validate() {
+        var ErrorFound = 0
+        if (document.frmName.taskGroupLabel.value == "") {
+            alert("Please enter the task group name.");
+            document.frmName.taskGroupLabel.focus();
+            ErrorFound = ErrorFound + 1
+        }
+        if (ErrorFound == 0) {
+            document.frmName.submit();
+        }
+    }
+
+</script>
+<!-- #include file="include/dbclose.inc" -->
+@* @{
+    for (int i = 0; i < g_creditFieldDefCount; i++)
+    {
+        var fieldDefName = g_creditFieldDefList[FIELD_DEF_NAME, i]; // assuming 2D array or similar structure
+
+        Session["from_flex_cred_" + fieldDefName] = "";
+        Session["to_flex_cred_" + fieldDefName] = "";
+        Session["flex_cred_" + fieldDefName] = "";
+        Session["chk_flex_cred_" + fieldDefName] = "";
+    }
+}
+ *@

@@ -1,0 +1,87 @@
+﻿section {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    display: table;
+}
+
+section#aa-form-header {
+    padding: 10px 10px 4px 10px;
+}
+
+section#aa-form-footer {
+    padding: 0 10px 14px 10px;
+}
+
+section#aa-form-header > div,
+section#aa-form-footer > div {
+    width: 50%;
+    float: left;
+}
+
+section#aa-form-header > div > ul.aa-button-wrapper,
+section#aa-form-footer > div > ul.aa-button-wrapper {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+
+section#aa-form-header > div > ul.aa-button-wrapper > li,
+section#aa-form-footer > div > ul.aa-button-wrapper > li {
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    padding-left: 12px;
+}
+
+section#aa-form-header > div > ul.aa-button-wrapper > li:first-child,
+section#aa-form-footer > div > ul.aa-button-wrapper > li:first-child {
+    padding-left: 0;
+}
+
+.tabstrip-inner-table {
+    width: 100%;
+}
+
+.header {
+    padding-bottom: 20px;
+}
+
+.header > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+
+.header > ul > li {
+    float: left;
+    padding-left: 6px;
+}
+
+.header > ul > li:nth-child(2) {
+    padding-left: 48px;
+}
+
+.header > ul > li:first-child {
+    padding-left: 0;
+}
+
+.section-header {
+    font-size: 14px;
+    background-color: #F5F5F5;
+    padding: 6px 0 6px 6px;
+}
+
+.row {
+    height: 30px;
+}
+
+.row > td:nth-child(1) {
+    width: 24px;
+}
+
+.k-tabstrip .k-content.k-state-active {
+    max-height: 700px;
+}

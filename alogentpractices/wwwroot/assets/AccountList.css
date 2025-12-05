@@ -1,0 +1,45 @@
+﻿.aa-tar {
+    text-align: right;
+}
+
+.aa-tac {
+    text-align: center;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.aa-icon {
+    font-size: 9px;
+    margin-left: 8px;
+}
+
+.k-grid table {
+    table-layout: fixed;
+}
+
+.k-grid.k-widget.k-display-block {
+    max-width: 874px;
+}
+
+.k-grid td {
+    padding: 3px 6px;
+}
+
+.k-grid-header th.k-header {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.account-link {
+    font-weight: bold;
+}
+
+.light {
+    color: #777;
+}

@@ -1,0 +1,14 @@
+﻿table#aa-orphan-file-table > tbody > tr > td:nth-child(1) {
+    width: 20px;
+}
+
+table#aa-orphan-file-table > tbody > tr > td:nth-child(2) {
+    width: 40px;
+    text-align: center;
+}
+
+div#aa-scrollable-content {
+    padding: 6px 0px;
+    height: 425px;
+    overflow-y: auto;
+}

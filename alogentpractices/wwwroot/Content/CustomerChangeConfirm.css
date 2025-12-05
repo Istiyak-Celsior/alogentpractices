@@ -1,0 +1,10 @@
+﻿.k-dropdown {
+    width: 350px;
+}
+
+#aa-mapping-wrapper {
+    width: 100%;
+    height: 320px;
+    overflow: auto;
+    margin: 6px 0;
+}

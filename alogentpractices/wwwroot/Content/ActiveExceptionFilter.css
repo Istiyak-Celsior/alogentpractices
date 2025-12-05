@@ -1,0 +1,40 @@
+main#aa-active-exception-filter-wrapper {
+    width: 676px;
+    min-width: auto;
+    padding: 0;
+}
+
+#aa-active-exception-filter-wrapper #aa-selection-list-wrapper {
+    width: 100%;
+    height: 290px;
+    overflow: auto;
+    margin-top: 6px;
+    border: solid 1px #E5E5E5;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+#aa-active-exception-filter-wrapper td.aa-selection-list-content {
+    width: 50%;
+    vertical-align: top;
+}
+
+#aa-active-exception-filter-wrapper .aa-selection-list-table {
+    width: 100%;
+}
+
+#aa-active-exception-filter-wrapper .radio-wrapper.top > td {
+    padding-bottom: 6px;
+}
+
+#aa-active-exception-filter-wrapper .radio-wrapper.pad-top > td {
+    padding-top: 6px;
+}
+
+#aa-active-exception-filter-wrapper form {
+    padding: 12px;
+}
+
+#aa-active-exception-filter-wrapper aa-selection-list-wrapper {
+    overflow: auto;
+}

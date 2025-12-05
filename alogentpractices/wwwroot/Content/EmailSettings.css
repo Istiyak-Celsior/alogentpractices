@@ -1,0 +1,79 @@
+﻿.k-textbox {
+    width: 300px;
+}
+
+#uxSendUsingInformation {
+    color: #777;
+}
+
+.fa-question-circle {
+    cursor: default;
+}
+
+#uxTestResultText {
+    color: #333;
+}
+
+.k-button.small {
+    line-height: 1.28571428em;
+    padding: 3px 14px;
+}
+
+.aa-two-column-form-table > tbody > tr.header {
+    height: 28px;
+}
+
+.aa-two-column-form-table > tbody > tr.header > td {
+    background-color: #777;
+    color: #EEE;
+    text-transform: uppercase;
+}
+
+.aa-button-wrapper-left {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.aa-button-wrapper-left.bottom {
+    margin-top: 12px;
+}
+
+.k-button.aa-validate {
+    color: #FFF;
+    border-color: #5FB662;
+    background-color: #5FB662;
+}
+
+.k-button:hover.aa-validate {
+    color: #FFF;
+    border-color: #79D07C;
+    background-color: #79D07C;
+}
+
+.k-button:focus.aa-validate {
+    color: #FFF;
+    border-color: #2C832F;
+    background-color: #2C832F;
+}
+
+#uxTestResultText, #uxWorkingIcon {
+    line-height: 35px;
+    height: 35px;
+}
+
+#error-message {
+    background-color: #F8D7DA;
+    color: #D24350;
+    padding: 12px;
+}
+
+#error-message p {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+#error-message span {
+    font-weight: 400;
+}

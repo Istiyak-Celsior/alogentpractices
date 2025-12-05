@@ -1,0 +1,113 @@
+.aa-title {
+    padding-left: 20px;
+}
+
+main {
+    padding: 12px;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+}
+
+.aa-tac {
+    text-align: center !important;
+}
+
+.aa-grid-wrapper {
+    display: block;
+    overflow: auto;
+    height: 427px;
+    border: 1px #E5E5E5 solid;
+}
+
+.aa-kendo-grid {
+    border: 0;
+}
+
+[id^="wrapper-"] > td {
+    background-color: #FAFAFA !important;
+}
+
+[id^="wrapper-"] > td > span:last-child {
+    padding-left: 6px;
+}
+
+.aa-status-yes,
+.aa-status-no {
+    font-size: 9px;
+}
+
+.aa-status-yes {
+    color: #27AE60
+}
+
+.aa-status-no {
+    color: #E74C3C
+}
+
+.k-dropdown {
+    width: 90px;
+}
+
+.k-textbox.orig-date,
+.k-textbox.exp-date {
+    width: 80px;
+}
+
+.k-textbox.comments {
+    width: 500px;
+}
+
+.document-type-header {
+    height: 30px !important;
+}
+
+.document-type-header > td {
+    background-color: #ECECEC !important;
+}
+
+.kendo-grid-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    clear: left;
+    display: table;
+}
+
+.kendo-grid-list > li {
+    float: left;
+    padding-left: 6px;
+    line-height: 32px;
+    height: 32px;
+}
+
+.kendo-grid-list > li:first-child {
+    padding-left: 0;
+}
+
+.fa-exclamation-triangle, .fa-question-circle,
+.fa-exclamation-triangle:hover, .fa-question-circle:hover {
+    cursor: default;
+}
+
+
+.kendo-grid-list > li > span {
+    width: 100px;
+}
+
+#all-label {
+    color: #999;
+    font-size: 12px;
+}
+
+#pageLoadingBottom {
+    padding-top: 8px;
+}
+
+.doc-file-type .aa-icon {
+    font-size: 16px;
+}
+
+.aa-disabled {
+    color: #CACACA;
+}

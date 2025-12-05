@@ -1,0 +1,208 @@
+.aa-my-uploads-dashboard-widget {
+    height: 100%;
+}
+
+.aa-my-uploads-dashboard-widget .parent-folder-wrapper {
+    display: flex;
+    position: relative;
+}
+
+.aa-my-uploads-dashboard-widget .parent-folder-wrapper > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.aa-my-uploads-dashboard-widget .parent-folder-wrapper > ul > li {
+    float: left;
+    padding-left: 6px;
+    height: 28px;
+    line-height: 28px;
+}
+
+.aa-my-uploads-dashboard-widget .parent-folder-wrapper > ul > li:nth-child(3) > span {
+    text-transform: lowercase;
+    color: #ACACAC;
+}
+
+.aa-my-uploads-dashboard-widget .parent-folder-wrapper .fa-folder-open {
+    color: #45546C;
+}
+
+.aa-my-uploads-dashboard-widget .clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.aa-my-uploads-dashboard-widget .listview {
+    list-style-type: none;
+    padding: 6px 6px 6px 5px;
+    margin: 0;
+    border-top-color: #E6E6E6;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    height: calc(100% - 38px);
+    box-sizing: border-box;
+}
+
+.aa-my-uploads-dashboard-widget .listview > li {
+    padding: 6px 0;
+}
+
+.aa-my-uploads-dashboard-widget .listview .aa-file-type-icon {
+    margin-right: 3px;
+}
+
+/* POPOUT TABLE */
+.dashboard-popout .aa-my-uploads-dashboard-widget table {
+    width: 100%;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr,
+.dashboard-popout .aa-my-uploads-dashboard-widget table > tbody > tr {
+    height: 28px;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th,
+.dashboard-popout .aa-my-uploads-dashboard-widget table > tbody > tr > td {
+    padding: 6px 2px 6px 4px;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th {
+    border-bottom: 1px #E6E6E6 solid;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th:nth-child(1) {
+    text-align: left;
+    width: 16px;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > tbody > tr > td:nth-child(1) {
+    vertical-align: top;
+    width: 16px;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th:nth-child(2) {
+    text-align: left;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th:nth-child(n+3):nth-child(-n+9),
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th span.path {
+    color: #ACACAC;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th span.path {
+    text-transform: lowercase;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th:nth-child(3),
+.dashboard-popout .aa-my-uploads-dashboard-widget table > tbody > tr > td:nth-child(3) {
+    text-align: left;
+    width: 90px;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th:nth-child(4),
+.dashboard-popout .aa-my-uploads-dashboard-widget table > tbody > tr > td:nth-child(4) {
+    text-align: left;
+    width: 190px;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th:nth-child(n+5):nth-child(-n+6),
+.dashboard-popout .aa-my-uploads-dashboard-widget table > tbody > tr > td:nth-child(n+5):nth-child(-n+6) {
+    text-align: left;
+    width: 70px;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th:nth-child(7),
+.dashboard-popout .aa-my-uploads-dashboard-widget table > tbody > tr > td:nth-child(7) {
+    text-align: left;
+    width: 90px;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th:nth-child(8),
+.dashboard-popout .aa-my-uploads-dashboard-widget table > tbody > tr > td:nth-child(8) {
+    text-align: left;
+    width: 100px;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > thead > tr > th:nth-child(9),
+.dashboard-popout .aa-my-uploads-dashboard-widget table > tbody > tr > td:nth-child(9) {
+    text-align: right;
+    width: 50px;
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table > tbody > tr:hover td {
+    background-color: rgba(203, 227, 242, 0.25);
+}
+
+.dashboard-popout .aa-my-uploads-dashboard-widget table .fa-info-circle,
+.dashboard-popout .aa-my-uploads-dashboard-widget table .fa-arrow-circle-right {
+    font-size: 16px;
+}
+
+/* LIST ITEMS */
+.aa-my-uploads-dashboard-widget .list-item {
+    display: flex;
+}
+
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(1) {
+    width: 22px;
+    min-width: 22px;
+}
+
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(3) {
+    flex: 1;
+    text-align: right;
+    margin: auto;
+}
+
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(4) {
+    padding-left: 6px;
+    margin: auto;
+}
+
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(3) .aa-icon.fa,
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(4) .aa-icon.fa {
+    font-size: 16px;
+}
+
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(3) a,
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(3) a:visited,
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(3) a:active,
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(4) a,
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(4) a:visited,
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(4) a:active {
+    background-color: transparent;
+    padding: 3px 0 2px 0;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(3) a:hover,
+.aa-my-uploads-dashboard-widget .list-item > div:nth-child(4) a:hover {
+    background-color: #F1F1F1;
+}
+
+.aa-color-quickmove {
+    color: #8DD69A;
+}
+
+.aa-my-uploads-dashboard-widget a.customer-link,
+.aa-my-uploads-dashboard-widget a.customer-link:visited,
+.aa-my-uploads-dashboard-widget a.customer-link:active,
+.aa-my-uploads-dashboard-widget a.customer-link:hover {
+    color: #6499B6;
+}
+
+#document-info-window {
+    overflow-y: hidden;
+}
