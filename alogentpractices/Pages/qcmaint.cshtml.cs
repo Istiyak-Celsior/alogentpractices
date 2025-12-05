@@ -34,7 +34,7 @@ namespace alogentpractices.Pages
         [BindProperty]
         public QcMaintViewModel QcMaint { get; set; }
 
-        public void OnGet(string historyId, string cust, string docId, string file, string path)
+        public IActionResult OnGet(string historyId, string cust, string docId, string file, string path)
         {
             // ### Build out user for security processing
             //
@@ -100,9 +100,9 @@ namespace alogentpractices.Pages
                                  employee = c != null ? c.employee : false,
                                  loanId = l != null ? l.loanId : null,
                                  loanBranchId = l != null ? l.loanBranchId : null,
-                                 extendedAccountClassCode = l != null && (ls == null || ls.isApplicationStatus == null || ls.isApplicationStatus == 0)
+                                 extendedAccountClassCode = l != null && (ls == null || ls.isApplicationStatus == null || ls.isApplicationStatus == false)
                                      ? (ac != null ? ac.accountClassCode : null)
-                                     : (l != null && ls != null && ls.isApplicationStatus == 1
+                                     : (l != null && ls != null && ls.isApplicationStatus == true
                                          ? "loanapp"
                                          : (c != null ? "credit" : null)),
                                  documentMissing = d == null ? 1 : 0,
@@ -300,6 +300,8 @@ namespace alogentpractices.Pages
                 QcMaint.allowEmailSending = allowEmailSending;
                 QcMaint.sessionUserId = HttpContext.Session.GetString("userId");
             }
+
+            return Page();
         }
     }
 }

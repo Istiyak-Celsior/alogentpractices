@@ -150,10 +150,10 @@ namespace alogentpractices.Entities
             if (!context.AccountClasses.Any())
             {
                 context.AccountClasses.AddRange(
-                    new AccountClass { accountClassId = 1, accountClassName = "LOAN", accountClassCode = "CTG", accountClassSortOrder = 1 },
-                    new AccountClass { accountClassId = 2, accountClassName = "DEPOSIT", accountClassCode = "ATG", accountClassSortOrder = 2 },
-                    new AccountClass { accountClassId = 3, accountClassName = "TRUST", accountClassCode = "trust", accountClassSortOrder = 2 },
-                    new AccountClass { accountClassId = 4, accountClassName = "CREDIT", accountClassCode = "credit", accountClassSortOrder = 2 }
+                    new AccountClass { accountClassId = 1, accountClassName = "LOAN", accountClassCode = "CTG", accountClassSortOrder = "1" },
+                    new AccountClass { accountClassId = 2, accountClassName = "DEPOSIT", accountClassCode = "ATG", accountClassSortOrder = "2" },
+                    new AccountClass { accountClassId = 3, accountClassName = "TRUST", accountClassCode = "trust", accountClassSortOrder = "2" },
+                    new AccountClass { accountClassId = 4, accountClassName = "CREDIT", accountClassCode = "credit", accountClassSortOrder = "2" }
                 );
 
                 context.SaveChanges();
@@ -162,8 +162,8 @@ namespace alogentpractices.Entities
             if (!context.LoanStatuses.Any())
             {
                 context.LoanStatuses.AddRange(
-                    new LoanStatus { statusId = 1, statusDescription = "Pending", statusCode = "PEN", isDefault = true, isActive = true, accountClassId = 1, isApplicationStatus = false, AccountCount = 0 },
-                    new LoanStatus { statusId = 2, statusDescription = "Completed", statusCode = "COM", isDefault = true, isActive = true, accountClassId = 2, isApplicationStatus = false, AccountCount = 0 }
+                    new LoanStatus { statusId = 1, statusDescription = "Pending", statusCode = "PEN", isDefault = true, isActive = true, accountClassId = 1, isApplicationStatus = false, accountCount = 0 },
+                    new LoanStatus { statusId = 2, statusDescription = "Completed", statusCode = "COM", isDefault = true, isActive = true, accountClassId = 2, isApplicationStatus = false, accountCount = 0 }
                 );
 
                 context.SaveChanges();

@@ -32,8 +32,8 @@
                     <td>Active Status?</td>
                     <td>
                         <select id="cboIsActiveApplicationStatus" name="IsActiveApplicationStatus">
-                            <option value="0" selected="@(Model.loanStatus.IsActiveApplicationStatus ? "" : "selected")">No</option>
-                            <option value="1" selected="@(Model.loanStatus.IsActiveApplicationStatus ? "selected" : "")">Yes</option>
+                            <option value="0" selected="@(Model.loanStatus.isActiveApplicationStatus ? "" : "selected")">No</option>
+                            <option value="1" selected="@(Model.loanStatus.isActiveApplicationStatus ? "selected" : "")">Yes</option>
                         </select>
                     </td>
                 </tr>
@@ -41,8 +41,8 @@
                     <td>Default Status?</td>
                     <td>
                         <select id="cboIsDefaultApplicationStatus" name="IsDefaultApplicationStatus">
-                            <option value="0" selected="@(Model.loanStatus.IsDefaultApplicationStatus ? "" : "selected")">No</option>
-                            <option value="1" selected="@(Model.loanStatus.IsDefaultApplicationStatus ? "selected" : "")">Yes</option>
+                            <option value="0" selected="@(Model.loanStatus.isDefaultApplicationStatus ? "" : "selected")">No</option>
+                            <option value="1" selected="@(Model.loanStatus.isDefaultApplicationStatus ? "selected" : "")">Yes</option>
                         </select>
                     </td>
                 </tr>
@@ -50,8 +50,8 @@
                     <td>Approved Status?</td>
                     <td>
                         <select id="cboIsApprovedApplicationStatus" name="IsApprovedApplicationStatus">
-                            <option value="0" selected="@(Model.loanStatus.IsApprovedApplicationStatus ? "" : "selected")">No</option>
-                            <option value="1" selected="@(Model.loanStatus.IsApprovedApplicationStatus ? "selected" : "")">Yes</option>
+                            <option value="0" selected="@(Model.loanStatus.isApprovedApplicationStatus ? "" : "selected")">No</option>
+                            <option value="1" selected="@(Model.loanStatus.isApprovedApplicationStatus ? "selected" : "")">Yes</option>
                         </select>
                     </td>
                 </tr>

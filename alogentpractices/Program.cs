@@ -18,6 +18,11 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<Security>();
 builder.Services.AddScoped<SecurityService>();
 
+builder.Services.AddScoped<CommonHelper>();
+builder.Services.AddScoped<BranchSecurityFunctions>();
+builder.Services.AddScoped<DocumentTabSecurity>();
+builder.Services.AddScoped<ApplicationTransactions>();
+
 
 builder.Services.AddRazorPages();
 var app = builder.Build();

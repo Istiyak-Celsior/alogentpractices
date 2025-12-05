@@ -30,7 +30,7 @@ namespace alogentpractices.Pages
 
             AccountClass = await _context.AccountClasses
                 .Include(a => a.LoanStatuses)
-                .OrderBy(x => x.AccountClassSortOrder)
+                .OrderBy(x => x.accountClassSortOrder)
                 .ToListAsync();
         }
     }

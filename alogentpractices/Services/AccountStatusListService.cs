@@ -18,24 +18,24 @@ namespace alogentpractices.Services
                           join ls in _context.LoanStatuses
                               on ac.accountClassId equals ls.accountClassId into gj
                           from ls in gj.DefaultIfEmpty()
-                          where ac.AccountClassId == accountClassId && 
+                          where ac.accountClassId == accountClassId && 
                           (ls.isApplicationStatus == false || ls.isApplicationStatus == null)
-                          orderby ac.AccountClassSortOrder, ls.StatusDescription
+                          orderby ac.accountClassSortOrder, ls.statusDescription
                           select new
                           {
-                              ac.AccountClassId,
-                              ac.AccountClassName,
-                              ac.AccountClassCode,
-                              ls.StatusId,
-                              ls.StatusDescription,
-                              ls.StatusCode,
-                              ls.IsDefault,
-                              ls.IsActive,
-                              ls.IsApplicationStatus,
-                              ls.IsActiveApplicationStatus,
-                              ls.IsApprovedApplicationStatus,
-                              ls.IsDefaultApplicationStatus,
-                              AccountCount = _context.Loanses.Count(l => l.LoanStatusId == ls.StatusId)
+                              ac.accountClassId,
+                              ac.accountClassName,
+                              ac.accountClassCode,
+                              ls.statusId,
+                              ls.statusDescription,
+                              ls.statusCode,
+                              ls.isDefault,
+                              ls.isActive,
+                              ls.isApplicationStatus,
+                              ls.isActiveApplicationStatus,
+                              ls.isApprovedApplicationStatus,
+                              ls.isDefaultApplicationStatus,
+                              AccountCount = _context.Loanses.Count(l => l.LoanStatusId == ls.statusId)
                           }).ToList<dynamic>();
 
             return await Task.FromResult(result);

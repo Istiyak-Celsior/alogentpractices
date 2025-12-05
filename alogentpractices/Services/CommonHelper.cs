@@ -89,5 +89,10 @@ namespace alogentpractices.Services
                 return "aa-file-type-icon fad " + pstrOut + " fa-fw";
             }
         }
+
+        public string GetDocumentFileViewUrl(string documentId, string userId)
+        {
+            return $"document({documentId})/file?dispositionType=inline&userId={userId}";
+        }
     }
 }

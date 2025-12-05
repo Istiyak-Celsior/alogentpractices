@@ -11,5 +11,6 @@ namespace alogentpractices.Entities
         public string accountClassCode { get; set; }
         public string accountClassName { set; get; }
         public string accountClassSortOrder { set; get; }
+        public List<LoanStatus> LoanStatuses { set; get; }
     }
 }

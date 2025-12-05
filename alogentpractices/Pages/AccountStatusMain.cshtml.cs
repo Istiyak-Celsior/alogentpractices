@@ -31,7 +31,7 @@ namespace alogentpractices.Pages
                 isActive = true,
                 accountClassId = 1,
                 isApplicationStatus = false,
-                AccountCount = 0
+                accountCount = 0
             };
         }
 
